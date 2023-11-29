@@ -1,4 +1,4 @@
-import { Card, CardBody, CardFooter, CardHeader } from "@/Components/card";
+import { Card, CardBody, CardFooter, CardHeader } from "@/Components/Card";
 import AuthLayout from "@/Layouts/AuthLayout";
 import React from "react";
 

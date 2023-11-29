@@ -18,9 +18,7 @@ class ClienteController extends Controller
      */
     public function index(Request $request)
     {
-        // if (!auth()->user()->tokenCan('user-store')) {
-        //     return $this->error('Unauthorized', 403);
-        // }
+
         $search = $request->get('q');
 
         $query = Cliente::with('ordens')->orderBy('id', 'DESC');
@@ -29,9 +27,9 @@ class ClienteController extends Controller
             $query->where('nome', 'like', '%' . $search . '%');
         }
 
-        $clientes = $query->paginate(12);
-        return Inertia::render('Clientes/index',["clientes" => $clientes]);
-        // return ClienteResource::collection($clientes,400);
+        $clientes = $query->paginate(15);
+
+        return Inertia::render('Clientes/index', ["clientes" => $clientes]);
     }
 
     public function allclientes()
@@ -39,6 +37,15 @@ class ClienteController extends Controller
         $clientes = Cliente::all();
         return ClienteResource::collection($clientes);
     }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return Inertia::render('Clientes/add');
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -77,6 +84,14 @@ class ClienteController extends Controller
     public function show(Cliente $cliente)
     {
         return new ClienteResource($cliente);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
     }
 
     /**

@@ -1,7 +1,7 @@
 import React from 'react'
-import Logo from "../logo"
 import { Link, usePage } from "@inertiajs/react";
 import { AiOutlineDashboard } from 'react-icons/ai';
+import Logo from "../Logo";
 
 const Sidebar = () => {
     const { url, component } = usePage();
@@ -27,8 +27,8 @@ const Sidebar = () => {
                     </li>
                     <li>
                         <Link
-                            className={`flex items-center p-2 rounded-md ${url === '/2' ? 'text-white bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
-                            href={"/"}>
+                            className={`flex items-center p-2 rounded-md ${url === '/clientes' ? 'text-white bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
+                            href={"/clientes"}>
                             <AiOutlineDashboard size={20} />
                             <span className="ml-2">Dashboard</span>
                         </Link>

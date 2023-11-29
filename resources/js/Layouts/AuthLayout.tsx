@@ -1,7 +1,8 @@
-import Footer from "@/Components/footer";
-import Header from "@/Components/header";
-import Sidebar from "@/Components/sidebar";
 import React from "react";
+import Footer from "@/Components/Footer";
+import Header from "@/Components/Header";
+import Sidebar from "@/Components/Sidebar";
+
 
 interface AuthLayoutProps {
     children: React.ReactNode;

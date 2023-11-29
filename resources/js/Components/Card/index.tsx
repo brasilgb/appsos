@@ -2,11 +2,12 @@ import React from 'react';
 
 interface CardProps {
     children: React.ReactNode;
+    className?: string;
 }
 
 export const Card = ({ children }: CardProps) => {
     return (
-        <div className="w-full md:m-4 bg-white border border-gray-100 shadow rounded-md">
+        <div className="w-full md:m-4">
             {children}
         </div>
     )
@@ -14,7 +15,15 @@ export const Card = ({ children }: CardProps) => {
 
 export const CardHeader = ({ children }: CardProps) => {
     return (
-        <div className="bg-white p-2 rounded-t-md">
+        <div className="flex items-center justify-between bg-white p-2 rounded-t-md">
+            {children}
+        </div>
+    )
+}
+
+export const CardHeaderContent = ({ children, className }: CardProps) => {
+    return (
+        <div className={`flex-1 ${className}`}>
             {children}
         </div>
     )
@@ -22,7 +31,7 @@ export const CardHeader = ({ children }: CardProps) => {
 
 export const CardBody = ({ children }: CardProps) => {
     return (
-        <div>
+        <div className="bg-white">
             {children}
         </div>
     )
