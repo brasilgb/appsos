@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Session;
 
 class ClienteController extends Controller
 {
@@ -51,31 +52,30 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        // if(!auth()->user()->tokenCan('user-store')) {
-        //     return $this->error('Unauthorized', 403);
-        // }
-        $validator = Validator::make($request->all(), [
-            'cpf' => 'required',
-            'nome' => 'required',
-            'email' => 'required|email',
-            'cep' => 'required',
-            'uf' => 'required',
-            'cidade' => 'required',
-            'bairro' => 'required',
-            'endereco' => 'required',
-            'telefone' => 'required',
-        ]);
+        $data = $request->all();
 
-        if ($validator->fails()) {
-            return $this->error('Dados inválidos!', 422, $validator->errors());
-        }
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'email' => 'Endereço de e-mail válido',
+            'cpf_ou_cnpj' => 'CPF ou CNPJ inválido',
+        ];
+        $request->validate(
+            [
+                'nome' => 'required',
+                'cpf' => 'nullable|cpf_ou_cnpj',
+                'email' => 'nullable|email',
+                'telefone' => 'required'
+            ],
+            $messages,
+            [
+                'nome' => 'nome',
+                'email' => 'e-mail',
+            ]
+        );
 
-        $created = Cliente::create($request->all());
-
-        if ($created) {
-            return $this->response('Cliente cadastrado com sucesso!', 200, new ClienteResource($created));
-        }
-        return $this->error('Cliente não cadastrado', 400);
+        Cliente::create($data);
+        Session::flash('success', 'Usuário criado com sucesso!');
+        return redirect()->route('clientes.index');
     }
 
     /**

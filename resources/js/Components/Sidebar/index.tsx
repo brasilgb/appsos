@@ -2,11 +2,13 @@ import React from 'react'
 import { Link, usePage } from "@inertiajs/react";
 import { AiOutlineDashboard } from 'react-icons/ai';
 import Logo from "../Logo";
+import { IoPeopleSharp } from "react-icons/io5";
 
 const Sidebar = () => {
-    const { url, component } = usePage();
+    const { url } = usePage();
+
     return (
-        <aside className="w-64 duration-300 bg-blue-dark">
+        <aside className=" hidden md:block md:w-64 duration-300 bg-blue-dark">
             <div className="flex items-center justify-start border-b border-blue-light p-3.5">
                 <div className="h-8 w-8">
                     <Logo />
@@ -27,10 +29,10 @@ const Sidebar = () => {
                     </li>
                     <li>
                         <Link
-                            className={`flex items-center p-2 rounded-md ${url === '/clientes' ? 'text-white bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
+                            className={`flex items-center p-2 rounded-md ${url.startsWith('/clientes') ? 'text-white bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
                             href={"/clientes"}>
-                            <AiOutlineDashboard size={20} />
-                            <span className="ml-2">Dashboard</span>
+                            <IoPeopleSharp size={20} />
+                            <span className="ml-2">Clientes</span>
                         </Link>
                     </li>
                     <li>

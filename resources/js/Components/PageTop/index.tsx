@@ -16,8 +16,8 @@ export const HeaderContent = ({ children }: PageTopProps) => {
 
 export const TitleTop = ({ children }: PageTopProps) => {
     return (
-        <div>
-            <h1 className="text-2xl text-gray-600">{children}</h1>
+        <div className="flex items-center justify-start text-2xl text-gray-600">
+            {children}
         </div>
     )
 }
@@ -37,14 +37,14 @@ export const BreadCrumbTop = ({ links }: PageTopProps) => {
                 <li className="px-1.5 text-gray-400">/</li>
                 {links.map((link: any) => (
                     <>
-                    <li>
-                        {
-                            link.url !== null
-                                ? <Link className="text-blue-600" href={link.url}>{link.label}</Link>
-                                : link.label
-                        }
-                    </li>
-                    {link.url !== null && <li className="px-1.5 text-gray-400">/</li>}
+                        <li>
+                            {
+                                link.url !== null
+                                    ? <Link className="text-blue-600" href={link.url}>{link.label}</Link>
+                                    : link.label
+                            }
+                        </li>
+                        {link.url !== null && <li className="px-1.5 text-gray-400">/</li>}
                     </>
                 ))}
             </ul>

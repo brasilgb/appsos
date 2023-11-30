@@ -8,3 +8,12 @@
         @apply font-roboto antialiased;
     }   
 }
+
+@layer components {
+    .label-form {
+        @apply text-sm text-gray-500 font-medium;
+    }
+    .input-form {
+        @apply rounded-md p-2 bg-transparent text-base text-gray-600 border border-gray-300;
+    }
+}

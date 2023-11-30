@@ -5,9 +5,18 @@ interface CardProps {
     className?: string;
 }
 
+
+export const CardContainer = ({ children }: CardProps) => {
+    return (
+        <div className="shadow bg-white">
+            {children}
+        </div>
+    )
+}
+
 export const Card = ({ children }: CardProps) => {
     return (
-        <div className="w-full md:m-4">
+        <div className="md:w-full md:m-4">
             {children}
         </div>
     )
@@ -23,15 +32,15 @@ export const CardHeader = ({ children }: CardProps) => {
 
 export const CardHeaderContent = ({ children, className }: CardProps) => {
     return (
-        <div className={`flex-1 ${className}`}>
+        <div className={`${className}`}>
             {children}
         </div>
     )
 }
 
-export const CardBody = ({ children }: CardProps) => {
+export const CardBody = ({ children, className }: CardProps) => {
     return (
-        <div className="bg-white">
+        <div className={`bg-white ${className}`}>
             {children}
         </div>
     )
