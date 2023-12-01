@@ -7,6 +7,7 @@ use App\Http\Resources\ClienteResource;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Session;
@@ -83,15 +84,15 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        return new ClienteResource($cliente);
+        return Inertia::render('Clientes/edit', ['clientes' => $cliente]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Cliente $cliente)
     {
-        //
+        return Redirect::route('clientes.show', ['cliente' => $cliente->id]);
     }
 
     /**
@@ -132,11 +133,8 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        $deleted = $cliente->delete();
-
-        if ($deleted) {
-            return $this->response('Cliente deletado com sucesso!', 200);
-        }
-        return $this->response('Cliente não deletado!', 400);
+        $cliente->delete();
+        Session::flash('success', 'Cliente deletado com sucesso');
+        return Redirect::route('clientes.index');
     }
 }

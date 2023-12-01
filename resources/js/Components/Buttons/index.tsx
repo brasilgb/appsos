@@ -1,15 +1,16 @@
-import { Link } from "@inertiajs/react"
+import { Link, useForm } from "@inertiajs/react"
 import React, { useState } from 'react'
 import { IoAdd, IoArrowBackOutline, IoClose, IoConstruct, IoSave, IoTrash } from "react-icons/io5";
 import { TbEdit } from "react-icons/tb";
 import { FaRegTrashCan } from "react-icons/fa6";
 
 interface ButtonsProps {
-    url?: string;
+    url?: any;
     label?: string;
     processing?: any;
     onclick?: any;
-    id?: string;
+    param?: string;
+    identify?: string;
 }
 
 export const AddButton = ({ url, label }: ButtonsProps) => {
@@ -40,7 +41,7 @@ export const BackButton = ({ url, label }: ButtonsProps) => {
     )
 }
 
-export const OrderButton = ({ url, label }: ButtonsProps) => {
+export const OrderButton = ({ url }: ButtonsProps) => {
     return (
         <Link
             className="flex items-center justify-center bg-zinc-600 hover:bg-zinc-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
@@ -54,7 +55,8 @@ export const OrderButton = ({ url, label }: ButtonsProps) => {
     )
 }
 
-export const EditButton = ({ url, label }: ButtonsProps) => {
+export const EditButton = ({ url }: ButtonsProps) => {
+
     return (
         <Link
             className="flex items-center justify-center bg-orange-600 hover:bg-orange-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
@@ -68,10 +70,21 @@ export const EditButton = ({ url, label }: ButtonsProps) => {
     )
 }
 
-export const DeleteButton = ({ id, onclick }: ButtonsProps) => {
+export const DeleteButton = ({ identify, param, url }: ButtonsProps) => {
     const [showConfirme, setShowConfirme] = useState(false);
+    const { delete: destroy } = useForm();
+
+    function onsubmit(e: any) {
+        e.preventDefault();
+        console.log(url, param);
+
+        destroy(route(url, param));
+        setShowConfirme(false);
+    }
+
 
     const ModalDelete = () => {
+
         return (
             <div onClick={() => setShowConfirme(false)} className={`fixed z-20 top-0 right-0 bottom-0 left-0 flex items-center justify-center bg-gray-500 bg-opacity-40`}>
                 <div className="w-1/4 bg-gray-50 rounded-md shadow-md border border-white">
@@ -85,17 +98,20 @@ export const DeleteButton = ({ id, onclick }: ButtonsProps) => {
                         </div>
                     </div>
                     <div className="my-2 flex flex-col items-center justify-center">
-                        <h2 className="text-base">Você realmente deseja excluir este registro?</h2>
-                        <h2 className="test-sm">Esta operação não pode ser desfeita.</h2>
+                        <h2 className="text-base text-center">Você realmente deseja excluir {identify}?</h2>
+                        <h2 className="test-sm mt-1">Esta operação não pode ser desfeita.</h2>
                     </div>
+
                     <div className="flex items-center justify-end gap-3 p-3 mt-2">
                         <button
-                        className="py-2 px-3 flex-1 bg-zinc-600 hover:bg-zinc-700 rounded-md"
+                            onClick={() => setShowConfirme(false)}
+                            className="py-2 px-3 flex-1 bg-zinc-600 hover:bg-zinc-700 rounded-md"
                         >
                             <span className="text-sm text-gray-50">Cancelar</span>
                         </button>
                         <button
-                        className="py-2 px-3 flex-1 bg-red-500 hover:bg-red-600 rounded-md"
+                            onClick={onsubmit}
+                            className="py-2 px-3 flex-1 bg-red-500 hover:bg-red-600 rounded-md"
                         >
                             <span className="text-sm text-gray-50">Excluir</span>
                         </button>
@@ -113,7 +129,7 @@ export const DeleteButton = ({ id, onclick }: ButtonsProps) => {
             <button
                 className="flex items-center justify-center bg-red-600 hover:bg-red-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
                 onClick={() => setShowConfirme(true)}
-                title={`Deletar registro ${id}`}
+                title={`Deletar registro ${param}`}
             >
                 <IoTrash size={18} />
             </button>
