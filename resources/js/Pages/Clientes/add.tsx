@@ -2,10 +2,10 @@ import { BackButton, SaveButton } from "@/Components/Buttons";
 import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderContent } from "@/Components/Card";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
+import { maskCep, maskCpfCnpj, maskPhone, unMask } from "@/Utils";
 import { useForm } from "@inertiajs/react";
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { IoPeopleSharp } from "react-icons/io5";
-import InputMask from "react-input-mask";
 
 const AddCliente = () => {
     // const options = clientes.map((cliente: any) => ({ value: cliente.id, label: cliente.nome }))
@@ -31,14 +31,21 @@ const AddCliente = () => {
         e.preventDefault();
         post(route('clientes.store'));
     }
-    function dynamicMask(data:any) {
-console.log(data.length)
-        if (data.replace(/\D/g, "").length < 11) {
-            return "99.999.999/9999-99";
-        } else {
-             return "999.999.999-99";
-        }
+
+    const getCep = (cep: string) => {
+        const cleanCep = unMask(cep);
+        fetch(`https://viacep.com.br/ws/${cleanCep}/json/`)
+            .then((response) => response.json())
+            .then(result => {
+                setData(data => ({...data, 'uf': result.uf}));
+                setData(data => ({...data, 'cidade': result.localidade}));
+                setData(data => ({...data, 'bairro': result.bairro}));
+                setData(data => ({...data, 'endereco': result.logradouro}));
+                setData(data => ({...data, 'complemento': result.complemento}));
+            })
+            .catch((error) => console.error(error));
     }
+   
     return (
         <AuthLayout>
             <Card>
@@ -74,19 +81,13 @@ console.log(data.length)
                                         <label className="label-form" htmlFor="cpf">
                                             CPF/CNPJ
                                         </label>
-                                        {/* <input
+                                        <input
                                             id="cpf"
                                             type="text"
-value={data.cpf.length}
-                                        /> */}
-                                        <InputMask
-                                            id="cpf"
-                                            type={'text'}
-                                            className="input-form"
-                                            mask={dynamicMask(data.cpf)}
-                                            alwaysShowMask={true}
-                                            value={data.cpf}
+                                            value={maskCpfCnpj(data.cpf)}
                                             onChange={(e) => setData('cpf', e.target.value)}
+                                            className="input-form"
+                                            maxLength={18}
                                         />
                                         {errors.cpf && <div className="text-sm text-red-500">{errors.cpf}</div>}
                                     </div>
@@ -138,9 +139,11 @@ value={data.cpf.length}
                                         <input
                                             id="cep"
                                             type="text"
-                                            value={data.cep}
+                                            value={maskCep(data.cep)}
                                             onChange={(e) => setData('cep', e.target.value)}
+                                            onBlur={(e) => getCep(e.target.value)}
                                             className="input-form"
+                                            maxLength={9}
                                         />
                                     </div>
                                     <div className="flex flex-col">
@@ -216,9 +219,10 @@ value={data.cpf.length}
                                         <input
                                             id="telefone"
                                             type="text"
-                                            value={data.telefone}
+                                            value={maskPhone(data.telefone)}
                                             onChange={(e) => setData('telefone', e.target.value)}
                                             className="input-form"
+                                            maxLength={15}
                                         />
                                         {errors.telefone && <div className="text-sm text-red-500">{errors.telefone}</div>}
                                     </div>
@@ -241,9 +245,10 @@ value={data.cpf.length}
                                         <input
                                             id="telcontato"
                                             type="text"
-                                            value={data.telcontato}
+                                            value={maskPhone(data.telcontato)}
                                             onChange={(e) => setData('telcontato', e.target.value)}
                                             className="input-form"
+                                            maxLength={15}
                                         />
                                     </div>
                                 </div>

@@ -59,7 +59,7 @@ const Clientes = ({ clientes }: any) => {
                                         <TableCell className="flex items-center justify-end gap-2">
                                             <OrderButton url={""} />
                                             <EditButton url={""} />
-                                            <DeleteButton url={""} />
+                                            <DeleteButton id={cliente.id} />
                                         </TableCell>
                                     </TableRow>
                                 ))}

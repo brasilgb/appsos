@@ -1,12 +1,15 @@
 import { Link } from "@inertiajs/react"
-import React from 'react'
-import { IoAdd, IoArrowBackOutline, IoConstruct, IoConstructOutline, IoSave, IoTrash } from "react-icons/io5";
+import React, { useState } from 'react'
+import { IoAdd, IoArrowBackOutline, IoClose, IoConstruct, IoSave, IoTrash } from "react-icons/io5";
 import { TbEdit } from "react-icons/tb";
+import { FaRegTrashCan } from "react-icons/fa6";
 
 interface ButtonsProps {
     url?: string;
     label?: string;
     processing?: any;
+    onclick?: any;
+    id?: string;
 }
 
 export const AddButton = ({ url, label }: ButtonsProps) => {
@@ -44,9 +47,9 @@ export const OrderButton = ({ url, label }: ButtonsProps) => {
             href={url}
             as="button"
             type="button"
+            title={`Ordens do cliente`}
         >
             <IoConstruct size={18} />
-            <span>{label}</span>
         </Link>
     )
 }
@@ -58,24 +61,64 @@ export const EditButton = ({ url, label }: ButtonsProps) => {
             href={url}
             as="button"
             type="button"
+            title={`Editar registro`}
         >
             <TbEdit size={18} />
-            <span>{label}</span>
         </Link>
     )
 }
 
-export const DeleteButton = ({ url, label }: ButtonsProps) => {
+export const DeleteButton = ({ id, onclick }: ButtonsProps) => {
+    const [showConfirme, setShowConfirme] = useState(false);
+
+    const ModalDelete = () => {
+        return (
+            <div onClick={() => setShowConfirme(false)} className={`fixed z-20 top-0 right-0 bottom-0 left-0 flex items-center justify-center bg-gray-500 bg-opacity-40`}>
+                <div className="w-1/4 bg-gray-50 rounded-md shadow-md border border-white">
+                    <div className="text-gray-400 flex justify-end pt-0.5 pr-0.5"><button onClick={() => setShowConfirme(false)}><IoClose size={18} /></button></div>
+                    <div className="flex items-center justify-center">
+                        <div className="flex flex-col items-center justify-center">
+                            <div className="text-red-500 pb-2">
+                                <FaRegTrashCan size={40} />
+                            </div>
+                            <div className="text-xl">Excluir registro</div>
+                        </div>
+                    </div>
+                    <div className="my-2 flex flex-col items-center justify-center">
+                        <h2 className="text-base">Você realmente deseja excluir este registro?</h2>
+                        <h2 className="test-sm">Esta operação não pode ser desfeita.</h2>
+                    </div>
+                    <div className="flex items-center justify-end gap-3 p-3 mt-2">
+                        <button
+                        className="py-2 px-3 flex-1 bg-zinc-600 hover:bg-zinc-700 rounded-md"
+                        >
+                            <span className="text-sm text-gray-50">Cancelar</span>
+                        </button>
+                        <button
+                        className="py-2 px-3 flex-1 bg-red-500 hover:bg-red-600 rounded-md"
+                        >
+                            <span className="text-sm text-gray-50">Excluir</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     return (
-        <Link
-            className="flex items-center justify-center bg-red-600 hover:bg-red-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
-            href={url}
-            as="button"
-            type="button"
-        >
-            <IoTrash size={18} />
-            <span>{label}</span>
-        </Link>
+        <>
+            {showConfirme &&
+                <ModalDelete />
+            }
+            <button
+                className="flex items-center justify-center bg-red-600 hover:bg-red-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+                onClick={() => setShowConfirme(true)}
+                title={`Deletar registro ${id}`}
+            >
+                <IoTrash size={18} />
+            </button>
+        </>
+
     )
 }
 
@@ -83,13 +126,13 @@ export const SaveButton = ({ processing }: ButtonsProps) => {
     return (
         <div className="flex justify-end">
             <button
-            className="flex items-center justify-center bg-blue-700 hover:bg-blue-600 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
-            disabled={processing}
-            type="submit"
-        >
-            <IoSave size={18} />
-            <span className="ml-1">Salvar</span>
-        </button>
+                className="flex items-center justify-center bg-blue-700 hover:bg-blue-600 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+                disabled={processing}
+                type="submit"
+            >
+                <IoSave size={18} />
+                <span className="ml-1">Salvar</span>
+            </button>
         </div>
     )
 }
