@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, usePage } from "@inertiajs/react";
 import { AiOutlineDashboard } from 'react-icons/ai';
 import Logo from "../Logo";
-import { IoPeopleSharp } from "react-icons/io5";
+import { IoConstruct, IoPeopleSharp } from "react-icons/io5";
 
 const Sidebar = () => {
     const { url } = usePage();
@@ -37,10 +37,10 @@ const Sidebar = () => {
                     </li>
                     <li>
                         <Link
-                            className={`flex items-center p-2 rounded-md ${url === '/3' ? 'text-white bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
-                            href={"/"}>
-                            <AiOutlineDashboard size={20} />
-                            <span className="ml-2">Dashboard</span>
+                            className={`flex items-center p-2 rounded-md ${url.startsWith('/ordens') ? 'text-white bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
+                            href={"/ordens"}>
+                            <IoConstruct size={20} />
+                            <span className="ml-2">Ordens de serviço</span>
                         </Link>
                     </li>
                     <li>

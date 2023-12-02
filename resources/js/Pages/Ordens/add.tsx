@@ -1,55 +1,35 @@
 import { BackButton, SaveButton } from "@/Components/Buttons";
 import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderContent } from "@/Components/Card";
-import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { maskCep, maskCpfCnpj, maskPhone, unMask } from "@/Utils";
-import { useForm, usePage } from "@inertiajs/react";
-import { InertiaFormProps } from "@inertiajs/react/types/useForm";
+import { useForm } from "@inertiajs/react";
 import React, { useCallback, useEffect } from "react";
 import { IoPeopleSharp } from "react-icons/io5";
 
-interface ClientesProps {
-    cpf: string;
-    nascimento: any;
-    nome: string;
-    email: string;
-    cep: string;
-    uf: string;
-    cidade: string;
-    bairro: string;
-    endereco: string;
-    complemento: string;
-    telefone: string;
-    contato: string;
-    telcontato: string;
-    obs: string;
-}
-
-const EditCliente = ({clientes}:any) => {
+const AddOrdem = () => {
     // const options = clientes.map((cliente: any) => ({ value: cliente.id, label: cliente.nome }))
-    const { flash } = usePage().props;
 
-    const { data, setData, patch, progress, processing, errors, setDefaults }: InertiaFormProps<ClientesProps> = useForm({
-        cpf: clientes?.cpf,
-        nascimento: clientes.nascimento,
-        nome: clientes.nome,
-        email: clientes.email,
-        cep: clientes.cep,
-        uf: clientes.uf,
-        cidade: clientes.cidade,
-        bairro: clientes.bairro,
-        endereco: clientes.endereco,
-        complemento: clientes.complemento,
-        telefone: clientes.telefone,
-        contato: clientes.contato,
-        telcontato: clientes.telcontato,
-        obs: clientes.obs,
+    const { data, setData, post, progress, processing, errors } = useForm({
+        cpf: "",
+        nascimento: "",
+        nome: "",
+        email: "",
+        cep: "",
+        uf: "",
+        cidade: "",
+        bairro: "",
+        endereco: "",
+        complemento: "",
+        telefone: "",
+        contato: "",
+        telcontato: "",
+        obs: "",
     });
 
     function handleSubmit(e: any) {
         e.preventDefault();
-        patch(route('clientes.update', clientes.id));
+        post(route('clientes.store'));
     }
 
     const getCep = (cep: string) => {
@@ -57,21 +37,15 @@ const EditCliente = ({clientes}:any) => {
         fetch(`https://viacep.com.br/ws/${cleanCep}/json/`)
             .then((response) => response.json())
             .then(result => {
-                setData(data => ({ ...data, 'uf': result.uf }));
-                setData(data => ({ ...data, 'cidade': result.localidade }));
-                setData(data => ({ ...data, 'bairro': result.bairro }));
-                setData(data => ({ ...data, 'endereco': result.logradouro }));
-                setData(data => ({ ...data, 'complemento': result.complemento }));
+                setData(data => ({...data, 'uf': result.uf}));
+                setData(data => ({...data, 'cidade': result.localidade}));
+                setData(data => ({...data, 'bairro': result.bairro}));
+                setData(data => ({...data, 'endereco': result.logradouro}));
+                setData(data => ({...data, 'complemento': result.complemento}));
             })
             .catch((error) => console.error(error));
     }
-
-    useEffect(() => {
-        const getCliente = () => {
-
-        };
-        getCliente();
-    }, [])
+   
     return (
         <AuthLayout>
             <Card>
@@ -90,7 +64,6 @@ const EditCliente = ({clientes}:any) => {
                     />
                 </HeaderContent>
                 <CardContainer>
-                    <FlashMessage message={flash} />
                     <CardHeader>
                         <CardHeaderContent>
                             <BackButton url={"/clientes"} label={"Voltar"} />
@@ -307,4 +280,4 @@ const EditCliente = ({clientes}:any) => {
         </AuthLayout >
     );
 }
-export default EditCliente;
+export default AddOrdem;

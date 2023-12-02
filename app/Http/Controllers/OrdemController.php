@@ -5,14 +5,13 @@ namespace App\Http\Controllers;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrdemResource;
-use App\Models\Empresa;
 use App\Models\Ordem;
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
+use Inertia\Inertia;
 
 class OrdemController extends Controller
 {
@@ -31,46 +30,37 @@ class OrdemController extends Controller
         }
 
         $ordens = $query->paginate(12);
-        return OrdemResource::collection($ordens);
+       
+        return Inertia::render('Ordens/index', ["ordens" => $ordens]);
     }
 
-    /**
-     * Todas as ordens
-     */
-    public function allordens()
-    {
-        $ordens = Ordem::all();
-        return OrdemResource::collection($ordens);
-    }
-   
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    { {
-            // if(!auth()->user()->tokenCan('user-store')) {
-            //     return $this->error('Unauthorized', 403);
-            // }
+    { 
+        $data = $request->all();
 
-            $validator = Validator::make($request->all(), [
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido'
+        ];
+        $request->validate([
                 'cliente_id' => 'required',
                 'equipamento' => 'required',
                 'senha' => 'required',
                 'defeito' => 'required',
                 'estado' => 'required',
-            ]);
+            ],
+            $messages,
+            [
+                'equipamento' => 'equipamento',
+                'senha' => 'senha',
+            ]
+        );
 
-            if ($validator->fails()) {
-                return $this->error('Dados inválidos!', 422, $validator->errors());
-            }
-
-            $created = Ordem::create($request->all());
-
-            if ($created) {
-                return $this->response('Ordem cadastrada com sucesso!', 200, new OrdemResource($created));
-            }
-            return $this->error('Ordem não cadastrada', 400);
-        }
+            Ordem::create($data);
+            Session::flash('success', 'Ordem cadastrada com sucesso!');
+            return redirect()->route('ordens.index');
     }
 
     /**

@@ -36,7 +36,7 @@ export const TableHead = ({ children, className }: TableProps) => {
 
 export const TableCell = ({ children, className }: TableProps) => {
     return (
-        <td className={`border-b py-2.5 px-2 text-gray-500 ${className}`}>
+        <td className={`border-b py-2 px-2 text-gray-500 ${className}`}>
             {children}
         </td>
     );

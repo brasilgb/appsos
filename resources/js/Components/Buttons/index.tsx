@@ -1,6 +1,6 @@
 import { Link, useForm } from "@inertiajs/react"
 import React, { useState } from 'react'
-import { IoAdd, IoArrowBackOutline, IoClose, IoConstruct, IoSave, IoTrash } from "react-icons/io5";
+import { IoAdd, IoArrowBackOutline, IoClose, IoConstruct, IoPrint, IoSave, IoTrash } from "react-icons/io5";
 import { TbEdit } from "react-icons/tb";
 import { FaRegTrashCan } from "react-icons/fa6";
 
@@ -37,6 +37,20 @@ export const BackButton = ({ url, label }: ButtonsProps) => {
         >
             <IoArrowBackOutline size={18} />
             <span>{label}</span>
+        </Link>
+    )
+}
+
+export const PrintButton = ({ url }: ButtonsProps) => {
+    return (
+        <Link
+            className="flex items-center justify-center bg-zinc-600 hover:bg-zinc-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+            href={url}
+            as="button"
+            type="button"
+            title={`Imprimir recibo`}
+        >
+            <IoPrint size={18} />
         </Link>
     )
 }

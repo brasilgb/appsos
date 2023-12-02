@@ -26,18 +26,13 @@ class ClienteController extends Controller
         $query = Cliente::with('ordens')->orderBy('id', 'DESC');
 
         if ($search) {
-            $query->where('nome', 'like', '%' . $search . '%');
+            $query->where('nome', 'like', '%' . $search . '%')
+                ->orWhere('cpf', 'like', '%' . $search . '%');
         }
 
-        $clientes = $query->paginate(15);
+        $clientes = $query->paginate(12);
 
         return Inertia::render('Clientes/index', ["clientes" => $clientes]);
-    }
-
-    public function allclientes()
-    {
-        $clientes = Cliente::all();
-        return ClienteResource::collection($clientes);
     }
 
     /**
@@ -59,11 +54,12 @@ class ClienteController extends Controller
             'required' => 'O campo :attribute deve ser preenchido',
             'email' => 'Endereço de e-mail válido',
             'cpf_ou_cnpj' => 'CPF ou CNPJ inválido',
+            'unique' => 'CPF ou CNPJ já está em uso',
         ];
         $request->validate(
             [
                 'nome' => 'required',
-                'cpf' => 'nullable|cpf_ou_cnpj',
+                'cpf' => 'nullable|cpf_ou_cnpj|unique:clientes',
                 'email' => 'nullable|email',
                 'telefone' => 'required'
             ],
@@ -75,7 +71,7 @@ class ClienteController extends Controller
         );
 
         Cliente::create($data);
-        Session::flash('success', 'Usuário criado com sucesso!');
+        Session::flash('success', 'Cliente cadastrado com sucesso!');
         return redirect()->route('clientes.index');
     }
 
@@ -100,32 +96,31 @@ class ClienteController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
-        // if(!auth()->user()->tokenCan('user-store')) {
-        //     return $this->error('Unauthorized', 403);
-        // }
-        // dd($request->all());
-        $validator = Validator::make($request->all(), [
-            'cpf' => 'required',
-            'nome' => 'required',
-            'email' => "unique:users,email,$cliente->id",
-            'cep' => 'required',
-            'uf' => 'required',
-            'cidade' => 'required',
-            'bairro' => 'required',
-            'endereco' => 'required',
-            'telefone' => 'required',
-        ]);
+        $data = $request->all();
 
-        if ($validator->fails()) {
-            return $this->error('Dados inválidos!', 422, $validator->errors());
-        }
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'email' => 'Endereço de e-mail válido',
+            'cpf_ou_cnpj' => 'CPF ou CNPJ inválido',
+            'unique' => 'CPF ou CNPJ já está em uso',
+        ];
+        $request->validate(
+            [
+                'nome' => 'required',
+                'cpf' => 'nullable|cpf_ou_cnpj|unique:clientes,cpf,' . $cliente->id,
+                'email' => 'nullable|email',
+                'telefone' => 'required'
+            ],
+            $messages,
+            [
+                'nome' => 'nome',
+                'email' => 'e-mail',
+            ]
+        );
 
-        $updated = $cliente->update($request->all());
-
-        if ($updated) {
-            return $this->response('Cliente alterado com sucesso!', 200, new ClienteResource($cliente));
-        }
-        return $this->error('Cliente não alterado', 400);
+        $cliente->update($data);
+        Session::flash('success', 'Cliente editado com sucesso!');
+        return Redirect::route('clientes.show', ['cliente' => $cliente->id]);
     }
 
     /**
