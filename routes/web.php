@@ -18,7 +18,9 @@ use Inertia\Inertia;
 |
 */
 Route::resource('/clientes', ClienteController::class);
-Route::resource('/ordens', OrdemController::class);
+Route::resource('/ordens', OrdemController::class)->parameters([
+    'ordens' => 'ordem'
+]);
 
 Route::get('/', function () {
     return Inertia::render('Dashboard', [

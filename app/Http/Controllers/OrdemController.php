@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrdemResource;
+use App\Models\Cliente;
 use App\Models\Ordem;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
@@ -39,7 +40,9 @@ class OrdemController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Ordens/add');
+        $clientes = Cliente::get();
+        $ordem = Ordem::orderBy('id', 'desc')->first()->id;
+        return Inertia::render('Ordens/add', ['clientes' => $clientes, 'ordem' => $ordem]);
     }
     /**
      * Store a newly created resource in storage.
@@ -54,9 +57,7 @@ class OrdemController extends Controller
         $request->validate([
                 'cliente_id' => 'required',
                 'equipamento' => 'required',
-                'senha' => 'required',
                 'defeito' => 'required',
-                'estado' => 'required',
             ],
             $messages,
             [
@@ -66,7 +67,7 @@ class OrdemController extends Controller
         );
 
             Ordem::create($data);
-            Session::flash('success', 'Ordem cadastrada com sucesso!');
+            Session::flash('success', 'Ordem de serviço cadastrada com sucesso!');
             return redirect()->route('ordens.index');
     }
 
@@ -75,16 +76,23 @@ class OrdemController extends Controller
      */
     public function show(Ordem $ordem)
     {
-        return new OrdemResource($ordem);
+        $ordens = Ordem::with('cliente')->where('id', $ordem->id)->first();
+        return Inertia::render('Ordens/edit', ['ordens' => $ordens]);
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Ordem $ordem)
+    {
+        return Redirect::route('ordens.show', ['ordem' => $ordem->id]);
+    }
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Ordem $ordem)
     {
 
-        // dd(Carbon::parse($request->dtentrada)->format('Y-m-d H:i:s'));
         $validator = Validator::make($request->all(), [
             'equipamento' => 'required',
             'senha' => 'required',

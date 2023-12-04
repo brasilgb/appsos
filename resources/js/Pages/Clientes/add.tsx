@@ -8,7 +8,6 @@ import React, { useCallback, useEffect } from "react";
 import { IoPeopleSharp } from "react-icons/io5";
 
 const AddCliente = () => {
-    // const options = clientes.map((cliente: any) => ({ value: cliente.id, label: cliente.nome }))
 
     const { data, setData, post, progress, processing, errors } = useForm({
         cpf: "",
@@ -58,7 +57,7 @@ const AddCliente = () => {
                         links={
                             [
                                 { url: '/clientes', label: 'Clientes' },
-                                { url: null, label: 'Adicionar Cliente' },
+                                { url: null, label: 'Adicionar cliente' },
                             ]
                         }
                     />

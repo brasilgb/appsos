@@ -1,5 +1,5 @@
 import { Link } from "@inertiajs/react";
-import React from 'react'
+import React, { Fragment } from 'react'
 
 interface PageTopProps {
     children?: React.ReactNode;
@@ -35,8 +35,8 @@ export const BreadCrumbTop = ({ links }: PageTopProps) => {
                     </Link>
                 </li>
                 <li className="px-1.5 text-gray-400">/</li>
-                {links.map((link: any) => (
-                    <>
+                {links.map((link: any, idx: number) => (
+                    <Fragment key={idx}>
                         <li>
                             {
                                 link.url !== null
@@ -45,7 +45,7 @@ export const BreadCrumbTop = ({ links }: PageTopProps) => {
                             }
                         </li>
                         {link.url !== null && <li className="px-1.5 text-gray-400">/</li>}
-                    </>
+                    </Fragment>
                 ))}
             </ul>
         </div>

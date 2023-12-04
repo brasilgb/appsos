@@ -1,4 +1,4 @@
-import { AddButton, DeleteButton, EditButton, OrderButton } from "@/Components/Buttons";
+import { AddButton, DeleteButton, EditButton, OrderButton, WhatsAppButton } from "@/Components/Buttons";
 import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderContent } from "@/Components/Card";
 import FlashMessage from "@/Components/FlashMessage";
 import InputSearch from "@/Components/InputSearch";
@@ -8,12 +8,12 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import AuthLayout from "@/Layouts/AuthLayout";
 import { usePage } from "@inertiajs/react";
 import moment from "moment";
-import React from "react";
+import React, { Fragment } from "react";
 import { IoPeopleSharp } from "react-icons/io5";
 
 const Clientes = ({ clientes }: any) => {
     const { flash } = usePage().props;
-    
+
     return (
         <AuthLayout>
             <Card>
@@ -39,7 +39,7 @@ const Clientes = ({ clientes }: any) => {
                             <AddButton url={"/clientes/create"} label={"Cliente"} />
                         </CardHeaderContent>
                     </CardHeader>
-                            <FlashMessage message={flash} />
+                    <FlashMessage message={flash} />
                     <CardBody>
                         <Table>
                             <TableHeader>
@@ -55,7 +55,8 @@ const Clientes = ({ clientes }: any) => {
                             </TableHeader>
                             <TableBody>
                                 {clientes.data.map((cliente: any) => (
-                                    <TableRow key={cliente.id}>
+                                    <Fragment key={cliente.id}>
+                                    <TableRow>
                                         <TableCell>{cliente.id}</TableCell>
                                         <TableCell>{cliente.nome}</TableCell>
                                         <TableCell>{cliente.email}</TableCell>
@@ -63,11 +64,13 @@ const Clientes = ({ clientes }: any) => {
                                         <TableCell>{cliente.telefone}</TableCell>
                                         <TableCell>{moment(cliente.created_at).format("DD/MM/YYYY")}</TableCell>
                                         <TableCell className="flex items-center justify-end gap-2">
+                                            <WhatsAppButton url="" />
                                             <OrderButton url="" />
                                             <EditButton url={route('clientes.edit', cliente.id)} />
                                             <DeleteButton url="clientes.destroy" param={cliente.id} identify={`o cliente ${cliente.nome}`} />
                                         </TableCell>
                                     </TableRow>
+                                    </Fragment>
                                 ))}
                             </TableBody>
                         </Table>

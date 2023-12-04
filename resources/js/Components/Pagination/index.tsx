@@ -47,8 +47,8 @@ const Pagination = ({ data }: PaginationProps) => {
                 }
             </li>
 
-            {clearLinks.map((link: any) => (
-                <li>
+            {clearLinks.map((link: any, idx: number) => (
+                <li key={idx}>
                     <Link
                         className={`flex items-center justify-center border-y border-r border-gray-200 h-10 w-10 text-sm ${link.active ? 'text-gray-50 bg-blue-700' : 'text-gray-500 hover:bg-gray-100 hover:text-gray-600'} duration-300`}
                         href={link.url}

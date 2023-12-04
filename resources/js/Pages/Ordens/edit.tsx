@@ -3,88 +3,77 @@ import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderConten
 import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { maskCep, maskCpfCnpj, maskPhone, unMask } from "@/Utils";
 import { useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
-import React, { useCallback, useEffect } from "react";
-import { IoPeopleSharp } from "react-icons/io5";
+import React, { useState } from "react";
+import { IoChevronDownSharp, IoPeopleSharp } from "react-icons/io5";
 
 interface ClientesProps {
-    cpf: string;
-    nascimento: any;
-    nome: string;
-    email: string;
-    cep: string;
-    uf: string;
-    cidade: string;
-    bairro: string;
-    endereco: string;
-    complemento: string;
-    telefone: string;
-    contato: string;
-    telcontato: string;
-    obs: string;
+    id: number;
+    equipamento: string,
+    modelo: string,
+    senha: string,
+    defeito: string,
+    estado: string,
+    acessorios: string,
+    previsao: any,
+    orcamento: string,
+    descorcamento: string,
+    valorcamento: string;
+    pecas: string,
+    valpecas: string,
+    valservico: string,
+    custo: string,
+    status: string,
+    tecnico: string,
+    detalhes: string,
+    obs: string,
 }
 
-const EditOrdem = ({clientes}:any) => {
-    // const options = clientes.map((cliente: any) => ({ value: cliente.id, label: cliente.nome }))
+const EditOrdem = ({ ordens }: any) => {
     const { flash } = usePage().props;
+    const [openOrcamento, setOpenOrcamento] = useState(false);
 
     const { data, setData, patch, progress, processing, errors, setDefaults }: InertiaFormProps<ClientesProps> = useForm({
-        cpf: clientes?.cpf,
-        nascimento: clientes.nascimento,
-        nome: clientes.nome,
-        email: clientes.email,
-        cep: clientes.cep,
-        uf: clientes.uf,
-        cidade: clientes.cidade,
-        bairro: clientes.bairro,
-        endereco: clientes.endereco,
-        complemento: clientes.complemento,
-        telefone: clientes.telefone,
-        contato: clientes.contato,
-        telcontato: clientes.telcontato,
-        obs: clientes.obs,
+        id: ordens.id,
+        equipamento: ordens.equipamento,
+        modelo: ordens.modelo,
+        senha: ordens.senha,
+        defeito: ordens.defeito,
+        estado: ordens.estado,
+        acessorios: ordens.acessorios,
+        previsao: ordens.previsao,
+        orcamento: ordens.orcamento,
+        descorcamento: ordens.descorcamento,
+        valorcamento: ordens.valorcamento,
+        pecas: ordens.pecas,
+        valpecas: ordens.valpecas,
+        valservico: ordens.valservico,
+        custo: ordens.custo,
+        status: ordens.status,
+        tecnico: ordens.tecnico,
+        detalhes: ordens.detalhes,
+        obs: ordens.obs,
     });
 
     function handleSubmit(e: any) {
         e.preventDefault();
-        patch(route('clientes.update', clientes.id));
+        patch(route('ordens.update', ordens.id));
     }
 
-    const getCep = (cep: string) => {
-        const cleanCep = unMask(cep);
-        fetch(`https://viacep.com.br/ws/${cleanCep}/json/`)
-            .then((response) => response.json())
-            .then(result => {
-                setData(data => ({ ...data, 'uf': result.uf }));
-                setData(data => ({ ...data, 'cidade': result.localidade }));
-                setData(data => ({ ...data, 'bairro': result.bairro }));
-                setData(data => ({ ...data, 'endereco': result.logradouro }));
-                setData(data => ({ ...data, 'complemento': result.complemento }));
-            })
-            .catch((error) => console.error(error));
-    }
-
-    useEffect(() => {
-        const getCliente = () => {
-
-        };
-        getCliente();
-    }, [])
     return (
         <AuthLayout>
             <Card>
                 <HeaderContent>
                     <TitleTop >
                         <IoPeopleSharp size={30} />
-                        <span className="ml-2">Clientes</span>
+                        <span className="ml-2">Ordens</span>
                     </TitleTop>
                     <BreadCrumbTop
                         links={
                             [
-                                { url: '/clientes', label: 'Clientes' },
-                                { url: null, label: 'Adicionar Cliente' },
+                                { url: '/ordens', label: 'Ordens' },
+                                { url: null, label: 'Adicionar ordem' },
                             ]
                         }
                     />
@@ -93,7 +82,7 @@ const EditOrdem = ({clientes}:any) => {
                     <FlashMessage message={flash} />
                     <CardHeader>
                         <CardHeaderContent>
-                            <BackButton url={"/clientes"} label={"Voltar"} />
+                            <BackButton url={"/ordens"} label={"Voltar"} />
                         </CardHeaderContent>
                         <CardHeaderContent>
                             <></>
@@ -103,187 +92,196 @@ const EditOrdem = ({clientes}:any) => {
                         <CardBody className=" border-y border-gray-100">
                             <div className="px-3 my-4">
 
-                                <div className="grid grid-cols-6 gap-4">
+                                <div className="grid grid-cols-5 gap-4">
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="cpf">
-                                            CPF/CNPJ
+                                        <label className="label-form" htmlFor="ordem">
+                                            Ordem
                                         </label>
                                         <input
-                                            id="cpf"
+                                            id="ordem"
                                             type="text"
-                                            value={maskCpfCnpj(data.cpf)}
-                                            onChange={(e) => setData('cpf', e.target.value)}
+                                            value={data.id}
                                             className="input-form"
-                                            maxLength={18}
+                                            disabled
                                         />
-                                        {errors.cpf && <div className="text-sm text-red-500">{errors.cpf}</div>}
                                     </div>
-                                    <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="nascimento">
-                                            Nascimento
+
+                                    <div className="flex flex-col col-span-2">
+                                        <label className="label-form" htmlFor="cliente_id">
+                                            Nome do cliente
                                         </label>
                                         <input
-                                            id="nascimento"
-                                            type="date"
-                                            value={data.nascimento}
-                                            onChange={(e) => setData('nascimento', e.target.value)}
+                                            id="equipamento"
+                                            type="text"
+                                            value={ordens.cliente.nome}
                                             className="input-form"
+                                            disabled
                                         />
                                     </div>
                                     <div className="flex flex-col col-span-2">
-                                        <label className="label-form" htmlFor="nome">
-                                            Nome
+                                        <label className="label-form" htmlFor="equipamento">
+                                            Tipo de equipamento
                                         </label>
                                         <input
-                                            id="nome"
+                                            id="equipamento"
                                             type="text"
-                                            value={data.nome}
-                                            onChange={(e) => setData('nome', e.target.value)}
+                                            value={data.equipamento}
+                                            onChange={(e) => setData('equipamento', e.target.value)}
                                             className="input-form"
                                         />
-                                        {errors.nome && <div className="text-sm text-red-500">{errors.nome}</div>}
-                                    </div>
-                                    <div className="flex flex-col col-span-2">
-                                        <label className="label-form" htmlFor="email">
-                                            E-mail
-                                        </label>
-                                        <input
-                                            id="email"
-                                            type="text"
-                                            value={data.email}
-                                            onChange={(e) => setData('email', e.target.value)}
-                                            className="input-form"
-                                        />
-                                        {errors.email && <div className="text-red-500">{errors.email}</div>}
+                                        {errors.equipamento && <div className="text-red-500">{errors.equipamento}</div>}
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-6 gap-4 mt-6">
-                                    <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="cep">
-                                            CEP
+                                <div className="grid grid-cols-4 gap-4 mt-6">
+                                    <div className="flex flex-col col-span-2">
+                                        <label className="label-form" htmlFor="modelo">
+                                            Modelo do equipamento
                                         </label>
                                         <input
-                                            id="cep"
+                                            id="modelo"
                                             type="text"
-                                            value={maskCep(data.cep)}
-                                            onChange={(e) => setData('cep', e.target.value)}
-                                            onBlur={(e) => getCep(e.target.value)}
+                                            value={data.modelo}
+                                            onChange={(e) => setData('modelo', e.target.value)}
                                             className="input-form"
-                                            maxLength={9}
                                         />
                                     </div>
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="uf">
-                                            UF
+                                        <label className="label-form" htmlFor="senha">
+                                            Senha do equipamento
                                         </label>
                                         <input
-                                            id="uf"
+                                            id="senha"
                                             type="text"
-                                            value={data.uf}
-                                            onChange={(e) => setData('uf', e.target.value)}
+                                            value={data.senha}
+                                            onChange={(e) => setData('senha', e.target.value)}
                                             className="input-form"
                                         />
                                     </div>
-                                    <div className="flex flex-col col-span-2">
-                                        <label className="label-form" htmlFor="cidade">
-                                            Cidade
+                                    <div className="flex flex-col">
+                                        <label className="label-form" htmlFor="previsao">
+                                            Previsão de entrega
                                         </label>
                                         <input
-                                            id="cidade"
-                                            type="text"
-                                            value={data.cidade}
-                                            onChange={(e) => setData('cidade', e.target.value)}
-                                            className="input-form"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col col-span-2">
-                                        <label className="label-form" htmlFor="bairro">
-                                            Bairro
-                                        </label>
-                                        <input
-                                            id="bairro"
-                                            type="text"
-                                            value={data.bairro}
-                                            onChange={(e) => setData('bairro', e.target.value)}
+                                            id="previsao"
+                                            type="date"
+                                            value={data.previsao}
+                                            onChange={(e) => setData('previsao', e.target.value)}
                                             className="input-form"
                                         />
                                     </div>
                                 </div>
 
                                 <div className="grid grid-cols-3 gap-4 mt-6">
-                                    <div className="flex flex-col col-span-2">
-                                        <label className="label-form" htmlFor="endereco">
-                                            Endereço
+                                    <div className="flex flex-col">
+                                        <label className="label-form" htmlFor="defeito">
+                                            Defeito relatado/Serviço solicitado
                                         </label>
-                                        <input
-                                            id="endereco"
-                                            type="text"
-                                            value={data.endereco}
-                                            onChange={(e) => setData('endereco', e.target.value)}
+                                        <textarea
+                                            id="defeito"
+                                            value={data.defeito}
+                                            onChange={(e) => setData('defeito', e.target.value)}
                                             className="input-form"
                                         />
                                     </div>
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="complemento">
-                                            Complemento
+                                        <label className="label-form" htmlFor="estado">
+                                            Estado do equipamento
                                         </label>
-                                        <input
-                                            id="complemento"
-                                            type="text"
-                                            value={data.complemento}
-                                            onChange={(e) => setData('complemento', e.target.value)}
+                                        <textarea
+                                            id="estado"
+                                            value={data.estado}
+                                            onChange={(e) => setData('estado', e.target.value)}
+                                            className="input-form"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label className="label-form" htmlFor="acessorios">
+                                            Acessórios
+                                        </label>
+                                        <textarea
+                                            id="acessorios"
+                                            value={data.acessorios}
+                                            onChange={(e) => setData('acessorios', e.target.value)}
                                             className="input-form"
                                         />
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-4 gap-4 mt-6">
-                                    <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="telefone">
-                                            Telefone
-                                        </label>
-                                        <input
-                                            id="telefone"
-                                            type="text"
-                                            value={maskPhone(data.telefone)}
-                                            onChange={(e) => setData('telefone', e.target.value)}
-                                            className="input-form"
-                                            maxLength={15}
-                                        />
-                                        {errors.telefone && <div className="text-sm text-red-500">{errors.telefone}</div>}
-                                    </div>
-                                    <div className="flex flex-col col-span-2">
-                                        <label className="label-form" htmlFor="contato">
-                                            Contato
-                                        </label>
-                                        <input
-                                            id="contato"
-                                            type="text"
-                                            value={data.contato}
-                                            onChange={(e) => setData('contato', e.target.value)}
-                                            className="input-form"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="telcontato">
-                                            Telefone contato
-                                        </label>
-                                        <input
-                                            id="telcontato"
-                                            type="text"
-                                            value={maskPhone(data.telcontato)}
-                                            onChange={(e) => setData('telcontato', e.target.value)}
-                                            className="input-form"
-                                            maxLength={15}
-                                        />
-                                    </div>
-                                </div>
-
+                                {/* Section orcamento */}
                                 <div className="mt-6">
+                                    <div onClick={() => setOpenOrcamento((prevState => !prevState))} className="flex items-center justify-between p-2 bg-blue-500 border-t border-x border-blue-600 text-white cursor-pointer">
+                                        <h1 className="text-lg">Orçamento</h1>
+                                        <div className={`${openOrcamento ? '-rotate-180' : 'rotate-0'} duration-500`}>
+                                        <IoChevronDownSharp />
+                                        </div>
+                                    </div>
+
+                                    {openOrcamento &&
+                                        <div className={`grid grid-cols-3 gap-4 bg-blue-50 p-6 border transition-all duration-500  ${openOrcamento ? 'opacity-100' : 'opacity-0'}`}>
+                                            <div className="flex flex-col">
+                                                <div className="flex flex-col">
+                                                    <label className="label-form" htmlFor="orcamento">
+                                                        Status do orçamento
+                                                    </label>
+                                                    <select
+                                                        id="orcamento"
+                                                        value={data.orcamento}
+                                                        onChange={(e) => setData('orcamento', e.target.value)}
+                                                        className="input-form !bg-white"
+                                                    >
+                                                        <option value="">Selecione o status</option>
+                                                        <option value="1">Gerado</option>
+                                                        <option value="2">Entregue</option>
+                                                        <option value="3">Aprovado</option>
+                                                        </select>
+                                                </div>
+                                                <div className="flex flex-col mt-6">
+                                                    <label className="label-form" htmlFor="valorcamento">
+                                                        Valor do orçamento
+                                                    </label>
+                                                    <input
+                                                        id="valorcamento"
+                                                        type="text"
+                                                        value={data.valorcamento}
+                                                        onChange={(e) => setData('valorcamento', e.target.value)}
+                                                        className="input-form !bg-white"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="flex flex-col col-span-2">
+                                                <label className="label-form" htmlFor="descorcamento">
+                                                    Descrição do orcamento
+                                                </label>
+                                                <textarea
+                                                    id="descorcamento"
+                                                    value={data.descorcamento}
+                                                    onChange={(e) => setData('descorcamento', e.target.value)}
+                                                    className="input-form !bg-white"
+                                                    rows={4}
+                                                />
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-4 mt-6">
+                                    <div className="flex flex-col">
+                                        <label className="label-form" htmlFor="detalhes">
+                                            Detalhes do serviço
+                                        </label>
+                                        <textarea
+                                            id="detalhes"
+                                            value={data.detalhes}
+                                            onChange={(e) => setData('detalhes', e.target.value)}
+                                            className="input-form"
+                                        />
+                                    </div>
                                     <div className="flex flex-col">
                                         <label className="label-form" htmlFor="obs">
-                                            Observação
+                                            Observações
                                         </label>
                                         <textarea
                                             id="obs"
