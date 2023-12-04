@@ -36,7 +36,7 @@ const Ordens = ({ ordens }: any) => {
                             <InputSearch placeholder={"Buscar ordem de serviço"} url={"ordens.index"} />
                         </CardHeaderContent>
                         <CardHeaderContent>
-                            <AddButton url={"/ordens/create"} label={"Cliente"} />
+                            <AddButton url={"/ordens/create"} label={"Ordem"} />
                         </CardHeaderContent>
                     </CardHeader>
                             <FlashMessage message={flash} />
