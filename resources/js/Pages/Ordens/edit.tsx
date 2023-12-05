@@ -3,6 +3,7 @@ import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderConten
 import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
+import { statusServico } from "@/Utils/dataSelect";
 import { useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React, { useState } from "react";
@@ -343,6 +344,9 @@ const EditOrdem = ({ ordens }: any) => {
                                             className="input-form"
                                         >
                                             <option value="">Selecione o status</option>
+                                            {statusServico.map((status:any) => (
+                                                <option key={status.value} value={status.value}>{status.label}</option>
+                                            ))}
                                         </select>
                                     </div>
                                 </div>

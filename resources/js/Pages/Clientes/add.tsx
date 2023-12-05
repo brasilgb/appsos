@@ -2,7 +2,7 @@ import { BackButton, SaveButton } from "@/Components/Buttons";
 import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderContent } from "@/Components/Card";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { maskCep, maskCpfCnpj, maskPhone, unMask } from "@/Utils";
+import { maskCep, maskCpfCnpj, maskPhone, unMask } from "@/Utils/mask";
 import { useForm } from "@inertiajs/react";
 import React, { useCallback, useEffect } from "react";
 import { IoPeopleSharp } from "react-icons/io5";

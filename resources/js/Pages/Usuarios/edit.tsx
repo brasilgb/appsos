@@ -26,7 +26,7 @@ interface ClientesProps {
     obs: string;
 }
 
-const EditCliente = ({clientes}:any) => {
+const EditUsuario = ({clientes}:any) => {
     // const options = clientes.map((cliente: any) => ({ value: cliente.id, label: cliente.nome }))
     const { flash } = usePage().props;
 
@@ -307,4 +307,4 @@ const EditCliente = ({clientes}:any) => {
         </AuthLayout >
     );
 }
-export default EditCliente;
+export default EditUsuario;

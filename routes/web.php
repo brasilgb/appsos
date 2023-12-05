@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\OrdemController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,6 +18,10 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::resource('/usuarios', UserController::class)->parameters([
+    'usuarios' => 'user'
+]);
 Route::resource('/clientes', ClienteController::class);
 Route::resource('/ordens', OrdemController::class)->parameters([
     'ordens' => 'ordem'
@@ -41,4 +46,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

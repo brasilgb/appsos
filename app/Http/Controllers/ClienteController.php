@@ -58,7 +58,7 @@ class ClienteController extends Controller
             [
                 'nome' => 'required',
                 'cpf' => 'nullable|cpf_ou_cnpj|unique:clientes',
-                'email' => 'nullable|email',
+                'email' => 'nullable|email|unique:clientes',
                 'telefone' => 'required'
             ],
             $messages,
@@ -98,7 +98,7 @@ class ClienteController extends Controller
 
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido',
-            'email' => 'Endereço de e-mail válido',
+            'email' => 'Endereço de e-mail inválido',
             'cpf_ou_cnpj' => 'CPF ou CNPJ inválido',
             'unique' => 'CPF ou CNPJ já está em uso',
         ];

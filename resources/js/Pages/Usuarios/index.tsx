@@ -1,4 +1,4 @@
-import { AddButton, DeleteButton, EditButton, OrderButton, PrintButton } from "@/Components/Buttons";
+import { AddButton, DeleteButton, EditButton, OrderButton, WhatsAppButton } from "@/Components/Buttons";
 import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderContent } from "@/Components/Card";
 import FlashMessage from "@/Components/FlashMessage";
 import InputSearch from "@/Components/InputSearch";
@@ -6,13 +6,13 @@ import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import Pagination from "@/Components/Pagination";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/Components/Table";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { statusOrdemByValue } from "@/Utils/functions";
+import { roleByValue, statusUserByValue } from "@/Utils/functions";
 import { usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment } from "react";
-import { IoConstruct } from "react-icons/io5";
+import { IoPeople, IoPeopleSharp } from "react-icons/io5";
 
-const Ordens = ({ ordens }: any) => {
+const Usuarios = ({ usuarios }: any) => {
     const { flash } = usePage().props;
 
     return (
@@ -20,13 +20,13 @@ const Ordens = ({ ordens }: any) => {
             <Card>
                 <HeaderContent>
                     <TitleTop >
-                        <IoConstruct size={30} />
-                        <span className="ml-2">Ordens</span>
+                        <IoPeople size={30} />
+                        <span className="ml-2">Usuários</span>
                     </TitleTop>
                     <BreadCrumbTop
                         links={
                             [
-                                { url: null, label: 'Ordens' }
+                                { url: null, label: 'Usuários' }
                             ]
                         }
                     />
@@ -34,10 +34,10 @@ const Ordens = ({ ordens }: any) => {
                 <CardContainer>
                     <CardHeader>
                         <CardHeaderContent>
-                            <InputSearch placeholder={"Buscar ordem de serviço"} url={"ordens.index"} />
+                            <InputSearch placeholder={"Buscar usuário"} url={"usuarios.index"} />
                         </CardHeaderContent>
                         <CardHeaderContent>
-                            <AddButton url={"/ordens/create"} label={"Ordem"} />
+                            <AddButton url={"/usuarios/create"} label={"Usuário"} />
                         </CardHeaderContent>
                     </CardHeader>
                     <FlashMessage message={flash} />
@@ -48,28 +48,26 @@ const Ordens = ({ ordens }: any) => {
                                     <TableHead>#</TableHead>
                                     <TableHead>Nome</TableHead>
                                     <TableHead>Telefone</TableHead>
-                                    <TableHead>Recebimento</TableHead>
-                                    <TableHead>Equipamento</TableHead>
+                                    <TableHead>Função</TableHead>
                                     <TableHead>Status</TableHead>
-                                    <TableHead>Entrega</TableHead>
+                                    <TableHead>Cadastro</TableHead>
                                     <TableHead></TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {ordens.data.map((ordem: any) => (
-                                    <Fragment key={ordem.id}>
+                                {usuarios.data.map((usuario: any) => (
+                                    <Fragment key={usuario.id}>
                                         <TableRow>
-                                            <TableCell>{ordem.id}</TableCell>
-                                            <TableCell>{ordem.cliente.nome}</TableCell>
-                                            <TableCell>{ordem.cliente.telefone}</TableCell>
-                                            <TableCell>{moment(ordem.created_at).format("DD/MM/YYYY")}</TableCell>
-                                            <TableCell>{ordem.equipamento}</TableCell>
-                                            <TableCell>{statusOrdemByValue(ordem.status)}</TableCell>
-                                            <TableCell>{ordem.dtentrega ? moment(ordem.updated_at).format("DD/MM/YYYY") : '__/__/____'}</TableCell>
+                                            <TableCell>{usuario.id}</TableCell>
+                                            <TableCell>{usuario.name}</TableCell>
+                                            <TableCell>{usuario.telefone}</TableCell>
+                                            <TableCell>{roleByValue(usuario.role)}</TableCell>
+                                            <TableCell>{statusUserByValue(usuario.status)}</TableCell>
+                                            <TableCell>{moment(usuario.created_at).format("DD/MM/YYYY")}</TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
-                                                <PrintButton url="" />
-                                                <EditButton url={route('ordens.edit', ordem.id)} />
-                                                <DeleteButton url="ordens.destroy" param={ordem.id} identify={`o ordem ${ordem.id}`} />
+                                                <WhatsAppButton url="" />
+                                                <EditButton url={route('usuarios.edit', usuario.id)} />
+                                                <DeleteButton url="usuarios.destroy" param={usuario.id} identify={`o usuário ${usuario.name}`} />
                                             </TableCell>
                                         </TableRow>
                                     </Fragment>
@@ -78,7 +76,7 @@ const Ordens = ({ ordens }: any) => {
                         </Table>
                     </CardBody>
                     <CardFooter>
-                        <Pagination data={ordens} />
+                        <Pagination data={usuarios} />
                     </CardFooter>
                 </CardContainer>
             </Card>
@@ -86,4 +84,4 @@ const Ordens = ({ ordens }: any) => {
         </AuthLayout>
     );
 }
-export default Ordens;
+export default Usuarios;

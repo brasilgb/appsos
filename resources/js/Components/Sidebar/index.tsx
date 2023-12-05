@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, usePage } from "@inertiajs/react";
 import { AiOutlineDashboard } from 'react-icons/ai';
 import Logo from "../Logo";
-import { IoConstruct, IoPeopleSharp } from "react-icons/io5";
+import { IoConstruct, IoPeopleSharp, IoPerson } from "react-icons/io5";
 
 const Sidebar = () => {
     const { url } = usePage();
@@ -45,10 +45,10 @@ const Sidebar = () => {
                     </li>
                     <li>
                         <Link
-                            className={`flex items-center p-2 rounded-md ${url === '/4' ? 'text-white bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
-                            href={"/"}>
-                            <AiOutlineDashboard size={20} />
-                            <span className="ml-2">Dashboard</span>
+                            className={`flex items-center p-2 rounded-md ${url.startsWith('/usuarios') ? 'text-white bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
+                            href={"/usuarios"}>
+                            <IoPerson size={20} />
+                            <span className="ml-2">Usuários</span>
                         </Link>
                     </li>
 
