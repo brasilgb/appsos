@@ -213,7 +213,7 @@ const EditOrdem = ({ ordens }: any) => {
                                     <div onClick={() => setOpenOrcamento((prevState => !prevState))} className="flex items-center justify-between p-2 bg-blue-500 border-t border-x border-blue-600 text-white cursor-pointer">
                                         <h1 className="text-lg">Orçamento</h1>
                                         <div className={`${openOrcamento ? '-rotate-180' : 'rotate-0'} duration-500`}>
-                                        <IoChevronDownSharp />
+                                            <IoChevronDownSharp />
                                         </div>
                                     </div>
 
@@ -234,7 +234,7 @@ const EditOrdem = ({ ordens }: any) => {
                                                         <option value="1">Gerado</option>
                                                         <option value="2">Entregue</option>
                                                         <option value="3">Aprovado</option>
-                                                        </select>
+                                                    </select>
                                                 </div>
                                                 <div className="flex flex-col mt-6">
                                                     <label className="label-form" htmlFor="valorcamento">
@@ -266,7 +266,86 @@ const EditOrdem = ({ ordens }: any) => {
                                     }
 
                                 </div>
-
+                                <div className="grid grid-cols-6 gap-4 mt-6">
+                                    <div className="flex flex-col col-span-3">
+                                        <label className="label-form" htmlFor="pecas">
+                                            Peças utilizadas
+                                        </label>
+                                        <input
+                                            id="pecas"
+                                            type="text"
+                                            value={data.pecas}
+                                            onChange={(e) => setData('pecas', e.target.value)}
+                                            className="input-form"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label className="label-form" htmlFor="valpecas">
+                                            Valor das peças
+                                        </label>
+                                        <input
+                                            id="valpecas"
+                                            type="text"
+                                            value={data.valpecas}
+                                            onChange={(e) => setData('valpecas', e.target.value)}
+                                            className="input-form"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label className="label-form" htmlFor="valservico">
+                                            Valor do serviço
+                                        </label>
+                                        <input
+                                            id="valservico"
+                                            type="text"
+                                            value={data.valservico}
+                                            onChange={(e) => setData('valservico', e.target.value)}
+                                            className="input-form"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label className="label-form" htmlFor="custo">
+                                            Custo total
+                                        </label>
+                                        <input
+                                            id="custo"
+                                            type="text"
+                                            value={data.custo}
+                                            onChange={(e) => setData('custo', e.target.value)}
+                                            className="input-form"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4 mt-6">
+                                    <div className="flex flex-col">
+                                        <label className="label-form" htmlFor="tecnico">
+                                            Técnico
+                                        </label>
+                                        <select
+                                            id="tecnico"
+                                            value={data.tecnico}
+                                            onChange={(e) => setData('tecnico', e.target.value)}
+                                            className="input-form"
+                                        >
+                                            <option value="">Slecione o técnico</option>
+                                            <option value="1">Anderson</option>
+                                        </select>
+                                        {errors.tecnico && <div className="text-red-500">{errors.tecnico}</div>}
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label className="label-form" htmlFor="status">
+                                            Status do serviço
+                                        </label>
+                                        <select
+                                            id="status"
+                                            value={data.status}
+                                            onChange={(e) => setData('status', e.target.value)}
+                                            className="input-form"
+                                        >
+                                            <option value="">Selecione o status</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div className="grid grid-cols-2 gap-4 mt-6">
                                     <div className="flex flex-col">
                                         <label className="label-form" htmlFor="detalhes">
@@ -278,6 +357,7 @@ const EditOrdem = ({ ordens }: any) => {
                                             onChange={(e) => setData('detalhes', e.target.value)}
                                             className="input-form"
                                         />
+                                        {errors.detalhes && <div className="text-red-500">{errors.detalhes}</div>}
                                     </div>
                                     <div className="flex flex-col">
                                         <label className="label-form" htmlFor="obs">

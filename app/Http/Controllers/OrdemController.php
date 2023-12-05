@@ -41,7 +41,8 @@ class OrdemController extends Controller
     public function create()
     {
         $clientes = Cliente::get();
-        $ordem = Ordem::orderBy('id', 'desc')->first()->id;
+        $ordem = Ordem::exists() ? Ordem::orderBy('id', 'desc')->first()->id : [];
+        
         return Inertia::render('Ordens/add', ['clientes' => $clientes, 'ordem' => $ordem]);
     }
     /**
@@ -65,7 +66,6 @@ class OrdemController extends Controller
                 'senha' => 'senha',
             ]
         );
-
             Ordem::create($data);
             Session::flash('success', 'Ordem de serviço cadastrada com sucesso!');
             return redirect()->route('ordens.index');
@@ -92,27 +92,26 @@ class OrdemController extends Controller
      */
     public function update(Request $request, Ordem $ordem)
     {
-
-        $validator = Validator::make($request->all(), [
-            'equipamento' => 'required',
-            'senha' => 'required',
-            'defeito' => 'required',
-            'estado' => 'required',
-            'tecnico' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->error('Dados inválidos UPDATE!', 422, $validator->errors());
-        }
-
         $data = $request->all();
-        $data['dtentrega'] = Carbon::parse($request->dtentrada)->format('Y-m-d H:i:s');
-        $updated = $ordem->update($data);
 
-        if ($updated) {
-            return $this->response('Ordem alterada com sucesso!', 200, new OrdemResource($ordem));
-        }
-        return $this->error('Ordem não alterada', 400);
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido'
+        ];
+        $request->validate([
+            'equipamento' => 'required',
+            'defeito' => 'required',
+            'detalhes' => 'required',
+            'tecnico' => 'required',
+            ],
+            $messages,
+            [
+                'equipamento' => 'equipamento',
+                'senha' => 'senha',
+            ]
+        );
+            $ordem->update($data);
+            Session::flash('success', 'Ordem de serviço editada com sucesso!');
+            return redirect()->route('ordens.show', ['ordem' => $ordem->id]);
     }
 
     /**
