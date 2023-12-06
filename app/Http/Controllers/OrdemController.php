@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\OrdemResource;
 use App\Models\Cliente;
 use App\Models\Ordem;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Redirect;
@@ -23,11 +24,15 @@ class OrdemController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('q');
+        $oc = $request->get('oc');
 
         $query = Ordem::with('cliente')->orderBy('id', 'DESC');
 
         if ($search) {
             $query->where('id', 'like', '%' . $search . '%');
+        }
+        if ($oc) {
+            $query->where('cliente_id', $oc);
         }
 
         $ordens = $query->paginate(12);
@@ -77,7 +82,8 @@ class OrdemController extends Controller
     public function show(Ordem $ordem)
     {
         $ordens = Ordem::with('cliente')->where('id', $ordem->id)->first();
-        return Inertia::render('Ordens/edit', ['ordens' => $ordens]);
+        $tecnicos = User::where('role', 3)->where('status', 1)->get();
+        return Inertia::render('Ordens/edit', ['ordens' => $ordens, 'tecnicos' => $tecnicos]);
     }
 
     /**

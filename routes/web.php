@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\OrdemController;
+use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -26,6 +28,8 @@ Route::resource('/clientes', ClienteController::class);
 Route::resource('/ordens', OrdemController::class)->parameters([
     'ordens' => 'ordem'
 ]);
+Route::resource('/produtos', ProdutoController::class);
+Route::resource('/agendas', AgendaController::class);
 
 Route::get('/', function () {
     return Inertia::render('Dashboard', [

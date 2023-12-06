@@ -104,14 +104,17 @@ class UserController extends Controller
 
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido',
-            'email' => 'Endereço de e-mail válido',
+            "unique" => 'E-mail já cadastrado',
+            'confirmed' => 'As senhas não correspondem',
+            'min' => 'As senha deve ter no mínimo :min caracteres',
         ];
         $request->validate(
             [
-                'nome' => 'required',
+                'name' => 'required',
                 'email' => 'nullable|email',
-                'password' => 'required',
                 'role' => 'required',
+                'password' => ['nullable','min:6', 'confirmed', Rules\Password::defaults()],
+                'password_confirmation' => ['nullable','min:6'],
             ],
             $messages,
             [
@@ -121,10 +124,9 @@ class UserController extends Controller
                 'role' => 'função',
             ]
         );
-
-        $data['password'] = Hash::make($request->password);
+        $data['password'] = $request->password ? Hash::make($request->password) : $user->password;
         $user->update($data);
-        Session::flash('success', 'Usuário cadastrado com sucesso!');
+        Session::flash('success', 'Usuário editado com sucesso!');
         return Redirect::route('usuarios.show', ['user' => $user->id]);
     }
 

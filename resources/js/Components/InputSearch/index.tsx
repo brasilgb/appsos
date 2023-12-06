@@ -29,7 +29,7 @@ const InputSearch = ({ placeholder, url }: SearchProps) => {
             className="w-full p-1 ring-0 focus:ring-0 shadow-none focus:shadow-none focus:outline-none border-none focus:border-none text-gray-500 placeholder:text-gray-400"
             type="search"
             placeholder={placeholder}
-            autoComplete="off"
+            autoComplete="off" 
           />
         </div>
         <button

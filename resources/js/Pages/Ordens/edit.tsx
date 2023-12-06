@@ -3,7 +3,7 @@ import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderConten
 import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { statusServico } from "@/Utils/dataSelect";
+import { statusOrcamento, statusServico } from "@/Utils/dataSelect";
 import { useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React, { useState } from "react";
@@ -31,7 +31,7 @@ interface ClientesProps {
     obs: string,
 }
 
-const EditOrdem = ({ ordens }: any) => {
+const EditOrdem = ({ ordens, tecnicos }: any) => {
     const { flash } = usePage().props;
     const [openOrcamento, setOpenOrcamento] = useState(false);
 
@@ -232,9 +232,9 @@ const EditOrdem = ({ ordens }: any) => {
                                                         className="input-form !bg-white"
                                                     >
                                                         <option value="">Selecione o status</option>
-                                                        <option value="1">Gerado</option>
-                                                        <option value="2">Entregue</option>
-                                                        <option value="3">Aprovado</option>
+                                                        {statusOrcamento.map((status:any) => (
+                                                            <option key={status.value} value={status.value}>{status.label}</option>
+                                                        ))}
                                                     </select>
                                                 </div>
                                                 <div className="flex flex-col mt-6">
@@ -329,7 +329,9 @@ const EditOrdem = ({ ordens }: any) => {
                                             className="input-form"
                                         >
                                             <option value="">Slecione o técnico</option>
-                                            <option value="1">Anderson</option>
+                                            {tecnicos.map((tecnico: any) => (
+                                                <option key={tecnico.id} value={tecnico.id}>{tecnico.name}</option>
+                                            ))}
                                         </select>
                                         {errors.tecnico && <div className="text-red-500">{errors.tecnico}</div>}
                                     </div>
@@ -344,7 +346,7 @@ const EditOrdem = ({ ordens }: any) => {
                                             className="input-form"
                                         >
                                             <option value="">Selecione o status</option>
-                                            {statusServico.map((status:any) => (
+                                            {statusServico.map((status: any) => (
                                                 <option key={status.value} value={status.value}>{status.label}</option>
                                             ))}
                                         </select>

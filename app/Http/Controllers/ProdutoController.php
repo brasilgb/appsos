@@ -7,7 +7,10 @@ use App\Http\Resources\ProdutoResource;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Session;
 
 class ProdutoController extends Controller
 {
@@ -26,41 +29,52 @@ class ProdutoController extends Controller
         }
 
         $produtos = $query->paginate(12);
-        return ProdutoResource::collection($produtos);
+        return Inertia::render('Produtos/index', ["produtos" => $produtos]);
     }
 
-    public function allprodutos()
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        $produtos = Produto::all();
-        return ProdutoResource::collection($produtos);
+        return Inertia::render('Produtos/add');
     }
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+        $data = $request->all();
 
-        $validator = Validator::make($request->all(), [
-            'descricao' => 'required',
-            'movimento' => 'required',
-            'valcompra' => 'required',
-            'valvenda' => 'required',
-            'unidade' => 'required',
-            'estmaximo' => 'required',
-            'estminimo' => 'required',
-            'tipo' => 'required',
-        ]);
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'numeric' => 'Digite somente números e decimais com ponto(10.21)',
+        ];
+        $request->validate(
+            [
+                'descricao' => 'required',
+                'movimento' => 'required',
+                'valcompra' => 'required|numeric',
+                'valvenda' => 'required|numeric',
+                'unidade' => 'required',
+                'estmaximo' => 'required|numeric',
+                'estminimo' => 'required|numeric',
+                'tipo' => 'required',
+            ],
+            $messages,
+            [
+                'descricao' => 'descrição',
+                'valcompra' => 'valor da compra',
+                'valvenda' => 'valor da venda',
+                'estmaximo' => 'estoque máximo',
+                'estminimo' => 'estoque mínimo',
+            ]
+        );
 
-        if ($validator->fails()) {
-            return $this->error('Dados inválidos!', 422, $validator->errors());
-        }
-
-        $created = Produto::create($request->all());
-
-        if ($created) {
-            return $this->response('Produto cadastrado com sucesso!', 200, new ProdutoResource($created));
-        }
-        return $this->error('Produto não cadastrado', 400);
+        Produto::create($data);
+        Session::flash('success', 'Produto cadastrado com sucesso!');
+        return redirect()->route('produtos.index');
     }
 
     /**
@@ -68,7 +82,15 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
-        return new ProdutoResource($produto);
+        return Inertia::render('Produtos/edit', ['produtos' => $produto]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Produto $produto)
+    {
+        return Redirect::route('produtos.show', ['produto' => $produto->id]);
     }
 
     /**
@@ -76,28 +98,36 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-       
-        $validator = Validator::make($request->all(), [
-            'descricao' => 'required',
-            'movimento' => 'required',
-            'valcompra' => 'required',
-            'valvenda' => 'required',
-            'unidade' => 'required',
-            'estmaximo' => 'required',
-            'estminimo' => 'required',
-            'tipo' => 'required',
-        ]);
+        $data = $request->all();
 
-        if ($validator->fails()) {
-            return $this->error('Dados inválidos!', 422, $validator->errors());
-        }
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'numeric' => 'Digite somente números e decimais com ponto(10.21)',
+        ];
+        $request->validate(
+            [
+                'descricao' => 'required',
+                'movimento' => 'required',
+                'valcompra' => 'required|numeric',
+                'valvenda' => 'required|numeric',
+                'unidade' => 'required',
+                'estmaximo' => 'required|numeric',
+                'estminimo' => 'required|numeric',
+                'tipo' => 'required',
+            ],
+            $messages,
+            [
+                'descricao' => 'descrição',
+                'valcompra' => 'valor da compra',
+                'valvenda' => 'valor da venda',
+                'estmaximo' => 'estoque máximo',
+                'estminimo' => 'estoque mínimo',
+            ]
+        );
 
-        $created = $produto->update($request->all());
-
-        if ($created) {
-            return $this->response('Produto alterado com sucesso!', 200, new ProdutoResource($produto));
-        }
-        return $this->error('Produto não alterado', 400);
+        $produto->update($data);
+        Session::flash('success', 'Produto editado com sucesso!');
+        return Redirect::route('produtos.show', ['produto' => $produto->id]);
     }
 
     /**
@@ -105,11 +135,8 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
-        $deleted = $produto->delete();
-
-        if ($deleted) {
-            return $this->response('Produto deletado com sucesso!', 200);
-        }
-        return $this->response('Produto não deletado!', 400);
+        $produto->delete();
+        Session::flash('success', 'Produto deletado com sucesso');
+        return Redirect::route('produtos.index');
     }
 }

@@ -23,4 +23,25 @@ const statusUser = [
     { value: 2, label: "Inativo" },
 ];
 
-export { statusServico, statusOrcamento, statusUser, roleUser };
+
+const movimentosProdutos = [
+    {value: 1, label: 'Entrada'},
+    {value: 2, label: 'Saída'},
+];
+
+const unidadesProdutos = [
+    {value: 1, label: 'Unidade'},
+    {value: 2, label: 'Caixa'},
+    {value: 3, label: 'Metros'},
+    {value: 4, label: 'Kg'},
+    {value: 5, label: 'Litros'},
+];
+
+const tiposProdutos = [
+    {value: 1, label: 'Nova'},
+    {value: 2, label: 'Usada'},
+    {value: 3, label: 'Seminova'},
+    {value: 4, label: 'Remanufaturada'},
+];
+
+export { statusServico, statusOrcamento, statusUser, roleUser, movimentosProdutos, unidadesProdutos, tiposProdutos };

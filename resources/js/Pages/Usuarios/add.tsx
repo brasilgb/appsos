@@ -33,7 +33,7 @@ const AddUsuario = () => {
                 <HeaderContent>
                     <TitleTop >
                         <IoPerson size={30} />
-                        <span className="ml-2">Clientes</span>
+                        <span className="ml-2">Usuários</span>
                     </TitleTop>
                     <BreadCrumbTop
                         links={

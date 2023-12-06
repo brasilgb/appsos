@@ -65,7 +65,7 @@ const Clientes = ({ clientes }: any) => {
                                         <TableCell>{moment(cliente.created_at).format("DD/MM/YYYY")}</TableCell>
                                         <TableCell className="flex items-center justify-end gap-2">
                                             <WhatsAppButton url="" />
-                                            <OrderButton url="" />
+                                            <OrderButton url={`/ordens?oc=${cliente.id}`} />
                                             <EditButton url={route('clientes.edit', cliente.id)} />
                                             <DeleteButton url="clientes.destroy" param={cliente.id} identify={`o cliente ${cliente.nome}`} />
                                         </TableCell>
