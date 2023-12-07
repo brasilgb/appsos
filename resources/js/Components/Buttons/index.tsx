@@ -2,7 +2,7 @@ import { Link, useForm } from "@inertiajs/react"
 import React, { useState } from 'react'
 import { IoAdd, IoArrowBackOutline, IoClose, IoConstruct, IoLogoWhatsapp, IoPrint, IoSave, IoTrash } from "react-icons/io5";
 import { TbEdit } from "react-icons/tb";
-import { FaRegTrashCan } from "react-icons/fa6";
+import { FaCalendarDays, FaRegTrashCan } from "react-icons/fa6";
 
 interface ButtonsProps {
     url?: any;
@@ -65,6 +65,20 @@ export const WhatsAppButton = ({ url }: ButtonsProps) => {
             title={`Enviar mensagem`}
         >
             <IoLogoWhatsapp size={18} />
+        </Link>
+    )
+}
+
+export const AgendaClienteButton = ({ url }: ButtonsProps) => {
+    return (
+        <Link
+            className="flex items-center justify-center bg-teal-600 hover:bg-teal-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+            href={url}
+            as="button"
+            type="button"
+            title={`Acessar agendamento`}
+        >
+            <FaCalendarDays size={18} />
         </Link>
     )
 }

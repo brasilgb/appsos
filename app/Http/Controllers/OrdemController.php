@@ -31,6 +31,7 @@ class OrdemController extends Controller
         if ($search) {
             $query->where('id', 'like', '%' . $search . '%');
         }
+        
         if ($oc) {
             $query->where('cliente_id', $oc);
         }

@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AgendaResource;
 use App\Models\Agenda;
+use App\Models\Cliente;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Session;
 
 class AgendaController extends Controller
 {
@@ -18,6 +22,7 @@ class AgendaController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('q');
+        $ac = $request->get('ac');
 
         $query = Agenda::with('cliente')->orderBy('id', 'DESC');
 
@@ -25,14 +30,22 @@ class AgendaController extends Controller
             $query->whereDate('datahora', $search);
         }
 
+        if ($ac) {
+            $query->where('cliente_id', $ac);
+        }
+
         $agendas = $query->paginate(12);
-        return AgendaResource::collection($agendas);
+        return Inertia::render('Agendas/index', ['agendas' => $agendas]);
     }
 
-    public function allagendas()
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        $agendas = Agenda::all();
-        return AgendaResource::collection($agendas);
+        $clientes = Cliente::get();
+        $tecnicos = User::where('role', 3)->where('status', 1)->get();
+        return Inertia::render('Agendas/add', ['clientes' => $clientes, 'tecnicos' => $tecnicos]);
     }
 
     /**
@@ -40,26 +53,29 @@ class AgendaController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
 
-        $validator = Validator::make($request->all(), [
-            'cliente_id' => 'required',
-            'datahora' => 'required',
-            'servico' => 'required',
-            'detalhes' => 'required',
-            'tecnico' => 'required',
-            'status' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->error('Dados inválidos!', 422, $validator->errors());
-        }
-
-        $created = Agenda::create($request->all());
-
-        if ($created) {
-            return $this->response('Agenda adicionada com sucesso!', 200, new AgendaResource($created));
-        }
-        return $this->error('Agenda não adicionada', 400);
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido',
+];
+        $request->validate(
+            [
+                'cliente_id' => 'required',
+                'datahora' => 'required',
+                'servico' => 'required',
+                'detalhes' => 'required',
+                'tecnico' => 'required',
+                'status' => 'required',
+            ],
+            $messages,
+            [
+                // 'nome' => 'nome',
+                // 'email' => 'e-mail',
+            ]
+        );
+        Agenda::create($data);
+        Session::flash('success', 'Agendamento cadastrado com sucesso!');
+        return redirect()->route('agendas.index');
     }
 
     /**
@@ -67,7 +83,17 @@ class AgendaController extends Controller
      */
     public function show(Agenda $agenda)
     {
-        return new AgendaResource($agenda);
+        $agendas = Agenda::with('cliente')->where('id', $agenda->id)->first();
+        $tecnicos = User::where('role', 3)->where('status', 1)->get();
+        return Inertia::render('Agendas/edit', ['agendas' => $agendas, 'tecnicos' => $tecnicos]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Agenda $agenda)
+    {
+        return Redirect::route('agendas.show', ['agenda' => $agenda->id]);
     }
 
     /**
@@ -75,26 +101,31 @@ class AgendaController extends Controller
      */
     public function update(Request $request, Agenda $agenda)
     {
+        $data = $request->all();
 
-        $validator = Validator::make($request->all(), [
-            'cliente_id' => 'required',
-            'datahora' => 'required',
-            'servico' => 'required',
-            'detalhes' => 'required',
-            'tecnico' => 'required',
-            'status' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->error('Dados inválidos!', 422, $validator->errors());
-        }
-
-        $created = $agenda->update($request->all());
-
-        if ($created) {
-            return $this->response('Agenda alterada com sucesso!', 200, new AgendaResource($agenda));
-        }
-        return $this->error('Agenda não alterada', 400);
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            // 'email' => 'Endereço de e-mail válido',
+            // 'cpf_ou_cnpj' => 'CPF ou CNPJ inválido',
+            // 'unique' => 'CPF ou CNPJ já está em uso',
+        ];
+        $request->validate(
+            [
+                'datahora' => 'required',
+                'servico' => 'required',
+                'detalhes' => 'required',
+                'tecnico' => 'required',
+                'status' => 'required',
+            ],
+            $messages,
+            [
+                // 'nome' => 'nome',
+                // 'email' => 'e-mail',
+            ]
+        );
+        $agenda->update($data);
+        Session::flash('success', 'Agendamento editado com sucesso!');
+        return Redirect::route('agendas.show', ['agenda' => $agenda->id]);
     }
 
     /**
@@ -102,11 +133,8 @@ class AgendaController extends Controller
      */
     public function destroy(Agenda $agenda)
     {
-        $deleted = $agenda->delete();
-
-        if ($deleted) {
-            return $this->response('Agenda deletada com sucesso!', 200);
-        }
-        return $this->response('Agenda não deletada!', 400);
+        $agenda->delete();
+        Session::flash('success', 'Agendamento deletado com sucesso');
+        return Redirect::route('agendas.index');
     }
 }

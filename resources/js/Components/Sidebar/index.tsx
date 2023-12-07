@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Link, usePage } from "@inertiajs/react";
 import { AiFillPrinter, AiFillTags, AiOutlineDashboard } from 'react-icons/ai';
 import Logo from "../Logo";
-import { IoConstruct, IoLogoWhatsapp, IoPeopleSharp, IoPerson } from "react-icons/io5";
-import { FaBasketShopping, FaCalendarDays, FaChevronDown, FaMessage, FaSliders } from "react-icons/fa6";
+import { IoChatboxEllipses, IoConstruct, IoLogoWhatsapp, IoPeopleSharp, IoPerson } from "react-icons/io5";
+import { FaBasketShopping, FaCalendarDays, FaChevronDown, FaSliders } from "react-icons/fa6";
 import { HiBuildingOffice } from "react-icons/hi2";
 
 const Sidebar = () => {
@@ -56,7 +56,7 @@ const Sidebar = () => {
                     <li>
                         <Link
                             className={`flex items-center p-2 rounded-md transition-all duration-300 ${url.startsWith('/agendas') ? 'text-white bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
-                            href={"/"}>
+                            href={"/agendas"}>
                             <FaCalendarDays size={20} />
                             <span className="ml-2">Agenda</span>
                         </Link>
@@ -64,9 +64,9 @@ const Sidebar = () => {
                     <li>
                         <Link
                             className={`flex items-center p-2 rounded-md transition-all duration-300 ${url.startsWith('/mensagens') ? 'text-white bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
-                            href={"/"}>
-                            <FaMessage size={20} />
-                            <span className="ml-2">Mensagen</span>
+                            href={"/mensagens"}>
+                            <IoChatboxEllipses size={20} />
+                            <span className="ml-2">Mensagens</span>
                         </Link>
                     </li>
 

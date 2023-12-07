@@ -24,4 +24,18 @@ const roleByValue = (value:any) => {
     }
 }
 
-export {statusOrdemByValue, statusUserByValue, roleByValue};
+const statusAgendaByValue = (value:any) => {
+    switch(value){
+        case 1: return "Aberta";
+        case 2: return "Atendimento";
+        case 3: return "Fechada";
+    }
+}
+    const statusMessageByValue = (value:any) => {
+        switch(value){
+            case 1: return "Não lida";
+            case 2: return "lida";
+        }
+    }
+
+export {statusOrdemByValue, statusUserByValue, roleByValue, statusAgendaByValue, statusMessageByValue};

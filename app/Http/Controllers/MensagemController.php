@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MensagemResource;
 use App\Models\Mensagem;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Session;
 
 class MensagemController extends Controller
 {
@@ -24,15 +28,18 @@ class MensagemController extends Controller
         if ($search) {
             $query->where('remetente', 'like', '%' . $search . '%');
         }
-
-        $agendas = $query->paginate(12);
-        return MensagemResource::collection($agendas);
+        $users = User::where('status', 1)->get();
+        $mensagens = $query->paginate(12);
+        return Inertia::render('Mensagens/index', ['mensagens' => $mensagens, 'users' => $users]);
     }
 
-    public function allmensagens()
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        $agendas = Mensagem::all();
-        return MensagemResource::collection($agendas);
+        $users = User::where('status', 1)->get();
+        return Inertia::render('Mensagens/add', ['users' => $users]);
     }
 
     /**
@@ -40,23 +47,25 @@ class MensagemController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
 
-        $validator = Validator::make($request->all(), [
-            'remetente' => 'required',
-            'destinatario' => 'required',
-            'mensagem' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return $this->error('Dados inválidos!', 422, $validator->errors());
-        }
-
-        $created = Mensagem::create($request->all());
-
-        if ($created) {
-            return $this->response('Mensagem adicionada com sucesso!', 200, new MensagemResource($created));
-        }
-        return $this->error('Mensagem não adicionada', 400);
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido',
+        ];
+        $request->validate(
+            [
+                'remetente' => 'required',
+                'destinatario' => 'required',
+                'mensagem' => 'required'
+            ],
+            $messages,
+            [
+                'destinatario' => 'destinatário',
+            ]
+        );
+        Mensagem::create($data);
+        Session::flash('success', 'Mensagem cadastrada com sucesso!');
+        return redirect()->route('mensagens.index');
     }
 
     /**
@@ -64,7 +73,16 @@ class MensagemController extends Controller
      */
     public function show(Mensagem $mensagem)
     {
-        return new MensagemResource($mensagem);
+        $users = User::where('status', 1)->get();
+        return Inertia::render('Mensagens/edit', ['mensagens' => $mensagem, 'users' => $users]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Mensagem $mensagem)
+    {
+        return Redirect::route('mensagens.show', ['mensagem' => $mensagem->id]);
     }
 
     /**
@@ -72,23 +90,25 @@ class MensagemController extends Controller
      */
     public function update(Request $request, Mensagem $mensagem)
     {
+        $data = $request->all();
 
-        $validator = Validator::make($request->all(), [
-            'remetente' => 'required',
-            'destinatario' => 'required',
-            'mensagem' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return $this->error('Dados inválidos!', 422, $validator->errors());
-        }
-
-        $created = $mensagem->update($request->all());
-
-        if ($created) {
-            return $this->response('Mensagem alterada com sucesso!', 200, new MensagemResource($mensagem));
-        }
-        return $this->error('Mensagem não alterada', 400);
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido',
+        ];
+        $request->validate(
+            [
+                'remetente' => 'required',
+                'destinatario' => 'required',
+                'mensagem' => 'required'
+            ],
+            $messages,
+            [
+                'destinatario' => 'destinatário',
+            ]
+        );
+        $mensagem->update($data);
+        Session::flash('success', 'Mensagem Editada com sucesso!');
+        return Redirect::route('mensagens.show', ['mensagem' => $mensagem->id]);
     }
 
     /**
@@ -96,11 +116,8 @@ class MensagemController extends Controller
      */
     public function destroy(Mensagem $mensagem)
     {
-        $deleted = $mensagem->delete();
-
-        if ($deleted) {
-            return $this->response('Mensagem deletada com sucesso!', 200);
-        }
-        return $this->response('Mensagem não deletada!', 400);
+        $mensagem->delete();
+        Session::flash('success', 'Mensagem deletada com sucesso');
+        return Redirect::route('mensagens.index');
     }
 }

@@ -44,4 +44,15 @@ const tiposProdutos = [
     {value: 4, label: 'Remanufaturada'},
 ];
 
-export { statusServico, statusOrcamento, statusUser, roleUser, movimentosProdutos, unidadesProdutos, tiposProdutos };
+const statusAgenda = [
+    {value: 1, label: 'Aberta'},
+    {value: 2, label: 'Em atendimento'},
+    {value: 3, label: 'Fechada'},
+];
+
+const statusMessage = [
+    {value: 1, label: 'Não lida'},
+    {value: 2, label: 'Lida'},
+];
+
+export { statusServico, statusOrcamento, statusUser, roleUser, movimentosProdutos, unidadesProdutos, tiposProdutos, statusAgenda };

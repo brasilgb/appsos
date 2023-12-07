@@ -18,11 +18,12 @@ class Agenda extends Model
         'detalhes',
         'tecnico',
         'status',
-        'observacoes'
+        'obs'
     ];
     
     public function cliente()
     {
         return $this->belongsTo(Cliente::class);
     }
+    
 }

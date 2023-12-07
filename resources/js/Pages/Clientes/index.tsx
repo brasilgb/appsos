@@ -1,4 +1,4 @@
-import { AddButton, DeleteButton, EditButton, OrderButton, WhatsAppButton } from "@/Components/Buttons";
+import { AddButton, AgendaClienteButton, DeleteButton, EditButton, OrderButton, WhatsAppButton } from "@/Components/Buttons";
 import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderContent } from "@/Components/Card";
 import FlashMessage from "@/Components/FlashMessage";
 import InputSearch from "@/Components/InputSearch";
@@ -33,7 +33,7 @@ const Clientes = ({ clientes }: any) => {
                 <CardContainer>
                     <CardHeader>
                         <CardHeaderContent>
-                            <InputSearch placeholder={"Buscar cliente"} url={"clientes.index"} />
+                            <InputSearch placeholder={"Buscar por nome ou cpf/cnpj"} url={"clientes.index"} />
                         </CardHeaderContent>
                         <CardHeaderContent>
                             <AddButton url={"/clientes/create"} label={"Cliente"} />
@@ -65,6 +65,7 @@ const Clientes = ({ clientes }: any) => {
                                         <TableCell>{moment(cliente.created_at).format("DD/MM/YYYY")}</TableCell>
                                         <TableCell className="flex items-center justify-end gap-2">
                                             <WhatsAppButton url="" />
+                                            <AgendaClienteButton url={`/agendas?ac=${cliente.id}`} />
                                             <OrderButton url={`/ordens?oc=${cliente.id}`} />
                                             <EditButton url={route('clientes.edit', cliente.id)} />
                                             <DeleteButton url="clientes.destroy" param={cliente.id} identify={`o cliente ${cliente.nome}`} />

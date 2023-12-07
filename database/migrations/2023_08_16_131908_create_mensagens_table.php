@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('mensagens', function (Blueprint $table) {
             $table->id();
-            $table->string('remetente', 50);
-            $table->string('destinatario', 50);
+            $table->unsignedBigInteger('remetente');
+            $table->foreign('remetente')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('destinatario');
+            $table->foreign('destinatario')->references('id')->on('users')->onDelete('cascade');
             $table->text('mensagem');
-            $table->tinyInteger('status')->default(1)->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

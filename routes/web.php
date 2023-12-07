@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\MensagemController;
 use App\Http\Controllers\OrdemController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProfileController;
@@ -30,6 +31,9 @@ Route::resource('/ordens', OrdemController::class)->parameters([
 ]);
 Route::resource('/produtos', ProdutoController::class);
 Route::resource('/agendas', AgendaController::class);
+Route::resource('/mensagens', MensagemController::class)->parameters([
+    'mensagens' => 'mensagem'
+]);
 
 Route::get('/', function () {
     return Inertia::render('Dashboard', [
