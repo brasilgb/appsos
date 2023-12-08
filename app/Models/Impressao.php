@@ -12,7 +12,8 @@ class Impressao extends Model
     protected $table = 'impressoes';
 
     protected $fillable = [
-        'entrada',
-        'saida'
+        'recebimento',
+        'entrega',
+        'orcamento',
     ];
 }

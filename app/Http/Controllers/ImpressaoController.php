@@ -7,7 +7,9 @@ use App\Http\Resources\ImpressaoResource;
 use App\Models\Impressao;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Session;
 
 class ImpressaoController extends Controller
 {
@@ -16,14 +18,14 @@ class ImpressaoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
         if (Impressao::get()->isEmpty()) {
             Impressao::create();
         }
         $query = Impressao::orderBy("id", "DESC")->first();
-        $impressao = Impressao::where("id", $query->id)->get();
-        return ImpressaoResource::collection($impressao);
+        $impressao = Impressao::where("id", $query->id)->first();
+        return Inertia::render('Impressoes/index', ["impressao" => $impressao]);
     }
 
     /**
@@ -31,21 +33,9 @@ class ImpressaoController extends Controller
      */
     public function update(Request $request, Impressao $impressao)
     {
-
-        $validator = Validator::make($request->all(), [
-            'entrada' => 'required',
-            'saida' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->error('Dados inválidos!', 422, $validator->errors());
-        }
-
-        $created = $impressao->update($request->all());
-
-        if ($created) {
-            return $this->response('Impressão alterada com sucesso!', 200, new ImpressaoResource($impressao));
-        }
-        return $this->error('Impressão não alterada', 400);
+        $data = $request->all();
+        $impressao->update($data);
+        Session::flash('success', 'Dados de impressão editados com sucesso!');
+        return Redirect::route('impressoes.index');
     }
 }

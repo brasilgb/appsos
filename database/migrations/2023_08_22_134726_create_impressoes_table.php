@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('impressoes', function (Blueprint $table) {
             $table->id();
-            $table->text('entrada')->nullable();
-            $table->text('saida')->nullable();
+            $table->text('recebimento')->nullable();
+            $table->text('entrega')->nullable();
+            $table->text('orcamento')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

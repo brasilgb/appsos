@@ -71,7 +71,7 @@ const Sidebar = () => {
                     </li>
 
                     <li className="">
-                        <div className={`flex items-center justify-between p-2 cursor-pointer ${openDropDown ? 'bg-gray-50 text-gray-600  border-b rounded-t-lg' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400 rounded-lg'}`} onClick={() => setOpenDropDown(state => !state)}>
+                        <div className={`flex items-center justify-between p-2 cursor-pointer ${url.startsWith('/configuracoes') ? 'text-gray500 bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} ${openDropDown ? 'bg-gray-50 text-gray-600  border-b rounded-t-lg' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400 rounded-lg'}`} onClick={() => setOpenDropDown(state => !state)}>
                             <FaSliders size={20} />
                             <span className="self-start w-full pl-2">Configurações</span>
                             <FaChevronDown
@@ -84,32 +84,32 @@ const Sidebar = () => {
                             <ul className="bg-gray-50 rounded-b-lg p-2">
                                 <li>
                                     <Link
-                                        className={`flex items-center p-2 transition-all duration-300 hover:text-gray-400 ${url.startsWith('/') ? 'text-gray-600' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
-                                        href={"/"}>
+                                        className={`flex items-center p-2 transition-all duration-300 hover:text-gray-400 text-gray-600 group`}
+                                        href={"/configuracoes/empresa"}>
                                         <HiBuildingOffice size={20} />
                                         <span className="ml-2">Empresa</span>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link
-                                        className={`flex items-center p-2 transition-all duration-300 hover:text-gray-400 ${url.startsWith('/') ? 'text-gray-600' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
-                                        href={"/"}>
+                                        className={`flex items-center p-2 transition-all duration-300 hover:text-gray-400 text-gray-600 group`}
+                                        href={"/configuracoes/whatsapp"}>
                                         <IoLogoWhatsapp size={20} />
                                         <span className="ml-2">WhatsApp</span>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link
-                                        className={`flex items-center p-2 transition-all duration-300 hover:text-gray-400 ${url.startsWith('/') ? 'text-gray-600' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
-                                        href={"/"}>
+                                        className={`flex items-center p-2 transition-all duration-300 hover:text-gray-400 text-gray-600 group`}
+                                        href={"/configuracoes/impressoes"}>
                                         <AiFillPrinter size={20} />
                                         <span className="ml-2">Impressões</span>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link
-                                        className={`flex items-center p-2 transition-all duration-300 hover:text-gray-400 ${url.startsWith('/') ? 'text-gray-600' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
-                                        href={"/"}>
+                                        className={`flex items-center p-2 transition-all duration-300 hover:text-gray-400 text-gray-600 group`}
+                                        href={"/configuracoes/etiquetas"}>
                                         <AiFillTags size={20} />
                                         <span className="ml-2">Etiquetas</span>
                                     </Link>

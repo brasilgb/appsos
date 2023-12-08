@@ -7,14 +7,16 @@ function maskCep(value: string) {
 }
 
 function maskPhone(value: string) {
-    if (value.length < 11) {
-        value = value.replace(/\D/g, '');
-        value = value.replace(/^(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
-        return value;
-    } else  {
-        value = value.replace(/\D/g, '');
-        value = value.replace(/^(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-        return value;
+    if(value){
+        if (value.length < 11) {
+            value = value.replace(/\D/g, '');
+            value = value.replace(/^(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+            return value;
+        } else {
+            value = value.replace(/\D/g, '');
+            value = value.replace(/^(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+            return value;
+        }
     }
 }
 
@@ -38,6 +40,14 @@ function maskCpfCnpj(value: string) {
     }
 }
 
+function maskCnpj(value: string) {
+    if (value) {
+        value = value.replace(/\D/g, '');
+        value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+        return value;
+    }
+}
+
 function unMask(value: string) {
     if (value) {
         value = value.replace(/\D/g, '');
@@ -45,4 +55,4 @@ function unMask(value: string) {
     }
 }
 
-export {maskCep, maskPhone, maskDate, maskCpfCnpj, unMask};
+export { maskCep, maskPhone, maskDate, maskCpfCnpj, maskCnpj, unMask };

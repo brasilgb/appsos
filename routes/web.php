@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\ImpressaoController;
 use App\Http\Controllers\MensagemController;
 use App\Http\Controllers\OrdemController;
 use App\Http\Controllers\ProdutoController;
@@ -33,6 +35,11 @@ Route::resource('/produtos', ProdutoController::class);
 Route::resource('/agendas', AgendaController::class);
 Route::resource('/mensagens', MensagemController::class)->parameters([
     'mensagens' => 'mensagem'
+]);
+Route::resource('/configuracoes/empresa', EmpresaController::class);
+
+Route::resource('/configuracoes/impressoes', ImpressaoController::class)->parameters([
+    'impressoes' => 'impressao'
 ]);
 
 Route::get('/', function () {
