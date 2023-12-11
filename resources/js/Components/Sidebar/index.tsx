@@ -71,7 +71,7 @@ const Sidebar = () => {
                     </li>
 
                     <li className="">
-                        <div className={`flex items-center justify-between p-2 cursor-pointer ${url.startsWith('/configuracoes') ? 'text-gray500 bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} ${openDropDown ? 'bg-gray-50 text-gray-600  border-b rounded-t-lg' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400 rounded-lg'}`} onClick={() => setOpenDropDown(state => !state)}>
+                        <div className={`flex items-center justify-between p-2 cursor-pointer ${url.startsWith('/configuracoes') ? 'text-gray500 bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} ${openDropDown ? 'bg-gray-50 text-gray-600  border-b rounded-t-lg' : 'text-gray-100 rounded-lg'}`} onClick={() => setOpenDropDown(state => !state)}>
                             <FaSliders size={20} />
                             <span className="self-start w-full pl-2">Configurações</span>
                             <FaChevronDown

@@ -42,6 +42,7 @@ const Impressoes = ({ empresa }: any) => {
     });
 
     function handleSubmit(e: any) {
+        e.preventDefault();
         router.post(`empresa/${empresa.id}`, {
             _method: 'put',
             empresa: data.empresa,
@@ -58,6 +59,21 @@ const Impressoes = ({ empresa }: any) => {
             email: data.email,
         });
     }
+
+    const getCep = (cep: string) => {
+        const cleanCep = unMask(cep);
+        fetch(`https://viacep.com.br/ws/${cleanCep}/json/`)
+            .then((response) => response.json())
+            .then(result => {
+                setData(data => ({...data, 'uf': result.uf}));
+                setData(data => ({...data, 'cidade': result.localidade}));
+                setData(data => ({...data, 'bairro': result.bairro}));
+                setData(data => ({...data, 'endereco': result.logradouro}));
+            })
+            .catch((error) => console.error(error));
+    }
+   
+
     return (
         <AuthLayout>
             <Card>
@@ -80,17 +96,23 @@ const Impressoes = ({ empresa }: any) => {
                         <CardBody className=" border-y border-gray-100">
 
                             <div className="px-3 my-4">
-
-                                <div className="grid grid-cols-5 gap-4">
+                                <div className="w-44 my-10">
+                                    <img src={`/storage/images/${empresa.logo ? empresa.logo : 'profile.jpg'}`} alt="Imagem de logo" />
+                                </div>
+                                <div className="grid grid-cols-4 gap-4">
                                     <div className="flex flex-col">
                                         <label className="label-form" htmlFor="logo">
-                                            Logo
+                                            Logo da empresa
                                         </label>
                                         <input
                                             id="logo"
                                             type="file"
                                             onChange={(e) => setData('logo', e.target.files[0])}
-                                            className="input-form"
+                                            className="block w-full text-base text-gray-600
+                                            file:mr-4 file:py-2.5 file:px-4 file:rounded-l-md
+                                            file:border-0 file:text-sm file:font-semibold
+                                            file:bg-blue-700 file:text-gray-50 file:cursor-pointer
+                                            hover:file:bg-blue-600 border border-gray-300 rounded-md bg-transparent"
                                         />
                                     </div>
                                     <div className="flex flex-col">
@@ -106,7 +128,7 @@ const Impressoes = ({ empresa }: any) => {
                                         />
                                     </div>
 
-                                    <div className="flex flex-col col-span-2">
+                                    <div className="flex flex-col">
                                         <label className="label-form" htmlFor="razao">
                                             Razão social
                                         </label>
@@ -144,6 +166,7 @@ const Impressoes = ({ empresa }: any) => {
                                             type="text"
                                             value={maskCep(data.cep)}
                                             onChange={(e) => setData('cep', e.target.value)}
+                                            onBlur={(e) => getCep(e.target.value)}
                                             className="input-form"
                                             maxLength={9}
                                         />
@@ -186,8 +209,8 @@ const Impressoes = ({ empresa }: any) => {
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-8 gap-4 mt-6">
-                                    <div className="flex flex-col col-span-3">
+                                <div className="grid grid-cols-4 gap-4 mt-6">
+                                    <div className="flex flex-col">
                                         <label className="label-form" htmlFor="endereco">
                                             Endereço
                                         </label>
@@ -213,20 +236,20 @@ const Impressoes = ({ empresa }: any) => {
                                             maxLength={15}
                                         />
                                     </div>
-                                    <div className="flex flex-col col-span-2">
+                                    <div className="flex flex-col">
                                         <label className="label-form" htmlFor="site">
                                             Site
                                         </label>
                                         <input
                                             id="site"
-                                            type="url"
-                                            value={maskPhone(data.site)}
+                                            type="text"
+                                            value={data.site}
                                             onChange={(e) => setData('site', e.target.value)}
                                             className="input-form"
                                         />
-                                        {errors.telefone && <div className="text-sm text-red-500">{errors.telefone}</div>}
+                                        {errors.site && <div className="text-sm text-red-500">{errors.site}</div>}
                                     </div>
-                                    <div className="flex flex-col col-span-2">
+                                    <div className="flex flex-col">
                                         <label className="label-form" htmlFor="email">
                                             E-mail
                                         </label>
@@ -237,6 +260,7 @@ const Impressoes = ({ empresa }: any) => {
                                             onChange={(e) => setData('email', e.target.value)}
                                             className="input-form"
                                         />
+                                        {errors.email && <div className="text-sm text-red-500">{errors.email}</div>}
                                     </div>
                                 </div>
                             </div>

@@ -11,6 +11,7 @@ interface ButtonsProps {
     onclick?: any;
     param?: string;
     identify?: string;
+    value?: string;
 }
 
 export const AddButton = ({ url, label }: ButtonsProps) => {
@@ -180,7 +181,7 @@ export const DeleteButton = ({ identify, param, url }: ButtonsProps) => {
     )
 }
 
-export const SaveButton = ({ processing }: ButtonsProps) => {
+export const SaveButton = ({ processing, value = 'Salvar' }: ButtonsProps) => {
     return (
         <div className="flex justify-end">
             <button
@@ -189,7 +190,7 @@ export const SaveButton = ({ processing }: ButtonsProps) => {
                 type="submit"
             >
                 <IoSave size={18} />
-                <span className="ml-1">Salvar</span>
+                <span className="ml-1">{value}</span>
             </button>
         </div>
     )

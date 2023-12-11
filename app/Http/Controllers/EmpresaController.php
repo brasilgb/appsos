@@ -18,7 +18,7 @@ class EmpresaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Empresa $empresa)
     {
         if (Empresa::get()->isEmpty()) {
             Empresa::create();

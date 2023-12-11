@@ -3,6 +3,7 @@
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\EtiquetaController;
 use App\Http\Controllers\ImpressaoController;
 use App\Http\Controllers\MensagemController;
 use App\Http\Controllers\OrdemController;
@@ -41,6 +42,7 @@ Route::resource('/configuracoes/empresa', EmpresaController::class);
 Route::resource('/configuracoes/impressoes', ImpressaoController::class)->parameters([
     'impressoes' => 'impressao'
 ]);
+Route::resource('/configuracoes/etiquetas', EtiquetaController::class);
 
 Route::get('/', function () {
     return Inertia::render('Dashboard', [
