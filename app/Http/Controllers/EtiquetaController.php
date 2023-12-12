@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Empresa;
 use App\Models\Ordem;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
@@ -30,11 +31,15 @@ class EtiquetaController extends Controller
     public function store(Request $request)
     {
         $etiquetas = $request->all();
+        $empresa = Empresa::first();
         for($i = $etiquetas['ordeminicial'];  $i <= $etiquetas['ordemfinal']; $i++){
-            echo $i;
+        $data[] = [
+            'ordem' => $i,
+            'telefone' => $empresa->telefone,
+            'empresa' => $empresa->empresa,
+        ];
         }
-       
-        // return Inertia::render('Etiquetas/printer', ['etiquetas' => $data]);
+        return Inertia::render('Etiquetas/printer', ['etiquetas' => $data]);
     }
 
 }

@@ -67,7 +67,7 @@ const Ordens = ({ ordens }: any) => {
                                             <TableCell>{statusOrdemByValue(ordem.status)}</TableCell>
                                             <TableCell>{ordem.dtentrega ? moment(ordem.updated_at).format("DD/MM/YYYY") : '__/__/____'}</TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
-                                                <PrintButton url="" />
+                                                <PrintButton url={`${ordem.id}`} />
                                                 <EditButton url={route('ordens.edit', ordem.id)} />
                                                 <DeleteButton url="ordens.destroy" param={ordem.id} identify={`a ordem ${ordem.id}`} />
                                             </TableCell>

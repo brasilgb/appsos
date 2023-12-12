@@ -7,6 +7,7 @@ use App\Http\Controllers\EtiquetaController;
 use App\Http\Controllers\ImpressaoController;
 use App\Http\Controllers\MensagemController;
 use App\Http\Controllers\OrdemController;
+use App\Http\Controllers\PrinterController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -43,6 +44,7 @@ Route::resource('/configuracoes/impressoes', ImpressaoController::class)->parame
     'impressoes' => 'impressao'
 ]);
 Route::resource('/configuracoes/etiquetas', EtiquetaController::class);
+Route::get('/docs/printer/{printer}', [PrinterController::class, 'index'])->name('docs.index');
 
 Route::get('/', function () {
     return Inertia::render('Dashboard', [

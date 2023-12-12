@@ -43,16 +43,61 @@ export const BackButton = ({ url, label }: ButtonsProps) => {
 }
 
 export const PrintButton = ({ url }: ButtonsProps) => {
+    const [openMenuButton, setOpenMenuButton] = useState(false);
     return (
-        <Link
-            className="flex items-center justify-center bg-zinc-600 hover:bg-zinc-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
-            href={url}
-            as="button"
-            type="button"
-            title={`Imprimir recibo`}
-        >
-            <IoPrint size={18} />
-        </Link>
+        <>
+            <button
+                className="relative flex items-center justify-center bg-zinc-600 hover:bg-zinc-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+                onClick={() => setOpenMenuButton(!openMenuButton)}
+                title={`Imprimir recibo`}
+            >
+                <IoPrint size={18} />
+            </button>
+            {openMenuButton &&
+                <div className="absolute w-full flex items-center justify-center bg-gray-700 bg-opacity-10 top-0 right-0 bottom-0 left-0 z-50">
+                    <div className="w-1/4 bg-gray-50 border border-white rounded-md shadow-lg">
+                        <div className="h-10 flex items-center justify-between border-b px-2 bg-blue-600 text-white rounded-t-lg">
+                            <IoPrint size={20} />
+                            <h1 className="ml-2 flex-1 text-base font-semibold">Selecione o documento para impressão</h1>
+                            <button
+                            onClick={() => setOpenMenuButton(false)}
+                            >
+                            <IoClose size={20} />
+                            </button>
+                        </div>
+                        <ul className="p-2 text-base text-blue-middle font-medium flex flex-col gap-2">
+                            <li className="bg-gray-300 hover:bg-gray-200 rounded-md text-center border border-white shadow transition-all duration-300">
+                                <Link
+                                    href={`/docs/printer?or=${url}&tp=1`}
+                                    className="block p-1.5"
+                                >
+                                    Recibo entrada
+                                </Link>
+                            </li>
+                            <li className="bg-gray-300 hover:bg-gray-200 rounded-md text-center border border-white shadow transition-all duration-300">
+                                <Link
+                                    href={`/docs/printer?or=${url}&tp=2`}
+                                    className="block p-1.5"
+                                >
+                                    Recibo Saída
+                                </Link>
+                            </li>
+                            <li className="bg-gray-300 hover:bg-gray-200 rounded-md text-center border border-white shadow transition-all duration-300">
+                                <Link
+                                    href={`/docs/printer?or=${url}&tp=3`}
+                                    className="block p-1.5"
+                                >
+                                    Orçamento
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            }
+
+        </>
+
     )
 }
 

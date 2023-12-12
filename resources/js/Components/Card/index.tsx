@@ -8,7 +8,7 @@ interface CardProps {
 
 export const CardContainer = ({ children }: CardProps) => {
     return (
-        <div className="shadow bg-white">
+        <div className="shadow bg-white z-10">
             {children}
         </div>
     )
@@ -16,7 +16,7 @@ export const CardContainer = ({ children }: CardProps) => {
 
 export const Card = ({ children }: CardProps) => {
     return (
-        <div className="md:w-full md:m-4">
+        <div className="md:w-full md:m-4 z-10">
             {children}
         </div>
     )
@@ -32,7 +32,7 @@ export const CardHeader = ({ children }: CardProps) => {
 
 export const CardHeaderContent = ({ children, className }: CardProps) => {
     return (
-        <div className={`${className}`}>
+        <div className={`${className} z-10`}>
             {children}
         </div>
     )

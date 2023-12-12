@@ -20,7 +20,7 @@ const Etiquetas = ({ etiquetas }: any) => {
     const { data, setData, post, progress, processing, errors }: InertiaFormProps<ClientesProps> = useForm({
         ordeminicial: etiquetas.id + 1,
         paginas: 1,
-        ordemfinal: (etiquetas.id + 1) + 96,
+        ordemfinal: (etiquetas.id) + 96,
     });
 
     function handleSubmit(e: any) {
@@ -33,7 +33,7 @@ const Etiquetas = ({ etiquetas }: any) => {
         if (paginas) {
             // setData('paginas', paginas);
             setData(data => ({ ...data, 'paginas': paginas }));
-            setData(data => ({ ...data, 'ordemfinal': ((data.ordeminicial + 1) + (96 * paginas)) }));
+            setData(data => ({ ...data, 'ordemfinal': ((data.ordeminicial - 1) + (96* paginas)) }));
         }
     };
 
