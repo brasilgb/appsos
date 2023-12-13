@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Empresa;
+use App\Models\Impressao;
 use App\Models\Ordem;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
@@ -20,10 +21,24 @@ class PrinterController extends Controller
      */
     public function index(Request $request)
     {
+        $tp = $request->get('tp');
         $id = $request->get('or');
         $ordem = Ordem::where("id", $id)->first();
-        $empresa = Empresa::first();
-        return Inertia::render('Printer/index', ["empresa" => $empresa, "ordem" => $ordem]);
-    }
+        $pres = Impressao::first();
+        switch ($tp) {
+            case 1:
+                $printer = $pres->recebimento;
+                break;
+            case 2:
+                $printer = $pres->entrega;
+                break;
+            case 3:
+                $printer = $pres->orcamento;
+                break;
+        }
+        
 
+        $empresa = Empresa::first();
+        return Inertia::render('Printer/index', ["empresa" => $empresa, "ordem" => $ordem, 'printer' => $printer]);
+    }
 }

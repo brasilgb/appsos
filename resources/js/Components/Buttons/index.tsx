@@ -1,6 +1,6 @@
 import { Link, useForm } from "@inertiajs/react"
 import React, { useState } from 'react'
-import { IoAdd, IoArrowBackOutline, IoClose, IoConstruct, IoLogoWhatsapp, IoPrint, IoSave, IoTrash } from "react-icons/io5";
+import { IoAdd, IoArrowBackOutline, IoClose, IoConstruct, IoImageSharp, IoLogoWhatsapp, IoPrint, IoSave, IoTrash } from "react-icons/io5";
 import { TbEdit } from "react-icons/tb";
 import { FaCalendarDays, FaRegTrashCan } from "react-icons/fa6";
 
@@ -115,6 +115,20 @@ export const WhatsAppButton = ({ url }: ButtonsProps) => {
     )
 }
 
+export const ImagesAppButton = ({ url }: ButtonsProps) => {
+    return (
+        <Link
+            className="flex items-center justify-center bg-sky-700 hover:bg-sky-600 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+            href={`/imagens?or=${url}`}
+            as="button"
+            type="button"
+            title={`Imagens da ordem`}
+        >
+            <IoImageSharp size={18} />
+        </Link>
+    )
+}
+
 export const AgendaClienteButton = ({ url }: ButtonsProps) => {
     return (
         <Link
@@ -164,8 +178,6 @@ export const DeleteButton = ({ identify, param, url }: ButtonsProps) => {
 
     function onsubmit(e: any) {
         e.preventDefault();
-        console.log(url, param);
-
         destroy(route(url, param));
         setShowConfirme(false);
     }

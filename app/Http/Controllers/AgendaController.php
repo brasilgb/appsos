@@ -9,8 +9,8 @@ use App\Models\Cliente;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class AgendaController extends Controller

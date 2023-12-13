@@ -5,9 +5,10 @@ import ReactToPrint from "react-to-print";
 
 interface PrinterLayoutProps {
     children: React.ReactNode;
+    backlink?: string;
 }
 
-const PrinterLayout = ({ children }: PrinterLayoutProps) => {
+const PrinterLayout = ({ children, backlink }: PrinterLayoutProps) => {
     const componentRef = useRef<HTMLDivElement>(null)
     return (
         <div className="
@@ -32,7 +33,7 @@ const PrinterLayout = ({ children }: PrinterLayoutProps) => {
             border-b
             ">
                 <Link
-                    href="/configuracoes/etiquetas"
+                    href={`${backlink}`}
                     as="button"
                     type="button"
                     className="flex item-center justify-center py-2 px-6 bg-gray-200 rounded-md shadow border border-gray-300 text-sm text-gray-600"
@@ -56,8 +57,6 @@ const PrinterLayout = ({ children }: PrinterLayoutProps) => {
         print:m-[1cm] 
         screen:bg-gray-50 
         print:bg-white 
-        print:w-[8.27in] 
-        print:h-[11.69in] 
         screen:m-[1cm]
         ">
                 {children}

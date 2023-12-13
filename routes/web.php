@@ -4,6 +4,7 @@ use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EtiquetaController;
+use App\Http\Controllers\ImagemController;
 use App\Http\Controllers\ImpressaoController;
 use App\Http\Controllers\MensagemController;
 use App\Http\Controllers\OrdemController;
@@ -33,6 +34,10 @@ Route::resource('/clientes', ClienteController::class);
 Route::resource('/ordens', OrdemController::class)->parameters([
     'ordens' => 'ordem'
 ]);
+Route::resource('/imagens', ImagemController::class)->parameters([
+    'imagens' => 'imagem'
+]);
+
 Route::resource('/produtos', ProdutoController::class);
 Route::resource('/agendas', AgendaController::class);
 Route::resource('/mensagens', MensagemController::class)->parameters([
@@ -44,7 +49,7 @@ Route::resource('/configuracoes/impressoes', ImpressaoController::class)->parame
     'impressoes' => 'impressao'
 ]);
 Route::resource('/configuracoes/etiquetas', EtiquetaController::class);
-Route::get('/docs/printer/{printer}', [PrinterController::class, 'index'])->name('docs.index');
+Route::get('/docs/printer', [PrinterController::class, 'index'])->name('docs.index');
 
 Route::get('/', function () {
     return Inertia::render('Dashboard', [
