@@ -1,15 +1,12 @@
 const statusServico = [
     { value: 1, label: "Ordem Aberta" },
     { value: 2, label: "Ordem Fechada" },
-    { value: 3, label: "Executando reparo" },
-    { value: 4, label: "(CA)Serviço concluído" },
-    { value: 5, label: "(CN)Serviço concluído" },
-    { value: 6, label: "Entregue ao cliente" },
-];
-
-const statusOrcamento = [
-    { value: 1, label: "Gerado" },
-    { value: 2, label: "Aprovado" },
+    { value: 3, label: "Orçamento Gerado" },
+    { value: 4, label: "Orçamento Aprovado" },
+    { value: 5, label: "Executando reparo" },
+    { value: 6, label: "(CA)Serviço concluído" },
+    { value: 7, label: "(CN)Serviço concluído" },
+    { value: 8, label: "Entregue ao cliente" },
 ];
 
 const roleUser = [
@@ -55,4 +52,4 @@ const statusMessage = [
     {value: 2, label: 'Lida'},
 ];
 
-export { statusServico, statusOrcamento, statusUser, roleUser, movimentosProdutos, unidadesProdutos, tiposProdutos, statusAgenda };
+export { statusServico, statusUser, roleUser, movimentosProdutos, unidadesProdutos, tiposProdutos, statusAgenda };

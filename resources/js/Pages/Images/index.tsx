@@ -26,19 +26,21 @@ const Images = ({ imagens, ordem }: any) => {
         destroy(route('imagens.destroy', id));
     }
 
-    const handleShowImage = (image:any) => {
+    const handleShowImage = (image: any) => {
         setShowZoomImage(image);
     }
 
     const ImageSelected = () => {
         return (
             <div onClick={() => setShowZoomImage(false)} className="fixed z-50 top-0 right-0 bottom-0 left-0 bg-gray-700 bg-opacity-20 flex items-center justify-center">
-                <div className="w-2/5 bg-gray-50 border border-white rounded-md shadow-md p-2">
-                    <div className="flex items-center justify-end">
-                        <div className="text-gray-600 cursor-pointer"><IoClose size={24}/></div>
+                <div className="w-auto bg-gray-50 border border-white rounded-md shadow-md p-2">
+                    <div className="flex items-center justify-end mb-1">
+                        <div className="text-gray-600 cursor-pointer"><IoClose size={24} /></div>
                     </div>
-                    <div>
-                      <img src={`/storage/ordens/${ordem}/${showZoomImage}`} alt="" />   
+                    <div className="flex items-center justify-center">
+                        <figure className="max-w-lg">
+                            <img className="object-cover" src={`/storage/ordens/${ordem}/${showZoomImage}`} alt="" />
+                        </figure>
                     </div>
                 </div>
             </div>
@@ -110,7 +112,8 @@ const Images = ({ imagens, ordem }: any) => {
                                 </div>
                                 <div className="grid grid-cols-8 gap-4 mt-8 md:container mx-auto">
                                     {imagens.map((image: any) => (
-                                        <div className="relative bg-gray-50 border border-gray-200 hover:opacity-70 shadow rounded-md">
+
+                                            <div className="relative bg-gray-50 border border-gray-200 hover:opacity-70 shadow rounded-md">
                                             <div className="absolute flex items-center justify-between left-0.5 right-1 top-0.2">
                                                 <div className="text-blue-600 cursor-pointer">
                                                     <IoSearchCircle size={20} onClick={() => handleShowImage(image.imagem)} />
@@ -120,7 +123,9 @@ const Images = ({ imagens, ordem }: any) => {
                                                 </div>
                                             </div>
                                             <div className="p-2">
-                                                <img src={`/storage/ordens/${image.ordem_id}/${image.imagem}`} alt={`Imagem ordem ${image.ordem_id}`} />
+                                                <figure className="max-w-lg">
+                                                    <img className="object-fill h-48 w-96" src={`/storage/ordens/${image.ordem_id}/${image.imagem}`} alt={`Imagem ordem ${image.ordem_id}`} />
+                                                </figure>
                                             </div>
                                         </div>
                                     ))}

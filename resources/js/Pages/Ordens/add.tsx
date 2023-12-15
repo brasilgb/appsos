@@ -69,7 +69,7 @@ const AddOrdem = ({ clientes, ordem }) => {
                                         <input
                                             id="ordem"
                                             type="text"
-                                            value={ordem > 0 ? ordem + 1 : 1}
+                                            value={ordem > 0 ? ('000000' + (ordem + 1)).slice(-6) : 1}
                                             className="input-form"
                                             disabled
                                         />

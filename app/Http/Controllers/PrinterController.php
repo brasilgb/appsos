@@ -23,7 +23,7 @@ class PrinterController extends Controller
     {
         $tp = $request->get('tp');
         $id = $request->get('or');
-        $ordem = Ordem::where("id", $id)->first();
+        $ordem = Ordem::with('cliente')->where("id", $id)->first();
         $pres = Impressao::first();
         switch ($tp) {
             case 1:
@@ -39,6 +39,6 @@ class PrinterController extends Controller
         
 
         $empresa = Empresa::first();
-        return Inertia::render('Printer/index', ["empresa" => $empresa, "ordem" => $ordem, 'printer' => $printer]);
+        return Inertia::render('Printer/index', ["empresa" => $empresa, "ordem" => $ordem, 'printer' => $printer, 'tipo' => $tp]);
     }
 }

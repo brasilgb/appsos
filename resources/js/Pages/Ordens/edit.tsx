@@ -3,7 +3,7 @@ import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderConten
 import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { statusOrcamento, statusServico } from "@/Utils/dataSelect";
+import { statusServico } from "@/Utils/dataSelect";
 import { useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React, { useState } from "react";
@@ -19,7 +19,6 @@ interface ClientesProps {
     acessorios: string,
     previsao: any,
     orcamento: string,
-    descorcamento: string,
     valorcamento: string;
     pecas: string,
     valpecas: string,
@@ -45,7 +44,6 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
         acessorios: ordens.acessorios,
         previsao: ordens.previsao,
         orcamento: ordens.orcamento,
-        descorcamento: ordens.descorcamento,
         valorcamento: ordens.valorcamento,
         pecas: ordens.pecas,
         valpecas: ordens.valpecas,
@@ -101,7 +99,7 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
                                         <input
                                             id="ordem"
                                             type="text"
-                                            value={data.id}
+                                            value={('000000' + data.id).slice(-6)}
                                             className="input-form"
                                             disabled
                                         />
@@ -209,64 +207,6 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
                                     </div>
                                 </div>
 
-                                {/* Section orcamento */}
-                                <div className="mt-6">
-                                    <div onClick={() => setOpenOrcamento((prevState => !prevState))} className="flex items-center justify-between p-2 bg-blue-500 border-t border-x border-blue-600 text-white cursor-pointer">
-                                        <h1 className="text-lg">Orçamento</h1>
-                                        <div className={`${openOrcamento ? '-rotate-180' : 'rotate-0'} duration-500`}>
-                                            <IoChevronDownSharp />
-                                        </div>
-                                    </div>
-
-                                    {openOrcamento &&
-                                        <div className={`grid grid-cols-3 gap-4 bg-blue-50 p-6 border transition-all duration-500  ${openOrcamento ? 'opacity-100' : 'opacity-0'}`}>
-                                            <div className="flex flex-col">
-                                                <div className="flex flex-col">
-                                                    <label className="label-form" htmlFor="orcamento">
-                                                        Status do orçamento
-                                                    </label>
-                                                    <select
-                                                        id="orcamento"
-                                                        value={data.orcamento}
-                                                        onChange={(e) => setData('orcamento', e.target.value)}
-                                                        className="input-form !bg-white"
-                                                    >
-                                                        <option value="">Selecione o status</option>
-                                                        {statusOrcamento.map((status:any) => (
-                                                            <option key={status.value} value={status.value}>{status.label}</option>
-                                                        ))}
-                                                    </select>
-                                                </div>
-                                                <div className="flex flex-col mt-6">
-                                                    <label className="label-form" htmlFor="valorcamento">
-                                                        Valor do orçamento
-                                                    </label>
-                                                    <input
-                                                        id="valorcamento"
-                                                        type="text"
-                                                        value={data.valorcamento}
-                                                        onChange={(e) => setData('valorcamento', e.target.value)}
-                                                        className="input-form !bg-white"
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div className="flex flex-col col-span-2">
-                                                <label className="label-form" htmlFor="descorcamento">
-                                                    Descrição do orcamento
-                                                </label>
-                                                <textarea
-                                                    id="descorcamento"
-                                                    value={data.descorcamento}
-                                                    onChange={(e) => setData('descorcamento', e.target.value)}
-                                                    className="input-form !bg-white"
-                                                    rows={4}
-                                                />
-                                            </div>
-                                        </div>
-                                    }
-
-                                </div>
                                 <div className="grid grid-cols-6 gap-4 mt-6">
                                     <div className="flex flex-col col-span-3">
                                         <label className="label-form" htmlFor="pecas">
@@ -377,7 +317,6 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
                                         />
                                     </div>
                                 </div>
-
                             </div>
 
                         </CardBody>

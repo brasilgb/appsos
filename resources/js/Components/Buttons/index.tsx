@@ -12,6 +12,7 @@ interface ButtonsProps {
     param?: string;
     identify?: string;
     value?: string;
+    status?: string;
 }
 
 export const AddButton = ({ url, label }: ButtonsProps) => {
@@ -42,7 +43,7 @@ export const BackButton = ({ url, label }: ButtonsProps) => {
     )
 }
 
-export const PrintButton = ({ url }: ButtonsProps) => {
+export const PrintButton = ({ url, status }: ButtonsProps) => {
     const [openMenuButton, setOpenMenuButton] = useState(false);
     return (
         <>
@@ -60,32 +61,38 @@ export const PrintButton = ({ url }: ButtonsProps) => {
                             <IoPrint size={20} />
                             <h1 className="ml-2 flex-1 text-base font-semibold">Selecione o documento para impressão</h1>
                             <button
-                            onClick={() => setOpenMenuButton(false)}
+                                onClick={() => setOpenMenuButton(false)}
                             >
-                            <IoClose size={20} />
+                                <IoClose size={20} />
                             </button>
                         </div>
                         <ul className="p-2 text-base text-blue-middle font-medium flex flex-col gap-2">
-                            <li className="bg-gray-300 hover:bg-gray-200 rounded-md text-center border border-white shadow transition-all duration-300">
+                            <li className={`${status == '1' ? 'bg-gray-300 hover:bg-gray-200 text-blue-light' : 'text-gray-200'} rounded-md text-center border border-white shadow transition-all duration-300`}>
                                 <Link
+                                    disabled={status == '1' ? false : true}
+                                    as="button"
                                     href={`/docs/printer?or=${url}&tp=1`}
-                                    className="block p-1.5"
+                                    className="py-1.5 w-full"
                                 >
                                     Recibo entrada
                                 </Link>
                             </li>
-                            <li className="bg-gray-300 hover:bg-gray-200 rounded-md text-center border border-white shadow transition-all duration-300">
+                            <li className={`${status == '8' ? 'bg-gray-300 hover:bg-gray-200 text-blue-light' : 'text-gray-200'} rounded-md text-center border border-white shadow transition-all duration-300`}>
                                 <Link
+                                    disabled={status == '8' ? false : true}
+                                    as="button"
                                     href={`/docs/printer?or=${url}&tp=2`}
-                                    className="block p-1.5"
+                                    className="py-1.5 w-full"
                                 >
                                     Recibo Saída
                                 </Link>
                             </li>
-                            <li className="bg-gray-300 hover:bg-gray-200 rounded-md text-center border border-white shadow transition-all duration-300">
+                            <li className={`${status == '3' ? 'bg-gray-300 hover:bg-gray-200 text-blue-light' : 'text-gray-200'} rounded-md text-center border border-white shadow transition-all duration-300`}>
                                 <Link
+                                    disabled={status == '3' ? false : true}
+                                    as="button"
                                     href={`/docs/printer?or=${url}&tp=3`}
-                                    className="block p-1.5"
+                                    className="py-1.5 w-full"
                                 >
                                     Orçamento
                                 </Link>

@@ -59,7 +59,7 @@ const Ordens = ({ ordens }: any) => {
                                 {ordens.data.map((ordem: any) => (
                                     <Fragment key={ordem.id}>
                                         <TableRow>
-                                            <TableCell>{ordem.id}</TableCell>
+                                            <TableCell>{('000000' + ordem.id).slice(-6)}</TableCell>
                                             <TableCell>{ordem.cliente.nome}</TableCell>
                                             <TableCell>{ordem.cliente.telefone}</TableCell>
                                             <TableCell>{moment(ordem.created_at).format("DD/MM/YYYY")}</TableCell>
@@ -68,7 +68,7 @@ const Ordens = ({ ordens }: any) => {
                                             <TableCell>{ordem.dtentrega ? moment(ordem.updated_at).format("DD/MM/YYYY") : '__/__/____'}</TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
                                                 <ImagesAppButton url={`${ordem.id}`} />
-                                                <PrintButton url={`${ordem.id}`} />
+                                                <PrintButton url={`${ordem.id}`} status={ordem.status} />
                                                 <EditButton url={route('ordens.edit', ordem.id)} />
                                                 <DeleteButton url="ordens.destroy" param={ordem.id} identify={`a ordem ${ordem.id}`} />
                                             </TableCell>
