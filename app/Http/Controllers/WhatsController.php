@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\EmailResource;
-use App\Models\Email;
+use App\Models\Whats;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
-use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class WhatsController extends Controller
 {
@@ -18,40 +19,24 @@ class WhatsController extends Controller
      */
     public function index()
     {
-        if (Email::get()->isEmpty()) {
-            Email::create();
+        if (Whats::get()->isEmpty()) {
+            Whats::create();
         }
-        $query = Email::orderBy("id", "DESC")->first();
-        $email = Email::where("id", $query->id)->get();
-        return EmailResource::collection($email);
+        $query = Whats::orderBy("id", "DESC")->first();
+        $whats = Whats::where("id", $query->id)->first();
+
+        return Inertia::render('Whats/index', ["whats" => $whats]);
+    
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Email $email)
+    public function update(Request $request, Whats $whats)
     {
-
-        $validator = Validator::make($request->all(), [
-            'servidor' => 'required',
-            'porta' => 'required',
-            'seguranca' => 'required',
-            'usuario' => 'required',
-            'senha' => 'required',
-            'assunto' => 'required',
-            'mensagem' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return $this->error('Dados inválidos!', 422, $validator->errors());
-        }
-
-        $created = $email->update($request->all());
-
-        if ($created) {
-            return $this->response('E-mail alterada com sucesso!', 200, new EmailResource($email));
-        }
-        return $this->error('E-mail não alterada', 400);
+        $data = $request->all();
+        $whats->update($data);
+        Session::flash('success', 'Dados do Whatsapp editado com sucesso!');
+        return Redirect::route('whats.index');
     }
-
 }

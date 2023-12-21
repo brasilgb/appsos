@@ -6,10 +6,13 @@
 @layer base {
     body {
         @apply font-roboto antialiased;
-    }   
+    }
 }
 
 @layer components {
+    .btn-login {
+        @apply flex items-center justify-center rounded-md border-2 shadow-md bg-blue-middle hover:bg-blue-light border-white px-5 py-2 font-roboto font-medium text-base text-gray-light transition-colors w-full;
+    }
     .label-form {
         @apply text-sm text-gray-500 font-medium;
     }

@@ -4,6 +4,7 @@ use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EtiquetaController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImagemController;
 use App\Http\Controllers\ImpressaoController;
 use App\Http\Controllers\MensagemController;
@@ -12,6 +13,8 @@ use App\Http\Controllers\PrinterController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WhatsController;
+use App\Models\Whats;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,32 +30,10 @@ use Inertia\Inertia;
 |
 */
 
-Route::resource('/usuarios', UserController::class)->parameters([
-    'usuarios' => 'user'
-]);
-Route::resource('/clientes', ClienteController::class);
-Route::resource('/ordens', OrdemController::class)->parameters([
-    'ordens' => 'ordem'
-]);
-Route::resource('/imagens', ImagemController::class)->parameters([
-    'imagens' => 'imagem'
-]);
 
-Route::resource('/produtos', ProdutoController::class);
-Route::resource('/agendas', AgendaController::class);
-Route::resource('/mensagens', MensagemController::class)->parameters([
-    'mensagens' => 'mensagem'
-]);
-Route::resource('/configuracoes/empresa', EmpresaController::class);
-
-Route::resource('/configuracoes/impressoes', ImpressaoController::class)->parameters([
-    'impressoes' => 'impressao'
-]);
-Route::resource('/configuracoes/etiquetas', EtiquetaController::class);
-Route::get('/docs/printer', [PrinterController::class, 'index'])->name('docs.index');
 
 Route::get('/', function () {
-    return Inertia::render('Dashboard', [
+    return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -60,11 +41,31 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
+    route::get('/', [HomeController::class, 'index']);
+    Route::resource('/usuarios', UserController::class)->parameters([
+        'usuarios' => 'user'
+    ]);
+    Route::resource('/configuracoes/empresa', EmpresaController::class);
+    Route::resource('/clientes', ClienteController::class);
+    Route::resource('/ordens', OrdemController::class)->parameters([
+        'ordens' => 'ordem'
+    ]);
+    Route::resource('/imagens', ImagemController::class)->parameters([
+        'imagens' => 'imagem'
+    ]);
+    Route::resource('/produtos', ProdutoController::class);
+    Route::resource('/agendas', AgendaController::class);
+    Route::resource('/mensagens', MensagemController::class)->parameters([
+        'mensagens' => 'mensagem'
+    ]);
+    Route::resource('/configuracoes/impressoes', ImpressaoController::class)->parameters([
+        'impressoes' => 'impressao'
+    ]);
+    Route::resource('/configuracoes/etiquetas', EtiquetaController::class);
+    Route::get('/docs/printer', [PrinterController::class, 'index'])->name('docs.index');
+    Route::resource('/configuracoes/whatsapp', WhatsController::class);
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

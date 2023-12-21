@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Empresa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
 
@@ -37,6 +39,11 @@ class HandleInertiaRequests extends Middleware
             ],
             'auth' => [
                 'user' => $request->user(),
+            ],
+            'logemp' => fn () => [
+                DB::table('empresa')
+                    ->select('logo', 'empresa')
+                    ->first()
             ],
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),

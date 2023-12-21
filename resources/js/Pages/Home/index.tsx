@@ -2,12 +2,12 @@ import { Card, CardBody, CardFooter, CardHeader } from "@/Components/Card";
 import AuthLayout from "@/Layouts/AuthLayout";
 import React from "react";
 
-const Dashboard = () => {
+const Home = () => {
     return (
         <AuthLayout>
             <Card>
                 <CardHeader>
-                    Dashboard
+                    Home
                 </CardHeader>
                 <CardBody>
                     Body
@@ -19,4 +19,4 @@ const Dashboard = () => {
         </AuthLayout>
     );
 }
-export default Dashboard;
+export default Home;
