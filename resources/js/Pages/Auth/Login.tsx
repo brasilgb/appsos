@@ -6,10 +6,11 @@ import ClockTime from "@/Utils/ClockTime";
 import { IoEyeOffOutline, IoEyeOutline, IoPerson } from "react-icons/io5";
 
 export default function Login({ status, canResetPassword }) {
-    const { confemp, confger } = usePage().props;
-    console.log(confger[0].bgcolor);
+    const { confemp, confger, auth } = usePage().props;
+    console.log(auth.user);
 
-    const [passwordView, setPasswordView] = useState(false);
+    const [passwordView, setPasswordView] = useState<boolean>(false);
+    const [passwordForgout, setPasswordForgout] = useState<boolean>(false);
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -24,7 +25,6 @@ export default function Login({ status, canResetPassword }) {
 
     const submit = (e: any) => {
         e.preventDefault();
-
         post(route('login'));
     };
 
@@ -67,10 +67,10 @@ export default function Login({ status, canResetPassword }) {
                                         className="input-form w-full"
                                     />
                                     <div className="absolute right-1">
-                                        <IoPerson size={22} color="#4b5563"/>
+                                        <IoPerson size={22} color="#4b5563" />
                                     </div>
                                 </div>
-                                {errors.email && <div className="text-red-500">{errors.email}</div>}
+                                {errors.email && <div className="text-red-500 text-sm">{errors.email}</div>}
                             </div>
 
                             <div className="mt-4 flex flex-col">
@@ -95,10 +95,33 @@ export default function Login({ status, canResetPassword }) {
                                         )}
                                     </div>
                                 </div>
-                                {errors.password && <div className="text-red-500">{errors.password}</div>}
+                                {errors.password && <div className="text-red-500 text-sm">{errors.password}</div>}
 
                             </div>
+                            <div className="flex items-center justify-between mt-4">
+                                {!auth.user &&
+                                    <Link
+                                        href={route('register')}
+                                        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    >
+                                        Registrar administrador
+                                    </Link>
+                                }
+                                {canResetPassword && (
+                                    <span
+                                        onClick={() => setPasswordForgout(!passwordForgout)}
+                                        className="cursor-pointer underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    >
+                                        Esqueceu sua senha?
+                                    </span>
+                                )}
 
+                            </div>
+                            {passwordForgout &&
+                                <div className="bg-yellow-100 border border-red-200 rounded p-2 mt-4">
+                                    <p className="text-xs text-center text-red-500">Solicite uma nova senha ao administrador do sistema</p>
+                                </div>
+                            }
                             <div className="flex items-center justify-between mt-8">
                                 <button
                                     className="btn-login"
