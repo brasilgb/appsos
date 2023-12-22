@@ -38,7 +38,7 @@ class EmpresaController extends Controller
         if ($request->hasfile('logo')) {
             $fileName = time() . '.' . $request->logo->extension();
             $request->logo->move($storePath, $fileName);
-            if (file_exists($storePath . DIRECTORY_SEPARATOR . $empresa->logo)) {
+            if (file_exists($storePath . DIRECTORY_SEPARATOR . $empresa->logo && $empresa->logo)) {
                 unlink($storePath . DIRECTORY_SEPARATOR . $empresa->logo);
             }
         }
@@ -46,6 +46,5 @@ class EmpresaController extends Controller
         $empresa->update($data);
         Session::flash('success', 'Dados da empresa editado com sucesso!');
         return Redirect::route('empresa.index');
-    
     }
 }

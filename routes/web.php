@@ -4,6 +4,7 @@ use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EtiquetaController;
+use App\Http\Controllers\GeralController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImagemController;
 use App\Http\Controllers\ImpressaoController;
@@ -33,7 +34,7 @@ use Inertia\Inertia;
 
 
 Route::get('/', function () {
-    return Inertia::render('Home', [
+    return Inertia::render('Home/index', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -46,7 +47,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('/usuarios', UserController::class)->parameters([
         'usuarios' => 'user'
     ]);
-    Route::resource('/configuracoes/empresa', EmpresaController::class);
     Route::resource('/clientes', ClienteController::class);
     Route::resource('/ordens', OrdemController::class)->parameters([
         'ordens' => 'ordem'
@@ -58,6 +58,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('/agendas', AgendaController::class);
     Route::resource('/mensagens', MensagemController::class)->parameters([
         'mensagens' => 'mensagem'
+    ]);
+    Route::resource('/configuracoes/empresa', EmpresaController::class);
+    Route::resource('/configuracoes/gerais', GeralController::class)->parameters([
+        'gerais' => 'geral'
     ]);
     Route::resource('/configuracoes/impressoes', ImpressaoController::class)->parameters([
         'impressoes' => 'impressao'

@@ -64,22 +64,6 @@ class ImagemController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Imagem $imagem)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Imagem $imagem)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
     public function destroy(Imagem $imagem)
@@ -94,14 +78,3 @@ class ImagemController extends Controller
         return redirect()->route('imagens.index', ['or' => $imagem->ordem_id]);
     }
 }
-/*
-        $storePath = public_path('storage/ordens/' . $request->ordem_id);
-        if (file_exists($storePath . DIRECTORY_SEPARATOR . $image->image)) {
-            unlink($storePath . DIRECTORY_SEPARATOR . $image->image);
-        }
-        $image->galleries()->detach();
-        $image->delete($image);
-        Session::flash('success', 'Imagem deletada com sucesso!');
-        return redirect()->route('images.index');
-
-*/

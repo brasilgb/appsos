@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, usePage } from "@inertiajs/react";
 import { AiFillPrinter, AiFillTags, AiOutlineDashboard } from 'react-icons/ai';
 import Logo from "../Logo";
-import { IoChatboxEllipses, IoConstruct, IoLogoWhatsapp, IoPeopleSharp, IoPerson } from "react-icons/io5";
+import { IoChatboxEllipses, IoCog, IoConstruct, IoLogoWhatsapp, IoPeopleSharp, IoPerson } from "react-icons/io5";
 import { FaBasketShopping, FaCalendarDays, FaChevronDown, FaSliders } from "react-icons/fa6";
 import { HiBuildingOffice } from "react-icons/hi2";
 
@@ -112,6 +112,14 @@ const Sidebar = () => {
                                         href={"/configuracoes/etiquetas"}>
                                         <AiFillTags size={20} />
                                         <span className="ml-2">Etiquetas</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        className={`flex items-center p-2 transition-all duration-300 hover:text-gray-400 text-gray-600 group`}
+                                        href={"/configuracoes/gerais"}>
+                                        <IoCog size={20} />
+                                        <span className="ml-2">Gerais</span>
                                     </Link>
                                 </li>
                             </ul>

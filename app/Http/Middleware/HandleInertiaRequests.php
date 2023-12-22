@@ -40,9 +40,14 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
-            'logemp' => fn () => [
+            'confemp' => fn () => [
                 DB::table('empresa')
                     ->select('logo', 'empresa')
+                    ->first()
+            ],
+            'confger' => fn () => [
+                DB::table('gerais')
+                    ->select('bgimage', 'bgcolor')
                     ->first()
             ],
             'ziggy' => fn () => [
