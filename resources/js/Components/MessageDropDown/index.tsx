@@ -1,12 +1,12 @@
-import { Link, useForm, usePage } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 import React, { useState } from 'react';
-import { IoExit, IoLogOut, IoPerson } from 'react-icons/io5';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import { IoChatboxEllipses, IoExit } from 'react-icons/io5';
+import { BsChatRightText } from "react-icons/bs";
+interface DropDownProps {
+    mensagens: any;
+};
 
-type Props = {};
-
-const UserDropDown = (props: Props) => {
-    const { auth } = usePage().props
+const MessageDropDown = ({ mensagens }: DropDownProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const { post } = useForm();
 
@@ -24,16 +24,17 @@ const UserDropDown = (props: Props) => {
     return (
 
         <>
-            <div className="relative">
+            <div className="relative text-sm">
                 <button
-                    className="flex items-center justify-between p-2"
+                    className="flex items-center justify-between"
                     onClick={toggle}
                 >
-                    <div className="text-gray-700">
-                        <IoPerson size={22} />
+                    <div className="text-emerald-600">
+                        <IoChatboxEllipses size={22} />
+
                     </div>
-                    <div className="text-gray-700">
-                        <MdOutlineKeyboardArrowDown size={24} className={`duration-300 ${isOpen ? '-rotate-180' : 'rotate-0'}`} />
+                    <div className="absolute text-xs text-red-500 font-bold -top-3 right-0">
+                        {mensagens.length}
                     </div>
                 </button>
                 <div
@@ -41,21 +42,23 @@ const UserDropDown = (props: Props) => {
                 >
                     <Link
                         className="text-gray-600 hover:text-gray-500 px-4 pb-3 flex items-center"
-                        href={`/usuarios/${auth.user.id}`}
+                        href={`/mensagens`}
                         onClick={toggle}
                     >
-                        <IoPerson />
-                        <span className="ml-1">{auth.user.name}</span>
+                        <BsChatRightText />
+                        <span className="ml-1">Todas as mensagens</span>
                     </Link>
                     <span className="w-full border-b border-gray-200"></span>
-                    <Link
-                        className="text-gray-600 hover:text-gray-500 px-4 pt-2 flex items-center"
-                        href="#"
-                        onClick={(e) => handleLogout(e)}
-                    >
-                        <IoExit />
-                        <span className="ml-1">Sair</span>
-                    </Link>
+                    {mensagens.map((message: any) => (
+                        <Link
+                            className="text-gray-600 hover:text-gray-500 px-4 pt-2 flex items-center"
+                            href="#"
+                            onClick={(e) => handleLogout(e)}
+                        >
+                            <IoExit />
+                            <span className="ml-1">{message.mensagem}</span>
+                        </Link>
+                    ))}
 
                 </div>
             </div>
@@ -71,4 +74,4 @@ const UserDropDown = (props: Props) => {
     );
 };
 
-export default UserDropDown;
+export default MessageDropDown;

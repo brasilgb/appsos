@@ -6,17 +6,17 @@ interface CardProps {
 }
 
 
-export const CardContainer = ({ children }: CardProps) => {
+export const CardContainer = ({ children, className }: CardProps) => {
     return (
-        <div className="shadow bg-white z-10">
+        <div className={`shadow z-10 ${className}`}>
             {children}
         </div>
     )
 }
 
-export const Card = ({ children }: CardProps) => {
+export const Card = ({ children, className }: CardProps) => {
     return (
-        <div className="md:w-full md:m-4 z-10">
+        <div className={`w-full md:m-4 z-10 ${className}`}>
             {children}
         </div>
     )

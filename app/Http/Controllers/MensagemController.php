@@ -8,6 +8,7 @@ use App\Models\Mensagem;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
@@ -22,14 +23,18 @@ class MensagemController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('q');
-
-        $query = Mensagem::orderBy('id', 'DESC');
-
+        $logged = Auth::user()->id;
+        $adminuser = !!User::where('role', 1)->first();
+        if ($adminuser) {
+            $query = Mensagem::orderBy('id', 'DESC');
+        } else {
+            $query = Mensagem::where('destinatario', $logged)->orderBy('id', 'DESC');
+        }
         if ($search) {
             $query->where('remetente', 'like', '%' . $search . '%');
         }
-        $users = User::where('status', 1)->get();
         $mensagens = $query->paginate(12);
+        $users = User::where('status', 1)->get();
         return Inertia::render('Mensagens/index', ['mensagens' => $mensagens, 'users' => $users]);
     }
 

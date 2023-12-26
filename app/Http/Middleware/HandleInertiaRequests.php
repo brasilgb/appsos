@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Empresa;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Middleware;
@@ -49,6 +50,9 @@ class HandleInertiaRequests extends Middleware
                 DB::table('gerais')
                     ->select('bgimage', 'bgcolor')
                     ->first()
+            ],
+            'userexist' => fn () => [
+                DB::table('users')->where('id', '>', 1)->exists()
             ],
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),

@@ -20,7 +20,6 @@ const statusUser = [
     { value: 2, label: "Inativo" },
 ];
 
-
 const movimentosProdutos = [
     {value: 1, label: 'Entrada'},
     {value: 2, label: 'Saída'},

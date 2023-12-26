@@ -6,7 +6,7 @@ import ClockTime from "@/Utils/ClockTime";
 import { IoEyeOffOutline, IoEyeOutline, IoPerson } from "react-icons/io5";
 
 export default function Login({ status, canResetPassword }) {
-    const { confemp, confger, auth } = usePage().props;
+    const { confemp, confger, userexist } = usePage().props;
 
     const [passwordView, setPasswordView] = useState<boolean>(false);
     const [passwordForgout, setPasswordForgout] = useState<boolean>(false);
@@ -51,7 +51,7 @@ export default function Login({ status, canResetPassword }) {
                                 </span>
                             </div>
                             <div className="w-32 flex items-center justify-center">
-                                <img src={`/storage/images/${confemp[0]?.logo?confemp[0]?.logo:'default.png'}`} alt={`${confemp[0]?.empresa}`} className="" />
+                                <img src={`/storage/images/${confemp[0]?.logo ? confemp[0]?.logo : 'default.png'}`} alt={`${confemp[0]?.empresa}`} className="" />
                             </div>
                         </div>
                         <form onSubmit={submit}>
@@ -98,22 +98,26 @@ export default function Login({ status, canResetPassword }) {
 
                             </div>
                             <div className="flex items-center justify-between mt-4">
-                                {auth.user &&
-                                    <Link
-                                        href={route('register')}
-                                        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                    >
-                                        Registrar administrador
-                                    </Link>
-                                }
-                                {canResetPassword && (
-                                    <span
-                                        onClick={() => setPasswordForgout(!passwordForgout)}
-                                        className="cursor-pointer underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                    >
-                                        Esqueceu sua senha?
-                                    </span>
-                                )}
+                                <div>
+                                    {!userexist[0] &&
+                                        <Link
+                                            href={route('register')}
+                                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                        >
+                                            Registrar administrador
+                                        </Link>
+                                    }
+                                </div>
+                                <div>
+                                    {canResetPassword && (
+                                        <span
+                                            onClick={() => setPasswordForgout(!passwordForgout)}
+                                            className="cursor-pointer underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                        >
+                                            Esqueceu sua senha?
+                                        </span>
+                                    )}
+                                </div>
 
                             </div>
                             {passwordForgout &&

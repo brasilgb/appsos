@@ -35,8 +35,8 @@ const statusAgendaByValue = (value:any) => {
 }
     const statusMessageByValue = (value:any) => {
         switch(value){
-            case 1: return "Não lida";
-            case 2: return "lida";
+            case 0: return "Não lida";
+            case 1: return "lida";
         }
     }
 

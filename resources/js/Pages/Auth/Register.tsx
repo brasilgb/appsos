@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
 
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import React from "react";
 import InputLabel from "@/Components/old/InputLabel";
 import TextInput from "@/Components/old/TextInput";
@@ -9,7 +9,8 @@ import InputError from "@/Components/old/InputError";
 import PrimaryButton from "@/Components/old/PrimaryButton";
 
 export default function Register() {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { userexist } = usePage().props;
+    const { data, setData, post, get, processing, errors, reset } = useForm({
         name: '',
         email: '',
         password: '',
@@ -24,9 +25,17 @@ export default function Register() {
 
     const submit = (e) => {
         e.preventDefault();
-
         post(route('register'));
     };
+
+    useEffect(() => {
+        const getRedirectLogin = () => {
+            if (userexist[0]) {
+                get('/');
+            }
+        };
+        getRedirectLogin();
+    }, []);
 
     return (
         <GuestLayout>
