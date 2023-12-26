@@ -1,24 +1,28 @@
-import { Link, useForm } from "@inertiajs/react";
-import React, {useState} from 'react';
-import {IoLogOut, IoPerson} from 'react-icons/io5';
-import {MdOutlineKeyboardArrowDown} from 'react-icons/md';
+import { Link, useForm, usePage } from "@inertiajs/react";
+import React, { useState } from 'react';
+import { IoExit, IoLogOut, IoPerson } from 'react-icons/io5';
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 
 type Props = {};
 
 const UserDropDown = (props: Props) => {
+    const { auth } = usePage().props
     const [isOpen, setIsOpen] = useState<boolean>(false);
-const { post } = useForm();
+    const { post } = useForm();
+    
     const toggle = () => {
         setIsOpen(old => !old);
     };
 
-    const handleLogout = (e:any) => {
+    const handleLogout = (e: any) => {
         e.preventDefault();
         post(route('logout'));
     }
+
     const transClass = isOpen ? 'flex' : 'hidden';
+
     return (
-        // <div>{session?.user.name}</div>
+        
         <>
             <div className="relative">
                 <button
@@ -29,30 +33,31 @@ const { post } = useForm();
                         <IoPerson />
                     </div>
                     <div className="">
-                        <MdOutlineKeyboardArrowDown size={24} />
+                        <MdOutlineKeyboardArrowDown size={24} className={`duration-300 ${isOpen ? '-rotate-180' : 'rotate-0'}`} />
                     </div>
                 </button>
                 <div
-                    className={`absolute top-11 right-0 z-30 w-[250px] min-h-[300px] flex flex-col py-4 bg-zinc-400 rounded ${transClass}`}
+                    className={`absolute top-11 right-0 z-30 w-[250px] flex flex-col py-4 bg-gray-50 rounded-md shadow-lg  ${transClass}`}
                 >
-                    
-                        <Link
-                            className="hover:bg-zinc-300 hover:text-zinc-500 px-4 py-1"
-                            // href={session?.user.id || ''}
-                            href="#"
-                            onClick={toggle}
-                        >
-                            User
-                        </Link>
-                        <Link
-                            className="hover:bg-zinc-300 hover:text-zinc-500 px-4 py-1"
-                            // href={session?.user.id || ''}
-                            href="#"
-                            onClick={(e) => handleLogout(e)}
-                        >
-                            Sair
-                        </Link>
-                    
+
+                    <Link
+                        className="text-gray-600 hover:text-gray-500 px-4 py-1 flex items-center"
+                        href={`/usuarios/${auth.user.id}`}
+                        onClick={toggle}
+                    >
+                        <IoPerson />
+                        <span className="ml-1">{auth.user.name}</span>
+                    </Link>
+                    <Link
+                        className="text-gray-600 hover:text-gray-500 px-4 py-1 flex items-center"
+                        // href={session?.user.id || ''}
+                        href="#"
+                        onClick={(e) => handleLogout(e)}
+                    >
+                        <IoExit />
+                        <span className="ml-1">Sair</span>
+                    </Link>
+
                 </div>
             </div>
             {isOpen ? (

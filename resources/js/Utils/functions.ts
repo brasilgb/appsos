@@ -18,7 +18,7 @@ const statusUserByValue = (value:any) => {
     }
 }
 
-const roleByValue = (value:any) => {
+const roleUserByValue = (value:any) => {
     switch(value){
         case 1: return "Administrador";
         case 2: return "Usuário";
@@ -40,4 +40,4 @@ const statusAgendaByValue = (value:any) => {
         }
     }
 
-export {statusOrdemByValue, statusUserByValue, roleByValue, statusAgendaByValue, statusMessageByValue};
+export {statusOrdemByValue, statusUserByValue, roleUserByValue, statusAgendaByValue, statusMessageByValue};

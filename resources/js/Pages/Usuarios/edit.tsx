@@ -31,8 +31,8 @@ const EditUsuario = ({ usuarios }: any) => {
         telefone: usuarios.telefone,
         role: usuarios.role,
         status: usuarios.status,
-        password: "",
-        password_confirmation: "",
+        password: '',
+        password_confirmation: '',
     });
 
     function handleSubmit(e: any) {

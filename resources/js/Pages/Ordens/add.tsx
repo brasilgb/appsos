@@ -159,6 +159,7 @@ const AddOrdem = ({ clientes, ordem }) => {
                                             onChange={(e) => setData('defeito', e.target.value)}
                                             className="input-form"
                                         />
+                                        {errors.defeito && <div className="text-red-500">{errors.defeito}</div>}
                                     </div>
                                     <div className="flex flex-col">
                                         <label className="label-form" htmlFor="estado">

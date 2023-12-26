@@ -8,6 +8,7 @@ use App\Models\Ordem;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Schema;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Session;
 
@@ -20,8 +21,12 @@ class EtiquetaController extends Controller
      */
     public function index()
     {
-        $query = Ordem::orderBy("id", "DESC")->first();
-        $etiquetas = Ordem::where("id", $query->id)->first();
+        $etiquetas = Ordem::orderBy("id", "DESC")->first();
+        if($etiquetas){
+            $etiquetas = Ordem::orderBy("id", "DESC")->first();
+        }else{
+            $etiquetas = ['id' => 0];
+        }
         return Inertia::render('Etiquetas/index', ["etiquetas" => $etiquetas]);
     }
 
@@ -32,14 +37,13 @@ class EtiquetaController extends Controller
     {
         $etiquetas = $request->all();
         $empresa = Empresa::first();
-        for($i = $etiquetas['ordeminicial'];  $i <= $etiquetas['ordemfinal']; $i++){
-        $data[] = [
-            'ordem' => $i,
-            'telefone' => $empresa->telefone,
-            'empresa' => $empresa->empresa,
-        ];
+        for ($i = $etiquetas['ordeminicial']; $i <= $etiquetas['ordemfinal']; $i++) {
+            $data[] = [
+                'ordem' => $i,
+                'telefone' => $empresa->telefone,
+                'empresa' => $empresa->empresa,
+            ];
         }
         return Inertia::render('Etiquetas/printer', ['etiquetas' => $data]);
     }
-
 }

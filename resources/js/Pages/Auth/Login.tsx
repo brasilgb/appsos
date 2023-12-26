@@ -7,7 +7,6 @@ import { IoEyeOffOutline, IoEyeOutline, IoPerson } from "react-icons/io5";
 
 export default function Login({ status, canResetPassword }) {
     const { confemp, confger, auth } = usePage().props;
-    console.log(auth.user);
 
     const [passwordView, setPasswordView] = useState<boolean>(false);
     const [passwordForgout, setPasswordForgout] = useState<boolean>(false);
@@ -35,8 +34,8 @@ export default function Login({ status, canResetPassword }) {
             <div
                 className="fixed top-0 right-0 bottom-0 left-0 flex items-center justify-center"
                 style={{
-                    backgroundColor: confger[0].bgcolor ? confger[0].bgcolor : "#0161a0",
-                    backgroundImage: `url("/storage/images/${confger[0].bgimage ? confger[0].bgimage : 'none'}")`,
+                    backgroundColor: confger[0]?.bgcolor ? confger[0]?.bgcolor : "#0161a0",
+                    backgroundImage: `url("/storage/images/${confger[0]?.bgimage ? confger[0]?.bgimage : 'none'}")`,
                     backgroundSize: 'cover'
                 }}
             >
@@ -51,8 +50,8 @@ export default function Login({ status, canResetPassword }) {
                                     <ClockTime />
                                 </span>
                             </div>
-                            <div className="w-44 flex items-center justify-center">
-                                <img src={`/storage/images/${confemp[0].logo}`} alt={`${confemp[0].empresa}`} className="" />
+                            <div className="w-32 flex items-center justify-center">
+                                <img src={`/storage/images/${confemp[0]?.logo?confemp[0]?.logo:'default.png'}`} alt={`${confemp[0]?.empresa}`} className="" />
                             </div>
                         </div>
                         <form onSubmit={submit}>
@@ -99,7 +98,7 @@ export default function Login({ status, canResetPassword }) {
 
                             </div>
                             <div className="flex items-center justify-between mt-4">
-                                {!auth.user &&
+                                {auth.user &&
                                     <Link
                                         href={route('register')}
                                         className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

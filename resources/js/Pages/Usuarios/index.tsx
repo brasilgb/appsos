@@ -6,7 +6,7 @@ import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import Pagination from "@/Components/Pagination";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/Components/Table";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { roleByValue, statusUserByValue } from "@/Utils/functions";
+import { roleByValue, roleUserByValue, statusUserByValue } from "@/Utils/functions";
 import { usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment } from "react";
@@ -61,7 +61,7 @@ const Usuarios = ({ usuarios }: any) => {
                                             <TableCell>{usuario.id}</TableCell>
                                             <TableCell>{usuario.name}</TableCell>
                                             <TableCell>{usuario.telefone}</TableCell>
-                                            <TableCell>{roleByValue(usuario.role)}</TableCell>
+                                            <TableCell>{roleUserByValue(usuario.role)}</TableCell>
                                             <TableCell>{statusUserByValue(usuario.status)}</TableCell>
                                             <TableCell>{moment(usuario.created_at).format("DD/MM/YYYY")}</TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">

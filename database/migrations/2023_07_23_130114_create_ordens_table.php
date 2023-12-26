@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
             $table->string('equipamento', 40);
             $table->string('modelo', 50)->nullable();
-            $table->string('senha', 50);
-            $table->text('defeito');
+            $table->string('senha', 50)->nullable();
+            $table->text('defeito')->nullable();
             $table->string('estado', 100);
             $table->text('acessorios')->nullable();
             $table->string('orcamento', 50)->nullable();

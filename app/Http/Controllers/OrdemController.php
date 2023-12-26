@@ -68,6 +68,7 @@ class OrdemController extends Controller
             [
                 'equipamento' => 'equipamento',
                 'senha' => 'senha',
+                'cliente_id' => 'cliente',
             ]
         );
             Ordem::create($data);
@@ -124,41 +125,8 @@ class OrdemController extends Controller
      */
     public function destroy(Ordem $ordem)
     {
-        $deleted = $ordem->delete();
-
-        if ($deleted) {
-            return $this->response('Ordem deletada com sucesso!', 200);
-        }
-        return $this->response('Ordem não deletada!', 400);
+        $ordem->delete();
+        Session::flash('success', 'Ordem deletada com sucesso');
+        return Redirect::route('ordens.index');
     }
-
-    // public function printTermo($id)
-    // {
-
-    //     $storePath = public_path('storage/ordens/pdf');
-    //     if (!file_exists($storePath)) {
-    //         mkdir($storePath, 0755, true);
-    //     };
-    //     $empresas = Empresa::get();
-    //     $ordens = Ordem::where('id', $id)->with('cliente')->get();
-    //     $data = [
-    //         'title' => 'Welcome to ItSolutionStuff.com',
-    //         'date' => date('m/d/Y'),
-    //         'ordens' => $ordens,
-    //         'empresas' => $empresas,
-    //     ];
-
-    //     // return view('termo', $data);
-    //     $pdf = Pdf::loadView('termo', $data);
-    //     $pdf->setPaper('A4', 'landscape');
-    //     $pdf->setOption([
-    //         'isRemoteEnabled' => true,
-    //         'dpi' => 150,
-    //         'isHtml5ParserEnabled' => true,
-    //         'defaultFont' => 'sans-serif'
-    //     ]);
-    //     $fileName = 'termo.pdf';
-    //     $pdf->save($storePath . DIRECTORY_SEPARATOR . $fileName);
-    //     return "storage/ordens/pdf/$fileName";
-    // }
 }

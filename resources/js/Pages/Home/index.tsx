@@ -1,21 +1,17 @@
 import { Card, CardBody, CardFooter, CardHeader } from "@/Components/Card";
+import Kpis from "@/Components/Kpis";
 import AuthLayout from "@/Layouts/AuthLayout";
 import React from "react";
 
 const Home = () => {
     return (
         <AuthLayout>
-            <Card>
-                <CardHeader>
-                    Home
-                </CardHeader>
-                <CardBody>
-                    Body
-                </CardBody>
-                <CardFooter>
-                    Footer
-                </CardFooter>
-            </Card>
+            <div></div>
+           <Kpis props={{
+                title: "Ordens",
+                value: "1000",
+                url: "/"
+            }}/>
         </AuthLayout>
     );
 }

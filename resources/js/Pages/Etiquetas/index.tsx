@@ -16,6 +16,7 @@ interface ClientesProps {
 }
 
 const Etiquetas = ({ etiquetas }: any) => {
+    
     const { flash } = usePage().props;
     const { data, setData, post, progress, processing, errors }: InertiaFormProps<ClientesProps> = useForm({
         ordeminicial: etiquetas.id + 1,
