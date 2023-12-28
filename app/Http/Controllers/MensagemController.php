@@ -24,8 +24,8 @@ class MensagemController extends Controller
     {
         $search = $request->get('q');
         $logged = Auth::user()->id;
-        $adminuser = !!User::where('role', 1)->first();
-        if ($adminuser) {
+        $admin = !!User::Where('role', 1)->where('id', $logged)->first();
+        if ($admin) {
             $query = Mensagem::orderBy('id', 'DESC');
         } else {
             $query = Mensagem::where('destinatario', $logged)->orderBy('id', 'DESC');
@@ -96,23 +96,28 @@ class MensagemController extends Controller
     public function update(Request $request, Mensagem $mensagem)
     {
         $data = $request->all();
-
-        $messages = [
-            'required' => 'O campo :attribute deve ser preenchido',
-        ];
-        $request->validate(
-            [
-                'remetente' => 'required',
-                'destinatario' => 'required',
-                'mensagem' => 'required'
-            ],
-            $messages,
-            [
-                'destinatario' => 'destinatário',
-            ]
-        );
-        $mensagem->update($data);
-        Session::flash('success', 'Mensagem Editada com sucesso!');
+        
+        if ($request->status) {
+            $mensagem->update($data);
+            Session::flash('success', 'Mensagem Marcada como lida!');
+        } else {
+            $messages = [
+                'required' => 'O campo :attribute deve ser preenchido',
+            ];
+            $request->validate(
+                [
+                    'remetente' => 'required',
+                    'destinatario' => 'required',
+                    'mensagem' => 'required'
+                ],
+                $messages,
+                [
+                    'destinatario' => 'destinatário',
+                ]
+            );
+            $mensagem->update($data);
+            Session::flash('success', 'Mensagem Editada com sucesso!');
+        }
         return Redirect::route('mensagens.show', ['mensagem' => $mensagem->id]);
     }
 

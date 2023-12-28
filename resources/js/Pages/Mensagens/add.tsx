@@ -12,7 +12,7 @@ const AddMensagem = ({ users }) => {
         remetente: "",
         destinatario: "",
         mensagem: "",
-        status: "1",
+        status: "0",
     });
 
     function handleSubmit(e: any) {

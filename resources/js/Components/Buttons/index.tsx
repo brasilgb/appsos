@@ -1,6 +1,6 @@
 import { Link, useForm } from "@inertiajs/react"
 import React, { useState } from 'react'
-import { IoAdd, IoArrowBackOutline, IoClose, IoConstruct, IoImageSharp, IoLogoWhatsapp, IoPrint, IoSave, IoTrash } from "react-icons/io5";
+import { IoAdd, IoArrowBackOutline, IoCheckmarkDone, IoClose, IoConstruct, IoImageSharp, IoLogoWhatsapp, IoPrint, IoSave, IoTrash } from "react-icons/io5";
 import { TbEdit } from "react-icons/tb";
 import { FaCalendarDays, FaRegTrashCan } from "react-icons/fa6";
 
@@ -13,6 +13,8 @@ interface ButtonsProps {
     identify?: string;
     value?: string;
     status?: string;
+    id?: string;
+    sttmessage?: number;
 }
 
 export const AddButton = ({ url, label }: ButtonsProps) => {
@@ -25,6 +27,30 @@ export const AddButton = ({ url, label }: ButtonsProps) => {
         >
             <IoAdd size={18} />
             <span>{label}</span>
+        </Link>
+    )
+}
+
+export const MessageLidaButton = ({ url, id, sttmessage }: ButtonsProps) => {
+    const { patch } = useForm({
+        status: sttmessage === 0 ? 1 : 0
+    });
+
+    const handleMessageRead = (e: any) => {
+        e.preventDefault();
+        patch(route(url, id));
+    }
+
+    return (
+        <Link
+            className="flex items-center justify-center bg-gray-50 hover:bg-gray-100 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+            href="#"
+            onClick={handleMessageRead}
+            as="button"
+            type="button"
+            title={sttmessage === 0 ? "Marcar como lida" : "Mensagem lida"}
+        >
+            <IoCheckmarkDone size={22} color={sttmessage === 0 ? "#6b6b6b" : "#2a82ca"} />
         </Link>
     )
 }

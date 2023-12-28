@@ -10,13 +10,13 @@ import { statusMessageByValue } from "@/Utils/functions";
 import { usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment, useEffect } from "react";
-import { IoChatboxEllipses } from "react-icons/io5";
+import { IoChatboxEllipses, IoCheckmark, IoCheckmarkDone } from "react-icons/io5";
 
 const Mensagens = ({ mensagens, users }) => {
     const { flash } = usePage().props;
-  
-    const getUserName = (id:any) => {
-        const nameuser = users.filter((i:any) => (i.id === id)).map((n:any) => (n.name));
+
+    const getUserName = (id: any) => {
+        const nameuser = users.filter((i: any) => (i.id === id)).map((n: any) => (n.name));
         return nameuser;
     }
 
@@ -65,7 +65,7 @@ const Mensagens = ({ mensagens, users }) => {
                                             <TableCell>{mensagem.id}</TableCell>
                                             <TableCell>{getUserName(mensagem.remetente)}</TableCell>
                                             <TableCell>{getUserName(mensagem.destinatario)}</TableCell>
-                                            <TableCell>{statusMessageByValue(mensagem.status)}</TableCell>
+                                            <TableCell>{mensagem.status === 0 ? <IoCheckmark size={22} color="#747474" /> : <IoCheckmarkDone size={22} color="#2a82ca" />}</TableCell>
                                             <TableCell>{moment(mensagem.created_at).format("DD/MM/YYYY HH:mm")}</TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
                                                 <EditButton url={route('mensagens.edit', mensagem.id)} />

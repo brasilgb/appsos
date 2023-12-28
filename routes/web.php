@@ -14,6 +14,7 @@ use App\Http\Controllers\PrinterController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WAMessagesController;
 use App\Http\Controllers\WhatsController;
 use App\Models\Whats;
 use Illuminate\Foundation\Application;
@@ -44,6 +45,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     route::get('/', [HomeController::class, 'index']);
+    route::get('/wamessage', [WAMessagesController::class, 'index']);
     Route::resource('/usuarios', UserController::class)->parameters([
         'usuarios' => 'user'
     ]);

@@ -20,7 +20,7 @@ class HomeController extends Controller
         $ordens = Ordem::with('cliente')->get();
         $produtos = Produto::get();
         $agendas = Agenda::get();
-        $mensagens = Mensagem::where('destinatario', $logged)->where('status', 1)->get();
+        $mensagens = Mensagem::where('destinatario', $logged)->where('status', 0)->get();
         return Inertia::render('Home/index', [
             'clientes'  => $clientes,
             'ordens'    => $ordens,

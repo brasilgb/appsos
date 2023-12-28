@@ -1,6 +1,6 @@
 import { Link, useForm } from "@inertiajs/react";
 import React, { useState } from 'react';
-import { IoChatboxEllipses, IoExit } from 'react-icons/io5';
+import { IoChatboxEllipses, IoCheckmark, IoExit } from 'react-icons/io5';
 import { BsChatRightText } from "react-icons/bs";
 interface DropDownProps {
     mensagens: any;
@@ -55,7 +55,7 @@ const MessageDropDown = ({ mensagens }: DropDownProps) => {
                             href="#"
                             onClick={(e) => handleLogout(e)}
                         >
-                            <IoExit />
+                            <IoCheckmark size={18} />
                             <span className="ml-1">{message.mensagem}</span>
                         </Link>
                     ))}

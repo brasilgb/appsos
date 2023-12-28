@@ -1,4 +1,4 @@
-import { BackButton, SaveButton } from "@/Components/Buttons";
+import { BackButton, MessageLidaButton, SaveButton } from "@/Components/Buttons";
 import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderContent } from "@/Components/Card";
 import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
@@ -49,7 +49,10 @@ const EditMensagem = ({ mensagens, users }: any) => {
                     <FlashMessage message={flash} />
                     <CardHeader>
                         <CardHeaderContent>
-                            <BackButton url={"/mensagens"} label={"Voltar"} />
+                            <div className="flex items-center gap-4">
+                                <BackButton url={"/mensagens"} label={"Voltar"} />
+                                <MessageLidaButton url={'mensagens.update'} id={`${mensagens.id}`} sttmessage={mensagens.status} />
+                            </div>
                         </CardHeaderContent>
                         <CardHeaderContent>
                             <></>
@@ -62,7 +65,7 @@ const EditMensagem = ({ mensagens, users }: any) => {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="flex flex-col">
                                         <label className="label-form" htmlFor="remetente">
-                                            Remetente
+                                            Remetente {mensagens.status}
                                         </label>
                                         <select
                                             id="remetente"
