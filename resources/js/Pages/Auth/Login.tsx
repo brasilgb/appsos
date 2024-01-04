@@ -4,12 +4,14 @@ import React from "react";
 import GuestLayout from "@/Layouts/GuestLayout";
 import ClockTime from "@/Utils/ClockTime";
 import { IoEyeOffOutline, IoEyeOutline, IoPerson } from "react-icons/io5";
+import { CgSpinnerTwo } from 'react-icons/cg';
 
 export default function Login({ status, canResetPassword }) {
     const { confemp, confger, userexist } = usePage().props;
 
     const [passwordView, setPasswordView] = useState<boolean>(false);
     const [passwordForgout, setPasswordForgout] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -24,6 +26,10 @@ export default function Login({ status, canResetPassword }) {
 
     const submit = (e: any) => {
         e.preventDefault();
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 200)
         post(route('login'));
     };
 
@@ -35,7 +41,7 @@ export default function Login({ status, canResetPassword }) {
                 className="fixed top-0 right-0 bottom-0 left-0 flex items-center justify-center"
                 style={{
                     backgroundColor: confger[0]?.bgcolor ? confger[0]?.bgcolor : "#0161a0",
-                    backgroundImage: `url("/storage/images/${confger[0]?.bgimage ? confger[0]?.bgimage : 'none'}")`,
+                    backgroundImage: `url("/storage/images/${confger[0]?.bgimage ? confger[0]?.bgimage : ''}")`,
                     backgroundSize: 'cover'
                 }}
             >
@@ -128,8 +134,12 @@ export default function Login({ status, canResetPassword }) {
                             <div className="flex items-center justify-between mt-8">
                                 <button
                                     className="btn-login"
-                                    disabled={processing}>
-                                    Entrar
+                                    disabled={processing}
+                                >
+                                    {loading
+                                        ? <CgSpinnerTwo size={24} />
+                                        : <span>Entrar</span>
+                                    }
                                 </button>
                             </div>
 
