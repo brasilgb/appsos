@@ -115,6 +115,7 @@ const Impressoes = ({ empresa }: any) => {
                                             hover:file:bg-blue-600 border border-gray-300 rounded-md bg-transparent"
                                         />
                                     </div>
+                                    
                                     <div className="flex flex-col">
                                         <label className="label-form" htmlFor="empresa">
                                             Nome fantasia
