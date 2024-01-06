@@ -4,7 +4,7 @@ import MessageDropDown from "@/Components/MessageDropDown";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import Boxorder from "@/Components/boxorder";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { usePage } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
 import React, { useState } from "react";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { FaBasketShopping, FaCalendarDays } from "react-icons/fa6";
@@ -16,6 +16,7 @@ const Home = ({ clientes, ordens, produtos, agendas, mensagens }: any) => {
 
     return (
         <AuthLayout>
+            <Head title="Dashboard" />
             <Card className="!p-4">
                 <HeaderContent>
                     <TitleTop >
