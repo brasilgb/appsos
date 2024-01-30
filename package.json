@@ -3,7 +3,9 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "format": "prettier --check --ignore-path .gitignore .",
+        "format:fix": "prettier --write --ignore-path .gitignore ."
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
@@ -22,6 +24,7 @@
     "dependencies": {
         "@inertiajs/inertia": "^0.11.1",
         "moment": "^2.29.4",
+        "prettier": "^3.2.4",
         "react-icons": "^4.12.0",
         "react-select": "^5.8.0",
         "react-to-print": "^2.14.15"

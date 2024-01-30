@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import {useEffect, useState} from 'react';
-import moment from 'moment';
+import { useEffect, useState } from "react";
+import moment from "moment";
 
 const ClockTime = () => {
     const [timeClock, setTimeClock] = useState();
 
     useEffect(() => {
         setInterval(() => {
-            let time: any = moment().format('HH:mm:ss');
+            let time: any = moment().format("HH:mm:ss");
             setTimeClock(time);
         }, 1000);
     }, []);

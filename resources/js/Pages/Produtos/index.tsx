@@ -1,10 +1,30 @@
-import { AddButton, DeleteButton, EditButton, OrderButton, WhatsAppButton } from "@/Components/Buttons";
-import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderContent } from "@/Components/Card";
+import {
+    AddButton,
+    DeleteButton,
+    EditButton,
+    OrderButton,
+    WhatsAppButton,
+} from "@/Components/Buttons";
+import {
+    Card,
+    CardBody,
+    CardContainer,
+    CardFooter,
+    CardHeader,
+    CardHeaderContent,
+} from "@/Components/Card";
 import FlashMessage from "@/Components/FlashMessage";
 import InputSearch from "@/Components/InputSearch";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import Pagination from "@/Components/Pagination";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/Components/Table";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/Components/Table";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { usePage } from "@inertiajs/react";
 import moment from "moment";
@@ -19,25 +39,25 @@ const Produtos = ({ produtos }: any) => {
         <AuthLayout>
             <Card>
                 <HeaderContent>
-                    <TitleTop >
+                    <TitleTop>
                         <FaBasketShopping size={30} />
                         <span className="ml-2">Produtos</span>
                     </TitleTop>
-                    <BreadCrumbTop
-                        links={
-                            [
-                                { url: null, label: 'Produtos' }
-                            ]
-                        }
-                    />
+                    <BreadCrumbTop links={[{ url: null, label: "Produtos" }]} />
                 </HeaderContent>
                 <CardContainer>
                     <CardHeader>
                         <CardHeaderContent>
-                            <InputSearch placeholder={"Buscar produto"} url={"produtos.index"} />
+                            <InputSearch
+                                placeholder={"Buscar produto"}
+                                url={"produtos.index"}
+                            />
                         </CardHeaderContent>
                         <CardHeaderContent>
-                            <AddButton url={"/produtos/create"} label={"Produto"} />
+                            <AddButton
+                                url={"/produtos/create"}
+                                label={"Produto"}
+                            />
                         </CardHeaderContent>
                     </CardHeader>
                     <FlashMessage message={flash} />
@@ -57,14 +77,37 @@ const Produtos = ({ produtos }: any) => {
                                 {produtos.data.map((produto: any) => (
                                     <Fragment key={produto.id}>
                                         <TableRow>
-                                            <TableCell>{('000000' + produto.id).slice(-6)}</TableCell>
-                                            <TableCell>{produto.descricao}</TableCell>
-                                            <TableCell>{produto.estmaximo}</TableCell>
-                                            <TableCell>{produto.valvenda}</TableCell>
-                                            <TableCell>{moment(produto.created_at).format("DD/MM/YYYY")}</TableCell>
+                                            <TableCell>
+                                                {("000000" + produto.id).slice(
+                                                    -6,
+                                                )}
+                                            </TableCell>
+                                            <TableCell>
+                                                {produto.descricao}
+                                            </TableCell>
+                                            <TableCell>
+                                                {produto.estmaximo}
+                                            </TableCell>
+                                            <TableCell>
+                                                {produto.valvenda}
+                                            </TableCell>
+                                            <TableCell>
+                                                {moment(
+                                                    produto.created_at,
+                                                ).format("DD/MM/YYYY")}
+                                            </TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
-                                                <EditButton url={route('produtos.edit', produto.id)} />
-                                                <DeleteButton url="produtos.destroy" param={produto.id} identify={`o produto ${produto.descricao}`} />
+                                                <EditButton
+                                                    url={route(
+                                                        "produtos.edit",
+                                                        produto.id,
+                                                    )}
+                                                />
+                                                <DeleteButton
+                                                    url="produtos.destroy"
+                                                    param={produto.id}
+                                                    identify={`o produto ${produto.descricao}`}
+                                                />
                                             </TableCell>
                                         </TableRow>
                                     </Fragment>
@@ -77,8 +120,7 @@ const Produtos = ({ produtos }: any) => {
                     </CardFooter>
                 </CardContainer>
             </Card>
-
         </AuthLayout>
     );
-}
+};
 export default Produtos;

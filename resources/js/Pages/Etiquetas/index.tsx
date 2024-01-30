@@ -1,5 +1,12 @@
 import { BackButton, SaveButton } from "@/Components/Buttons";
-import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderContent } from "@/Components/Card";
+import {
+    Card,
+    CardBody,
+    CardContainer,
+    CardFooter,
+    CardHeader,
+    CardHeaderContent,
+} from "@/Components/Card";
 import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
@@ -10,31 +17,40 @@ import { AiFillTags } from "react-icons/ai";
 import { IoChatboxEllipses } from "react-icons/io5";
 
 interface ClientesProps {
-    ordeminicial: number,
-    paginas: number,
-    ordemfinal: number,
+    ordeminicial: number;
+    paginas: number;
+    ordemfinal: number;
 }
 
 const Etiquetas = ({ etiquetas }: any) => {
-    
     const { flash } = usePage().props;
-    const { data, setData, post, progress, processing, errors }: InertiaFormProps<ClientesProps> = useForm({
+    const {
+        data,
+        setData,
+        post,
+        progress,
+        processing,
+        errors,
+    }: InertiaFormProps<ClientesProps> = useForm({
         ordeminicial: etiquetas.id + 1,
         paginas: 1,
-        ordemfinal: (etiquetas.id) + 96,
+        ordemfinal: etiquetas.id + 96,
     });
 
     function handleSubmit(e: any) {
         e.preventDefault();
-        post(route('etiquetas.store'));
+        post(route("etiquetas.store"));
     }
 
     const handlerOrdemFinal = (e: any) => {
         const paginas = parseInt(e.target.value);
         if (paginas) {
             // setData('paginas', paginas);
-            setData(data => ({ ...data, 'paginas': paginas }));
-            setData(data => ({ ...data, 'ordemfinal': ((data.ordeminicial - 1) + (96* paginas)) }));
+            setData((data) => ({ ...data, paginas: paginas }));
+            setData((data) => ({
+                ...data,
+                ordemfinal: data.ordeminicial - 1 + 96 * paginas,
+            }));
         }
     };
 
@@ -42,41 +58,46 @@ const Etiquetas = ({ etiquetas }: any) => {
         <AuthLayout>
             <Card>
                 <HeaderContent>
-                    <TitleTop >
+                    <TitleTop>
                         <AiFillTags size={30} />
                         <span className="ml-2">Etiquetas</span>
                     </TitleTop>
                     <BreadCrumbTop
-                        links={
-                            [
-                                { url: null, label: 'Etiquetas' },
-                            ]
-                        }
+                        links={[{ url: null, label: "Etiquetas" }]}
                     />
                 </HeaderContent>
                 <CardContainer>
                     <FlashMessage message={flash} />
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <CardBody className=" border-y border-gray-100">
-
                             <div className="px-3 my-4">
                                 <div className="grid grid-cols-3 gap-4">
-
                                     <div className="flex flex-col mt-6">
-                                        <label className="label-form" htmlFor="ordeminicial">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="ordeminicial"
+                                        >
                                             Ordem inicial
                                         </label>
                                         <input
                                             id="ordeminicial"
                                             value={data.ordeminicial}
                                             type="text"
-                                            onChange={(e) => setData('ordeminicial', parseInt(e.target.value))}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "ordeminicial",
+                                                    parseInt(e.target.value),
+                                                )
+                                            }
                                             className="input-form"
                                         />
                                     </div>
 
                                     <div className="flex flex-col mt-6">
-                                        <label className="label-form" htmlFor="paginas">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="paginas"
+                                        >
                                             Páginas
                                         </label>
                                         <input
@@ -89,14 +110,22 @@ const Etiquetas = ({ etiquetas }: any) => {
                                     </div>
 
                                     <div className="flex flex-col mt-6">
-                                        <label className="label-form" htmlFor="ordemfinal">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="ordemfinal"
+                                        >
                                             Ordem final
                                         </label>
                                         <input
                                             id="ordemfinal"
                                             value={data.ordemfinal}
                                             type="text"
-                                            onChange={(e) => setData('ordemfinal', parseInt(e.target.value))}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "ordemfinal",
+                                                    parseInt(e.target.value),
+                                                )
+                                            }
                                             className="input-form"
                                         />
                                     </div>
@@ -109,7 +138,7 @@ const Etiquetas = ({ etiquetas }: any) => {
                     </form>
                 </CardContainer>
             </Card>
-        </AuthLayout >
+        </AuthLayout>
     );
-}
+};
 export default Etiquetas;

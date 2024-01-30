@@ -1,28 +1,27 @@
 import { Link, useForm, usePage } from "@inertiajs/react";
-import React, { useState } from 'react';
-import { IoExit, IoLogOut, IoPerson } from 'react-icons/io5';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import React, { useState } from "react";
+import { IoExit, IoLogOut, IoPerson } from "react-icons/io5";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 type Props = {};
 
 const UserDropDown = (props: Props) => {
-    const { auth } = usePage().props
+    const { auth } = usePage().props;
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const { post } = useForm();
 
     const toggle = () => {
-        setIsOpen(old => !old);
+        setIsOpen((old) => !old);
     };
 
     const handleLogout = (e: any) => {
         e.preventDefault();
-        post(route('logout'));
-    }
+        post(route("logout"));
+    };
 
-    const transClass = isOpen ? 'flex' : 'hidden';
+    const transClass = isOpen ? "flex" : "hidden";
 
     return (
-
         <>
             <div className="relative">
                 <button
@@ -33,7 +32,10 @@ const UserDropDown = (props: Props) => {
                         <IoPerson size={22} />
                     </div>
                     <div className="text-gray-700">
-                        <MdOutlineKeyboardArrowDown size={24} className={`duration-300 ${isOpen ? '-rotate-180' : 'rotate-0'}`} />
+                        <MdOutlineKeyboardArrowDown
+                            size={24}
+                            className={`duration-300 ${isOpen ? "-rotate-180" : "rotate-0"}`}
+                        />
                     </div>
                 </button>
                 <div
@@ -56,7 +58,6 @@ const UserDropDown = (props: Props) => {
                         <IoExit />
                         <span className="ml-1">Sair</span>
                     </Link>
-
                 </div>
             </div>
             {isOpen ? (

@@ -10,5 +10,5 @@ const GuestLayout = ({ children }: GuestLayoutProps) => {
             {children}
         </div>
     );
-}
+};
 export default GuestLayout;

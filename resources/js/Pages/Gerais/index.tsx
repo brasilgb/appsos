@@ -10,13 +10,22 @@ import { AiFillTags } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
 
 interface GeraisProps {
-    bgimage: any,
-    bgcolor: string,
+    bgimage: any;
+    bgcolor: string;
 }
 
 const Gerais = ({ geral }: any) => {
     const { flash } = usePage().props;
-    const { data, setData, post, delete: destroy, progress, processing, reset, errors }: InertiaFormProps<GeraisProps> = useForm({
+    const {
+        data,
+        setData,
+        post,
+        delete: destroy,
+        progress,
+        processing,
+        reset,
+        errors,
+    }: InertiaFormProps<GeraisProps> = useForm({
         bgimage: geral.bgimage,
         bgcolor: geral.bgcolor,
     });
@@ -24,61 +33,70 @@ const Gerais = ({ geral }: any) => {
     function handleSubmit(e: any) {
         e.preventDefault();
         router.post(`gerais/${geral.id}`, {
-            _method: 'put',
+            _method: "put",
             bgimage: data.bgimage,
-            bgcolor: data.bgcolor
+            bgcolor: data.bgcolor,
         });
         reset;
     }
     const handleDeleteImage = (e: any) => {
         e.preventDefault();
-        destroy(route('gerais.destroy', geral.id));
-    }
+        destroy(route("gerais.destroy", geral.id));
+    };
     return (
         <AuthLayout>
             <Card>
                 <HeaderContent>
-                    <TitleTop >
+                    <TitleTop>
                         <AiFillTags size={30} />
                         <span className="ml-2">Configurações gerais</span>
                     </TitleTop>
                     <BreadCrumbTop
-                        links={
-                            [
-                                { url: null, label: 'Configurações gerais' },
-                            ]
-                        }
+                        links={[{ url: null, label: "Configurações gerais" }]}
                     />
                 </HeaderContent>
                 <CardContainer>
                     <FlashMessage message={flash} />
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <CardBody className=" border-y border-gray-100">
-                            {geral.bgimage &&
+                            {geral.bgimage && (
                                 <div className="relative w-48">
                                     <div className="absolute rounded-full w-5 h-5 bg-red-500 text-white top-0 right-0">
                                         <button
-                                            onClick={(e) => handleDeleteImage(e)}
+                                            onClick={(e) =>
+                                                handleDeleteImage(e)
+                                            }
                                         >
                                             <IoClose size={20} />
                                         </button>
                                     </div>
                                     <div className="w-44 my-10">
-                                        <img src={`/storage/images/${geral.bgimage ? geral.bgimage : ''}`} alt="" />
+                                        <img
+                                            src={`/storage/images/${geral.bgimage ? geral.bgimage : ""}`}
+                                            alt=""
+                                        />
                                     </div>
                                 </div>
-                            }
+                            )}
 
                             <div className="px-3 my-4">
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="bgimage">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="bgimage"
+                                        >
                                             Imagem de fundo
                                         </label>
                                         <input
                                             id="bgimage"
                                             type="file"
-                                            onChange={(e) => setData('bgimage', e.target.files[0])}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "bgimage",
+                                                    e.target.files[0],
+                                                )
+                                            }
                                             className="block w-full text-base text-gray-600
                                             file:mr-4 file:py-2.5 file:px-4 file:rounded-l-md
                                             file:border-0 file:text-sm file:font-semibold
@@ -88,28 +106,38 @@ const Gerais = ({ geral }: any) => {
                                     </div>
 
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="bgcolor">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="bgcolor"
+                                        >
                                             Cor de fundo
                                         </label>
                                         <input
                                             id="bgcolor"
                                             type="color"
                                             value={data.bgcolor}
-                                            onChange={(e) => setData('bgcolor', e.target.value)}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "bgcolor",
+                                                    e.target.value,
+                                                )
+                                            }
                                             className="input-form !p-0 !h-10 w-full"
                                         />
                                     </div>
-
                                 </div>
                             </div>
                         </CardBody>
                         <CardFooter>
-                            <SaveButton value="Salvar" processing={processing} />
+                            <SaveButton
+                                value="Salvar"
+                                processing={processing}
+                            />
                         </CardFooter>
                     </form>
                 </CardContainer>
             </Card>
-        </AuthLayout >
+        </AuthLayout>
     );
-}
+};
 export default Gerais;

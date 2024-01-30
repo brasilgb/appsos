@@ -9,23 +9,30 @@ import React from "react";
 import { IoLogoWhatsapp } from "react-icons/io5";
 
 interface WhatsProps {
-    messagecli: string,
-    messagetec: string
+    messagecli: string;
+    messagetec: string;
 }
 
 const Whats = ({ whats }: any) => {
     const { flash } = usePage().props;
-    const { data, setData, patch, progress, processing, errors }: InertiaFormProps<WhatsProps> = useForm({
+    const {
+        data,
+        setData,
+        patch,
+        progress,
+        processing,
+        errors,
+    }: InertiaFormProps<WhatsProps> = useForm({
         messagecli: whats.messagecli,
-        messagetec: whats.messagetec
+        messagetec: whats.messagetec,
     });
 
     function handleSubmit(e: any) {
         e.preventDefault();
         router.post(`whatsapp/${whats.id}`, {
-            _method: 'put',
+            _method: "put",
             messagecli: data.messagecli,
-            messagetec: data.messagetec
+            messagetec: data.messagetec,
         });
     }
 
@@ -33,53 +40,69 @@ const Whats = ({ whats }: any) => {
         <AuthLayout>
             <Card>
                 <HeaderContent>
-                    <TitleTop >
+                    <TitleTop>
                         <IoLogoWhatsapp size={30} />
                         <span className="ml-2">WhatsApp</span>
                     </TitleTop>
-                    <BreadCrumbTop
-                        links={
-                            [
-                                { url: null, label: 'WhatsApp' },
-                            ]
-                        }
-                    />
+                    <BreadCrumbTop links={[{ url: null, label: "WhatsApp" }]} />
                 </HeaderContent>
                 <CardContainer>
                     <FlashMessage message={flash} />
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <CardBody className=" border-y border-gray-100">
-
                             <div className="px-3 my-4">
                                 <div className="flex flex-col">
-                                    <label className="label-form" htmlFor="messagecli">
+                                    <label
+                                        className="label-form"
+                                        htmlFor="messagecli"
+                                    >
                                         Mensagem ao cliente
                                     </label>
                                     <textarea
                                         id="email"
                                         value={data.messagecli}
-                                        onChange={(e) => setData('messagecli', e.target.value)}
+                                        onChange={(e) =>
+                                            setData(
+                                                "messagecli",
+                                                e.target.value,
+                                            )
+                                        }
                                         className="input-form"
                                     />
-                                    {errors.messagecli && <div className="text-sm text-red-500">{errors.messagecli}</div>}
+                                    {errors.messagecli && (
+                                        <div className="text-sm text-red-500">
+                                            {errors.messagecli}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 
                             <div className="px-3 my-4">
                                 <div className="flex flex-col">
-                                    <label className="label-form" htmlFor="messagetec">
+                                    <label
+                                        className="label-form"
+                                        htmlFor="messagetec"
+                                    >
                                         Mensagem ao técnico (agendamentos)
                                     </label>
                                     <textarea
                                         id="email"
                                         value={data.messagetec}
-                                        onChange={(e) => setData('messagetec', e.target.value)}
+                                        onChange={(e) =>
+                                            setData(
+                                                "messagetec",
+                                                e.target.value,
+                                            )
+                                        }
                                         className="input-form"
                                     />
-                                    {errors.messagetec && <div className="text-sm text-red-500">{errors.messagetec}</div>}
+                                    {errors.messagetec && (
+                                        <div className="text-sm text-red-500">
+                                            {errors.messagetec}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
-
                         </CardBody>
                         <CardFooter>
                             <SaveButton processing={processing} />
@@ -87,7 +110,7 @@ const Whats = ({ whats }: any) => {
                     </form>
                 </CardContainer>
             </Card>
-        </AuthLayout >
+        </AuthLayout>
     );
-}
+};
 export default Whats;

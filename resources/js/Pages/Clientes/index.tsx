@@ -1,10 +1,31 @@
-import { AddButton, AgendaClienteButton, DeleteButton, EditButton, OrderButton, WhatsAppButton } from "@/Components/Buttons";
-import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderContent } from "@/Components/Card";
+import {
+    AddButton,
+    AgendaClienteButton,
+    DeleteButton,
+    EditButton,
+    OrderButton,
+    WhatsAppButton,
+} from "@/Components/Buttons";
+import {
+    Card,
+    CardBody,
+    CardContainer,
+    CardFooter,
+    CardHeader,
+    CardHeaderContent,
+} from "@/Components/Card";
 import FlashMessage from "@/Components/FlashMessage";
 import InputSearch from "@/Components/InputSearch";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import Pagination from "@/Components/Pagination";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/Components/Table";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/Components/Table";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { unMask } from "@/Utils/mask";
 import { usePage } from "@inertiajs/react";
@@ -19,25 +40,25 @@ const Clientes = ({ clientes, whats }: any) => {
         <AuthLayout>
             <Card>
                 <HeaderContent>
-                    <TitleTop >
+                    <TitleTop>
                         <IoPeopleSharp size={30} />
                         <span className="ml-2">Clientes</span>
                     </TitleTop>
-                    <BreadCrumbTop
-                        links={
-                            [
-                                { url: null, label: 'Clientes' }
-                            ]
-                        }
-                    />
+                    <BreadCrumbTop links={[{ url: null, label: "Clientes" }]} />
                 </HeaderContent>
                 <CardContainer>
                     <CardHeader>
                         <CardHeaderContent>
-                            <InputSearch placeholder={"Buscar por nome ou cpf/cnpj"} url={"clientes.index"} />
+                            <InputSearch
+                                placeholder={"Buscar por nome ou cpf/cnpj"}
+                                url={"clientes.index"}
+                            />
                         </CardHeaderContent>
                         <CardHeaderContent>
-                            <AddButton url={"/clientes/create"} label={"Cliente"} />
+                            <AddButton
+                                url={"/clientes/create"}
+                                label={"Cliente"}
+                            />
                         </CardHeaderContent>
                     </CardHeader>
                     <FlashMessage message={flash} />
@@ -57,21 +78,46 @@ const Clientes = ({ clientes, whats }: any) => {
                             <TableBody>
                                 {clientes.data.map((cliente: any) => (
                                     <Fragment key={cliente.id}>
-                                    <TableRow>
-                                        <TableCell>{cliente.id}</TableCell>
-                                        <TableCell>{cliente.nome}</TableCell>
-                                        <TableCell>{cliente.email}</TableCell>
-                                        <TableCell>{cliente.cpf}</TableCell>
-                                        <TableCell>{cliente.telefone}</TableCell>
-                                        <TableCell>{moment(cliente.created_at).format("DD/MM/YYYY")}</TableCell>
-                                        <TableCell className="flex items-center justify-end gap-2">
-                                            <WhatsAppButton url={`https://api.whatsapp.com/send?phone=${unMask(cliente.whatsapp)}&text=${whats.messagecli}`} />
-                                            <AgendaClienteButton url={`/agendas?ac=${cliente.id}`} />
-                                            <OrderButton url={`/ordens?oc=${cliente.id}`} />
-                                            <EditButton url={route('clientes.edit', cliente.id)} />
-                                            <DeleteButton url="clientes.destroy" param={cliente.id} identify={`o cliente ${cliente.nome}`} />
-                                        </TableCell>
-                                    </TableRow>
+                                        <TableRow>
+                                            <TableCell>{cliente.id}</TableCell>
+                                            <TableCell>
+                                                {cliente.nome}
+                                            </TableCell>
+                                            <TableCell>
+                                                {cliente.email}
+                                            </TableCell>
+                                            <TableCell>{cliente.cpf}</TableCell>
+                                            <TableCell>
+                                                {cliente.telefone}
+                                            </TableCell>
+                                            <TableCell>
+                                                {moment(
+                                                    cliente.created_at,
+                                                ).format("DD/MM/YYYY")}
+                                            </TableCell>
+                                            <TableCell className="flex items-center justify-end gap-2">
+                                                <WhatsAppButton
+                                                    url={`https://api.whatsapp.com/send?phone=${unMask(cliente.whatsapp)}&text=${whats.messagecli}`}
+                                                />
+                                                <AgendaClienteButton
+                                                    url={`/agendas?ac=${cliente.id}`}
+                                                />
+                                                <OrderButton
+                                                    url={`/ordens?oc=${cliente.id}`}
+                                                />
+                                                <EditButton
+                                                    url={route(
+                                                        "clientes.edit",
+                                                        cliente.id,
+                                                    )}
+                                                />
+                                                <DeleteButton
+                                                    url="clientes.destroy"
+                                                    param={cliente.id}
+                                                    identify={`o cliente ${cliente.nome}`}
+                                                />
+                                            </TableCell>
+                                        </TableRow>
                                     </Fragment>
                                 ))}
                             </TableBody>
@@ -82,8 +128,7 @@ const Clientes = ({ clientes, whats }: any) => {
                     </CardFooter>
                 </CardContainer>
             </Card>
-
         </AuthLayout>
     );
-}
+};
 export default Clientes;

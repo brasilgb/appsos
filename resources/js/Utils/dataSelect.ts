@@ -21,34 +21,42 @@ const statusUser = [
 ];
 
 const movimentosProdutos = [
-    {value: 1, label: 'Entrada'},
-    {value: 2, label: 'Saída'},
+    { value: 1, label: "Entrada" },
+    { value: 2, label: "Saída" },
 ];
 
 const unidadesProdutos = [
-    {value: 1, label: 'Unidade'},
-    {value: 2, label: 'Caixa'},
-    {value: 3, label: 'Metros'},
-    {value: 4, label: 'Kg'},
-    {value: 5, label: 'Litros'},
+    { value: 1, label: "Unidade" },
+    { value: 2, label: "Caixa" },
+    { value: 3, label: "Metros" },
+    { value: 4, label: "Kg" },
+    { value: 5, label: "Litros" },
 ];
 
 const tiposProdutos = [
-    {value: 1, label: 'Nova'},
-    {value: 2, label: 'Usada'},
-    {value: 3, label: 'Seminova'},
-    {value: 4, label: 'Remanufaturada'},
+    { value: 1, label: "Nova" },
+    { value: 2, label: "Usada" },
+    { value: 3, label: "Seminova" },
+    { value: 4, label: "Remanufaturada" },
 ];
 
 const statusAgenda = [
-    {value: 1, label: 'Aberta'},
-    {value: 2, label: 'Em atendimento'},
-    {value: 3, label: 'Fechada'},
+    { value: 1, label: "Aberta" },
+    { value: 2, label: "Em atendimento" },
+    { value: 3, label: "Fechada" },
 ];
 
 const statusMessage = [
-    {value: 1, label: 'Não lida'},
-    {value: 2, label: 'Lida'},
+    { value: 1, label: "Não lida" },
+    { value: 2, label: "Lida" },
 ];
 
-export { statusServico, statusUser, roleUser, movimentosProdutos, unidadesProdutos, tiposProdutos, statusAgenda };
+export {
+    statusServico,
+    statusUser,
+    roleUser,
+    movimentosProdutos,
+    unidadesProdutos,
+    tiposProdutos,
+    statusAgenda,
+};

@@ -9,9 +9,10 @@ interface PrinterLayoutProps {
 }
 
 const PrinterLayout = ({ children, backlink }: PrinterLayoutProps) => {
-    const componentRef = useRef<HTMLDivElement>(null)
+    const componentRef = useRef<HTMLDivElement>(null);
     return (
-        <div className="
+        <div
+            className="
         w-[8.27in] 
         mx-auto 
         screen:rounded-b-md 
@@ -20,8 +21,10 @@ const PrinterLayout = ({ children, backlink }: PrinterLayoutProps) => {
         screen:border-white 
         screen:bg-gray-50 
         m-3
-        ">
-            <div className="
+        "
+        >
+            <div
+                className="
             flex
             items-center
             justify-between
@@ -31,7 +34,8 @@ const PrinterLayout = ({ children, backlink }: PrinterLayoutProps) => {
             screen:rounded-t-md
             px-3 
             border-b
-            ">
+            "
+            >
                 <Link
                     href={`${backlink}`}
                     as="button"
@@ -43,9 +47,7 @@ const PrinterLayout = ({ children, backlink }: PrinterLayoutProps) => {
                 </Link>
                 <ReactToPrint
                     trigger={() => (
-                        <button
-                            className="flex item-center justify-center py-2 px-6 bg-gray-200 rounded-md shadow border border-gray-300 text-sm text-gray-600"
-                        >
+                        <button className="flex item-center justify-center py-2 px-6 bg-gray-200 rounded-md shadow border border-gray-300 text-sm text-gray-600">
                             <IoPrint size={18} />
                             <span className="ml-1">Imprimir</span>
                         </button>
@@ -53,15 +55,18 @@ const PrinterLayout = ({ children, backlink }: PrinterLayoutProps) => {
                     content={() => componentRef.current}
                 />
             </div>
-            <div ref={(el) => (componentRef.current = el)} className="
+            <div
+                ref={(el) => (componentRef.current = el)}
+                className="
         print:m-[1cm] 
         screen:bg-gray-50 
         print:bg-white 
         screen:m-[1cm]
-        ">
+        "
+            >
                 {children}
             </div>
-        </div >
+        </div>
     );
-}
+};
 export default PrinterLayout;

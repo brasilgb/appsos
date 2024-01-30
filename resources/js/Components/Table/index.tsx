@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface TableProps {
     children?: React.ReactNode;
@@ -9,7 +9,9 @@ interface TableProps {
 export const Table = ({ children, className }: TableProps) => {
     return (
         <div className="md:w-full overflow-y-auto">
-            <table className={`table-auto md:w-full  ${className} text-sm`}>{children}</table>
+            <table className={`table-auto md:w-full  ${className} text-sm`}>
+                {children}
+            </table>
         </div>
     );
 };
@@ -23,12 +25,18 @@ export const TableBody = ({ children }: TableProps) => {
 };
 
 export const TableRow = ({ children, className, key }: TableProps) => {
-    return <tr key={key} className={`${className}`}>{children}</tr>;
+    return (
+        <tr key={key} className={`${className}`}>
+            {children}
+        </tr>
+    );
 };
 
 export const TableHead = ({ children, className }: TableProps) => {
     return (
-        <th className={`text-left py-3 px-2 bg-gray-200 text-gray-600 ${className}`}>
+        <th
+            className={`text-left py-3 px-2 bg-gray-200 text-gray-600 ${className}`}
+        >
             {children}
         </th>
     );

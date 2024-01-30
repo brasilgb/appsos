@@ -1,14 +1,24 @@
 import { BackButton, SaveButton } from "@/Components/Buttons";
-import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderContent } from "@/Components/Card";
+import {
+    Card,
+    CardBody,
+    CardContainer,
+    CardFooter,
+    CardHeader,
+    CardHeaderContent,
+} from "@/Components/Card";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { useForm } from "@inertiajs/react";
 import React from "react";
 import { IoPeopleSharp } from "react-icons/io5";
-import Select from 'react-select';
+import Select from "react-select";
 
 const AddOrdem = ({ clientes, ordem }) => {
-    const options = clientes.map((cliente: any) => ({ value: cliente.id, label: cliente.nome }))
+    const options = clientes.map((cliente: any) => ({
+        value: cliente.id,
+        label: cliente.nome,
+    }));
 
     const { data, setData, post, progress, processing, errors } = useForm({
         cliente_id: "",
@@ -24,28 +34,26 @@ const AddOrdem = ({ clientes, ordem }) => {
 
     function handleSubmit(e: any) {
         e.preventDefault();
-        post(route('ordens.store'));
+        post(route("ordens.store"));
     }
 
     const handleChange = (selected: any) => {
-        setData('cliente_id', selected.value); 
+        setData("cliente_id", selected.value);
     };
-    
+
     return (
         <AuthLayout>
             <Card>
                 <HeaderContent>
-                    <TitleTop >
+                    <TitleTop>
                         <IoPeopleSharp size={30} />
                         <span className="ml-2">Ordens</span>
                     </TitleTop>
                     <BreadCrumbTop
-                        links={
-                            [
-                                { url: '/ordens', label: 'Ordens' },
-                                { url: null, label: 'Adicionar ordem' },
-                            ]
-                        }
+                        links={[
+                            { url: "/ordens", label: "Ordens" },
+                            { url: null, label: "Adicionar ordem" },
+                        ]}
                     />
                 </HeaderContent>
                 <CardContainer>
@@ -60,23 +68,35 @@ const AddOrdem = ({ clientes, ordem }) => {
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <CardBody className=" border-y border-gray-100">
                             <div className="px-3 my-4">
-
                                 <div className="grid grid-cols-5 gap-4">
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="ordem">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="ordem"
+                                        >
                                             Ordem
                                         </label>
                                         <input
                                             id="ordem"
                                             type="text"
-                                            value={ordem > 0 ? ('000000' + (ordem + 1)).slice(-6) : 1}
+                                            value={
+                                                ordem > 0
+                                                    ? (
+                                                          "000000" +
+                                                          (ordem + 1)
+                                                      ).slice(-6)
+                                                    : 1
+                                            }
                                             className="input-form"
                                             disabled
                                         />
                                     </div>
 
                                     <div className="flex flex-col col-span-2">
-                                        <label className="label-form" htmlFor="cliente_id">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="cliente_id"
+                                        >
                                             Nome do cliente
                                         </label>
                                         <Select
@@ -85,64 +105,101 @@ const AddOrdem = ({ clientes, ordem }) => {
                                             placeholder="Selecione o cliente"
                                             onChange={handleChange}
                                             styles={{
-                                                control: provided => ({
+                                                control: (provided) => ({
                                                     ...provided,
                                                     padding: 2,
                                                     borderRadius: 6,
                                                 }),
                                             }}
                                         />
-                                        {errors.cliente_id && <div className="text-sm text-red-500">{errors.cliente_id}</div>}
+                                        {errors.cliente_id && (
+                                            <div className="text-sm text-red-500">
+                                                {errors.cliente_id}
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="flex flex-col col-span-2">
-                                        <label className="label-form" htmlFor="equipamento">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="equipamento"
+                                        >
                                             Tipo de equipamento
                                         </label>
                                         <input
                                             id="equipamento"
                                             type="text"
                                             value={data.equipamento}
-                                            onChange={(e) => setData('equipamento', e.target.value)}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "equipamento",
+                                                    e.target.value,
+                                                )
+                                            }
                                             className="input-form"
                                         />
-                                        {errors.equipamento && <div className="text-red-500">{errors.equipamento}</div>}
+                                        {errors.equipamento && (
+                                            <div className="text-red-500">
+                                                {errors.equipamento}
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
 
                                 <div className="grid grid-cols-4 gap-4 mt-6">
                                     <div className="flex flex-col col-span-2">
-                                        <label className="label-form" htmlFor="modelo">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="modelo"
+                                        >
                                             Modelo do equipamento
                                         </label>
                                         <input
                                             id="modelo"
                                             type="text"
                                             value={data.modelo}
-                                            onChange={(e) => setData('modelo', e.target.value)}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "modelo",
+                                                    e.target.value,
+                                                )
+                                            }
                                             className="input-form"
                                         />
                                     </div>
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="senha">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="senha"
+                                        >
                                             Senha do equipamento
                                         </label>
                                         <input
                                             id="senha"
                                             type="text"
                                             value={data.senha}
-                                            onChange={(e) => setData('senha', e.target.value)}
+                                            onChange={(e) =>
+                                                setData("senha", e.target.value)
+                                            }
                                             className="input-form"
                                         />
                                     </div>
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="previsao">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="previsao"
+                                        >
                                             Previsão
                                         </label>
                                         <input
                                             id="previsao"
                                             type="date"
                                             value={data.previsao}
-                                            onChange={(e) => setData('previsao', e.target.value)}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "previsao",
+                                                    e.target.value,
+                                                )
+                                            }
                                             className="input-form"
                                         />
                                     </div>
@@ -150,25 +207,45 @@ const AddOrdem = ({ clientes, ordem }) => {
 
                                 <div className="grid grid-cols-2 gap-4 mt-6">
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="defeito">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="defeito"
+                                        >
                                             Defeito relatado/Serviço solicitado
                                         </label>
                                         <textarea
                                             id="defeito"
                                             value={data.defeito}
-                                            onChange={(e) => setData('defeito', e.target.value)}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "defeito",
+                                                    e.target.value,
+                                                )
+                                            }
                                             className="input-form"
                                         />
-                                        {errors.defeito && <div className="text-red-500">{errors.defeito}</div>}
+                                        {errors.defeito && (
+                                            <div className="text-red-500">
+                                                {errors.defeito}
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="estado">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="estado"
+                                        >
                                             Estado do equipamento
                                         </label>
                                         <textarea
                                             id="estado"
                                             value={data.estado}
-                                            onChange={(e) => setData('estado', e.target.value)}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "estado",
+                                                    e.target.value,
+                                                )
+                                            }
                                             className="input-form"
                                         />
                                     </div>
@@ -176,31 +253,42 @@ const AddOrdem = ({ clientes, ordem }) => {
 
                                 <div className="grid grid-cols-2 gap-4 mt-6">
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="acessorios">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="acessorios"
+                                        >
                                             Acessórios
                                         </label>
                                         <textarea
                                             id="acessorios"
                                             value={data.acessorios}
-                                            onChange={(e) => setData('acessorios', e.target.value)}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "acessorios",
+                                                    e.target.value,
+                                                )
+                                            }
                                             className="input-form"
                                         />
                                     </div>
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="obs">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="obs"
+                                        >
                                             Observações
                                         </label>
                                         <textarea
                                             id="obs"
                                             value={data.obs}
-                                            onChange={(e) => setData('obs', e.target.value)}
+                                            onChange={(e) =>
+                                                setData("obs", e.target.value)
+                                            }
                                             className="input-form"
                                         />
                                     </div>
                                 </div>
-
                             </div>
-
                         </CardBody>
                         <CardFooter>
                             <SaveButton />
@@ -208,8 +296,7 @@ const AddOrdem = ({ clientes, ordem }) => {
                     </form>
                 </CardContainer>
             </Card>
-
-        </AuthLayout >
+        </AuthLayout>
     );
-}
+};
 export default AddOrdem;

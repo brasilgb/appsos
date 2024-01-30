@@ -1,28 +1,27 @@
 import { Link, useForm } from "@inertiajs/react";
-import React, { useState } from 'react';
-import { IoChatboxEllipses, IoCheckmark, IoExit } from 'react-icons/io5';
+import React, { useState } from "react";
+import { IoChatboxEllipses, IoCheckmark, IoExit } from "react-icons/io5";
 import { BsChatRightText } from "react-icons/bs";
 interface DropDownProps {
     mensagens: any;
-};
+}
 
 const MessageDropDown = ({ mensagens }: DropDownProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const { post } = useForm();
 
     const toggle = () => {
-        setIsOpen(old => !old);
+        setIsOpen((old) => !old);
     };
 
     const handleLogout = (e: any) => {
         e.preventDefault();
-        post(route('logout'));
-    }
+        post(route("logout"));
+    };
 
-    const transClass = isOpen ? 'flex' : 'hidden';
+    const transClass = isOpen ? "flex" : "hidden";
 
     return (
-
         <>
             <div className="relative text-sm">
                 <button
@@ -31,7 +30,6 @@ const MessageDropDown = ({ mensagens }: DropDownProps) => {
                 >
                     <div className="text-emerald-600">
                         <IoChatboxEllipses size={22} />
-
                     </div>
                     <div className="absolute text-xs text-red-500 font-bold -top-3 right-0">
                         {mensagens.length}
@@ -52,14 +50,12 @@ const MessageDropDown = ({ mensagens }: DropDownProps) => {
                     {mensagens.map((message: any) => (
                         <Link
                             className="text-gray-600 hover:text-gray-500 px-4 pt-2 flex items-center"
-                            href="#"
-                            onClick={(e) => handleLogout(e)}
+                            href={`/mensagens/${message.id}`}
                         >
                             <IoCheckmark size={18} />
                             <span className="ml-1">{message.mensagem}</span>
                         </Link>
                     ))}
-
                 </div>
             </div>
             {isOpen ? (

@@ -1,6 +1,6 @@
 import { Link } from "@inertiajs/react";
-import React from 'react';
-import {FaArrowCircleDown, FaArrowCircleRight, FaTools} from 'react-icons/fa';
+import React from "react";
+import { FaArrowCircleDown, FaArrowCircleRight, FaTools } from "react-icons/fa";
 
 interface BoxProps {
     ordens: any;
@@ -10,7 +10,13 @@ interface BoxProps {
     titleColor: string;
 }
 
-const Boxorder = ({ordens, query, title, iconColor, titleColor}: BoxProps) => {
+const Boxorder = ({
+    ordens,
+    query,
+    title,
+    iconColor,
+    titleColor,
+}: BoxProps) => {
     return (
         <div className="bg-white flex-col items-center justify-between rounded shadow hover:shadow-md p-3">
             <div className="pb-2 flex items-center justify-start">
@@ -51,7 +57,7 @@ const Boxorder = ({ordens, query, title, iconColor, titleColor}: BoxProps) => {
                                     {ordem.cliente.nome}
                                 </div>
                                 <div className="w-28 text-sm text-gray-500">
-                                    {('000000' + ordem.id).slice(-6)}
+                                    {("000000" + ordem.id).slice(-6)}
                                 </div>
                                 <div className="w-28 text-sm text-gray-500">
                                     {ordem.equipamento}

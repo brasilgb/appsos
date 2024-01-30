@@ -1,9 +1,20 @@
 import { BackButton, SaveButton } from "@/Components/Buttons";
-import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderContent } from "@/Components/Card";
+import {
+    Card,
+    CardBody,
+    CardContainer,
+    CardFooter,
+    CardHeader,
+    CardHeaderContent,
+} from "@/Components/Card";
 import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { movimentosProdutos, tiposProdutos, unidadesProdutos } from "@/Utils/dataSelect";
+import {
+    movimentosProdutos,
+    tiposProdutos,
+    unidadesProdutos,
+} from "@/Utils/dataSelect";
 import { maskCep, maskCpfCnpj, maskPhone, unMask } from "@/Utils/mask";
 import { useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
@@ -12,21 +23,28 @@ import { FaBasketShopping } from "react-icons/fa6";
 import { IoPeopleSharp } from "react-icons/io5";
 
 interface ClientesProps {
-    codbarra: string,
-    descricao: string,
-    movimento: string,
-    valcompra: string,
-    valvenda: string,
-    unidade: string,
-    estmaximo: string,
-    estminimo: string,
-    tipo: string,
+    codbarra: string;
+    descricao: string;
+    movimento: string;
+    valcompra: string;
+    valvenda: string;
+    unidade: string;
+    estmaximo: string;
+    estminimo: string;
+    tipo: string;
 }
 
 const EditProduto = ({ produtos }: any) => {
     const { flash } = usePage().props;
 
-    const { data, setData, patch, progress, processing, errors }: InertiaFormProps<ClientesProps> = useForm({
+    const {
+        data,
+        setData,
+        patch,
+        progress,
+        processing,
+        errors,
+    }: InertiaFormProps<ClientesProps> = useForm({
         codbarra: produtos.codbarra,
         descricao: produtos.descricao,
         movimento: produtos.movimento,
@@ -40,24 +58,22 @@ const EditProduto = ({ produtos }: any) => {
 
     function handleSubmit(e: any) {
         e.preventDefault();
-        patch(route('produtos.update', produtos.id));
+        patch(route("produtos.update", produtos.id));
     }
 
     return (
         <AuthLayout>
             <Card>
                 <HeaderContent>
-                    <TitleTop >
+                    <TitleTop>
                         <FaBasketShopping size={30} />
                         <span className="ml-2">Produtos</span>
                     </TitleTop>
                     <BreadCrumbTop
-                        links={
-                            [
-                                { url: '/produtos', label: 'Produtos' },
-                                { url: null, label: 'Editar produto' },
-                            ]
-                        }
+                        links={[
+                            { url: "/produtos", label: "Produtos" },
+                            { url: null, label: "Editar produto" },
+                        ]}
                     />
                 </HeaderContent>
                 <CardContainer>
@@ -73,136 +89,250 @@ const EditProduto = ({ produtos }: any) => {
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <CardBody className=" border-y border-gray-100">
                             <div className="px-3 my-4">
-
                                 <div className="grid grid-cols-3 gap-4">
                                     <div className="flex flex-col col-span-2">
-                                        <label className="label-form" htmlFor="descricao">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="descricao"
+                                        >
                                             Descrição
                                         </label>
                                         <input
                                             id="descricao"
                                             type="text"
                                             value={data.descricao}
-                                            onChange={(e) => setData('descricao', e.target.value)}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "descricao",
+                                                    e.target.value,
+                                                )
+                                            }
                                             className="input-form"
                                         />
-                                        {errors.descricao && <div className="text-sm text-red-500">{errors.descricao}</div>}
+                                        {errors.descricao && (
+                                            <div className="text-sm text-red-500">
+                                                {errors.descricao}
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="movimento">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="movimento"
+                                        >
                                             Movimento
                                         </label>
                                         <select
                                             id="movimento"
                                             value={data.movimento}
-                                            onChange={(e) => setData('movimento', e.target.value)}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "movimento",
+                                                    e.target.value,
+                                                )
+                                            }
                                             className="input-form"
                                         >
-                                            <option value="">Selecione a movimento</option>
-                                            {movimentosProdutos.map((movimento: any) => (
-                                                <option key={movimento.value} value={movimento.value}>{movimento.label}</option>
-                                            ))}
+                                            <option value="">
+                                                Selecione a movimento
+                                            </option>
+                                            {movimentosProdutos.map(
+                                                (movimento: any) => (
+                                                    <option
+                                                        key={movimento.value}
+                                                        value={movimento.value}
+                                                    >
+                                                        {movimento.label}
+                                                    </option>
+                                                ),
+                                            )}
                                         </select>
-                                        {errors.movimento && <div className="text-red-500">{errors.movimento}</div>}
+                                        {errors.movimento && (
+                                            <div className="text-red-500">
+                                                {errors.movimento}
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
 
                                 <div className="grid grid-cols-2 gap-4 mt-6">
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="valcompra">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="valcompra"
+                                        >
                                             Valor da compra
                                         </label>
                                         <input
                                             id="valcompra"
                                             type="text"
                                             value={data.valcompra}
-                                            onChange={(e) => setData('valcompra', e.target.value)}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "valcompra",
+                                                    e.target.value,
+                                                )
+                                            }
                                             className="input-form"
                                         />
-                                        {errors.valcompra && <div className="text-red-500">{errors.valcompra}</div>}
+                                        {errors.valcompra && (
+                                            <div className="text-red-500">
+                                                {errors.valcompra}
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="valvenda">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="valvenda"
+                                        >
                                             Valor venda
                                         </label>
                                         <input
                                             id="valvenda"
                                             type="text"
                                             value={data.valvenda}
-                                            onChange={(e) => setData('valvenda', e.target.value)}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "valvenda",
+                                                    e.target.value,
+                                                )
+                                            }
                                             className="input-form"
                                         />
-                                        {errors.valvenda && <div className="text-red-500">{errors.valvenda}</div>}
+                                        {errors.valvenda && (
+                                            <div className="text-red-500">
+                                                {errors.valvenda}
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
 
                                 <div className="grid grid-cols-4 gap-4 mt-6">
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="unidade">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="unidade"
+                                        >
                                             Unidade de medida
                                         </label>
                                         <select
                                             id="unidade"
                                             value={data.unidade}
-                                            onChange={(e) => setData('unidade', e.target.value)}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "unidade",
+                                                    e.target.value,
+                                                )
+                                            }
                                             className="input-form"
                                         >
-                                            <option value="">Selecione a medida</option>
-                                            {unidadesProdutos.map((unidade: any) => (
-                                                <option key={unidade.value} value={unidade.value}>{unidade.label}</option>
-                                            ))}
+                                            <option value="">
+                                                Selecione a medida
+                                            </option>
+                                            {unidadesProdutos.map(
+                                                (unidade: any) => (
+                                                    <option
+                                                        key={unidade.value}
+                                                        value={unidade.value}
+                                                    >
+                                                        {unidade.label}
+                                                    </option>
+                                                ),
+                                            )}
                                         </select>
-                                        {errors.unidade && <div className="text-sm text-red-500">{errors.unidade}</div>}
+                                        {errors.unidade && (
+                                            <div className="text-sm text-red-500">
+                                                {errors.unidade}
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="estmaximo">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="estmaximo"
+                                        >
                                             Estoque máximo
                                         </label>
                                         <input
                                             id="estmaximo"
                                             type="text"
                                             value={data.estmaximo}
-                                            onChange={(e) => setData('estmaximo', e.target.value)}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "estmaximo",
+                                                    e.target.value,
+                                                )
+                                            }
                                             className="input-form"
                                         />
-                                        {errors.estmaximo && <div className="text-sm text-red-500">{errors.estmaximo}</div>}
+                                        {errors.estmaximo && (
+                                            <div className="text-sm text-red-500">
+                                                {errors.estmaximo}
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="estminimo">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="estminimo"
+                                        >
                                             Estoque mínimo
                                         </label>
                                         <input
                                             id="estminimo"
                                             type="text"
-                                            value={(data.estminimo)}
-                                            onChange={(e) => setData('estminimo', e.target.value)}
+                                            value={data.estminimo}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "estminimo",
+                                                    e.target.value,
+                                                )
+                                            }
                                             className="input-form"
                                             maxLength={15}
                                         />
-                                        {errors.estminimo && <div className="text-sm text-red-500">{errors.estminimo}</div>}
+                                        {errors.estminimo && (
+                                            <div className="text-sm text-red-500">
+                                                {errors.estminimo}
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="flex flex-col">
-                                        <label className="label-form" htmlFor="tipo">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="tipo"
+                                        >
                                             Tipo do produto
                                         </label>
                                         <select
                                             id="tipo"
                                             value={data.tipo}
-                                            onChange={(e) => setData('tipo', e.target.value)}
+                                            onChange={(e) =>
+                                                setData("tipo", e.target.value)
+                                            }
                                             className="input-form"
                                         >
-                                            <option value="">Selecione o tipo</option>
+                                            <option value="">
+                                                Selecione o tipo
+                                            </option>
                                             {tiposProdutos.map((tipo: any) => (
-                                                <option key={tipo.value} value={tipo.value}>{tipo.label}</option>
+                                                <option
+                                                    key={tipo.value}
+                                                    value={tipo.value}
+                                                >
+                                                    {tipo.label}
+                                                </option>
                                             ))}
                                         </select>
-                                        {errors.tipo && <div className="text-sm text-red-500">{errors.tipo}</div>}
+                                        {errors.tipo && (
+                                            <div className="text-sm text-red-500">
+                                                {errors.tipo}
+                                            </div>
+                                        )}
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </CardBody>
                         <CardFooter>
                             <SaveButton />
@@ -210,8 +340,7 @@ const EditProduto = ({ produtos }: any) => {
                     </form>
                 </CardContainer>
             </Card>
-
-        </AuthLayout >
+        </AuthLayout>
     );
-}
+};
 export default EditProduto;

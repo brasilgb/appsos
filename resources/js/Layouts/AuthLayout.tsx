@@ -3,13 +3,11 @@ import Footer from "@/Components/Footer";
 import Header from "@/Components/Header";
 import Sidebar from "@/Components/Sidebar";
 
-
 interface AuthLayoutProps {
     children: React.ReactNode;
 }
 
 const AuthLayout = ({ children }: AuthLayoutProps) => {
-
     return (
         <div className="min-h-screen bg-gray-100">
             <main className="flex min-h-screen flex-row bg-gray-middle">
@@ -24,5 +22,5 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
             </main>
         </div>
     );
-}
+};
 export default AuthLayout;
