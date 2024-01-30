@@ -136,15 +136,14 @@ export const PrintButton = ({ url, status }: ButtonsProps) => {
 
 export const WhatsAppButton = ({ url }: ButtonsProps) => {
     return (
-        <Link
+        <a
             className="flex items-center justify-center bg-green-600 hover:bg-green-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
             href={url}
-            as="button"
-            type="button"
+            target="_blank"
             title={`Enviar mensagem`}
         >
             <IoLogoWhatsapp size={18} />
-        </Link>
+        </a>
     )
 }
 

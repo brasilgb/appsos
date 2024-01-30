@@ -10,20 +10,17 @@ const Sidebar = () => {
     const { url } = usePage();
     const [openDropDown, setOpenDropDown] = useState<boolean>(false);
     return (
-        <aside className=" hidden md:block md:w-64 duration-300 bg-blue-dark">
-            <div className="flex items-center justify-start border-b border-blue-light p-3.5">
-                <div className="h-8 w-8">
+        <aside className=" hidden md:block md:w-64 duration-300 bg-blue-cinco">
+            <div className="flex items-center justify-center border-b border-blue-um p-3.5">
+                <div className="w-40">
                     <Logo />
                 </div>
-                <h1 className="ml-2 text-gray-100 text-lg font-semibold">
-                    Dashboard
-                </h1>
             </div>
             <nav className="mt-3">
                 <ul className="space-y-2 font-normal px-3">
                     <li>
                         <Link
-                            className={`flex items-center p-2 rounded-md transition-all duration-300 ${url === '/' ? 'text-white bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
+                            className={`flex items-center p-2 rounded-md transition-all duration-300 ${url === '/' ? 'text-white bg-blue-quatro' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
                             href={"/"}>
                             <AiOutlineDashboard size={20} />
                             <span className="ml-2">Dashboard</span>
@@ -31,7 +28,7 @@ const Sidebar = () => {
                     </li>
                     <li>
                         <Link
-                            className={`flex items-center p-2 rounded-md transition-all duration-300 ${url.startsWith('/clientes') ? 'text-white bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
+                            className={`flex items-center p-2 rounded-md transition-all duration-300 ${url.startsWith('/clientes') ? 'text-white bg-blue-quatro' : 'text-gray-100 hover:bg-blue-quatro hover:text-gray-400'} group`}
                             href={"/clientes"}>
                             <IoPeopleSharp size={20} />
                             <span className="ml-2">Clientes</span>
@@ -39,7 +36,7 @@ const Sidebar = () => {
                     </li>
                     <li>
                         <Link
-                            className={`flex items-center p-2 rounded-md transition-all duration-300 ${url.startsWith('/ordens') || url.startsWith('/imagens') ? 'text-white bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
+                            className={`flex items-center p-2 rounded-md transition-all duration-300 ${url.startsWith('/ordens') || url.startsWith('/imagens') ? 'text-white bg-blue-quatro' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
                             href={"/ordens"}>
                             <IoConstruct size={20} />
                             <span className="ml-2">Ordens de serviço</span>
@@ -47,7 +44,7 @@ const Sidebar = () => {
                     </li>
                     <li>
                         <Link
-                            className={`flex items-center p-2 rounded-md transition-all duration-300 ${url.startsWith('/produtos') ? 'text-white bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
+                            className={`flex items-center p-2 rounded-md transition-all duration-300 ${url.startsWith('/produtos') ? 'text-white bg-blue-quatro' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
                             href={"/produtos"}>
                             <FaBasketShopping size={20} />
                             <span className="ml-2">Produtos/Peças</span>
@@ -55,7 +52,7 @@ const Sidebar = () => {
                     </li>
                     <li>
                         <Link
-                            className={`flex items-center p-2 rounded-md transition-all duration-300 ${url.startsWith('/agendas') ? 'text-white bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
+                            className={`flex items-center p-2 rounded-md transition-all duration-300 ${url.startsWith('/agendas') ? 'text-white bg-blue-quatro' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
                             href={"/agendas"}>
                             <FaCalendarDays size={20} />
                             <span className="ml-2">Agenda</span>
@@ -63,7 +60,7 @@ const Sidebar = () => {
                     </li>
                     <li>
                         <Link
-                            className={`flex items-center p-2 rounded-md transition-all duration-300 ${url.startsWith('/mensagens') ? 'text-white bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
+                            className={`flex items-center p-2 rounded-md transition-all duration-300 ${url.startsWith('/mensagens') ? 'text-white bg-blue-quatro' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
                             href={"/mensagens"}>
                             <IoChatboxEllipses size={20} />
                             <span className="ml-2">Mensagens</span>
@@ -71,7 +68,7 @@ const Sidebar = () => {
                     </li>
 
                     <li className="">
-                        <div className={`flex items-center justify-between p-2 cursor-pointer ${url.startsWith('/configuracoes') ? 'text-gray500 bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} ${openDropDown ? 'bg-gray-50 hover:bg-gray-50 text-gray-600  border-b rounded-t-lg' : 'text-gray-100 rounded-lg'}`} onClick={() => setOpenDropDown(state => !state)}>
+                        <div className={`flex items-center justify-between p-2 cursor-pointer ${url.startsWith('/configuracoes') ? 'text-gray500 bg-blue-quatro' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} ${openDropDown ? 'bg-gray-50 hover:bg-gray-50 text-gray-600  border-b rounded-t-lg' : 'text-gray-100 rounded-lg'}`} onClick={() => setOpenDropDown(state => !state)}>
                             <FaSliders size={20} />
                             <span className="self-start w-full pl-2">Configurações</span>
                             <FaChevronDown
@@ -127,7 +124,7 @@ const Sidebar = () => {
                     </li>
                     <li>
                         <Link
-                            className={`flex items-center p-2 transition-all duration-300 rounded-md hover:text-gray-400 ${url.startsWith('/usuarios') ? 'text-white bg-blue-700' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
+                            className={`flex items-center p-2 transition-all duration-300 rounded-md hover:text-gray-400 ${url.startsWith('/usuarios') ? 'text-white bg-blue-quatro' : 'text-gray-100 hover:bg-blue-middle hover:text-gray-400'} group`}
                             href={"/usuarios"}>
                             <IoPerson size={20} />
                             <span className="ml-2">Usuários</span>

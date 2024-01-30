@@ -32,10 +32,37 @@ const Home = ({ clientes, ordens, produtos, agendas, mensagens }: any) => {
                         }
                     </TitleTop>
                 </HeaderContent>
-                <CardContainer className="!bg-transparent shadow-none">
-                    <CardBody className="!bg-transparent">
-
-                    </CardBody>
+                <CardContainer className="!bg-transparent bg-blue-600 shadow-none grid md:grid-cols-5 gap-6">
+                        <Kpis props={{
+                            title: "Clientes",
+                            value: clientes.length,
+                            url: "/ordens",
+                            icon: <IoConstruct size={50} color="#2671e2" />
+                        }} />
+                        <Kpis props={{
+                            title: "Ordens",
+                            value: "85",
+                            url: "/ordens",
+                            icon: <IoConstruct size={50} color="" />
+                        }} />
+                        <Kpis props={{
+                            title: "Ordens",
+                            value: "85",
+                            url: "/ordens",
+                            icon: <IoConstruct size={50} color="" />
+                        }} />
+                        <Kpis props={{
+                            title: "Ordens",
+                            value: "85",
+                            url: "/ordens",
+                            icon: <IoConstruct size={50} color="" />
+                        }} />
+                        <Kpis props={{
+                            title: "Ordens",
+                            value: "85",
+                            url: "/ordens",
+                            icon: <IoConstruct size={50} color="" />
+                        }} />
                 </CardContainer>
             </Card>
         </AuthLayout>

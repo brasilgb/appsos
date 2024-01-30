@@ -21,17 +21,23 @@ export default {
             },
             colors: {
                 'screen-login': '#1B2335',
-                blue: {
-                    light: '#253C53',
-                    middle: '#293751',
-                    dark: '#1C2537',
+                'blue': {
+                  um: '#B0BCBC',
+                  dois: '#8498A3',
+                  tres: '#617C8D',
+                  quatro: '#405F73',
+                  cinco: '#032639',
                 },
-                gray: {
-                    light: '#FCFBFA',
-                    middle: '#F6F7F9',
-                    dark: '#ddd',
+                'red': {
+                  um: '#CA0156',
                 },
-            },
+                'gray': {
+                  um: '#202029',
+                },
+                'megb': {
+                  yellow: '#EEA917',
+                },
+              },
         },
     },
 

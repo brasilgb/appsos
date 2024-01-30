@@ -6,12 +6,13 @@ import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import Pagination from "@/Components/Pagination";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/Components/Table";
 import AuthLayout from "@/Layouts/AuthLayout";
+import { unMask } from "@/Utils/mask";
 import { usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment } from "react";
 import { IoPeopleSharp } from "react-icons/io5";
 
-const Clientes = ({ clientes }: any) => {
+const Clientes = ({ clientes, whats }: any) => {
     const { flash } = usePage().props;
 
     return (
@@ -64,7 +65,7 @@ const Clientes = ({ clientes }: any) => {
                                         <TableCell>{cliente.telefone}</TableCell>
                                         <TableCell>{moment(cliente.created_at).format("DD/MM/YYYY")}</TableCell>
                                         <TableCell className="flex items-center justify-end gap-2">
-                                            <WhatsAppButton url="" />
+                                            <WhatsAppButton url={`https://api.whatsapp.com/send?phone=${unMask(cliente.whatsapp)}&text=${whats.messagecli}`} />
                                             <AgendaClienteButton url={`/agendas?ac=${cliente.id}`} />
                                             <OrderButton url={`/ordens?oc=${cliente.id}`} />
                                             <EditButton url={route('clientes.edit', cliente.id)} />

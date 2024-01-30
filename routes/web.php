@@ -14,9 +14,7 @@ use App\Http\Controllers\PrinterController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\WAMessagesController;
 use App\Http\Controllers\WhatsController;
-use App\Models\Whats;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -45,7 +43,6 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     route::get('/', [HomeController::class, 'index']);
-    route::get('/wamessage', [WAMessagesController::class, 'index']);
     Route::resource('/usuarios', UserController::class)->parameters([
         'usuarios' => 'user'
     ]);
@@ -70,7 +67,10 @@ Route::middleware('auth')->group(function () {
     ]);
     Route::resource('/configuracoes/etiquetas', EtiquetaController::class);
     Route::get('/docs/printer', [PrinterController::class, 'index'])->name('docs.index');
-    Route::resource('/configuracoes/whatsapp', WhatsController::class);
+    
+    Route::resource('/configuracoes/whatsapp', WhatsController::class)->parameters([
+        'whatsapp' => 'whats'
+    ]);;
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -21,6 +21,7 @@ interface ClientesProps {
     endereco: string;
     complemento: string;
     telefone: string;
+    whatsapp: string;
     contato: string;
     telcontato: string;
     obs: string;
@@ -42,6 +43,7 @@ const EditCliente = ({clientes}:any) => {
         endereco: clientes.endereco,
         complemento: clientes.complemento,
         telefone: clientes.telefone,
+        whatsapp: clientes.whatsapp,
         contato: clientes.contato,
         telcontato: clientes.telcontato,
         obs: clientes.obs,
@@ -238,7 +240,7 @@ const EditCliente = ({clientes}:any) => {
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-4 gap-4 mt-6">
+                                <div className="grid grid-cols-5 gap-4 mt-6">
                                     <div className="flex flex-col">
                                         <label className="label-form" htmlFor="telefone">
                                             Telefone
@@ -252,6 +254,20 @@ const EditCliente = ({clientes}:any) => {
                                             maxLength={15}
                                         />
                                         {errors.telefone && <div className="text-sm text-red-500">{errors.telefone}</div>}
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label className="label-form" htmlFor="whatsapp">
+                                            Whatsapp
+                                        </label>
+                                        <input
+                                            id="whatsapp"
+                                            type="text"
+                                            value={maskPhone(data.whatsapp)}
+                                            onChange={(e) => setData('whatsapp', e.target.value)}
+                                            className="input-form"
+                                            maxLength={15}
+                                        />
+                                        {errors.whatsapp && <div className="text-sm text-red-500">{errors.whatsapp}</div>}
                                     </div>
                                     <div className="flex flex-col col-span-2">
                                         <label className="label-form" htmlFor="contato">

@@ -37,6 +37,6 @@ class WhatsController extends Controller
         $data = $request->all();
         $whats->update($data);
         Session::flash('success', 'Dados do Whatsapp editado com sucesso!');
-        return Redirect::route('whats.index');
+        return Redirect::route('whatsapp.index');
     }
 }

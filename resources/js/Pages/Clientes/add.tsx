@@ -21,6 +21,7 @@ const AddCliente = () => {
         endereco: "",
         complemento: "",
         telefone: "",
+        whatsapp: "",
         contato: "",
         telcontato: "",
         obs: "",
@@ -210,7 +211,7 @@ const AddCliente = () => {
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-4 gap-4 mt-6">
+                                <div className="grid grid-cols-5 gap-4 mt-6">
                                     <div className="flex flex-col">
                                         <label className="label-form" htmlFor="telefone">
                                             Telefone
@@ -225,6 +226,21 @@ const AddCliente = () => {
                                         />
                                         {errors.telefone && <div className="text-sm text-red-500">{errors.telefone}</div>}
                                     </div>
+                                    <div className="flex flex-col">
+                                        <label className="label-form" htmlFor="whatsapp">
+                                            Whatsapp
+                                        </label>
+                                        <input
+                                            id="whatsapp"
+                                            type="text"
+                                            value={maskPhone(data.whatsapp)}
+                                            onChange={(e) => setData('whatsapp', e.target.value)}
+                                            className="input-form"
+                                            maxLength={15}
+                                        />
+                                        {errors.whatsapp && <div className="text-sm text-red-500">{errors.whatsapp}</div>}
+                                    </div>
+
                                     <div className="flex flex-col col-span-2">
                                         <label className="label-form" htmlFor="contato">
                                             Contato
