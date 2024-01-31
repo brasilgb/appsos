@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('complemento', 20)->nullable();
             $table->string('telefone', 20);
             $table->string('contato', 50)->nullable();
+            $table->string('whatsapp', 50)->nullable();
             $table->string('telcontato', 20)->nullable();
             $table->text('obs')->nullable();
             $table->timestamp('created_at')->useCurrent();

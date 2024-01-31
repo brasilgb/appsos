@@ -5,6 +5,7 @@ import {
     ImagesAppButton,
     OrderButton,
     PrintButton,
+    WhatsAppButton,
 } from "@/Components/Buttons";
 import {
     Card,
@@ -28,12 +29,13 @@ import {
 } from "@/Components/Table";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { statusOrdemByValue } from "@/Utils/functions";
+import { unMask } from "@/Utils/mask";
 import { usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment } from "react";
 import { IoConstruct } from "react-icons/io5";
 
-const Ordens = ({ ordens }: any) => {
+const Ordens = ({ ordens, whats }: any) => {
     const { flash } = usePage().props;
 
     return (
@@ -104,11 +106,14 @@ const Ordens = ({ ordens }: any) => {
                                             <TableCell>
                                                 {ordem.dtentrega
                                                     ? moment(
-                                                          ordem.updated_at,
-                                                      ).format("DD/MM/YYYY")
+                                                        ordem.updated_at,
+                                                    ).format("DD/MM/YYYY")
                                                     : "__/__/____"}
                                             </TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
+                                                <WhatsAppButton
+                                                    url={`https://api.whatsapp.com/send?phone=${unMask(ordem.cliente.whatsapp)}&text=${ordem.status == 6 || ordem.status == 7 ? whats.concluido : ordem.status == 3 ? whats.orcamento : ''}`}
+                                                />
                                                 <ImagesAppButton
                                                     url={`${ordem.id}`}
                                                 />

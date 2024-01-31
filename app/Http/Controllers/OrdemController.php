@@ -7,6 +7,7 @@ use App\Http\Resources\OrdemResource;
 use App\Models\Cliente;
 use App\Models\Ordem;
 use App\Models\User;
+use App\Models\Whats;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Redirect;
@@ -35,8 +36,8 @@ class OrdemController extends Controller
         }
 
         $ordens = $query->paginate(12);
-       
-        return Inertia::render('Ordens/index', ["ordens" => $ordens]);
+        $whats = Whats::orderBy('id', 'DESC')->first();
+        return Inertia::render('Ordens/index', ["ordens" => $ordens, 'whats' => $whats]);
     }
 
     /**

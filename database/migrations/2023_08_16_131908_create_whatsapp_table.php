@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('whatsapp', function (Blueprint $table) {
             $table->id();
-            $table->text('messagecli')->nullable();
-            $table->text('messagetec')->nullable();
+            $table->text('orcamento')->nullable();
+            $table->text('concluido')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cliente;
-use App\Models\Whats;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Redirect;
@@ -30,8 +29,7 @@ class ClienteController extends Controller
 
         $clientes = $query->paginate(12);
 
-        $whats = Whats::orderBy('id', 'DESC')->first();
-        return Inertia::render('Clientes/index', ["clientes" => $clientes, 'whats' => $whats]);
+        return Inertia::render('Clientes/index', ["clientes" => $clientes]);
     }
 
     /**

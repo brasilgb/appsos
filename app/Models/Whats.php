@@ -12,7 +12,7 @@ class Whats extends Model
     protected $table = "whatsapp";
 
     protected $fillable = [
-        'messagecli',
-        'messagetec'
+        'orcamento',
+        'concluido'
     ];
 }

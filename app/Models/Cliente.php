@@ -22,11 +22,12 @@ class Cliente extends Model
         'endereco',
         'complemento',
         'telefone',
+        'whatsapp',
         'contato',
         'telcontato',
         'obs',
     ];
-        
+
     public function ordens()
     {
         return $this->hasMany(Ordem::class);

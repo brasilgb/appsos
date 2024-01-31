@@ -20,3 +20,10 @@
         @apply rounded-md p-2 bg-transparent text-base text-gray-600 border border-gray-300;
     }
 }
+
+@media print { 
+    .quebrapagina {
+        page-break-after: always 
+    }
+
+}

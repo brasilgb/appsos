@@ -9,8 +9,8 @@ import React from "react";
 import { IoLogoWhatsapp } from "react-icons/io5";
 
 interface WhatsProps {
-    messagecli: string;
-    messagetec: string;
+    orcamento: string;
+    concluido: string;
 }
 
 const Whats = ({ whats }: any) => {
@@ -23,16 +23,16 @@ const Whats = ({ whats }: any) => {
         processing,
         errors,
     }: InertiaFormProps<WhatsProps> = useForm({
-        messagecli: whats.messagecli,
-        messagetec: whats.messagetec,
+        orcamento: whats.orcamento,
+        concluido: whats.concluido,
     });
 
     function handleSubmit(e: any) {
         e.preventDefault();
         router.post(`whatsapp/${whats.id}`, {
             _method: "put",
-            messagecli: data.messagecli,
-            messagetec: data.messagetec,
+            orcamento: data.orcamento,
+            concluido: data.concluido,
         });
     }
 
@@ -54,24 +54,24 @@ const Whats = ({ whats }: any) => {
                                 <div className="flex flex-col">
                                     <label
                                         className="label-form"
-                                        htmlFor="messagecli"
+                                        htmlFor="orcamento"
                                     >
-                                        Mensagem ao cliente
+                                        Orçamento gerado
                                     </label>
                                     <textarea
                                         id="email"
-                                        value={data.messagecli}
+                                        value={data.orcamento}
                                         onChange={(e) =>
                                             setData(
-                                                "messagecli",
+                                                "orcamento",
                                                 e.target.value,
                                             )
                                         }
                                         className="input-form"
                                     />
-                                    {errors.messagecli && (
+                                    {errors.orcamento && (
                                         <div className="text-sm text-red-500">
-                                            {errors.messagecli}
+                                            {errors.orcamento}
                                         </div>
                                     )}
                                 </div>
@@ -81,24 +81,24 @@ const Whats = ({ whats }: any) => {
                                 <div className="flex flex-col">
                                     <label
                                         className="label-form"
-                                        htmlFor="messagetec"
+                                        htmlFor="concluido"
                                     >
-                                        Mensagem ao técnico (agendamentos)
+                                        Serviço concluído
                                     </label>
                                     <textarea
                                         id="email"
-                                        value={data.messagetec}
+                                        value={data.concluido}
                                         onChange={(e) =>
                                             setData(
-                                                "messagetec",
+                                                "concluido",
                                                 e.target.value,
                                             )
                                         }
                                         className="input-form"
                                     />
-                                    {errors.messagetec && (
+                                    {errors.concluido && (
                                         <div className="text-sm text-red-500">
-                                            {errors.messagetec}
+                                            {errors.concluido}
                                         </div>
                                     )}
                                 </div>

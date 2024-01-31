@@ -9,7 +9,7 @@ const Printer = ({ etiquetas }: any) => {
                     {etiquetas.map((etiqueta: any) => (
                         <div
                             key={etiqueta.ordem}
-                            className="flex flex-col items-center justify-between w-[31mm] h-[17mm] p-0.5 border border-gray-100"
+                            className="flex flex-col items-center justify-between w-[30mm] h-[16.8mm] p-0.5 border border-gray-100"
                         >
                             <div className="text-xs font-bold text-gray-600">
                                 {etiqueta.empresa}

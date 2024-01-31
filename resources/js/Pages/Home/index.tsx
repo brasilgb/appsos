@@ -1,34 +1,24 @@
-import {
-    Card,
-    CardBody,
-    CardContainer,
-    CardFooter,
-    CardHeader,
-    CardHeaderContent,
-} from "@/Components/Card";
 import HomeInfo from "@/Components/HomeInfo";
 import Kpis from "@/Components/Kpis";
 import MessageDropDown from "@/Components/MessageDropDown";
-import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
-import Boxorder from "@/Components/boxorder";
+import { HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { Head, usePage } from "@inertiajs/react";
 import React, { useState } from "react";
 import { AiOutlineDashboard } from "react-icons/ai";
-import { FaBasketShopping, FaCalendarDays } from "react-icons/fa6";
 import {
     IoBasket,
     IoCalendar,
     IoChatboxEllipses,
     IoConstruct,
     IoPeople,
-    IoPeopleSharp,
-    IoPerson,
 } from "react-icons/io5";
 
 const Home = ({ clientes, ordens, produtos, agendas, mensagens }: any) => {
     const { auth } = usePage().props;
-    // const read = mensagens.filter
+    const gerados = ordens.filter((fo: any) => (fo.status === 3));
+    const aprovados = ordens.filter((fo: any) => (fo.status === 4));
+    const concluidos = ordens.filter((fo: any) => (fo.status === 6 || fo.status === 7));
 
     return (
         <AuthLayout>
@@ -44,7 +34,7 @@ const Home = ({ clientes, ordens, produtos, agendas, mensagens }: any) => {
                             <MessageDropDown mensagens={mensagens} />
                         ) : (
                             <div className="text-red-300">
-                                <IoChatboxEllipses size={22} />
+                                <IoChatboxEllipses size={28} />
                             </div>
                         )}
                     </TitleTop>
@@ -97,21 +87,15 @@ const Home = ({ clientes, ordens, produtos, agendas, mensagens }: any) => {
                     <HomeInfo
                         icon={<IoConstruct color="#CA0156" />}
                         title="Orçamentos gerados"
-                    >
-                        <div>content</div>
-                    </HomeInfo>
+                        data={gerados} />
                     <HomeInfo
                         icon={<IoConstruct color="#0D9488" />}
                         title="Orçamentos aprovados"
-                    >
-                        <div>content</div>
-                    </HomeInfo>
+                        data={aprovados} />
                     <HomeInfo
                         icon={<IoConstruct color="#3fa1d4" />}
                         title="Serviços concluídos"
-                    >
-                        <div>content</div>
-                    </HomeInfo>
+                        data={concluidos} />
                 </div>
             </div>
         </AuthLayout>

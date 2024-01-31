@@ -33,7 +33,7 @@ import moment from "moment";
 import React, { Fragment } from "react";
 import { IoPeopleSharp } from "react-icons/io5";
 
-const Clientes = ({ clientes, whats }: any) => {
+const Clientes = ({ clientes }: any) => {
     const { flash } = usePage().props;
 
     return (
@@ -96,9 +96,6 @@ const Clientes = ({ clientes, whats }: any) => {
                                                 ).format("DD/MM/YYYY")}
                                             </TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
-                                                <WhatsAppButton
-                                                    url={`https://api.whatsapp.com/send?phone=${unMask(cliente.whatsapp)}&text=${whats.messagecli}`}
-                                                />
                                                 <AgendaClienteButton
                                                     url={`/agendas?ac=${cliente.id}`}
                                                 />

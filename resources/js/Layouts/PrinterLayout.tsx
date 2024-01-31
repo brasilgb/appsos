@@ -13,7 +13,8 @@ const PrinterLayout = ({ children, backlink }: PrinterLayoutProps) => {
     return (
         <div
             className="
-        w-[8.27in] 
+        w-[21cm] 
+        h-[29.7cm] 
         mx-auto 
         screen:rounded-b-md 
         screen:shadow-lg 
@@ -58,10 +59,11 @@ const PrinterLayout = ({ children, backlink }: PrinterLayoutProps) => {
             <div
                 ref={(el) => (componentRef.current = el)}
                 className="
-        print:m-[1cm] 
+        print:ml-[0.25cm] 
+        print:mt-[0.18cm] 
         screen:bg-gray-50 
         print:bg-white 
-        screen:m-[1cm]
+        screen:m-[5.7mm]
         "
             >
                 {children}
