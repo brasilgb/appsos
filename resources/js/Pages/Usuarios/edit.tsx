@@ -12,7 +12,7 @@ import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { roleUser, statusUser } from "@/Utils/dataSelect";
 import { maskCep, maskCpfCnpj, maskPhone, unMask } from "@/Utils/mask";
-import { useForm, usePage } from "@inertiajs/react";
+import { Head, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React, { useCallback, useEffect, useState } from "react";
 import { IoEye, IoEyeOff, IoPeopleSharp, IoPerson } from "react-icons/io5";
@@ -56,7 +56,8 @@ const EditUsuario = ({ usuarios }: any) => {
     }
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Usuários" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

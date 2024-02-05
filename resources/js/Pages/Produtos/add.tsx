@@ -15,7 +15,7 @@ import {
     unidadesProdutos,
 } from "@/Utils/dataSelect";
 import { maskCep, maskCpfCnpj, maskPhone, unMask } from "@/Utils/mask";
-import { useForm } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import React, { useCallback, useEffect } from "react";
 import { FaBasketShopping } from "react-icons/fa6";
 import { IoPeopleSharp } from "react-icons/io5";
@@ -39,7 +39,8 @@ const AddCliente = () => {
     }
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Produtos" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

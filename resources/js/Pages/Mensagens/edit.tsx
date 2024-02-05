@@ -14,7 +14,7 @@ import {
 import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { useForm, usePage } from "@inertiajs/react";
+import { Head, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React from "react";
 import { IoChatboxEllipses } from "react-icons/io5";
@@ -47,7 +47,8 @@ const EditMensagem = ({ mensagens, users }: any) => {
     }
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Mensagens" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

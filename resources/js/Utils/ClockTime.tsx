@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import moment from "moment";
+import React from "react";
 
 const ClockTime = () => {
     const [timeClock, setTimeClock] = useState();

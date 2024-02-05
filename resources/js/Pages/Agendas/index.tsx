@@ -27,7 +27,7 @@ import {
 } from "@/Components/Table";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { statusAgendaByValue } from "@/Utils/functions";
-import { usePage } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment } from "react";
 import { FaCalendarDays } from "react-icons/fa6";
@@ -36,7 +36,8 @@ const Agendas = ({ agendas }: any) => {
     const { flash } = usePage().props;
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Agendas" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

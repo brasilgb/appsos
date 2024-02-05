@@ -10,7 +10,7 @@ import {
 } from "@/Components/Card";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { useForm } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import Select from "react-select";
 import { IoChatboxEllipses } from "react-icons/io5";
 
@@ -28,7 +28,8 @@ const AddMensagem = ({ users }) => {
     }
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Mensagens" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

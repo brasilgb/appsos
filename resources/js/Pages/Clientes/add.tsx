@@ -10,7 +10,7 @@ import {
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { maskCep, maskCpfCnpj, maskPhone, unMask } from "@/Utils/mask";
-import { useForm } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import React, { useCallback, useEffect } from "react";
 import { IoPeopleSharp } from "react-icons/io5";
 
@@ -56,7 +56,8 @@ const AddCliente = () => {
     };
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Clientes" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

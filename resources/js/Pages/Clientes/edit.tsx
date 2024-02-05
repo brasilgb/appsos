@@ -11,7 +11,7 @@ import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { maskCep, maskCpfCnpj, maskPhone, unMask } from "@/Utils/mask";
-import { useForm, usePage } from "@inertiajs/react";
+import { Head, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React, { useCallback, useEffect } from "react";
 import { IoPeopleSharp } from "react-icons/io5";
@@ -91,7 +91,8 @@ const EditCliente = ({ clientes }: any) => {
         getCliente();
     }, []);
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Clientes" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

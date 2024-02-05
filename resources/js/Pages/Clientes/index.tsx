@@ -28,7 +28,7 @@ import {
 } from "@/Components/Table";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { unMask } from "@/Utils/mask";
-import { usePage } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment } from "react";
 import { IoPeopleSharp } from "react-icons/io5";
@@ -37,7 +37,8 @@ const Clientes = ({ clientes }: any) => {
     const { flash } = usePage().props;
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Clientes" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

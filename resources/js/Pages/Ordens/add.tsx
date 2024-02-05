@@ -9,7 +9,7 @@ import {
 } from "@/Components/Card";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { useForm } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import React from "react";
 import { IoPeopleSharp } from "react-icons/io5";
 import Select from "react-select";
@@ -42,7 +42,8 @@ const AddOrdem = ({ clientes, ordem }) => {
     };
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Ordens" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

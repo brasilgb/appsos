@@ -30,7 +30,7 @@ import {
 import AuthLayout from "@/Layouts/AuthLayout";
 import { statusOrdemByValue } from "@/Utils/functions";
 import { unMask } from "@/Utils/mask";
-import { usePage } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment } from "react";
 import { IoConstruct, IoPrint } from "react-icons/io5";
@@ -39,7 +39,8 @@ const Ordens = ({ ordens, whats, printers }: any) => {
     const { flash } = usePage().props;
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Ordens" />
             <Card>
                 <HeaderContent>
                     <TitleTop>
@@ -106,8 +107,8 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                             <TableCell>
                                                 {ordem.dtentrega
                                                     ? moment(
-                                                        ordem.updated_at,
-                                                    ).format("DD/MM/YYYY")
+                                                        ordem.dtentrega,
+                                                    ).format("DD/MM/YYYY HH:mm")
                                                     : "__/__/____"}
                                             </TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">

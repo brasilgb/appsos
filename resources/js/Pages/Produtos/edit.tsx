@@ -16,7 +16,7 @@ import {
     unidadesProdutos,
 } from "@/Utils/dataSelect";
 import { maskCep, maskCpfCnpj, maskPhone, unMask } from "@/Utils/mask";
-import { useForm, usePage } from "@inertiajs/react";
+import { Head, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React, { useCallback, useEffect } from "react";
 import { FaBasketShopping } from "react-icons/fa6";
@@ -62,7 +62,8 @@ const EditProduto = ({ produtos }: any) => {
     }
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Produtos" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

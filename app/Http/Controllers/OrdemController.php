@@ -121,7 +121,8 @@ class OrdemController extends Controller
                 'senha' => 'senha',
             ]
         );
-        $data['dtentrega'] = $data['status'] === 8 ? Carbon::now() : null;
+        $dtformat = Carbon::now();
+        $data['dtentrega'] = $data['status'] === 8 ? $dtformat->toDateTimeString() : null;
         $ordem->update($data);
         Session::flash('success', 'Ordem de serviço editada com sucesso!');
         return redirect()->route('ordens.show', ['ordem' => $ordem->id]);

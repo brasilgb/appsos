@@ -11,7 +11,7 @@ import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { statusServico } from "@/Utils/dataSelect";
-import { useForm, usePage } from "@inertiajs/react";
+import { Head, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React, { useState } from "react";
 import { IoChevronDownSharp, IoPeopleSharp } from "react-icons/io5";
@@ -76,7 +76,8 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
     }
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Ordens" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

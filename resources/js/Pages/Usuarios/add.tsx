@@ -11,7 +11,7 @@ import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { roleUser, statusUser } from "@/Utils/dataSelect";
 import { maskPhone } from "@/Utils/mask";
-import { useForm } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import React, { useState } from "react";
 import { IoEye, IoEyeOff, IoPerson } from "react-icons/io5";
 
@@ -35,7 +35,8 @@ const AddUsuario = () => {
     }
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Usuários" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

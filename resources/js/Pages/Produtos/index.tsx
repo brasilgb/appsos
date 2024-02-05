@@ -26,7 +26,7 @@ import {
     TableRow,
 } from "@/Components/Table";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { usePage } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment } from "react";
 import { FaBasketShopping } from "react-icons/fa6";
@@ -36,7 +36,8 @@ const Produtos = ({ produtos }: any) => {
     const { flash } = usePage().props;
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Produtos" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

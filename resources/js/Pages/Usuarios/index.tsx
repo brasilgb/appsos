@@ -27,11 +27,10 @@ import {
 } from "@/Components/Table";
 import AuthLayout from "@/Layouts/AuthLayout";
 import {
-    roleByValue,
     roleUserByValue,
     statusUserByValue,
 } from "@/Utils/functions";
-import { usePage } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment } from "react";
 import { IoPeople, IoPeopleSharp, IoPerson } from "react-icons/io5";
@@ -40,7 +39,8 @@ const Usuarios = ({ usuarios }: any) => {
     const { flash } = usePage().props;
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Usuários" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

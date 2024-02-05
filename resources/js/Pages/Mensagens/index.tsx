@@ -26,7 +26,7 @@ import {
     TableRow,
 } from "@/Components/Table";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { usePage } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment, useEffect } from "react";
 import {
@@ -46,7 +46,8 @@ const Mensagens = ({ mensagens, users }) => {
     };
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Mensagens" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

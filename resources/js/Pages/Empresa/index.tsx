@@ -10,7 +10,7 @@ import {
 import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { router, useForm, usePage } from "@inertiajs/react";
+import { Head, router, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React from "react";
 import {
@@ -94,7 +94,8 @@ const Impressoes = ({ empresa }: any) => {
     };
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Empresa" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

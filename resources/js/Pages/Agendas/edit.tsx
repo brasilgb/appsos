@@ -11,7 +11,7 @@ import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { statusAgenda } from "@/Utils/dataSelect";
-import { useForm, usePage } from "@inertiajs/react";
+import { Head, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React from "react";
 import { FaCalendarDays } from "react-icons/fa6";
@@ -50,7 +50,8 @@ const EditProduto = ({ agendas, tecnicos }: any) => {
     }
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+        <Head title="Agendas" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

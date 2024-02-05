@@ -11,7 +11,7 @@ import {
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { statusAgenda } from "@/Utils/dataSelect";
-import { useForm } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import { FaCalendarDays } from "react-icons/fa6";
 import Select from "react-select";
 
@@ -41,7 +41,8 @@ const AddAgenda = ({ clientes, tecnicos }) => {
     };
 
     return (
-        <AuthLayout>
+        <AuthLayout>            
+            <Head title="Agendas" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

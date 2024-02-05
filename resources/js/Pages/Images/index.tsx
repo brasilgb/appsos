@@ -9,7 +9,7 @@ import {
 } from "@/Components/Card";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { useForm } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import React, { useState } from "react";
 import {
     IoClose,
@@ -75,6 +75,7 @@ const Images = ({ imagens, ordem }: any) => {
 
     return (
         <AuthLayout>
+            <Head title="Imagens" />
             {showZoomImage && <ImageSelected />}
             <Card>
                 <HeaderContent>
