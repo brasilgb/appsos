@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('ordens', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('numordem');
             $table->unsignedBigInteger('cliente_id');
             $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
             $table->string('equipamento', 40);
             $table->string('modelo', 50)->nullable();
             $table->string('senha', 50)->nullable();
             $table->text('defeito')->nullable();
-            $table->string('estado', 100);
+            $table->string('estado', 100)->nullable();
             $table->text('acessorios')->nullable();
             $table->string('orcamento', 50)->nullable();
             $table->text('descorcamento')->nullable();
