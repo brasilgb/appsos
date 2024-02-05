@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrdemResource;
 use App\Models\Cliente;
+use App\Models\Impressao;
 use App\Models\Ordem;
 use App\Models\User;
 use App\Models\Whats;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
@@ -30,14 +32,15 @@ class OrdemController extends Controller
         if ($search) {
             $query->where('id', 'like', '%' . $search . '%');
         }
-        
+
         if ($oc) {
             $query->where('cliente_id', $oc);
         }
 
         $ordens = $query->paginate(12);
         $whats = Whats::orderBy('id', 'DESC')->first();
-        return Inertia::render('Ordens/index', ["ordens" => $ordens, 'whats' => $whats]);
+        $printers = Impressao::orderBy('id', 'DESC')->first();
+        return Inertia::render('Ordens/index', ["ordens" => $ordens, 'whats' => $whats, 'printers' => $printers]);
     }
 
     /**
@@ -47,20 +50,21 @@ class OrdemController extends Controller
     {
         $clientes = Cliente::get();
         $ordem = Ordem::exists() ? Ordem::orderBy('id', 'desc')->first()->id : [];
-        
+
         return Inertia::render('Ordens/add', ['clientes' => $clientes, 'ordem' => $ordem]);
     }
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    { 
+    {
         $data = $request->all();
 
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido'
         ];
-        $request->validate([
+        $request->validate(
+            [
                 'cliente_id' => 'required',
                 'equipamento' => 'required',
                 'defeito' => 'required',
@@ -72,9 +76,9 @@ class OrdemController extends Controller
                 'cliente_id' => 'cliente',
             ]
         );
-            Ordem::create($data);
-            Session::flash('success', 'Ordem de serviço cadastrada com sucesso!');
-            return redirect()->route('ordens.index');
+        Ordem::create($data);
+        Session::flash('success', 'Ordem de serviço cadastrada com sucesso!');
+        return redirect()->route('ordens.index');
     }
 
     /**
@@ -104,11 +108,12 @@ class OrdemController extends Controller
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido'
         ];
-        $request->validate([
-            'equipamento' => 'required',
-            'defeito' => 'required',
-            'detalhes' => 'required',
-            'tecnico' => 'required',
+        $request->validate(
+            [
+                'equipamento' => 'required',
+                'defeito' => 'required',
+                'detalhes' => 'required',
+                'tecnico' => 'required',
             ],
             $messages,
             [
@@ -116,9 +121,10 @@ class OrdemController extends Controller
                 'senha' => 'senha',
             ]
         );
-            $ordem->update($data);
-            Session::flash('success', 'Ordem de serviço editada com sucesso!');
-            return redirect()->route('ordens.show', ['ordem' => $ordem->id]);
+        $data['dtentrega'] = $data['status'] === 8 ? Carbon::now() : null;
+        $ordem->update($data);
+        Session::flash('success', 'Ordem de serviço editada com sucesso!');
+        return redirect()->route('ordens.show', ['ordem' => $ordem->id]);
     }
 
     /**

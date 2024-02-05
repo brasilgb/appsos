@@ -33,9 +33,9 @@ import { unMask } from "@/Utils/mask";
 import { usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment } from "react";
-import { IoConstruct } from "react-icons/io5";
+import { IoConstruct, IoPrint } from "react-icons/io5";
 
-const Ordens = ({ ordens, whats }: any) => {
+const Ordens = ({ ordens, whats, printers }: any) => {
     const { flash } = usePage().props;
 
     return (
@@ -117,10 +117,13 @@ const Ordens = ({ ordens, whats }: any) => {
                                                 <ImagesAppButton
                                                     url={`${ordem.id}`}
                                                 />
-                                                <PrintButton
-                                                    url={`${ordem.id}`}
-                                                    status={ordem.status}
-                                                />
+                                                {printers.length > 0 
+                                                   ? <PrintButton
+                                                        url={`${ordem.id}`}
+                                                        status={ordem.status}
+                                                    />
+                                                    : <div title="Preencha os dados de impressão em configurações > impressões" className="py-1.5 px-3 rounded-md shadow bg-gray-200"><IoPrint size={18} /></div>
+                                                }
                                                 <EditButton
                                                     url={route(
                                                         "ordens.edit",

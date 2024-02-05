@@ -19,7 +19,7 @@ const Home = ({ clientes, ordens, produtos, agendas, mensagens }: any) => {
     const gerados = ordens.filter((fo: any) => (fo.status === 3));
     const aprovados = ordens.filter((fo: any) => (fo.status === 4));
     const concluidos = ordens.filter((fo: any) => (fo.status === 6 || fo.status === 7));
-
+console.log(mensagens);
     return (
         <AuthLayout>
             <Head title="Dashboard" />
