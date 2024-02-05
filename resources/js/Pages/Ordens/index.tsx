@@ -117,8 +117,8 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                                 <ImagesAppButton
                                                     url={`${ordem.id}`}
                                                 />
-                                                {printers.length > 0 
-                                                   ? <PrintButton
+                                                {printers
+                                                    ? <PrintButton
                                                         url={`${ordem.id}`}
                                                         status={ordem.status}
                                                     />
