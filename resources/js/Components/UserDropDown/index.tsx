@@ -52,6 +52,8 @@ const UserDropDown = (props: Props) => {
                     <span className="w-full border-b border-gray-200"></span>
                     <Link
                         className="text-gray-600 hover:text-gray-500 px-4 pt-2 flex items-center"
+                        as="button"
+                        type="button"
                         href="#"
                         onClick={(e) => handleLogout(e)}
                     >
