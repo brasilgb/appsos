@@ -23,7 +23,6 @@
 
 @media print { 
     .quebrapagina {
-        page-break-after: always 
+        page-break-before: always 
     }
-
 }

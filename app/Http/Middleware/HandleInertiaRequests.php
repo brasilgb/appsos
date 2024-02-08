@@ -43,7 +43,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'confemp' => fn () => [
                 DB::table('empresa')
-                    ->select('logo', 'empresa')
+                    ->select('logo', 'empresa', 'cnpj')
                     ->first()
             ],
             'confger' => fn () => [

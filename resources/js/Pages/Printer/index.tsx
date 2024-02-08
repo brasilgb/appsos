@@ -19,17 +19,17 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
                         {empresa.cidade} - {empresa.telefone}
                     </h1>
                 </div>
-                <div className="flex items-center justify-start w-44">
+                <div className="flex items-center justify-start w-20">
                     <img
                         src={`/storage/images/${empresa.logo ? empresa.logo : "logo.png"}`}
                         alt=""
                     />
                 </div>
             </div>
-            <div className="flex items-center justify-between p-2 bg-gray-200 text-sm">
+            <div className="flex items-center justify-between p-2 bg-gray-200 text-xs">
                 <div>
                     <span className="font-semibold mr-2">O.S. N°:</span>
-                    <span>{("000000" + ordem.id).slice(-6)}</span>
+                    <span>{("00000000" + (ordem.id)).slice(-8)}</span>
                 </div>
                 <div>
                     <span className="font-semibold mr-2">
@@ -41,7 +41,7 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
 
             <div className="flex flex-col items-start justify-start pb-2 border border-gray-200 mt-2 p-2 text-xs">
                 <div className="mb-2 flex items-center justify-center w-full">
-                    <h1 className="text-base font-semibold text-center">
+                    <h1 className="text-sm border-b w-full border-gray-100 uppercase font-semibold text-center">
                         Dados do cliente
                     </h1>
                 </div>
@@ -94,7 +94,7 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
 
             <div className="flex flex-col items-start justify-start pb-2 border border-gray-200 mt-2 p-2 text-xs">
                 <div className="mb-2 flex items-center justify-center w-full">
-                    <h1 className="text-base font-semibold text-center">
+                    <h1 className="text-sm border-b w-full border-gray-100 uppercase font-semibold text-center">
                         Informações do produto
                     </h1>
                 </div>
@@ -127,27 +127,33 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
 
             <div className="flex flex-col items-start justify-start pb-2 border border-gray-200 mt-4 p-2 text-xs">
                 <div className="mb-2 flex items-center justify-center w-full">
-                    <h1 className="text-base font-semibold text-center">
+                <h1 className="text-sm border-b w-full border-gray-100 uppercase font-semibold text-center">
                         Defeito relatado
+                    </h1>
+                    <h1 className="text-sm border-b w-full border-gray-100 uppercase font-semibold text-center">
+                        Pré-orçamento
                     </h1>
                 </div>
 
                 <div className="flex items-start justify-start w-full">
-                    <div className="flex-1">
+                <div className="flex-1">
                         <h1>{ordem.defeito}</h1>
+                    </div>
+                    <div className="flex-1">
+                        <h1>{ordem.preorcamento}</h1>
                     </div>
                 </div>
             </div>
 
             <div className="flex flex-col items-start justify-start pb-2 border border-gray-200 mt-4 p-2 text-xs">
                 <div className="mb-2 flex items-center justify-center w-full">
-                    <h1 className="text-base font-semibold">
+                <h1 className="text-sm border-b w-full border-gray-100 uppercase font-semibold text-center">
                         Garantias e/ou observações
                     </h1>
                 </div>
                 <div className="flex items-start justify-start w-full">
                     <div className="flex-1">
-                        <div>{printer}</div>
+                        <div className="mb-2"><p dangerouslySetInnerHTML={{__html:`${printer ? printer : ''}`}}/></div>
                         <div>{ordem.obs}</div>
                     </div>
                 </div>
@@ -173,11 +179,11 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
                         </div>
                         <div className="flex-1">
                             <div>
-                                {ordem.valservico ? ordem.valservico : "0"}
+                                {(ordem.valservico ? Number(ordem.valservico) : 0).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
                             </div>
-                            <div>{ordem.valpecas ? ordem.valpecas : "0"}</div>
+                            <div>{(ordem.valpecas ? Number(ordem.valpecas) : 0).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</div>
                             <div className="font-semibold">
-                                {ordem.custo ? ordem.custo : "0"}
+                                {(Number(ordem.valservico) + Number(ordem.valpecas)).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
                             </div>
                         </div>
                     </div>
@@ -185,15 +191,19 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
             )}
 
             <div className="flex items-center justify-around mt-16">
-                <div className="w-80 border-t border-gray-500 text-center text-sm">
+                <div className="w-80 border-t border-gray-400 text-center text-sm">
                     Assinatura Cliente
                 </div>
-                <div className="w-80 border-t border-gray-500 text-center text-sm">
-                    Assinatura Responsável Técnico
-                </div>
+                {tipo !== "1"
+                    ? <div className="w-80 border-t border-gray-400 text-center text-sm">
+                        Assinatura Responsável Técnico
+                    </div>
+                    : <div className="w-80"></div>
+                }
+
             </div>
 
-            <div className="mt-8">
+            <div className="mt-8 ml-8">
                 <p className="text-sm">
                     {empresa.cidade}, {moment().locale("pt").format("LL")}.
                 </p>

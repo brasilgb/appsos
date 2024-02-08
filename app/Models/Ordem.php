@@ -23,6 +23,7 @@ class Ordem extends Model
         'orcamento',
         'descorcamento',
         'valorcamento',
+        'preorcamento',
         'pecas',
         'valpecas',
         'valservico',
@@ -31,7 +32,7 @@ class Ordem extends Model
         'tecnico',
         'detalhes',
         'dtentrega',
-        'observacoes'
+        'obs'
     ];
     
     public function cliente()

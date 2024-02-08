@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('acessorios')->nullable();
             $table->string('orcamento', 50)->nullable();
             $table->text('descorcamento')->nullable();
+            $table->text('preorcamento')->nullable();
             $table->text('valorcamento')->nullable();
             $table->text('detalhes')->nullable(); // servicos executados
             $table->text('pecas')->nullable();
@@ -33,7 +34,7 @@ return new class extends Migration
             $table->tinyInteger('status')->default('1');
             $table->dateTime('dtentrega')->nullable();
             $table->string('tecnico', 50)->nullable();
-            $table->text('observacoes')->nullable();
+            $table->text('obs')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

@@ -24,7 +24,7 @@ const Sidebar = () => {
     return (
         <aside className=" hidden md:block md:w-64 duration-300 bg-blue-cinco">
             <div className="flex items-center justify-center border-b border-blue-quatro p-3.5">
-                <div className="w-40">
+                <div className="w-16">
                     <Logo />
                 </div>
             </div>

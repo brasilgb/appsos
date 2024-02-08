@@ -109,9 +109,9 @@ const Impressoes = ({ empresa }: any) => {
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <CardBody className=" border-y border-gray-100">
                             <div className="px-3 my-4">
-                                <div className="w-44 my-10">
+                                <div className="w-24 my-10">
                                     <img
-                                        src={`/storage/images/${empresa.logo ? empresa.logo : "profile.jpg"}`}
+                                        src={`/storage/images/${empresa.logo ? empresa.logo : "default.png"}`}
                                         alt="Imagem de logo"
                                     />
                                 </div>

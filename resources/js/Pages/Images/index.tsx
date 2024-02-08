@@ -92,7 +92,7 @@ const Images = ({ imagens, ordem }: any) => {
                         </CardHeaderContent>
                         <CardHeaderContent>
                             <h1 className="text-xl text-sky-700 font-bold">
-                                Ordem N° #{ordem}
+                                Ordem N° #{("00000000" + (ordem)).slice(-8)}
                             </h1>
                         </CardHeaderContent>
                     </CardHeader>

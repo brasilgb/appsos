@@ -11,10 +11,10 @@ import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { statusServico } from "@/Utils/dataSelect";
-import { Head, useForm, usePage } from "@inertiajs/react";
+import { Head, Link, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React, { useState } from "react";
-import { IoChevronDownSharp, IoPeopleSharp } from "react-icons/io5";
+import { IoPeopleSharp, IoPrint } from "react-icons/io5";
 
 interface ClientesProps {
     id: number;
@@ -27,6 +27,7 @@ interface ClientesProps {
     previsao: any;
     orcamento: string;
     valorcamento: string;
+    preorcamento: string;
     pecas: string;
     valpecas: string;
     valservico: string;
@@ -39,8 +40,6 @@ interface ClientesProps {
 
 const EditOrdem = ({ ordens, tecnicos }: any) => {
     const { flash } = usePage().props;
-    const [openOrcamento, setOpenOrcamento] = useState(false);
-
     const {
         data,
         setData,
@@ -60,6 +59,7 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
         previsao: ordens.previsao,
         orcamento: ordens.orcamento,
         valorcamento: ordens.valorcamento,
+        preorcamento: ordens.preorcamento,
         pecas: ordens.pecas,
         valpecas: ordens.valpecas,
         valservico: ordens.valservico,
@@ -76,8 +76,8 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
     }
 
     return (
-        <AuthLayout>            
-        <Head title="Ordens" />
+        <AuthLayout>
+            <Head title="Ordens" />
             <Card>
                 <HeaderContent>
                     <TitleTop>
@@ -115,9 +115,7 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
                                         <input
                                             id="ordem"
                                             type="text"
-                                            value={("000000" + data.id).slice(
-                                                -6,
-                                            )}
+                                            value={("00000000" + (data.id)).slice(-8)}
                                             className="input-form"
                                             disabled
                                         />
@@ -432,7 +430,7 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
                                         </select>
                                     </div>
                                 </div>
-                                <div className="grid grid-cols-2 gap-4 mt-6">
+                                <div className="grid grid-cols-3 gap-4 mt-6">
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
@@ -460,6 +458,22 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
+                                            htmlFor="preorcamento"
+                                        >
+                                            Pré-orçamento
+                                        </label>
+                                        <textarea
+                                            id="preorcamento"
+                                            value={data.preorcamento}
+                                            onChange={(e) =>
+                                                setData("preorcamento", e.target.value)
+                                            }
+                                            className="input-form"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label
+                                            className="label-form"
                                             htmlFor="obs"
                                         >
                                             Observações
@@ -477,7 +491,19 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
                             </div>
                         </CardBody>
                         <CardFooter>
-                            <SaveButton />
+                            <div className="flex items-center justify-end gap-8">
+                                {ordens.status === 8 &&
+                                    <Link
+                                        disabled={ordens.status == "8" ? false : true}
+                                        as="button"
+                                        href={`/docs/printer?or=${ordens.id}&tp=2`}
+                                        className="flex items-center justify-center bg-zinc-600 hover:bg-zinc-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+                                    >
+                                        <IoPrint size={18} /><span className="ml-2">Imprimir recibo</span>
+                                    </Link>
+                                }
+                                <SaveButton />
+                            </div>
                         </CardFooter>
                     </form>
                 </CardContainer>

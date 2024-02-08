@@ -28,6 +28,7 @@ const AddOrdem = ({ clientes, ordem }) => {
         defeito: "",
         estado: "",
         acessorios: "",
+        preorcamento: "",
         previsao: "",
         obs: "",
     });
@@ -82,11 +83,8 @@ const AddOrdem = ({ clientes, ordem }) => {
                                             type="text"
                                             value={
                                                 ordem > 0
-                                                    ? (
-                                                          "000000" +
-                                                          (ordem + 1)
-                                                      ).slice(-6)
-                                                    : 1
+                                                    ? ("00000000" + (ordem + 1)).slice(-8)
+                                                    : ("00000000" + (1)).slice(-8)
                                             }
                                             className="input-form"
                                             disabled
@@ -252,7 +250,7 @@ const AddOrdem = ({ clientes, ordem }) => {
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-2 gap-4 mt-6">
+                                <div className="grid grid-cols-3 gap-4 mt-6">
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
@@ -268,6 +266,22 @@ const AddOrdem = ({ clientes, ordem }) => {
                                                     "acessorios",
                                                     e.target.value,
                                                 )
+                                            }
+                                            className="input-form"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="preorcamento"
+                                        >
+                                            Pré-orcamento
+                                        </label>
+                                        <textarea
+                                            id="preorcamento"
+                                            value={data.preorcamento}
+                                            onChange={(e) =>
+                                                setData("preorcamento", e.target.value)
                                             }
                                             className="input-form"
                                         />

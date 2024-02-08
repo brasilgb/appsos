@@ -1,20 +1,17 @@
-import { BackButton, SaveButton } from "@/Components/Buttons";
+import { SaveButton } from "@/Components/Buttons";
 import {
     Card,
     CardBody,
     CardContainer,
     CardFooter,
-    CardHeader,
-    CardHeaderContent,
 } from "@/Components/Card";
 import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { Head, router, useForm, usePage } from "@inertiajs/react";
+import { Head, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
-import React, { useEffect } from "react";
+import React from "react";
 import { AiFillTags } from "react-icons/ai";
-import { IoChatboxEllipses } from "react-icons/io5";
 
 interface ClientesProps {
     ordeminicial: number;
@@ -39,7 +36,7 @@ const Etiquetas = ({ etiquetas }: any) => {
 
     function handleSubmit(e: any) {
         e.preventDefault();
-        post(route("etiquetas.store"));
+        post(route("etiquetas.store"));       
     }
 
     const handlerOrdemFinal = (e: any) => {
@@ -55,8 +52,8 @@ const Etiquetas = ({ etiquetas }: any) => {
     };
 
     return (
-        <AuthLayout>            
-        <Head title="Etiquetas" />
+        <AuthLayout>
+            <Head title="Etiquetas" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

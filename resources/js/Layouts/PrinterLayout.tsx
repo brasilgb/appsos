@@ -46,7 +46,13 @@ const PrinterLayout = ({ children, backlink }: PrinterLayoutProps) => {
                     <IoArrowBackSharp size={18} />
                     <span className="ml-1">Voltar</span>
                 </Link>
-                <ReactToPrint
+                <button onClick={() => print()} className="flex item-center justify-center py-2 px-6 bg-gray-200 rounded-md shadow border border-gray-300 text-sm text-gray-600">
+                    <IoPrint size={18} />
+                    <span className="ml-1">Imprimir</span>
+                </button>
+                {/* <ReactToPrint
+                    bodyClass="mx-[5.7mm] my-[12.5mm] w-[21cm] h-[29.7cm]"
+                    // pageStyle="@page { size: A4 }"
                     trigger={() => (
                         <button className="flex item-center justify-center py-2 px-6 bg-gray-200 rounded-md shadow border border-gray-300 text-sm text-gray-600">
                             <IoPrint size={18} />
@@ -54,18 +60,9 @@ const PrinterLayout = ({ children, backlink }: PrinterLayoutProps) => {
                         </button>
                     )}
                     content={() => componentRef.current}
-                />
+                /> */}
             </div>
-            <div
-                ref={(el) => (componentRef.current = el)}
-                className="
-        print:ml-[0.25cm] 
-        print:mt-[0.18cm] 
-        screen:bg-gray-50 
-        print:bg-white 
-        screen:m-[5.7mm]
-        "
-            >
+            <div ref={(el) => (componentRef.current = el)}>
                 {children}
             </div>
         </div>
