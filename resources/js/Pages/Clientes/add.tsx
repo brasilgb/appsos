@@ -329,12 +329,12 @@ const AddCliente = () => {
                                             className="label-form"
                                             htmlFor="whatsapp"
                                         >
-                                            Whatsapp
+                                            Whatsapp(Utilizar número padrão)
                                         </label>
                                         <input
                                             id="whatsapp"
                                             type="text"
-                                            value={maskPhone(data.whatsapp)}
+                                            value={data.whatsapp}
                                             onChange={(e) =>
                                                 setData(
                                                     "whatsapp",
@@ -342,7 +342,8 @@ const AddCliente = () => {
                                                 )
                                             }
                                             className="input-form"
-                                            maxLength={15}
+                                            maxLength={13}
+                                            placeholder="5551985471163"
                                         />
                                         {errors.whatsapp && (
                                             <div className="text-sm text-red-500">

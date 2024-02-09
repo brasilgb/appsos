@@ -1,4 +1,3 @@
-import { SaveButton } from "@/Components/Buttons";
 import {
     Card,
     CardBody,
@@ -12,6 +11,7 @@ import { Head, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React from "react";
 import { AiFillTags } from "react-icons/ai";
+import { IoPricetagsSharp } from "react-icons/io5";
 
 interface ClientesProps {
     ordeminicial: number;
@@ -24,25 +24,15 @@ const Etiquetas = ({ etiquetas }: any) => {
     const {
         data,
         setData,
-        post,
-        progress,
-        processing,
-        errors,
     }: InertiaFormProps<ClientesProps> = useForm({
         ordeminicial: etiquetas.id + 1,
         paginas: 1,
         ordemfinal: etiquetas.id + 96,
     });
 
-    function handleSubmit(e: any) {
-        e.preventDefault();
-        post(route("etiquetas.store"));       
-    }
-
     const handlerOrdemFinal = (e: any) => {
         const paginas = parseInt(e.target.value);
         if (paginas) {
-            // setData('paginas', paginas);
             setData((data) => ({ ...data, paginas: paginas }));
             setData((data) => ({
                 ...data,
@@ -66,7 +56,7 @@ const Etiquetas = ({ etiquetas }: any) => {
                 </HeaderContent>
                 <CardContainer>
                     <FlashMessage message={flash} />
-                    <form onSubmit={handleSubmit} autoComplete="off">
+                    <form autoComplete="off">
                         <CardBody className=" border-y border-gray-100">
                             <div className="px-3 my-4">
                                 <div className="grid grid-cols-3 gap-4">
@@ -131,7 +121,16 @@ const Etiquetas = ({ etiquetas }: any) => {
                             </div>
                         </CardBody>
                         <CardFooter>
-                            <SaveButton value="Gerar" processing={processing} />
+                        <div className="flex justify-end">
+                            <a
+                                className="flex items-center justify-center bg-blue-700 hover:bg-blue-600 py-1.5 px-4 rounded-md shadow text-gray-50 self-end"
+                                target="_blank"
+                                href={`/configuracoes/etiquetas/printer/${data.ordeminicial}/${data.ordemfinal}`}
+                            >
+                                <IoPricetagsSharp size={18} />
+                                <span className="ml-2">Gerar etiquetas</span>
+                            </a>
+                            </div>
                         </CardFooter>
                     </form>
                 </CardContainer>

@@ -4,7 +4,6 @@ import { usePage } from "@inertiajs/react";
 
 const Footer = () => {
     const { confemp } = usePage().props;
-    console.log(confemp);
     return (
         <footer className="flex flex-row items-center justify-betwen py-2 px-4 border-t bg-white">
             <div className="flex flex-1 justify-start">

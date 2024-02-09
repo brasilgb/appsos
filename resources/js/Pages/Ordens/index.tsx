@@ -29,7 +29,6 @@ import {
 } from "@/Components/Table";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { statusOrdemByValue } from "@/Utils/functions";
-import { unMask } from "@/Utils/mask";
 import { Head, usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment } from "react";
@@ -111,7 +110,7 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                             </TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
                                                 <WhatsAppButton
-                                                    url={`https://api.whatsapp.com/send?phone=${unMask(ordem.cliente.whatsapp)}&text=${ordem.status == 6 || ordem.status == 7 ? whats.concluido : ordem.status == 3 ? whats.orcamento : ''}`}
+                                                    url={`https://api.whatsapp.com/send?phone=${encodeURIComponent(ordem.cliente.whatsapp)}&text=${encodeURIComponent(ordem.status == 6 || ordem.status == 7 ? whats.concluido : ordem.status == 3 ? whats.orcamento : '')}`}
                                                 />
                                                 <ImagesAppButton
                                                     url={`${ordem.id}`}

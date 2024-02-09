@@ -29,6 +29,3 @@ const Printer = ({ etiquetas }: any) => {
 };
 
 export default Printer;
-// {etiquetas.length > 96 &&
-//     <View style={{height:10, width: 100, backgroundColor: 'green'}} ><Text>{etiquetas.length}</Text></View>
-//     }

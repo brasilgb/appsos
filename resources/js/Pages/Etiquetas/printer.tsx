@@ -8,13 +8,15 @@ import {
     PDFViewer,
     Link,
 } from "@react-pdf/renderer";
+import { Head } from "@inertiajs/react";
+
 // Create styles
 const styles = StyleSheet.create({
     page: {
         backgroundColor: "#ffffff",
         color: "#3f3f3f",
         // marginLeft: '0.7cm',
-        // marginVertical: '1.25cm',
+        // marginTop: '1.25cm',
     },
     section: {
         width: '100%',
@@ -23,8 +25,14 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         alignItems: 'flex-start',
         alignContent: 'space-around',
-        margin: 10,
-        padding: 10,
+        marginTop: 12,
+        marginRight: 10,
+        marginBottom: 15,
+        marginLeft: 10,
+        paddingTop: 12,
+        paddingRight: 10,
+        paddingBottom: 10,
+        paddingLeft: 10,
         flexGrow: 1,
     },
     etiqueta: {
@@ -49,25 +57,19 @@ const styles = StyleSheet.create({
         width: window.innerWidth, //the pdf viewer will take up all of the width and height
         height: window.innerHeight,
     },
-    link: {
-        fontSize: 12,
-        marginLeft: 10,
-        marginTop: 10,
-    },
-
 });
-console.log(window.location.href);
+
 const Printer = ({ etiquetas }: any) => {
     return (
-        <PDFViewer style={styles.viewer}>
+        <>
+        <Head title="Etiquetas" />
+               <PDFViewer style={styles.viewer}>
 
             {/* Start of the document*/}
             <Document>
                 {/*render a single page*/}
                 <Page size="A4" style={styles.page}>
-                    <Link style={styles.link} src={`${window.location.href}`} >
-                        Retornar
-                    </Link>
+
                     <View style={styles.section}>
                         {etiquetas.map((etiqueta: any) => (
                             <View key={etiqueta.ordem} style={styles.etiqueta}>
@@ -85,7 +87,9 @@ const Printer = ({ etiquetas }: any) => {
                     </View>
                 </Page>
             </Document>
-        </PDFViewer>
+        </PDFViewer> 
+        </>
+
     );
 };
 

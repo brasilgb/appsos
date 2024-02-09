@@ -33,11 +33,12 @@ class EtiquetaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function printer($inicial, $final)
     {
-        $etiquetas = $request->all();
+        // $etiquetas = $request->all();
+        // dd($inicial, $final);
         $empresa = Empresa::first();
-        for ($i = $etiquetas['ordeminicial']; $i <= $etiquetas['ordemfinal']; $i++) {
+        for ($i = $inicial; $i <= $final; $i++) {
             $data[] = [
                 'ordem' => $i,
                 'telefone' => $empresa->telefone,
