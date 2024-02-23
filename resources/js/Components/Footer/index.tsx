@@ -8,7 +8,7 @@ const Footer = () => {
         <footer className="flex flex-row items-center justify-betwen py-2 px-4 border-t bg-white">
             <div className="flex flex-1 justify-start">
                 <p className="text-xs font-normal text-gray-700">
-                    {moment().format('YYYY')}&copy; - Licenciado para - {confemp[0].empresa} - CNPJ: {confemp[0].cnpj}
+                    {moment().format('YYYY')}&copy; - Licenciado para - {confemp[0]?.empresa} - CNPJ: {confemp[0]?.cnpj}
                 </p>
             </div>
             <div className="flex flex-1 justify-end">
