@@ -77,6 +77,7 @@ class OrdemController extends Controller
                 'cliente_id' => 'cliente',
             ]
         );
+        Ordem::create($data);
         Session::flash('success', 'Ordem de serviço cadastrada com sucesso!');
         return redirect()->route('ordens.index');
     }
