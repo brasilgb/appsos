@@ -187,7 +187,7 @@ const AddOrdem = ({ clientes, ordem }) => {
                                             className="label-form"
                                             htmlFor="previsao"
                                         >
-                                            Previsão
+                                            Previsão de entrega
                                         </label>
                                         <input
                                             id="previsao"

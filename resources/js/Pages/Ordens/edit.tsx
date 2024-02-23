@@ -13,8 +13,9 @@ import AuthLayout from "@/Layouts/AuthLayout";
 import { statusServico } from "@/Utils/dataSelect";
 import { Head, Link, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoPeopleSharp, IoPrint } from "react-icons/io5";
+import Select from "react-select";
 
 interface ClientesProps {
     id: number;
@@ -28,7 +29,7 @@ interface ClientesProps {
     orcamento: string;
     valorcamento: string;
     preorcamento: string;
-    pecas: string;
+    pecas: any;
     valpecas: string;
     valservico: string;
     custo: string;
@@ -38,8 +39,19 @@ interface ClientesProps {
     obs: string;
 }
 
-const EditOrdem = ({ ordens, tecnicos }: any) => {
+const EditOrdem = ({ ordens, tecnicos, produtos, ordemProduto }: any) => {
     const { flash } = usePage().props;
+
+    const options = produtos.map((produto: any) => ({
+        value: produto.id,
+        label: produto.descricao,
+    }));
+
+    const optionsDefault = ordemProduto.map((produto: any) => ({
+        value: produto.id,
+        label: produto.descricao,
+    }));
+
     const {
         data,
         setData,
@@ -60,10 +72,10 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
         orcamento: ordens.orcamento,
         valorcamento: ordens.valorcamento,
         preorcamento: ordens.preorcamento,
-        pecas: ordens.pecas,
+        pecas: [],
         valpecas: ordens.valpecas,
-        valservico: ordens.valservico,
-        custo: ordens.custo,
+        valservico: ordens.valservico ? ordens.valservico : "0",
+        custo: ordens.custo ? ordens.custo : "0",
         status: ordens.status,
         tecnico: ordens.tecnico,
         detalhes: ordens.detalhes,
@@ -75,6 +87,27 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
         patch(route("ordens.update", ordens.id));
     }
 
+    const handleChange = (selected: any) => {
+        const valueId = selected.map((v: any) => v.value);
+        const vpecas = produtos
+            .filter((fil: any) => valueId.includes(fil.id))
+            .map((peca: any) => peca.valvenda);
+        const totPecas = vpecas.reduce((t: any, q: any) => {
+            return t + q;
+        }, 0);
+
+        setData((data) => ({ ...data, valpecas: totPecas.toFixed(2) }));
+        setData((data) => ({
+            ...data,
+            pecas: selected.map((v: any) => v.value),
+        }));
+        // setData("pecas",selected.map((v: any) => v.value));
+    };
+
+    useEffect(() => {
+        const custo = parseFloat(data.valservico) + parseFloat(data.valpecas);
+        setData("custo", `${custo.toFixed(2)}`);
+    }, [data]);
     return (
         <AuthLayout>
             <Head title="Ordens" />
@@ -115,7 +148,9 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
                                         <input
                                             id="ordem"
                                             type="text"
-                                            value={("00000000" + (data.id)).slice(-8)}
+                                            value={("00000000" + data.id).slice(
+                                                -8,
+                                            )}
                                             className="input-form"
                                             disabled
                                         />
@@ -291,7 +326,7 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
                                         >
                                             Peças utilizadas
                                         </label>
-                                        <input
+                                        {/* <input
                                             id="pecas"
                                             type="text"
                                             value={data.pecas}
@@ -299,6 +334,20 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
                                                 setData("pecas", e.target.value)
                                             }
                                             className="input-form"
+                                        /> */}
+                                        <Select
+                                            options={options}
+                                            isMulti
+                                            defaultValue={optionsDefault}
+                                            onChange={handleChange}
+                                            placeholder="Selecione a(s) peças(s)"
+                                            styles={{
+                                                multiValueLabel: (base) => ({
+                                                    ...base,
+                                                    backgroundColor: "#00AEEF",
+                                                    color: "white",
+                                                }),
+                                            }}
                                         />
                                     </div>
                                     <div className="flex flex-col">
@@ -466,7 +515,10 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
                                             id="preorcamento"
                                             value={data.preorcamento}
                                             onChange={(e) =>
-                                                setData("preorcamento", e.target.value)
+                                                setData(
+                                                    "preorcamento",
+                                                    e.target.value,
+                                                )
                                             }
                                             className="input-form"
                                         />
@@ -492,16 +544,21 @@ const EditOrdem = ({ ordens, tecnicos }: any) => {
                         </CardBody>
                         <CardFooter>
                             <div className="flex items-center justify-end gap-8">
-                                {ordens.status === 8 &&
+                                {ordens.status === 8 && (
                                     <Link
-                                        disabled={ordens.status == "8" ? false : true}
+                                        disabled={
+                                            ordens.status == "8" ? false : true
+                                        }
                                         as="button"
                                         href={`/docs/printer?or=${ordens.id}&tp=2`}
                                         className="flex items-center justify-center bg-zinc-600 hover:bg-zinc-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
                                     >
-                                        <IoPrint size={18} /><span className="ml-2">Imprimir recibo</span>
+                                        <IoPrint size={18} />
+                                        <span className="ml-2">
+                                            Imprimir recibo
+                                        </span>
                                     </Link>
-                                }
+                                )}
                                 <SaveButton />
                             </div>
                         </CardFooter>

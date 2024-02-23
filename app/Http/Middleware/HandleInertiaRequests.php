@@ -52,7 +52,7 @@ class HandleInertiaRequests extends Middleware
                     ->first()
             ],
             'userexist' => fn () => [
-                DB::table('users')->where('id', '>', 1)->exists()
+                DB::table('users')->exists()
             ],
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),

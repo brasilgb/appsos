@@ -12,14 +12,19 @@ class Produto extends Model
     protected $table = 'produtos';
 
     protected $fillable = [
-            'codbarra',
-            'descricao',
-            'movimento',
-            'valcompra',
-            'valvenda',
-            'unidade',
-            'estmaximo',
-            'estminimo',
-            'tipo',
+        'codbarra',
+        'descricao',
+        'movimento',
+        'valcompra',
+        'valvenda',
+        'unidade',
+        'estmaximo',
+        'estminimo',
+        'tipo',
     ];
+
+    public function ordens()
+    {
+        return $this->belongsToMany(Ordem::class);
+    }
 }

@@ -7,6 +7,7 @@ use App\Http\Resources\OrdemResource;
 use App\Models\Cliente;
 use App\Models\Impressao;
 use App\Models\Ordem;
+use App\Models\Produto;
 use App\Models\User;
 use App\Models\Whats;
 use Illuminate\Http\Request;
@@ -76,7 +77,6 @@ class OrdemController extends Controller
                 'cliente_id' => 'cliente',
             ]
         );
-        Ordem::create($data);
         Session::flash('success', 'Ordem de serviço cadastrada com sucesso!');
         return redirect()->route('ordens.index');
     }
@@ -88,7 +88,8 @@ class OrdemController extends Controller
     {
         $ordens = Ordem::with('cliente')->where('id', $ordem->id)->first();
         $tecnicos = User::where('role', 3)->where('status', 1)->get();
-        return Inertia::render('Ordens/edit', ['ordens' => $ordens, 'tecnicos' => $tecnicos]);
+        $produtos = Produto::get();
+        return Inertia::render('Ordens/edit', ['ordens' => $ordens, 'tecnicos' => $tecnicos, 'produtos' => $produtos, 'ordemProduto' => $ordem->produtos]);
     }
 
     /**
@@ -124,6 +125,12 @@ class OrdemController extends Controller
         $dtformat = Carbon::now();
         $data['dtentrega'] = $data['status'] === 8 ? $dtformat->toDateTimeString() : null;
         $ordem->update($data);
+
+        if ($request->pecas != null) {
+            $ord = Ordem::find($ordem->id);
+            $ord->produtos()->sync($request->pecas);
+        }
+
         Session::flash('success', 'Ordem de serviço editada com sucesso!');
         return redirect()->route('ordens.show', ['ordem' => $ordem->id]);
     }
@@ -134,6 +141,10 @@ class OrdemController extends Controller
     public function destroy(Ordem $ordem)
     {
         $ordem->delete();
+
+        $ordem->produtos()->detach();
+        $ordem->delete($ordem);
+
         Session::flash('success', 'Ordem deletada com sucesso');
         return Redirect::route('ordens.index');
     }
