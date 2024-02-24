@@ -23,6 +23,7 @@ const AddUsuario = () => {
         name: "",
         email: "",
         telefone: "",
+        whatsapp: "",
         role: "",
         status: "1",
         password: "",
@@ -62,7 +63,7 @@ const AddUsuario = () => {
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <CardBody className=" border-y border-gray-100">
                             <div className="px-3 my-4">
-                                <div className="grid grid-cols-5 gap-4">
+                                <div className="grid grid-cols-6 gap-4">
                                     <div className="flex flex-col col-span-2">
                                         <label
                                             className="label-form"
@@ -132,6 +133,27 @@ const AddUsuario = () => {
                                                 {errors.telefone}
                                             </div>
                                         )}
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="whatsapp"
+                                        >
+                                            Whatsapp
+                                        </label>
+                                        <input
+                                            id="whatsapp"
+                                            type="text"
+                                            value={data.whatsapp}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "whatsapp",
+                                                    e.target.value,
+                                                )
+                                            }
+                                            className="input-form"
+                                            maxLength={15}
+                                        />
                                     </div>
                                 </div>
 

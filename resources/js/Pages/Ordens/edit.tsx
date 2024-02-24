@@ -26,7 +26,7 @@ interface ClientesProps {
     estado: string;
     acessorios: string;
     previsao: any;
-    orcamento: string;
+    descorcamento: string;
     valorcamento: string;
     preorcamento: string;
     pecas: any;
@@ -69,11 +69,11 @@ const EditOrdem = ({ ordens, tecnicos, produtos, ordemProduto }: any) => {
         estado: ordens.estado,
         acessorios: ordens.acessorios,
         previsao: ordens.previsao,
-        orcamento: ordens.orcamento,
+        descorcamento: ordens.descorcamento,
         valorcamento: ordens.valorcamento,
         preorcamento: ordens.preorcamento,
         pecas: [],
-        valpecas: ordens.valpecas,
+        valpecas: ordens.valpecas ? ordens.valpecas : "0",
         valservico: ordens.valservico ? ordens.valservico : "0",
         custo: ordens.custo ? ordens.custo : "0",
         status: ordens.status,
@@ -326,15 +326,6 @@ const EditOrdem = ({ ordens, tecnicos, produtos, ordemProduto }: any) => {
                                         >
                                             Peças utilizadas
                                         </label>
-                                        {/* <input
-                                            id="pecas"
-                                            type="text"
-                                            value={data.pecas}
-                                            onChange={(e) =>
-                                                setData("pecas", e.target.value)
-                                            }
-                                            className="input-form"
-                                        /> */}
                                         <Select
                                             options={options}
                                             isMulti
@@ -479,7 +470,49 @@ const EditOrdem = ({ ordens, tecnicos, produtos, ordemProduto }: any) => {
                                         </select>
                                     </div>
                                 </div>
-                                <div className="grid grid-cols-3 gap-4 mt-6">
+                                <div className="grid grid-cols-2 gap-4 mt-6">
+                                    <div className="flex flex-col">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="preorcamento"
+                                        >
+                                            Pré-orçamento
+                                        </label>
+                                        <textarea
+                                            id="preorcamento"
+                                            value={data.preorcamento}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "preorcamento",
+                                                    e.target.value,
+                                                )
+                                            }
+                                            className="input-form"
+                                        />
+                                        {errors.preorcamento && (
+                                            <div className="text-red-500">
+                                                {errors.preorcamento}
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="descorcamento"
+                                        >
+                                            Descrição do orçamento
+                                        </label>
+                                        <textarea
+                                            id="descorcamento"
+                                            value={data.descorcamento}
+                                            onChange={(e) =>
+                                                setData("descorcamento", e.target.value)
+                                            }
+                                            className="input-form"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4 mt-6">
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
@@ -503,25 +536,6 @@ const EditOrdem = ({ ordens, tecnicos, produtos, ordemProduto }: any) => {
                                                 {errors.detalhes}
                                             </div>
                                         )}
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <label
-                                            className="label-form"
-                                            htmlFor="preorcamento"
-                                        >
-                                            Pré-orçamento
-                                        </label>
-                                        <textarea
-                                            id="preorcamento"
-                                            value={data.preorcamento}
-                                            onChange={(e) =>
-                                                setData(
-                                                    "preorcamento",
-                                                    e.target.value,
-                                                )
-                                            }
-                                            className="input-form"
-                                        />
                                     </div>
                                     <div className="flex flex-col">
                                         <label

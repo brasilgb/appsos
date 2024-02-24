@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     page: {
         backgroundColor: "#ffffff",
         color: "#3f3f3f",
-        // marginLeft: '0.7cm',
-        // marginTop: '1.25cm',
+        marginLeft: '5.7mm',
+        marginTop: '12.5mm',
     },
     section: {
         width: '100%',
@@ -24,14 +24,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         alignItems: 'flex-start',
-        marginTop: 12,
+        marginTop: 0,
         marginRight: 10,
         marginBottom: 10,
-        marginLeft: 10,
+        marginLeft: 0,
         paddingTop: 10,
         paddingRight: 10,
         paddingBottom: 10,
-        paddingLeft: 10,
+        paddingLeft: 4,
         flexGrow: 1,
     },
     etiqueta: {

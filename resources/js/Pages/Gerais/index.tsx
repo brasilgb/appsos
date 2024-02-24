@@ -87,7 +87,7 @@ const Gerais = ({ geral }: any) => {
                                             className="label-form"
                                             htmlFor="bgimage"
                                         >
-                                            Imagem de fundo
+                                            Imagem de fundo (tela de login)
                                         </label>
                                         <input
                                             id="bgimage"
@@ -111,7 +111,7 @@ const Gerais = ({ geral }: any) => {
                                             className="label-form"
                                             htmlFor="bgcolor"
                                         >
-                                            Cor de fundo
+                                            Cor de fundo (tela de login)
                                         </label>
                                         <input
                                             id="bgcolor"

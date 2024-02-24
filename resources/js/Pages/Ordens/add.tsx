@@ -275,7 +275,7 @@ const AddOrdem = ({ clientes, ordem }) => {
                                             className="label-form"
                                             htmlFor="preorcamento"
                                         >
-                                            Pré-orcamento
+                                            Pré-orçamento
                                         </label>
                                         <textarea
                                             id="preorcamento"
