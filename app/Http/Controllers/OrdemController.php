@@ -114,7 +114,6 @@ class OrdemController extends Controller
             [
                 'equipamento' => 'required',
                 'defeito' => 'required',
-                'detalhes' => 'required',
                 'tecnico' => 'required',
             ],
             $messages,

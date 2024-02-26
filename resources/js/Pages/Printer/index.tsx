@@ -29,7 +29,7 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
             <div className="flex items-center justify-between p-2 bg-gray-200 text-xs">
                 <div>
                     <span className="font-semibold mr-2">O.S. N°:</span>
-                    <span>{("00000000" + (ordem.id)).slice(-8)}</span>
+                    <span>{("00000000" + ordem.id).slice(-8)}</span>
                 </div>
                 <div>
                     <span className="font-semibold mr-2">
@@ -127,7 +127,7 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
 
             <div className="flex flex-col items-start justify-start pb-2 border border-gray-200 mt-4 p-2 text-xs">
                 <div className="mb-2 flex items-center justify-center w-full">
-                <h1 className="text-sm border-b w-full border-gray-100 uppercase font-semibold text-center">
+                    <h1 className="text-sm border-b w-full border-gray-100 uppercase font-semibold text-center">
                         Defeito relatado
                     </h1>
                     <h1 className="text-sm border-b w-full border-gray-100 uppercase font-semibold text-center">
@@ -136,7 +136,7 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
                 </div>
 
                 <div className="flex items-start justify-start w-full">
-                <div className="flex-1">
+                    <div className="flex-1">
                         <h1>{ordem.defeito}</h1>
                     </div>
                     <div className="flex-1">
@@ -147,13 +147,19 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
 
             <div className="flex flex-col items-start justify-start pb-2 border border-gray-200 mt-4 p-2 text-xs">
                 <div className="mb-2 flex items-center justify-center w-full">
-                <h1 className="text-sm border-b w-full border-gray-100 uppercase font-semibold text-center">
+                    <h1 className="text-sm border-b w-full border-gray-100 uppercase font-semibold text-center">
                         Garantias e/ou observações
                     </h1>
                 </div>
                 <div className="flex items-start justify-start w-full">
                     <div className="flex-1">
-                        <div className="mb-2"><p dangerouslySetInnerHTML={{__html:`${printer ? printer : ''}`}}/></div>
+                        <div className="mb-2">
+                            <p
+                                dangerouslySetInnerHTML={{
+                                    __html: `${printer ? printer : ""}`,
+                                }}
+                            />
+                        </div>
                         <div>{ordem.obs}</div>
                     </div>
                 </div>
@@ -168,25 +174,51 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
                                 : "Serviços prestados"}
                         </h1>
                     </div>
-                    <div className="text-sm border-b mb-2 w-full">
-                        {ordem.detalhes}
+                    <div className={`text-sm ${ordem.status == 3 ? '' : 'border-b'} mb-2 w-full`}>
+                        {ordem.status == 3
+                            ? ordem.descorcamento
+                            : ordem.detalhes}
                     </div>
-                    <div className="flex items-start justify-start w-full">
-                        <div className="flex-1">
-                            <div>Valor dos serviços:</div>
-                            <div>Valor de peças/produtos:</div>
-                            <div className="font-semibold">Valor total:</div>
-                        </div>
-                        <div className="flex-1">
-                            <div>
-                                {(ordem.valservico ? Number(ordem.valservico) : 0).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
+                    {ordem.status != 3 && (
+                        <div className="flex items-start justify-start w-full">
+                            <div className="flex-1">
+                                <div>Valor dos serviços:</div>
+                                <div>Valor de peças/produtos:</div>
+                                <div className="font-semibold">
+                                    Valor total:
+                                </div>
                             </div>
-                            <div>{(ordem.valpecas ? Number(ordem.valpecas) : 0).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</div>
-                            <div className="font-semibold">
-                                {(Number(ordem.valservico) + Number(ordem.valpecas)).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
+                            <div className="flex-1">
+                                <div>
+                                    {(ordem.valservico
+                                        ? Number(ordem.valservico)
+                                        : 0
+                                    ).toLocaleString("pt-br", {
+                                        style: "currency",
+                                        currency: "BRL",
+                                    })}
+                                </div>
+                                <div>
+                                    {(ordem.valpecas
+                                        ? Number(ordem.valpecas)
+                                        : 0
+                                    ).toLocaleString("pt-br", {
+                                        style: "currency",
+                                        currency: "BRL",
+                                    })}
+                                </div>
+                                <div className="font-semibold">
+                                    {(
+                                        Number(ordem.valservico) +
+                                        Number(ordem.valpecas)
+                                    ).toLocaleString("pt-br", {
+                                        style: "currency",
+                                        currency: "BRL",
+                                    })}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             )}
 
@@ -194,13 +226,13 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
                 <div className="w-80 border-t border-gray-400 text-center text-sm">
                     Assinatura Cliente
                 </div>
-                {tipo !== "1"
-                    ? <div className="w-80 border-t border-gray-400 text-center text-sm">
+                {tipo !== "1" ? (
+                    <div className="w-80 border-t border-gray-400 text-center text-sm">
                         Assinatura Responsável Técnico
                     </div>
-                    : <div className="w-80"></div>
-                }
-
+                ) : (
+                    <div className="w-80"></div>
+                )}
             </div>
 
             <div className="mt-8 ml-8">

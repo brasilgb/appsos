@@ -38,8 +38,8 @@ const Ordens = ({ ordens, whats, printers }: any) => {
     const { flash } = usePage().props;
 
     return (
-        <AuthLayout>            
-        <Head title="Ordens" />
+        <AuthLayout>
+            <Head title="Ordens" />
             <Card>
                 <HeaderContent>
                     <TitleTop>
@@ -80,7 +80,9 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                     <Fragment key={ordem.id}>
                                         <TableRow>
                                             <TableCell>
-                                            {("00000000" + (ordem.id)).slice(-8)}
+                                                {("00000000" + ordem.id).slice(
+                                                    -8,
+                                                )}
                                             </TableCell>
                                             <TableCell>
                                                 {ordem.cliente.nome}
@@ -102,26 +104,35 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                                 )}
                                             </TableCell>
                                             <TableCell>
-                                                {ordem.dtentrega
+                                                {ordem.dtentrega !==
+                                                "0000-00-00 00:00:00"
                                                     ? moment(
-                                                        ordem.dtentrega,
-                                                    ).format("DD/MM/YYYY HH:mm")
+                                                          ordem.dtentrega,
+                                                      ).format(
+                                                          "DD/MM/YYYY HH:mm",
+                                                      )
                                                     : "__/__/____"}
                                             </TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
                                                 <WhatsAppButton
-                                                    url={`https://api.whatsapp.com/send?phone=${encodeURIComponent(ordem.cliente.whatsapp)}&text=${encodeURIComponent(ordem.status == 6 || ordem.status == 7 ? whats.concluido : ordem.status == 3 ? whats.orcamento : '')}`}
+                                                    url={`https://api.whatsapp.com/send?phone=${encodeURIComponent(ordem.cliente.whatsapp)}&text=${encodeURIComponent(ordem.status == 6 || ordem.status == 7 ? whats.concluido : ordem.status == 3 ? whats.orcamento : "")}`}
                                                 />
                                                 <ImagesAppButton
                                                     url={`${ordem.id}`}
                                                 />
-                                                {printers
-                                                    ? <PrintButton
+                                                {printers ? (
+                                                    <PrintButton
                                                         url={`${ordem.id}`}
                                                         status={ordem.status}
                                                     />
-                                                    : <div title="Preencha os dados de impressão em configurações > impressões" className="py-1.5 px-3 rounded-md shadow bg-gray-200"><IoPrint size={18} /></div>
-                                                }
+                                                ) : (
+                                                    <div
+                                                        title="Preencha os dados de impressão em configurações > impressões"
+                                                        className="py-1.5 px-3 rounded-md shadow bg-gray-200"
+                                                    >
+                                                        <IoPrint size={18} />
+                                                    </div>
+                                                )}
                                                 <EditButton
                                                     url={route(
                                                         "ordens.edit",

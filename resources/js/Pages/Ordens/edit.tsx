@@ -531,11 +531,6 @@ const EditOrdem = ({ ordens, tecnicos, produtos, ordemProduto }: any) => {
                                             }
                                             className="input-form"
                                         />
-                                        {errors.detalhes && (
-                                            <div className="text-red-500">
-                                                {errors.detalhes}
-                                            </div>
-                                        )}
                                     </div>
                                     <div className="flex flex-col">
                                         <label
