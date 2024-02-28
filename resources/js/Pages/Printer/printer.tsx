@@ -15,7 +15,7 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
             <div className="flex items-start justify-start py-1 px-2 border-b border-gray-200 font-semibold">
                 <div className="flex items-center justify-start w-8 mr-4">
                     <img
-                        src={`/storage/images/${empresa.logo ? empresa.logo : "logo.png"}`}
+                        src={`/storage/images/${empresa.logo ? empresa.logo : "default.png"}`}
                         alt=""
                     />
                 </div>
