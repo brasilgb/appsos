@@ -12,22 +12,24 @@ interface PrintProps {
 const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
     return (
         <div className="text-[10px] text-gray-600">
-            <div className="flex items-start justify-start py-1 px-2 border-b border-gray-200">
-                <div className="flex flex-col items-start justify-start w-full">
+            <div className="flex items-start justify-start py-1 px-2 border-b border-gray-200 font-semibold">
+                <div className="flex items-center justify-start w-8 mr-4">
+                    <img
+                        src={`/storage/images/${empresa.logo ? empresa.logo : "logo.png"}`}
+                        alt=""
+                    />
+                </div>
+                <div className="flex-1 flex-col items-start justify-start">
                     <h1>{empresa.razao}</h1>
-                    <h1>{empresa.cnpj}</h1>
+                    <h1>CNPJ: {empresa.cnpj}</h1>
+                </div>
+                <div className="flex-1 flex-col items-start justify-start">
                     <h1>
                         {empresa.endereco} - {empresa.bairro}
                     </h1>
                     <h1>
                         {empresa.cidade} - {empresa.telefone}
                     </h1>
-                </div>
-                <div className="flex items-center justify-start w-16">
-                    <img
-                        src={`/storage/images/${empresa.logo ? empresa.logo : "logo.png"}`}
-                        alt=""
-                    />
                 </div>
             </div>
             <div className="flex items-center justify-between px-2 py-0.5 bg-gray-200">
