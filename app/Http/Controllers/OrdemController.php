@@ -106,7 +106,6 @@ class OrdemController extends Controller
     public function update(Request $request, Ordem $ordem)
     {
         $data = $request->all();
-
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido'
         ];
@@ -123,7 +122,7 @@ class OrdemController extends Controller
             ]
         );
         $dtformat = Carbon::now();
-        $data['dtentrega'] = $data['status'] === 8 ? $dtformat->toDateTimeString() : null;
+        $data['dtentrega'] = $request->status === '8' ? $dtformat->toDateTimeString() : null;
         $ordem->update($data);
 
         if ($request->pecas != null) {

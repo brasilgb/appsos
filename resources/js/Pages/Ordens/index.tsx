@@ -104,13 +104,15 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                                 )}
                                             </TableCell>
                                             <TableCell>
-                                                {ordem.dtentrega !==
+                                            {ordem.dtentrega !=
                                                 "0000-00-00 00:00:00"
-                                                    ? moment(
-                                                          ordem.dtentrega,
-                                                      ).format(
-                                                          "DD/MM/YYYY HH:mm",
-                                                      )
+                                                    ? ordem.dtentrega !== null
+                                                        ? moment(
+                                                              ordem.dtentrega,
+                                                          ).format(
+                                                              "DD/MM/YYYY HH:mm",
+                                                          )
+                                                        : "__/__/____"
                                                     : "__/__/____"}
                                             </TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
