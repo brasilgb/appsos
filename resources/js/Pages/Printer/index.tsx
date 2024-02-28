@@ -8,7 +8,7 @@ import { maskCpfCnpj } from "@/Utils/mask";
 const Printer = ({ empresa, ordem, printer, tipo }: any) => {
     return (
         <PrinterLayout backlink="/ordens">
-            <div className="flex items-start justify-start pb-2 border-b border-gray-200 text-xs">
+            <div className="flex items-start justify-start px-2 pb-1 border-b border-gray-200 text-xs">
                 <div className="flex flex-col items-start justify-start w-full">
                     <h1>{empresa.razao}</h1>
                     <h1>{empresa.cnpj}</h1>
@@ -39,9 +39,9 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
                 </div>
             </div>
 
-            <div className="flex flex-col items-start justify-start pb-2 border border-gray-200 mt-2 p-2 text-xs">
-                <div className="mb-2 flex items-center justify-center w-full">
-                    <h1 className="text-sm border-b w-full border-gray-100 uppercase font-semibold text-center">
+            <div className="flex flex-col items-start justify-start pb-1 border border-gray-200 p-2 text-xs">
+                <div className="mb-1 flex items-center justify-center w-full">
+                    <h1 className="text-xs border-b w-full border-gray-100 uppercase font-semibold text-center">
                         Dados do cliente
                     </h1>
                 </div>
@@ -93,8 +93,8 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
             </div>
 
             <div className="flex flex-col items-start justify-start pb-2 border border-gray-200 mt-2 p-2 text-xs">
-                <div className="mb-2 flex items-center justify-center w-full">
-                    <h1 className="text-sm border-b w-full border-gray-100 uppercase font-semibold text-center">
+                <div className="mb-1 flex items-center justify-center w-full">
+                    <h1 className="text-xs border-b w-full border-gray-100 uppercase font-semibold text-center">
                         Informações do produto
                     </h1>
                 </div>
@@ -126,11 +126,11 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
             </div>
 
             <div className="flex flex-col items-start justify-start pb-2 border border-gray-200 mt-4 p-2 text-xs">
-                <div className="mb-2 flex items-center justify-center w-full">
-                    <h1 className="text-sm border-b w-full border-gray-100 uppercase font-semibold text-center">
+                <div className="mb-1 flex items-center justify-center w-full">
+                    <h1 className="text-xs border-b w-full border-gray-100 uppercase font-semibold text-center">
                         Defeito relatado
                     </h1>
-                    <h1 className="text-sm border-b w-full border-gray-100 uppercase font-semibold text-center">
+                    <h1 className="text-xs border-b w-full border-gray-100 uppercase font-semibold text-center">
                         Pré-orçamento
                     </h1>
                 </div>
@@ -146,14 +146,14 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
             </div>
 
             <div className="flex flex-col items-start justify-start pb-2 border border-gray-200 mt-4 p-2 text-xs">
-                <div className="mb-2 flex items-center justify-center w-full">
-                    <h1 className="text-sm border-b w-full border-gray-100 uppercase font-semibold text-center">
+                <div className="mb-1 flex items-center justify-center w-full">
+                    <h1 className="text-xs border-b w-full border-gray-100 uppercase font-semibold text-center">
                         Garantias e/ou observações
                     </h1>
                 </div>
                 <div className="flex items-start justify-start w-full">
                     <div className="flex-1">
-                        <div className="mb-2">
+                        <div className="mb-1">
                             <p
                                 dangerouslySetInnerHTML={{
                                     __html: `${printer ? printer : ""}`,
@@ -166,15 +166,15 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
             </div>
 
             {tipo !== "1" && (
-                <div className="flex flex-col items-start justify-start pb-2 border border-gray-200 mt-4 p-2 text-sm">
-                    <div className="mb-2 flex items-center justify-center w-full">
+                <div className="flex flex-col items-start justify-start pb-2 border border-gray-200 mt-4 p-2 text-xs">
+                    <div className="mb-1 flex items-center justify-center w-full">
                         <h1 className="text-base font-semibold">
                             {ordem.status == 3
                                 ? "Orçamento"
                                 : "Serviços prestados"}
                         </h1>
                     </div>
-                    <div className={`text-sm ${ordem.status == 3 ? '' : 'border-b'} mb-2 w-full`}>
+                    <div className={`text-xs ${ordem.status == 3 ? '' : 'border-b'} mb-1 w-full`}>
                         {ordem.status == 3
                             ? ordem.descorcamento
                             : ordem.detalhes}
@@ -223,11 +223,11 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
             )}
 
             <div className="flex items-center justify-around mt-16">
-                <div className="w-80 border-t border-gray-400 text-center text-sm">
+                <div className="w-80 border-t border-gray-400 text-center text-xs">
                     Assinatura Cliente
                 </div>
                 {tipo !== "1" ? (
-                    <div className="w-80 border-t border-gray-400 text-center text-sm">
+                    <div className="w-80 border-t border-gray-400 text-center text-xs">
                         Assinatura Responsável Técnico
                     </div>
                 ) : (
@@ -236,7 +236,7 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
             </div>
 
             <div className="mt-8 ml-8">
-                <p className="text-sm">
+                <p className="text-xs">
                     {empresa.cidade}, {moment().locale("pt").format("LL")}.
                 </p>
             </div>

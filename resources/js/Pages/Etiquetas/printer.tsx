@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     page: {
         backgroundColor: "#ffffff",
         color: "#3f3f3f",
-        marginLeft: '5.7mm',
-        marginTop: '12.5mm',
+        // marginLeft: '5.7mm',
+        // marginTop: '12.5mm',
     },
     section: {
         width: '100%',
@@ -24,34 +24,34 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         alignItems: 'flex-start',
-        marginTop: 0,
+        marginTop: '11.6mm',
         marginRight: 10,
-        marginBottom: 10,
-        marginLeft: 0,
-        paddingTop: 10,
+        marginBottom: 0,
+        marginLeft: '5.7mm',
+        paddingTop: 0,
         paddingRight: 10,
-        paddingBottom: 10,
-        paddingLeft: 4,
+        paddingBottom: 0,
+        paddingLeft: 0,
         flexGrow: 1,
     },
     etiqueta: {
-        width: '31mm',
+        width: '33mm',
         height: '17mm',
-        marginRight: '2mm',
+        // marginRight: '2mm',
         // marginBottom: '0.5mm',
         // paddingTop: '0.5mm',
-        border: 1,
-        borderColor: '#f5f5f5',
-        textAlign: 'center'
+        border: 0,
+        borderColor: '#666',
+        textAlign: 'center',
+        alignItems: 'center',
+        justifyContent: 'space-around'
     },
     textmd: {
         fontSize: 12,
-        marginVertical: 2,
         fontWeight: 'bold',
     },
     textxs: {
         fontSize: 8,
-        paddingVertical: 2,
     },
     viewer: {
         width: window.innerWidth, //the pdf viewer will take up all of the width and height
