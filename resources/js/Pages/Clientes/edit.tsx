@@ -130,7 +130,7 @@ const EditCliente = ({ clientes }: any) => {
                                         <input
                                             id="cpf"
                                             type="text"
-                                            value={maskCpfCnpj(data.cpf)}
+                                            value={data.cpf?maskCpfCnpj(data.cpf):''}
                                             onChange={(e) =>
                                                 setData("cpf", e.target.value)
                                             }
