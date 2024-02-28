@@ -37,11 +37,18 @@ interface ClientesProps {
     tecnico: string;
     detalhes: string;
     obs: string;
+    page: string;
 }
 
-const EditOrdem = ({ ordens, tecnicos, produtos, ordemProduto }: any) => {
+const EditOrdem = ({
+    ordens,
+    tecnicos,
+    produtos,
+    ordemProduto,
+    currentPage,
+}: any) => {
     const { flash } = usePage().props;
-
+    console.log(currentPage);
     const options = produtos.map((produto: any) => ({
         value: produto.id,
         label: produto.descricao,
@@ -80,6 +87,7 @@ const EditOrdem = ({ ordens, tecnicos, produtos, ordemProduto }: any) => {
         tecnico: ordens.tecnico,
         detalhes: ordens.detalhes,
         obs: ordens.obs,
+        page: currentPage,
     });
 
     function handleSubmit(e: any) {
@@ -108,6 +116,7 @@ const EditOrdem = ({ ordens, tecnicos, produtos, ordemProduto }: any) => {
         const custo = parseFloat(data.valservico) + parseFloat(data.valpecas);
         setData("custo", `${custo.toFixed(2)}`);
     }, [data]);
+
     return (
         <AuthLayout>
             <Head title="Ordens" />
@@ -128,7 +137,10 @@ const EditOrdem = ({ ordens, tecnicos, produtos, ordemProduto }: any) => {
                     <FlashMessage message={flash} />
                     <CardHeader>
                         <CardHeaderContent>
-                            <BackButton url={"/ordens"} label={"Voltar"} />
+                            <BackButton
+                                url={`/ordens?page=${currentPage}`}
+                                label={"Voltar"}
+                            />
                         </CardHeaderContent>
                         <CardHeaderContent>
                             <></>
@@ -506,7 +518,10 @@ const EditOrdem = ({ ordens, tecnicos, produtos, ordemProduto }: any) => {
                                             id="descorcamento"
                                             value={data.descorcamento}
                                             onChange={(e) =>
-                                                setData("descorcamento", e.target.value)
+                                                setData(
+                                                    "descorcamento",
+                                                    e.target.value,
+                                                )
                                             }
                                             className="input-form"
                                         />

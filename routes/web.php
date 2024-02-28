@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
         'usuarios' => 'user'
     ]);
     Route::resource('/clientes', ClienteController::class);
+
     Route::resource('/ordens', OrdemController::class)->parameters([
         'ordens' => 'ordem'
     ]);

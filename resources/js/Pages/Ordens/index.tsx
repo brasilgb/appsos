@@ -136,10 +136,12 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                                     </div>
                                                 )}
                                                 <EditButton
-                                                    url={route(
-                                                        "ordens.edit",
-                                                        ordem.id,
-                                                    )}
+                                                    // url={route(
+                                                    //     "ordens.edit",
+                                                    //     ordem.id,
+                                                    // )}
+                                                    url={`/ordens/${ordem.id}`}
+                                                    param={ordens.current_page}
                                                 />
                                                 <DeleteButton
                                                     url="ordens.destroy"

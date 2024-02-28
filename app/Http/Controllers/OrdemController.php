@@ -85,12 +85,13 @@ class OrdemController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Ordem $ordem)
+    public function show(Request $request, Ordem $ordem)
     {
+        $page = $request->page;
         $ordens = Ordem::with('cliente')->where('id', $ordem->id)->first();
         $tecnicos = User::where('role', 3)->where('status', 1)->get();
         $produtos = Produto::get();
-        return Inertia::render('Ordens/edit', ['ordens' => $ordens, 'tecnicos' => $tecnicos, 'produtos' => $produtos, 'ordemProduto' => $ordem->produtos]);
+        return Inertia::render('Ordens/edit', ['ordens' => $ordens, 'tecnicos' => $tecnicos, 'produtos' => $produtos, 'ordemProduto' => $ordem->produtos, 'currentPage' => $page]);
     }
 
     /**
@@ -98,7 +99,7 @@ class OrdemController extends Controller
      */
     public function edit(Ordem $ordem)
     {
-        return Redirect::route('ordens.show', ['ordem' => $ordem->id]);
+        return Redirect::route('ordens.show', ['ordem' => [$ordem->id]]);
     }
     /**
      * Update the specified resource in storage.
@@ -131,7 +132,7 @@ class OrdemController extends Controller
         }
 
         Session::flash('success', 'Ordem de serviço editada com sucesso!');
-        return redirect()->route('ordens.show', ['ordem' => $ordem->id]);
+        return redirect()->route('ordens.show', ['ordem' => $ordem->id, 'page' => $request->page]);
     }
 
     /**

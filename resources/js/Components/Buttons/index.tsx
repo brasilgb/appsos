@@ -206,7 +206,7 @@ export const OrderButton = ({ url }: ButtonsProps) => {
     );
 };
 
-export const EditButton = ({ url }: ButtonsProps) => {
+export const EditButton = ({ url, param }: ButtonsProps) => {
     return (
         <Link
             className="flex items-center justify-center bg-orange-600 hover:bg-orange-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
@@ -214,6 +214,7 @@ export const EditButton = ({ url }: ButtonsProps) => {
             as="button"
             type="button"
             title={`Editar registro`}
+            data={{page: param}}
         >
             <TbEdit size={18} />
         </Link>
