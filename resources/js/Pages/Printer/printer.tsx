@@ -84,7 +84,7 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
             <div className="flex flex-col items-start justify-start pb-2 border border-gray-200 mt-2 p-2">
                 <div className="mb-1 flex items-center justify-center w-full">
                     <h1 className="border-b w-full border-gray-100 uppercase font-semibold text-center">
-                        Informações do produto
+                        Informações sobre o produto
                     </h1>
                 </div>
 
@@ -104,7 +104,25 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                         </h1>
                     </div>
                 </div>
-                <div>
+                <div className="flex items-start justify-start w-full">
+                    <div className="flex-1">
+                        <h1>
+                            <span className="font-semibold mr-1">
+                                Defeito relatado:
+                            </span>
+                            {ordem.defeito}
+                        </h1>
+                    </div>
+                    <div className="flex-1">
+                        <h1>
+                            <span className="font-semibold mr-1">
+                                Pré-orçamento:
+                            </span>
+                            {ordem.preorcamento}
+                        </h1>
+                    </div>
+                </div>
+                <div className="flex items-start justify-start w-full">
                     <h1>
                         <span className="font-semibold mr-1">
                             Estado do equipamento:
@@ -113,27 +131,6 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                     </h1>
                 </div>
             </div>
-
-            <div className="flex flex-col items-start justify-start pb-2 border border-gray-200 mt-4 p-2">
-                <div className="mb-1 flex items-center justify-center w-full">
-                    <h1 className="border-b w-full border-gray-100 uppercase font-semibold text-center">
-                        Defeito relatado
-                    </h1>
-                    <h1 className="border-b w-full border-gray-100 uppercase font-semibold text-center">
-                        Pré-orçamento
-                    </h1>
-                </div>
-
-                <div className="flex items-start justify-start w-full">
-                    <div className="flex-1">
-                        <h1>{ordem.defeito}</h1>
-                    </div>
-                    <div className="flex-1">
-                        <h1>{ordem.preorcamento}</h1>
-                    </div>
-                </div>
-            </div>
-
             <div className="flex flex-col items-start justify-start pb-2 border border-gray-200 mt-4 p-2">
                 <div className="mb-1 flex items-center justify-center w-full">
                     <h1 className="border-b w-full border-gray-100 uppercase font-semibold text-center">
