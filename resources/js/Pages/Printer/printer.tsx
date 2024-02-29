@@ -72,7 +72,7 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                             <span className="font-semibold mr-1">
                                 CPF/CNPJ:
                             </span>
-                            {maskCpfCnpj(ordem.cliente.cpf)}
+                            {ordem.cliente.cpf?maskCpfCnpj(ordem.cliente.cpf):''}
                         </h1>
                         <h1>
                             <span className="font-semibold mr-1">Contato:</span>
