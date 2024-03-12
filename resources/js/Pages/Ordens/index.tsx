@@ -70,6 +70,7 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                     <TableHead>Telefone</TableHead>
                                     <TableHead>Recebimento</TableHead>
                                     <TableHead>Equipamento</TableHead>
+                                    <TableHead>Modelo</TableHead>
                                     <TableHead>Status</TableHead>
                                     <TableHead>Entrega</TableHead>
                                     <TableHead></TableHead>
@@ -97,6 +98,9 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                             </TableCell>
                                             <TableCell>
                                                 {ordem.equipamento}
+                                            </TableCell>
+                                            <TableCell>
+                                                {ordem.modelo}
                                             </TableCell>
                                             <TableCell>
                                                 {statusOrdemByValue(
