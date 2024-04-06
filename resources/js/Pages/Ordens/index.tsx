@@ -29,7 +29,7 @@ import {
 } from "@/Components/Table";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { statusOrdemByValue } from "@/Utils/functions";
-import { Head, usePage } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment } from "react";
 import { IoConstruct, IoPrint } from "react-icons/io5";
@@ -86,7 +86,11 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                                 )}
                                             </TableCell>
                                             <TableCell>
-                                                {ordem.cliente.nome}
+                                                <Link 
+                                                className="underline text-blue-800 font-medium"
+                                                title={`Ordens de ${ordem.cliente.nome}`}
+                                                href={`/ordens?oc=${ordem.cliente_id}`}>{ordem.cliente.nome}
+                                                </Link>
                                             </TableCell>
                                             <TableCell>
                                                 {ordem.cliente.telefone}
