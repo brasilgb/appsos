@@ -8,7 +8,6 @@ import { CgSpinnerTwo } from "react-icons/cg";
 
 export default function Login({ status, canResetPassword }) {
     const { confemp, confger, userexist } = usePage().props;
-console.log(userexist[0]);
 
     const [passwordView, setPasswordView] = useState<boolean>(false);
     const [passwordForgout, setPasswordForgout] = useState<boolean>(false);
