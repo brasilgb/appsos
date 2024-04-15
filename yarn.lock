@@ -1926,6 +1926,10 @@ kleur@^3.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
+laravel-pt-br-localization@lucascudo/laravel-pt-br-localization:
+  version "0.0.0"
+  resolved "https://codeload.github.com/lucascudo/laravel-pt-br-localization/tar.gz/5065baae95b21999479ff6f3785efd18c9df7e46"
+
 laravel-vite-plugin@^0.8.0:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/laravel-vite-plugin/-/laravel-vite-plugin-0.8.1.tgz#5e077944946c02008993f7cece8c36144a25c433"

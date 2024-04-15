@@ -24,6 +24,7 @@
     "dependencies": {
         "@inertiajs/inertia": "^0.11.1",
         "@react-pdf/renderer": "^3.3.6",
+        "laravel-pt-br-localization": "lucascudo/laravel-pt-br-localization",
         "moment": "^2.29.4",
         "prettier": "^3.2.4",
         "react-icons": "^4.12.0",

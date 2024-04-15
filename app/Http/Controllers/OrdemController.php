@@ -91,7 +91,14 @@ class OrdemController extends Controller
         $ordens = Ordem::with('cliente')->where('id', $ordem->id)->first();
         $tecnicos = User::where('role', 3)->where('status', 1)->get();
         $produtos = Produto::get();
-        return Inertia::render('Ordens/edit', ['ordens' => $ordens, 'tecnicos' => $tecnicos, 'produtos' => $produtos, 'ordemProduto' => $ordem->produtos, 'currentPage' => $page]);
+        return Inertia::render('Ordens/edit', [
+            'ordens' => $ordens, 
+            'tecnicos' => $tecnicos, 
+            'produtos' => $produtos, 
+            'ordemProduto' => $ordem->produtos, 
+            'currentPage' => $page
+            ]
+        );
     }
 
     /**

@@ -56,8 +56,8 @@ const AddCliente = () => {
     };
 
     return (
-        <AuthLayout>            
-        <Head title="Clientes" />
+        <AuthLayout>
+            <Head title="Clientes" />
             <Card>
                 <HeaderContent>
                     <TitleTop>
@@ -127,6 +127,7 @@ const AddCliente = () => {
                                             className="input-form"
                                         />
                                     </div>
+
                                     <div className="flex flex-col col-span-2">
                                         <label
                                             className="label-form"
@@ -149,6 +150,7 @@ const AddCliente = () => {
                                             </div>
                                         )}
                                     </div>
+
                                     <div className="flex flex-col col-span-2">
                                         <label
                                             className="label-form"
@@ -195,6 +197,7 @@ const AddCliente = () => {
                                             maxLength={9}
                                         />
                                     </div>
+
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
@@ -212,6 +215,7 @@ const AddCliente = () => {
                                             className="input-form"
                                         />
                                     </div>
+
                                     <div className="flex flex-col col-span-2">
                                         <label
                                             className="label-form"
@@ -232,6 +236,7 @@ const AddCliente = () => {
                                             className="input-form"
                                         />
                                     </div>
+
                                     <div className="flex flex-col col-span-2">
                                         <label
                                             className="label-form"
@@ -275,6 +280,7 @@ const AddCliente = () => {
                                             className="input-form"
                                         />
                                     </div>
+                                    
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
