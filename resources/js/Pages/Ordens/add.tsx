@@ -15,7 +15,8 @@ import { IoPeopleSharp } from "react-icons/io5";
 import Select from "react-select";
 
 const AddOrdem = ({ clientes, ordem }) => {
-    const [filterSeacrh, setFilterSeacrh] = useState<any>([]);
+    const [inputSeach, setInputSeach] = useState<string>("");
+    const [filterSearch, setFilterSearch] = useState<any>([]);
     const { data, setData, post, progress, processing, errors } = useForm({
         cliente_id: "",
         cliente: "",
@@ -31,15 +32,24 @@ const AddOrdem = ({ clientes, ordem }) => {
     });
 
 
-    useEffect(() => {
+    const handleFilter = () => {
+
         const client = data.cliente.toLowerCase();
         if (client.length > 3) {
+            setShowCustomers(true);
             const result = clientes.filter((cl: any) => (cl.nome.toLowerCase().includes(client)));
             setFilterSeacrh(result);
         } else {
             setFilterSeacrh([]);
+            setShowCustomers(false);
         }
-    }, [data])
+    }
+
+    useEffect(() => {
+        if (showCustomers) {
+            setShowCustomers(false);
+        }
+    }, [showCustomers]);
 
     function handleSubmit(e: any) {
         e.preventDefault();
@@ -47,7 +57,6 @@ const AddOrdem = ({ clientes, ordem }) => {
     }
 
     const handleChangeCustomer = (id: any, nome: any) => {
-        setFilterSeacrh([]);
         setData((data) => ({ ...data, cliente_id: id }));
         setData((data) => ({ ...data, cliente: nome }));
     };
@@ -117,7 +126,7 @@ const AddOrdem = ({ clientes, ordem }) => {
                                                     e.target.value,
                                                 )
                                             }
-                                            className="input-form"
+                                            className="hidden"
                                         />
                                         <input
                                             id="cliente"
@@ -131,13 +140,15 @@ const AddOrdem = ({ clientes, ordem }) => {
                                             }
                                             className="input-form"
                                         />
-                                        {filterSeacrh &&
+                                        {showCustomers &&
                                             <div className="absolute bg-gray-50 border-2 border-white shadow-md w-full rounded-sm top-16">
                                                 {filterSeacrh.map((cliente: any, idx: number) => (
                                                     <div key={idx} className="flex items-center justify-normal">
                                                         <div
                                                             onClick={() => handleChangeCustomer(cliente.id, cliente.nome)}
-                                                            className="">{cliente.nome}</div>
+                                                            className=""
+                                                        >{cliente.nome}
+                                                        </div>
                                                     </div>
                                                 ))}
                                             </div>
