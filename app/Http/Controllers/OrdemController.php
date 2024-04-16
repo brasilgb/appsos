@@ -54,6 +54,7 @@ class OrdemController extends Controller
 
         return Inertia::render('Ordens/add', ['clientes' => $clientes, 'ordem' => $ordem]);
     }
+    
     /**
      * Store a newly created resource in storage.
      */

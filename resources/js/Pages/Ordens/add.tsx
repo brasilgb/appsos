@@ -10,7 +10,7 @@ import {
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { Head, useForm } from "@inertiajs/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { IoPeopleSharp } from "react-icons/io5";
 import Select from "react-select";
 
@@ -33,6 +33,18 @@ const AddOrdem = ({ clientes, ordem }) => {
         obs: "",
     });
 
+
+    useEffect(() => {
+        const client  = data.cliente_id;
+        if(client.length > 3){
+            const result = clientes.filter((cl:any) => (cl.includes(client)));
+            console.log(result);
+        }
+        
+        
+
+    }, [data])
+
     function handleSubmit(e: any) {
         e.preventDefault();
         post(route("ordens.store"));
@@ -43,8 +55,8 @@ const AddOrdem = ({ clientes, ordem }) => {
     };
 
     return (
-        <AuthLayout>            
-        <Head title="Ordens" />
+        <AuthLayout>
+            <Head title="Ordens" />
             <Card>
                 <HeaderContent>
                     <TitleTop>
@@ -98,7 +110,19 @@ const AddOrdem = ({ clientes, ordem }) => {
                                         >
                                             Nome do cliente
                                         </label>
-                                        <Select
+                                        <input
+                                            id="cliente_id"
+                                            type="text"
+                                            value={data.cliente_id}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "cliente_id",
+                                                    e.target.value,
+                                                )
+                                            }
+                                            className="input-form"
+                                        />
+                                        {/* <Select
                                             id="cliente_id"
                                             options={options}
                                             placeholder="Selecione o cliente"
@@ -110,7 +134,7 @@ const AddOrdem = ({ clientes, ordem }) => {
                                                     borderRadius: 6,
                                                 }),
                                             }}
-                                        />
+                                        /> */}
                                         {errors.cliente_id && (
                                             <div className="text-sm text-red-500">
                                                 {errors.cliente_id}

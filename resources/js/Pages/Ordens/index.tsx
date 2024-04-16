@@ -57,7 +57,7 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                             />
                         </CardHeaderContent>
                         <CardHeaderContent>
-                            <AddButton url={"/ordens/create"} label={"Ordem"} />
+                            <AddButton url={route('ordens.create')} label={"Ordem"} />
                         </CardHeaderContent>
                     </CardHeader>
                     <FlashMessage message={flash} />
@@ -86,10 +86,10 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                                 )}
                                             </TableCell>
                                             <TableCell>
-                                                <Link 
-                                                className="underline text-blue-800 font-medium"
-                                                title={`Ordens de ${ordem.cliente.nome}`}
-                                                href={`/ordens?oc=${ordem.cliente_id}`}>{ordem.cliente.nome}
+                                                <Link
+                                                    className="underline text-blue-800 font-medium"
+                                                    title={`Ordens de ${ordem.cliente.nome}`}
+                                                    href={`/ordens?oc=${ordem.cliente_id}`}>{ordem.cliente.nome}
                                                 </Link>
                                             </TableCell>
                                             <TableCell>
@@ -112,20 +112,20 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                                 )}
                                             </TableCell>
                                             <TableCell>
-                                            {ordem.dtentrega !=
-                                                "0000-00-00 00:00:00"
+                                                {ordem.dtentrega !=
+                                                    "0000-00-00 00:00:00"
                                                     ? ordem.dtentrega !== null
                                                         ? moment(
-                                                              ordem.dtentrega,
-                                                          ).format(
-                                                              "DD/MM/YYYY HH:mm",
-                                                          )
+                                                            ordem.dtentrega,
+                                                        ).format(
+                                                            "DD/MM/YYYY HH:mm",
+                                                        )
                                                         : "__/__/____"
                                                     : "__/__/____"}
                                             </TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
                                                 <WhatsAppButton
-                                                    url={`https://api.whatsapp.com/send?phone=${encodeURIComponent(ordem.cliente.whatsapp)}&text=${encodeURIComponent(ordem.status == 6 || ordem.status == 7 ? whats.concluido : ordem.status == 3 ? whats.orcamento : "")}`}
+                                                    url={`https://api.whatsapp.com/send?phone=${encodeURIComponent(ordem.cliente.whatsapp)}&text=${encodeURIComponent(ordem.status == 6 || ordem.status == 7 ? whats?.concluido : ordem.status == 3 ? whats?.orcamento : "")}`}
                                                 />
                                                 <ImagesAppButton
                                                     url={`${ordem.id}`}

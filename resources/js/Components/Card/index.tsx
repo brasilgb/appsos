@@ -6,11 +6,11 @@ interface CardProps {
 }
 
 export const CardContainer = ({ children, className }: CardProps) => {
-    return <div className={`shadow z-10 ${className}`}>{children}</div>;
+    return <div className={`shadow ${className}`}>{children}</div>;
 };
 
 export const Card = ({ children, className }: CardProps) => {
-    return <div className={`w-full md:m-4 z-10 ${className}`}>{children}</div>;
+    return <div className={`md:m-4 ${className}`}>{children}</div>;
 };
 
 export const CardHeader = ({ children }: CardProps) => {
@@ -22,7 +22,7 @@ export const CardHeader = ({ children }: CardProps) => {
 };
 
 export const CardHeaderContent = ({ children, className }: CardProps) => {
-    return <div className={`${className} z-10`}>{children}</div>;
+    return <div className={`${className}`}>{children}</div>;
 };
 
 export const CardBody = ({ children, className }: CardProps) => {

@@ -42,7 +42,7 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
-    route::get('/', [HomeController::class, 'index']);
+    route::get('/', [HomeController::class, 'index'])->name('dashboard');
     Route::resource('/usuarios', UserController::class)->parameters([
         'usuarios' => 'user'
     ]);

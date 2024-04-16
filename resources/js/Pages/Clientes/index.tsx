@@ -37,8 +37,8 @@ const Clientes = ({ clientes }: any) => {
     const { flash } = usePage().props;
 
     return (
-        <AuthLayout>            
-        <Head title="Clientes" />
+        <AuthLayout>
+            <Head title="Clientes" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

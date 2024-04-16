@@ -8,7 +8,7 @@ interface TableProps {
 
 export const Table = ({ children, className }: TableProps) => {
     return (
-        <div className="md:w-full overflow-y-auto">
+        <div className="overflow-y-auto">
             <table className={`table-auto md:w-full  ${className} text-sm`}>
                 {children}
             </table>

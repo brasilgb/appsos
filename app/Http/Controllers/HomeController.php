@@ -16,17 +16,14 @@ class HomeController extends Controller
     public function index()
     {
         $logged = Auth::user()->id;
-        $clientes = Cliente::get();
-        $ordens = Ordem::with('cliente')->get();
-        $produtos = Produto::get();
-        $agendas = Agenda::get();
-        $mensagens = Mensagem::where('destinatario', $logged)->where('status', 0)->get();
-        return Inertia::render('Home/index', [
-            'clientes'  => $clientes,
-            'ordens'    => $ordens,
-            'produtos'  => $produtos,
-            'agendas'   => $agendas,
-            'mensagens' => $mensagens,
-        ]);
+
+        $dashData = [
+            'numcli' => count(Cliente::get()),
+            'numord' => count(Ordem::get()),
+            'numpro' => count(Produto::get()),
+            'numage' => count(Agenda::get()),
+            'nummen' => count(Mensagem::where('destinatario', $logged)->where('status', 0)->get()),
+        ];
+        return Inertia::render('Home/index', ['dashdata' => $dashData]);
     }
 }

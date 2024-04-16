@@ -9,18 +9,20 @@ interface AuthLayoutProps {
 
 const AuthLayout = ({ children }: AuthLayoutProps) => {
     return (
-        <div className="min-h-screen bg-gray-100">
-            <main className="flex min-h-screen flex-row bg-gray-middle">
-                <Sidebar />
-                <div className="flex flex-grow flex-col transition-all duration-150 ease-in md:ml-0">
+        <main className="bg-slate-200">
+            <div className='flex'>
+                <div>
+                    <Sidebar/>
+                </div>
+                <div className='min-h-screen flex flex-1 flex-col'>
                     <Header />
-                    <div className="w-full flex h-full items-start justify-start p4">
+                    <div className='flex-grow'>
                         {children}
                     </div>
                     <Footer />
                 </div>
-            </main>
-        </div>
+            </div>
+        </main>
     );
 };
 export default AuthLayout;

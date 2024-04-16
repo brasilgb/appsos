@@ -14,11 +14,11 @@ import {
     IoPeople,
 } from "react-icons/io5";
 
-const Home = ({ clientes, ordens, produtos, agendas, mensagens }: any) => {
-    const { auth } = usePage().props;
-    const gerados = ordens.filter((fo: any) => (fo.status === 3));
-    const aprovados = ordens.filter((fo: any) => (fo.status === 4));
-    const concluidos = ordens.filter((fo: any) => (fo.status === 6 || fo.status === 7));
+const Home = ({ dashdata }: any) => {
+    // const gerados = ordens.filter((fo: any) => (fo.status === 3));
+    // const aprovados = ordens.filter((fo: any) => (fo.status === 4));
+    // const concluidos = ordens.filter((fo: any) => (fo.status === 6 || fo.status === 7));
+
     return (
         <AuthLayout>
             <Head title="Dashboard" />
@@ -29,8 +29,8 @@ const Home = ({ clientes, ordens, produtos, agendas, mensagens }: any) => {
                         <span className="ml-2">Dashboard</span>
                     </TitleTop>
                     <TitleTop>
-                        {mensagens.length > 0 ? (
-                            <MessageDropDown mensagens={mensagens} />
+                        {dashdata.nummes ? (
+                            <MessageDropDown mensagens={'mensagens'} />
                         ) : (
                             <div className="text-red-300">
                                 <IoChatboxEllipses size={28} />
@@ -42,7 +42,7 @@ const Home = ({ clientes, ordens, produtos, agendas, mensagens }: any) => {
                     <Kpis
                         props={{
                             title: "Clientes",
-                            value: clientes.length,
+                            value: dashdata.numcli,
                             url: "/clientes",
                             icon: <IoPeople size={50} color="#2671e2" />,
                         }}
@@ -50,7 +50,7 @@ const Home = ({ clientes, ordens, produtos, agendas, mensagens }: any) => {
                     <Kpis
                         props={{
                             title: "Ordens",
-                            value: ordens.length,
+                            value: dashdata.numord,
                             url: "/ordens",
                             icon: <IoConstruct size={50} color="#CA0156" />,
                         }}
@@ -58,7 +58,7 @@ const Home = ({ clientes, ordens, produtos, agendas, mensagens }: any) => {
                     <Kpis
                         props={{
                             title: "Produtos",
-                            value: produtos.length,
+                            value: dashdata.numpro,
                             url: "/produtos",
                             icon: <IoBasket size={50} color="#EEA917" />,
                         }}
@@ -66,7 +66,7 @@ const Home = ({ clientes, ordens, produtos, agendas, mensagens }: any) => {
                     <Kpis
                         props={{
                             title: "Agendamentos",
-                            value: agendas.length,
+                            value: dashdata.numage,
                             url: "/agendas",
                             icon: <IoCalendar size={50} color="#0D9488" />,
                         }}
@@ -74,7 +74,7 @@ const Home = ({ clientes, ordens, produtos, agendas, mensagens }: any) => {
                     <Kpis
                         props={{
                             title: "Mensagens",
-                            value: agendas.length,
+                            value: dashdata.nummen,
                             url: "/mensagens",
                             icon: (
                                 <IoChatboxEllipses size={50} color="#3FA1D4" />
@@ -82,7 +82,7 @@ const Home = ({ clientes, ordens, produtos, agendas, mensagens }: any) => {
                         }}
                     />
                 </div>
-                <div className="grid md:grid-cols-3 gap-6">
+                {/* <div className="grid md:grid-cols-3 gap-6">
                     <HomeInfo
                         icon={<IoConstruct color="#CA0156" />}
                         title="Orçamentos gerados"
@@ -95,7 +95,7 @@ const Home = ({ clientes, ordens, produtos, agendas, mensagens }: any) => {
                         icon={<IoConstruct color="#3fa1d4" />}
                         title="Serviços concluídos"
                         data={concluidos} />
-                </div>
+                </div> */}
             </div>
         </AuthLayout>
     );
