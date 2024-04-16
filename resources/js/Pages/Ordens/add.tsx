@@ -10,18 +10,15 @@ import {
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { Head, useForm } from "@inertiajs/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { IoPeopleSharp } from "react-icons/io5";
 import Select from "react-select";
 
 const AddOrdem = ({ clientes, ordem }) => {
-    const options = clientes.map((cliente: any) => ({
-        value: cliente.id,
-        label: cliente.nome,
-    }));
-
+    const [filterSeacrh, setFilterSeacrh] = useState<any>([]);
     const { data, setData, post, progress, processing, errors } = useForm({
         cliente_id: "",
+        cliente: "",
         equipamento: "",
         modelo: "",
         senha: "",
@@ -35,14 +32,13 @@ const AddOrdem = ({ clientes, ordem }) => {
 
 
     useEffect(() => {
-        const client  = data.cliente_id;
-        if(client.length > 3){
-            const result = clientes.filter((cl:any) => (cl.includes(client)));
-            console.log(result);
+        const client = data.cliente.toLowerCase();
+        if (client.length > 3) {
+            const result = clientes.filter((cl: any) => (cl.nome.toLowerCase().includes(client)));
+            setFilterSeacrh(result);
+        } else {
+            setFilterSeacrh([]);
         }
-        
-        
-
     }, [data])
 
     function handleSubmit(e: any) {
@@ -50,8 +46,10 @@ const AddOrdem = ({ clientes, ordem }) => {
         post(route("ordens.store"));
     }
 
-    const handleChange = (selected: any) => {
-        setData("cliente_id", selected.value);
+    const handleChangeCustomer = (id: any, nome: any) => {
+        setFilterSeacrh([]);
+        setData((data) => ({ ...data, cliente_id: id }));
+        setData((data) => ({ ...data, cliente: nome }));
     };
 
     return (
@@ -103,15 +101,14 @@ const AddOrdem = ({ clientes, ordem }) => {
                                         />
                                     </div>
 
-                                    <div className="flex flex-col col-span-2">
+                                    <div className="flex flex-col col-span-2 relative">
                                         <label
                                             className="label-form"
-                                            htmlFor="cliente_id"
+                                            htmlFor="cliente"
                                         >
                                             Nome do cliente
                                         </label>
                                         <input
-                                            id="cliente_id"
                                             type="text"
                                             value={data.cliente_id}
                                             onChange={(e) =>
@@ -122,6 +119,29 @@ const AddOrdem = ({ clientes, ordem }) => {
                                             }
                                             className="input-form"
                                         />
+                                        <input
+                                            id="cliente"
+                                            type="text"
+                                            value={data.cliente}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "cliente",
+                                                    e.target.value,
+                                                )
+                                            }
+                                            className="input-form"
+                                        />
+                                        {filterSeacrh &&
+                                            <div className="absolute bg-gray-50 border-2 border-white shadow-md w-full rounded-sm top-16">
+                                                {filterSeacrh.map((cliente: any, idx: number) => (
+                                                    <div key={idx} className="flex items-center justify-normal">
+                                                        <div
+                                                            onClick={() => handleChangeCustomer(cliente.id, cliente.nome)}
+                                                            className="">{cliente.nome}</div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
                                         {/* <Select
                                             id="cliente_id"
                                             options={options}
@@ -137,7 +157,7 @@ const AddOrdem = ({ clientes, ordem }) => {
                                         /> */}
                                         {errors.cliente_id && (
                                             <div className="text-sm text-red-500">
-                                                {errors.cliente_id}
+                                                {errors.cliente}
                                             </div>
                                         )}
                                     </div>
