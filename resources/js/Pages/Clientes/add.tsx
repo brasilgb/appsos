@@ -14,8 +14,9 @@ import { Head, useForm } from "@inertiajs/react";
 import React, { useCallback, useEffect } from "react";
 import { IoPeopleSharp } from "react-icons/io5";
 
-const AddCliente = () => {
+const AddCliente = ({ cliente }) => {
     const { data, setData, post, progress, processing, errors } = useForm({
+        id: cliente > 0 ? cliente + 1 : 1,
         cpf: "",
         nascimento: "",
         nome: "",
@@ -138,7 +139,7 @@ const AddCliente = () => {
                                         <input
                                             id="nome"
                                             type="text"
-                                            value={data.nome}
+                                            value={(data.nome.toUpperCase())}
                                             onChange={(e) =>
                                                 setData("nome", e.target.value)
                                             }
@@ -280,7 +281,7 @@ const AddCliente = () => {
                                             className="input-form"
                                         />
                                     </div>
-                                    
+
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"

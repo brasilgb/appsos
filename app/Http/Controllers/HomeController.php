@@ -16,13 +16,12 @@ class HomeController extends Controller
     public function index()
     {
         $logged = Auth::user()->id;
-        // const gerados = ordens.filter((fo: any) => (fo.status === 3));
-        // const aprovados = ordens.filter((fo: any) => (fo.status === 4));
-        // const concluidos = ordens.filter((fo: any) => (fo.status === 6 || fo.status === 7));
         $statusOrder = [
             'gerados'    => Ordem::where('status', 3)->get('id'),
             'aprovados'  => Ordem::where('status', 4)->get('id'),
-            'concluidos' => Ordem::where('status', 6)->orWhere('status', 7)->get('id'),
+            'concluidosca' => Ordem::where('status', 6)->get('id'),
+            'concluidoscn' => Ordem::where('status', 7)->get('id'),
+            'messages' => Mensagem::where('destinatario', $logged)->where('status', 0)->get()
         ];
         $dashData = [
             'numcli' => count(Cliente::get()),

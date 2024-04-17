@@ -8,19 +8,22 @@ import {
 } from "react-icons/ri";
 interface PaginationProps {
     data: any;
+    oc?: any;
 }
 
-const Pagination = ({ data }: PaginationProps) => {
+const Pagination = ({ data, oc }: PaginationProps) => {
+
     const clearLinks = [...data.links];
     clearLinks.shift();
     clearLinks.pop();
+
     return (
         <ul className="flex items-center justify-center py-2">
             <li>
                 {data.prev_page_url !== null ? (
                     <Link
                         className="flex items-center justify-center border border-gray-200 h-10 w-10 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-600 duration-300"
-                        href={data.first_page_url}
+                        href={data.first_page_url + `${oc ? '&oc='+oc : ''}`}
                     >
                         <RiArrowLeftSLine size={16} />
                     </Link>
@@ -34,7 +37,7 @@ const Pagination = ({ data }: PaginationProps) => {
                 {data.prev_page_url !== null ? (
                     <Link
                         className="flex items-center justify-center border-y border-r border-gray-200 h-10 w-10 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-600 duration-300"
-                        href={data.prev_page_url}
+                        href={data.prev_page_url + `${oc ? '&oc='+oc : ''}`}
                     >
                         <RiArrowLeftDoubleLine size={16} />
                     </Link>
@@ -49,7 +52,7 @@ const Pagination = ({ data }: PaginationProps) => {
                 <li key={idx}>
                     <Link
                         className={`flex items-center justify-center border-y border-r border-gray-200 h-10 w-10 text-sm ${link.active ? "text-gray-50 bg-blue-700" : "text-gray-500 hover:bg-gray-100 hover:text-gray-600"} duration-300`}
-                        href={link.url}
+                        href={link.url + `${oc ? '&oc='+oc : ''}`}
                     >
                         {link.label}
                     </Link>
@@ -60,7 +63,7 @@ const Pagination = ({ data }: PaginationProps) => {
                 {data.next_page_url !== null ? (
                     <Link
                         className="flex items-center justify-center border-y border-r border-gray-200 h-10 w-10 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-600 duration-300"
-                        href={data.next_page_url}
+                        href={data.next_page_url + `${oc ? '&oc='+oc : ''}`}
                     >
                         <RiArrowRightDoubleLine size={16} />
                     </Link>
@@ -74,7 +77,7 @@ const Pagination = ({ data }: PaginationProps) => {
                 {data.next_page_url !== null ? (
                     <Link
                         className="flex items-center justify-center border-y border-r border-gray-200 h-10 w-10 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-600 duration-300"
-                        href={data.last_page_url}
+                        href={data.last_page_url + `${oc ? '&oc='+oc : ''}`}
                     >
                         <RiArrowRightSLine size={16} />
                     </Link>

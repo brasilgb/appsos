@@ -18,6 +18,8 @@ const AddOrdem = ({ clientes, ordem }) => {
     const [filterSearch, setFilterSearch] = useState<any>([]);
     const [showCustomers, setShowCustomers] = useState<boolean>(false);
     const { data, setData, post, errors } = useForm({
+
+        id: ordem > 0 ? ordem + 1 : 1,
         cliente_id: "",
         cliente: "",
         equipamento: "",
@@ -94,16 +96,11 @@ const AddOrdem = ({ clientes, ordem }) => {
                                         <input
                                             id="ordem"
                                             type="text"
-                                            value={
-                                                ordem > 0
-                                                    ? ("00000000" + (ordem + 1)).slice(-8)
-                                                    : ("00000000" + (1)).slice(-8)
-                                            }
+                                            value={("000000" + data.id).slice(-6)}
                                             className="input-form"
                                             disabled
                                         />
                                     </div>
-
                                     <div className="flex flex-col col-span-2 relative">
                                         <label
                                             className="label-form"

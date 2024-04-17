@@ -164,7 +164,7 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                         </Table>
                     </CardBody>
                     <CardFooter>
-                        <Pagination data={ordens} />
+                        <Pagination data={ordens} oc={33} />
                     </CardFooter>
                 </CardContainer>
             </Card>

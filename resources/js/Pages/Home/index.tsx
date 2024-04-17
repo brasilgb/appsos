@@ -16,6 +16,7 @@ import {
 
 const Home = ({ dashdata, statusorder }: any) => {
 
+console.log(statusorder?.messages);
 
     return (
         <AuthLayout>
@@ -27,11 +28,11 @@ const Home = ({ dashdata, statusorder }: any) => {
                         <span className="ml-2">Dashboard</span>
                     </TitleTop>
                     <TitleTop>
-                        {dashdata.nummes ? (
-                            <MessageDropDown mensagens={'mensagens'} />
+                        {dashdata.nummen ? (
+                            <MessageDropDown mensagens={statusorder?.messages} />
                         ) : (
                             <div className="text-red-300">
-                                <IoChatboxEllipses size={28} />
+                                <IoChatboxEllipses size={34} />
                             </div>
                         )}
                     </TitleTop>
@@ -80,20 +81,6 @@ const Home = ({ dashdata, statusorder }: any) => {
                         }}
                     />
                 </div>
-                {/*<div className="grid md:grid-cols-3 gap-6">
-                <HomeInfo
-                icon={<IoConstruct color="#CA0156" />}
-                title="Orçamentos gerados"
-                data={gerados} />
-                <HomeInfo
-                icon={<IoConstruct color="#0D9488" />}
-                title="Orçamentos aprovados"
-                data={aprovados} />
-                <HomeInfo
-                icon={<IoConstruct color="#3fa1d4" />}
-                title="Serviços concluídos"
-                data={concluidos} />
-            </div> */}
                 <div className="grid md:grid-cols-3 gap-6 mt-4">
                     <div className="bg-gray-50 rounded shadow-sm p-2">
                         <div className="border-b mb-2">
@@ -127,13 +114,20 @@ const Home = ({ dashdata, statusorder }: any) => {
                     </div>
                     <div className="bg-gray-50 rounded shadow-sm p-2">
                         <div className="border-b mb-2">
-                            <h1 className="text-sm text-gray-500 uppercase font-medium">Serviços concluídos</h1>
+                            <h1 className="text-sm text-gray-500 uppercase font-medium">Serviços concluídos <span className="text-cyan-600">(CA)</span> <span className="text-amber-500">(CN)</span></h1>
                         </div>
                         <div className="grid grid-cols-6 gap-2 text-center">
-                            {statusorder?.concluidos?.map((gerado: any, idx: number) => (
+                            {statusorder?.concluidosca?.map((gerado: any, idx: number) => (
                                 <Link
                                     href={`ordens/${gerado.id}`}
                                     key={idx} className="bg-cyan-600 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
+                                    {("000000" + gerado.id).slice(-6)}
+                                </Link>
+                            ))}
+                            {statusorder?.concluidoscn?.map((gerado: any, idx: number) => (
+                                <Link
+                                    href={`ordens/${gerado.id}`}
+                                    key={idx} className="bg-amber-500 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
                                     {("000000" + gerado.id).slice(-6)}
                                 </Link>
                             ))}

@@ -37,7 +37,9 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Clientes/add');
+        $cliente = Cliente::exists() ? Cliente::orderBy('id', 'desc')->first()->id : [];
+
+        return Inertia::render('Clientes/add', ['cliente' => $cliente]);
     }
 
     /**

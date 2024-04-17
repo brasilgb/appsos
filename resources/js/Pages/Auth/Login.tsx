@@ -51,7 +51,7 @@ export default function Login({ status, canResetPassword }) {
                     backgroundSize: "cover",
                 }}
             >
-                <div className="w-1/4 bg-gray-50  shadow-md shadow-gray-800 rounded-md p-2 bg-opacity-80">
+                <div className="md:w-1/4 w-full mx-4 bg-gray-50 shadow-md shadow-gray-800 rounded-md p-2 bg-opacity-80">
                     <div className="bg-gray-50 rounded-md p-4">
                         <div className="flex flex-col items-center justify-center mb-20">
                             <div className="flex items-start justify-between mb-6 border-b border-gray-200 w-full">
