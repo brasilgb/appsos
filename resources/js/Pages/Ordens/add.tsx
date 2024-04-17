@@ -150,19 +150,6 @@ const AddOrdem = ({ clientes, ordem }) => {
                                                 ))}
                                             </div>
                                         }
-                                        {/* <Select
-                                            id="cliente_id"
-                                            options={options}
-                                            placeholder="Selecione o cliente"
-                                            onChange={handleChange}
-                                            styles={{
-                                                control: (provided) => ({
-                                                    ...provided,
-                                                    padding: 2,
-                                                    borderRadius: 6,
-                                                }),
-                                            }}
-                                        /> */}
                                         {errors.cliente_id && (
                                             <div className="text-sm text-red-500">
                                                 {errors.cliente}
