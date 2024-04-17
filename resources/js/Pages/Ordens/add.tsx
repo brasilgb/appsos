@@ -52,8 +52,7 @@ const AddOrdem = ({ clientes, ordem }) => {
         setData((data) => ({ ...data, cliente_id: id }));
         setData((data) => ({ ...data, cliente: nome }));
         setFilterSearch([]);
-        console.log(id, nome);
-        
+
     };
 
     return (
@@ -138,21 +137,24 @@ const AddOrdem = ({ clientes, ordem }) => {
                                             className="input-form"
                                         />
                                         {filterSearch.length > 0 &&
-                                            <div className="absolute bg-gray-50 border-2 border-white shadow-md w-full rounded-sm top-16 h-52 overflow-y-auto">
-                                                {filterSearch.map((cliente: any, idx: number) => (
-                                                    <div key={idx} className="flex items-center justify-normal">
-                                                        <div
-                                                            onClick={() => handleChangeCustomer(cliente.id, cliente.nome)}
-                                                        >
-                                                            {cliente.nome}
-                                                        </div>
-                                                    </div>
-                                                ))}
+                                            <div className="absolute bg-gray-50 border-2 border-white shadow-md w-full rounded-sm top-16 max-h-52 overflow-y-auto">
+                                                <ul className="p-1">
+                                                    {filterSearch.map((cliente: any, idx: number) => (
+                                                        <li key={idx} className={`flex items-center justify-normal ${idx < (filterSearch.length - 1) ? 'border-b border-gray-200' : ''}`}>
+                                                            <div
+                                                                className="text-sm text-gray-600 p-1 cursor-pointer inline-block w-full"
+                                                                onClick={() => handleChangeCustomer(cliente.id, cliente.nome)}
+                                                            >
+                                                                {cliente.nome}
+                                                            </div>
+                                                        </li>
+                                                    ))}
+                                                </ul>
                                             </div>
                                         }
                                         {errors.cliente_id && (
                                             <div className="text-sm text-red-500">
-                                                {errors.cliente}
+                                                {errors.cliente_id}
                                             </div>
                                         )}
                                     </div>

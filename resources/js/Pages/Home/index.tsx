@@ -3,7 +3,7 @@ import Kpis from "@/Components/Kpis";
 import MessageDropDown from "@/Components/MessageDropDown";
 import { HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { Head, usePage } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 import React, { useState } from "react";
 import { AiOutlineDashboard } from "react-icons/ai";
 import {
@@ -14,10 +14,8 @@ import {
     IoPeople,
 } from "react-icons/io5";
 
-const Home = ({ dashdata }: any) => {
-    // const gerados = ordens.filter((fo: any) => (fo.status === 3));
-    // const aprovados = ordens.filter((fo: any) => (fo.status === 4));
-    // const concluidos = ordens.filter((fo: any) => (fo.status === 6 || fo.status === 7));
+const Home = ({ dashdata, statusorder }: any) => {
+
 
     return (
         <AuthLayout>
@@ -82,20 +80,66 @@ const Home = ({ dashdata }: any) => {
                         }}
                     />
                 </div>
-                {/* <div className="grid md:grid-cols-3 gap-6">
-                    <HomeInfo
-                        icon={<IoConstruct color="#CA0156" />}
-                        title="Orçamentos gerados"
-                        data={gerados} />
-                    <HomeInfo
-                        icon={<IoConstruct color="#0D9488" />}
-                        title="Orçamentos aprovados"
-                        data={aprovados} />
-                    <HomeInfo
-                        icon={<IoConstruct color="#3fa1d4" />}
-                        title="Serviços concluídos"
-                        data={concluidos} />
-                </div> */}
+                {/*<div className="grid md:grid-cols-3 gap-6">
+                <HomeInfo
+                icon={<IoConstruct color="#CA0156" />}
+                title="Orçamentos gerados"
+                data={gerados} />
+                <HomeInfo
+                icon={<IoConstruct color="#0D9488" />}
+                title="Orçamentos aprovados"
+                data={aprovados} />
+                <HomeInfo
+                icon={<IoConstruct color="#3fa1d4" />}
+                title="Serviços concluídos"
+                data={concluidos} />
+            </div> */}
+                <div className="grid md:grid-cols-3 gap-6 mt-4">
+                    <div className="bg-gray-50 rounded shadow-sm p-2">
+                        <div className="border-b mb-2">
+                            <h1 className="text-sm text-gray-500 uppercase font-medium">Orçamentos gerados</h1>
+                        </div>
+                        <div className="grid grid-cols-6 gap-2 text-center">
+                            {statusorder?.gerados?.map((gerado: any, idx: number) => (
+                                <Link
+                                    href={`ordens/${gerado.id}`}
+                                    key={idx}
+                                    className="bg-rose-600 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
+                                    {("000000" + gerado.id).slice(-6)}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="bg-gray-50 rounded shadow-sm p-2">
+                        <div className="border-b mb-2">
+                            <h1 className="text-sm text-gray-500 uppercase font-medium">Orçamentos aprovados</h1>
+                        </div>
+                        <div className="grid grid-cols-6 gap-2 text-center">
+                            {statusorder?.aprovados?.map((gerado: any, idx: number) => (
+                                <Link
+                                    href={`ordens/${gerado.id}`}
+                                    key={idx}
+                                    className="bg-blue-500 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
+                                    {("000000" + gerado.id).slice(-6)}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="bg-gray-50 rounded shadow-sm p-2">
+                        <div className="border-b mb-2">
+                            <h1 className="text-sm text-gray-500 uppercase font-medium">Serviços concluídos</h1>
+                        </div>
+                        <div className="grid grid-cols-6 gap-2 text-center">
+                            {statusorder?.concluidos?.map((gerado: any, idx: number) => (
+                                <Link
+                                    href={`ordens/${gerado.id}`}
+                                    key={idx} className="bg-cyan-600 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
+                                    {("000000" + gerado.id).slice(-6)}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </div>
         </AuthLayout>
     );

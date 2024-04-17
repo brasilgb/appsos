@@ -81,7 +81,7 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                     <Fragment key={ordem.id}>
                                         <TableRow>
                                             <TableCell>
-                                                {("00000000" + ordem.id).slice(
+                                                {("000000" + ordem.id).slice(
                                                     -8,
                                                 )}
                                             </TableCell>
