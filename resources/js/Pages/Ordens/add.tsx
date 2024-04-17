@@ -15,9 +15,9 @@ import { IoPeopleSharp } from "react-icons/io5";
 import Select from "react-select";
 
 const AddOrdem = ({ clientes, ordem }) => {
-    const [inputSeach, setInputSeach] = useState<string>("");
     const [filterSearch, setFilterSearch] = useState<any>([]);
-    const { data, setData, post, progress, processing, errors } = useForm({
+    const [showCustomers, setShowCustomers] = useState<boolean>(false);
+    const { data, setData, post, errors } = useForm({
         cliente_id: "",
         cliente: "",
         equipamento: "",
@@ -31,34 +31,29 @@ const AddOrdem = ({ clientes, ordem }) => {
         obs: "",
     });
 
-
-    const handleFilter = () => {
-
-        const client = data.cliente.toLowerCase();
-        if (client.length > 3) {
-            setShowCustomers(true);
-            const result = clientes.filter((cl: any) => (cl.nome.toLowerCase().includes(client)));
-            setFilterSeacrh(result);
-        } else {
-            setFilterSeacrh([]);
-            setShowCustomers(false);
-        }
-    }
-
-    useEffect(() => {
-        if (showCustomers) {
-            setShowCustomers(false);
-        }
-    }, [showCustomers]);
-
     function handleSubmit(e: any) {
         e.preventDefault();
         post(route("ordens.store"));
     }
 
+    const handleSearch = (value: any) => {
+        const client = value.toLowerCase();
+        const result = clientes.filter((cl: any) => (cl.nome.toLowerCase().includes(client)));
+        setFilterSearch(result);
+    };
+    useEffect(() => {
+        const filter = data.cliente;
+        if (filter === "") {
+            setFilterSearch([]);
+        }
+    }, [data]);
+
     const handleChangeCustomer = (id: any, nome: any) => {
         setData((data) => ({ ...data, cliente_id: id }));
         setData((data) => ({ ...data, cliente: nome }));
+        setFilterSearch([]);
+        console.log(id, nome);
+        
     };
 
     return (
@@ -132,22 +127,24 @@ const AddOrdem = ({ clientes, ordem }) => {
                                             id="cliente"
                                             type="text"
                                             value={data.cliente}
-                                            onChange={(e) =>
+                                            onChange={(e) => {
                                                 setData(
                                                     "cliente",
                                                     e.target.value,
                                                 )
+                                                handleSearch(e.target.value)
+                                            }
                                             }
                                             className="input-form"
                                         />
-                                        {showCustomers &&
-                                            <div className="absolute bg-gray-50 border-2 border-white shadow-md w-full rounded-sm top-16">
-                                                {filterSeacrh.map((cliente: any, idx: number) => (
+                                        {filterSearch.length > 0 &&
+                                            <div className="absolute bg-gray-50 border-2 border-white shadow-md w-full rounded-sm top-16 h-52 overflow-y-auto">
+                                                {filterSearch.map((cliente: any, idx: number) => (
                                                     <div key={idx} className="flex items-center justify-normal">
                                                         <div
                                                             onClick={() => handleChangeCustomer(cliente.id, cliente.nome)}
-                                                            className=""
-                                                        >{cliente.nome}
+                                                        >
+                                                            {cliente.nome}
                                                         </div>
                                                     </div>
                                                 ))}
