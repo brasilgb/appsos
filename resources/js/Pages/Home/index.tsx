@@ -37,7 +37,7 @@ console.log(statusorder?.messages);
                         )}
                     </TitleTop>
                 </HeaderContent>
-                <div className="grid md:grid-cols-5 sm:grid-cols-2 gap-6">
+                <div className="grid md:md:grid-cols-5 sm:grid-cols-2 gap-6">
                     <Kpis
                         props={{
                             title: "Clientes",
@@ -86,7 +86,7 @@ console.log(statusorder?.messages);
                         <div className="border-b mb-2">
                             <h1 className="text-sm text-gray-500 uppercase font-medium">Orçamentos gerados</h1>
                         </div>
-                        <div className="grid grid-cols-6 gap-2 text-center">
+                        <div className="grid md:grid-cols-5 gap-2 text-center">
                             {statusorder?.gerados?.map((gerado: any, idx: number) => (
                                 <Link
                                     href={`ordens/${gerado.id}`}
@@ -101,7 +101,7 @@ console.log(statusorder?.messages);
                         <div className="border-b mb-2">
                             <h1 className="text-sm text-gray-500 uppercase font-medium">Orçamentos aprovados</h1>
                         </div>
-                        <div className="grid grid-cols-6 gap-2 text-center">
+                        <div className="grid md:grid-cols-5 gap-2 text-center">
                             {statusorder?.aprovados?.map((gerado: any, idx: number) => (
                                 <Link
                                     href={`ordens/${gerado.id}`}
@@ -116,7 +116,7 @@ console.log(statusorder?.messages);
                         <div className="border-b mb-2">
                             <h1 className="text-sm text-gray-500 uppercase font-medium">Serviços concluídos <span className="text-cyan-600">(CA)</span> <span className="text-amber-500">(CN)</span></h1>
                         </div>
-                        <div className="grid grid-cols-6 gap-2 text-center">
+                        <div className="grid md:grid-cols-5 gap-2 text-center">
                             {statusorder?.concluidosca?.map((gerado: any, idx: number) => (
                                 <Link
                                     href={`ordens/${gerado.id}`}
