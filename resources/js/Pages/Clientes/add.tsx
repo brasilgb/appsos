@@ -139,7 +139,7 @@ const AddCliente = ({ cliente }) => {
                                         <input
                                             id="nome"
                                             type="text"
-                                            value={(data.nome.toUpperCase())}
+                                            value={data.nome}
                                             onChange={(e) =>
                                                 setData("nome", e.target.value)
                                             }

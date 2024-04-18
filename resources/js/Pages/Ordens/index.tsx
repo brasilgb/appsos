@@ -31,12 +31,13 @@ import AuthLayout from "@/Layouts/AuthLayout";
 import { statusOrdemByValue } from "@/Utils/functions";
 import { Head, Link, usePage } from "@inertiajs/react";
 import moment from "moment";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { IoConstruct, IoPrint } from "react-icons/io5";
 
 const Ordens = ({ ordens, whats, printers }: any) => {
-    const { flash } = usePage().props;
-
+    const { flash, ziggy } = usePage().props;
+    const { oc } = (ziggy as any).query
+console.log(oc);
     return (
         <AuthLayout>
             <Head title="Ordens" />
@@ -87,9 +88,11 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                             </TableCell>
                                             <TableCell>
                                                 <Link
+                                                    href={`/ordens?oc=${ordem.cliente_id}`}
                                                     className="underline text-blue-800 font-medium"
                                                     title={`Ordens de ${ordem.cliente.nome}`}
-                                                    href={`/ordens?oc=${ordem.cliente_id}`}>{ordem.cliente.nome}
+                                                >
+                                                    {ordem.cliente.nome}
                                                 </Link>
                                             </TableCell>
                                             <TableCell>
@@ -164,7 +167,7 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                         </Table>
                     </CardBody>
                     <CardFooter>
-                        <Pagination data={ordens} oc={33} />
+                        <Pagination data={ordens} oc={oc} />
                     </CardFooter>
                 </CardContainer>
             </Card>
