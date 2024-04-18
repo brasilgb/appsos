@@ -37,7 +37,7 @@ console.log(statusorder?.messages);
                         )}
                     </TitleTop>
                 </HeaderContent>
-                <div className="grid md:grid-cols-5 gap-6">
+                <div className="grid md:grid-cols-5 sm:grid-cols-2 gap-6">
                     <Kpis
                         props={{
                             title: "Clientes",
@@ -81,7 +81,7 @@ console.log(statusorder?.messages);
                         }}
                     />
                 </div>
-                <div className="grid md:grid-cols-3 gap-6 mt-4">
+                <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-6 mt-4">
                     <div className="bg-gray-50 rounded shadow-sm p-2">
                         <div className="border-b mb-2">
                             <h1 className="text-sm text-gray-500 uppercase font-medium">Orçamentos gerados</h1>
