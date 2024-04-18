@@ -37,7 +37,6 @@ import { IoConstruct, IoPrint } from "react-icons/io5";
 const Ordens = ({ ordens, whats, printers }: any) => {
     const { flash, ziggy } = usePage().props;
     const { oc } = (ziggy as any).query
-console.log(oc);
     return (
         <AuthLayout>
             <Head title="Ordens" />

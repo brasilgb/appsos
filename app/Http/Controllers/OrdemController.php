@@ -38,7 +38,7 @@ class OrdemController extends Controller
             $query->where('cliente_id', $oc);
         }
 
-        $ordens = $query->paginate(1);
+        $ordens = $query->paginate(12);
         $whats = Whats::orderBy('id', 'DESC')->first();
         $printers = Impressao::orderBy('id', 'DESC')->first();
         return Inertia::render('Ordens/index', ["ordens" => $ordens, 'whats' => $whats, 'printers' => $printers]);
