@@ -73,7 +73,7 @@ class UserController extends Controller
                 'role' => 'função',
             ]
         );
-
+        $data['password'] = Hash::make($request->password);
         User::create($data);
         Session::flash('success', 'Usuário cadastrado com sucesso!');
         return redirect()->route('usuarios.index');
@@ -113,8 +113,8 @@ class UserController extends Controller
                 'name' => 'required',
                 'email' => 'nullable|email',
                 'role' => 'required',
-                'password' => ['nullable','min:6', 'confirmed', Rules\Password::defaults()],
-                'password_confirmation' => ['nullable','min:6'],
+                'password' => ['nullable', 'min:6', 'confirmed', Rules\Password::defaults()],
+                'password_confirmation' => ['nullable', 'min:6'],
             ],
             $messages,
             [
