@@ -77,7 +77,7 @@ const Printer = ({ etiquetas }: any) => {
                                     <Text>{etiqueta.empresa}</Text>
                                 </View>
                                 <View style={styles.textmd}>
-                                    <Text>{("00000000" + (etiqueta.ordem)).slice(-8)}</Text>
+                                    <Text>{etiqueta.ordem}</Text>
                                 </View>
                                 <View style={styles.textxs}>
                                     <Text>{etiqueta.telefone}</Text>

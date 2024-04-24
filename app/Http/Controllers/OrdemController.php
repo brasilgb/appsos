@@ -23,6 +23,15 @@ class OrdemController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function getOrder($order) 
+    {
+        $query = Ordem::where('id', $order)->with('cliente')->get();
+        return [
+            'success' => true,
+            'result' => $query
+        ];
+    }
+
     public function index(Request $request)
     {
         $search = $request->get('q');
