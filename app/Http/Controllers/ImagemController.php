@@ -77,4 +77,19 @@ class ImagemController extends Controller
         Session::flash('success', 'Agendamento deletado com sucesso');
         return redirect()->route('imagens.index', ['or' => $imagem->ordem_id]);
     }
+
+    public function upload(Request $request)
+    {
+        $image = $request->file('imagem');
+        $filename = time() . rand(1, 50) . '.' . $image->extension();
+        $image->storeAs('ordens/' . $request->ordem_id,  $filename, 'public');
+        Imagem::create([
+            'ordem_id' => $request->ordem_id,
+            'imagem' => $filename
+        ]);
+        return [
+            "success" => true,
+            "message" => "Imagem salva com sucesso"
+        ];
+    }
 }
