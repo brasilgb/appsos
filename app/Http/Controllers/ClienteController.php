@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Session;
 class ClienteController extends Controller
 {
     use HttpResponses;
+
+    public function getClientes()
+    {
+        $clientes = Cliente::get();
+        return [
+            "success" => true,
+            "result" => $clientes
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -20,9 +20,8 @@ use Inertia\Inertia;
 class OrdemController extends Controller
 {
     use HttpResponses;
-    /**
-     * Display a listing of the resource.
-     */
+
+    // Display and linting order for id
     public function getOrder($order) 
     {
         $query = Ordem::where('id', $order)->with('cliente')->get();
@@ -31,7 +30,20 @@ class OrdemController extends Controller
             'result' => $query
         ];
     }
+    
+    // Display and listing customers for id order
+    public function getOrderCli($customer) 
+    {
+        $query = Ordem::where('cliente_id', $customer)->with('cliente')->get();
+        return [
+            'success' => true,
+            'result' => $query
+        ];
+    }
 
+    /**
+     * Display a listing of the resource.
+     */
     public function index(Request $request)
     {
         $search = $request->get('q');

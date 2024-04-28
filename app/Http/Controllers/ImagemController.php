@@ -8,9 +8,11 @@ use App\Models\Imagem;
 use App\Models\Ordem;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
+use Illuminate\Support\Facades\File;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class ImagemController extends Controller
 {
@@ -80,9 +82,15 @@ class ImagemController extends Controller
 
     public function upload(Request $request)
     {
-        $image = $request->file('imagem');
-        $filename = time() . rand(1, 50) . '.' . $image->extension();
-        $image->storeAs('ordens/' . $request->ordem_id,  $filename, 'public');
+        $image = base64_decode($request->imagem);
+        //  dd($image);   
+        // $image = $request->file('imagem');
+        $storePath = public_path('storage/ordens/' . $request->ordem_id);
+        if (!file_exists($storePath)) {
+            mkdir($storePath, 0777, true);
+        };
+        $filename = time() . rand(1, 50) . '.' . 'png';
+        File::put('storage/ordens/' . $request->ordem_id . '/' . $filename,  $image);
         Imagem::create([
             'ordem_id' => $request->ordem_id,
             'imagem' => $filename
@@ -90,6 +98,15 @@ class ImagemController extends Controller
         return [
             "success" => true,
             "message" => "Imagem salva com sucesso"
+        ];
+    }
+
+    public function getImages(Request $request)
+    {
+        $images = Imagem::where("ordem_id", $request->order)->get();
+        return [
+            "success" => true,
+            "result" => $images
         ];
     }
 }
