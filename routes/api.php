@@ -20,7 +20,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/ordercli/{customer}', [OrdemController::class, 'getOrderCli'])->name('ordercli');
 Route::get('/clientes', [ClienteController::class, 'getClientes'])->name('clientes');
+Route::get('/allorder', [OrdemController::class, 'allOrder'])->name('allrder');
 Route::get('/order/{order}', [OrdemController::class, 'getOrder'])->name('order');
+Route::delete('/deleteimage/{image}', [ImagemController::class, 'deleteImageOrder'])->name('deleteimage');
 Route::get('/images/{order}', [ImagemController::class, 'getImages'])->name('images');
 Route::post('/upload', [ImagemController::class, 'upload'])->name('upload');
 Route::post('/loginuser', [UserController::class, 'loginuser'])->name('loginuser');

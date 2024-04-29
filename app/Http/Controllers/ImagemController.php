@@ -65,6 +65,21 @@ class ImagemController extends Controller
         return redirect()->route('imagens.index', ['or' => $request->ordem_id]);
     }
 
+    // Delete image for id
+    public function deleteImageOrder(Imagem $imagem, $image)
+    {
+        $imgorder = Imagem::where('id', $image)->first();
+        
+        $storePath = public_path('storage'. DIRECTORY_SEPARATOR .'ordens' . DIRECTORY_SEPARATOR . $imgorder->ordem_id);
+        if (file_exists($storePath . DIRECTORY_SEPARATOR . $imgorder->imagem)) {
+            unlink($storePath . DIRECTORY_SEPARATOR . $imgorder->imagem);
+        }
+        $imagem->where('id', $imgorder->id)->delete();
+        return [
+            'success' => true,
+        ];
+    }
+
     /**
      * Remove the specified resource from storage.
      */

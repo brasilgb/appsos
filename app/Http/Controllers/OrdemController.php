@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrdemResource;
 use App\Models\Cliente;
+use App\Models\Imagem;
 use App\Models\Impressao;
 use App\Models\Ordem;
 use App\Models\Produto;
@@ -22,6 +23,23 @@ class OrdemController extends Controller
     use HttpResponses;
 
     // Display and linting order for id
+    public function allOrder() 
+    {
+        $dashData = [
+            'numorder' => count(Ordem::get()),
+            'numabertas' => count(Ordem::where('status', 1)->get()), // aberta
+            'numgerados' => count(Ordem::where('status', 3)->get()), // orc. gerado
+            'numaprovados' => count(Ordem::where('status', 4)->get()), // orc. aprovado
+            'numconcluidosca' => count(Ordem::where('status', 6)->get()), // concluido cli nao avisado
+            'numconcluidoscn' => count(Ordem::where('status', 7)->get()), // concluido cli avisado
+        ];
+        return [
+            'success' => true,
+            'result' => $dashData
+        ];
+    }
+  
+    // Display and linting order for id
     public function getOrder($order) 
     {
         $query = Ordem::where('id', $order)->with('cliente')->get();
@@ -30,7 +48,7 @@ class OrdemController extends Controller
             'result' => $query
         ];
     }
-    
+
     // Display and listing customers for id order
     public function getOrderCli($customer) 
     {
