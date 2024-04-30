@@ -25,8 +25,8 @@ export default {
                     um: "#B0BCBC",
                     dois: "#8498A3",
                     tres: "#617C8D",
-                    quatro: "#405F73",
-                    cinco: "#032639",
+                    quatro: "#0174BE",
+                    cinco: "#0C356A",
                 },
                 red: {
                     um: "#CA0156",
