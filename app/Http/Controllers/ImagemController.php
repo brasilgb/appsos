@@ -77,6 +77,7 @@ class ImagemController extends Controller
         $imagem->where('id', $imgorder->id)->delete();
         return [
             'success' => true,
+            'message' => 'Imagem deletada com sucesso!'
         ];
     }
 
