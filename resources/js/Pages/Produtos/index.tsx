@@ -26,6 +26,7 @@ import {
     TableRow,
 } from "@/Components/Table";
 import AuthLayout from "@/Layouts/AuthLayout";
+import { maskMoney } from "@/Utils/mask";
 import { Head, usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment } from "react";
@@ -79,9 +80,7 @@ const Produtos = ({ produtos }: any) => {
                                     <Fragment key={produto.id}>
                                         <TableRow>
                                             <TableCell>
-                                                {("000000" + produto.id).slice(
-                                                    -6,
-                                                )}
+                                                {produto.id}
                                             </TableCell>
                                             <TableCell>
                                                 {produto.descricao}
@@ -90,7 +89,7 @@ const Produtos = ({ produtos }: any) => {
                                                 {produto.estmaximo}
                                             </TableCell>
                                             <TableCell>
-                                                {produto.valvenda}
+                                                {maskMoney(produto.valvenda)}
                                             </TableCell>
                                             <TableCell>
                                                 {moment(

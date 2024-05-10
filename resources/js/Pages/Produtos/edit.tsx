@@ -15,8 +15,8 @@ import {
     tiposProdutos,
     unidadesProdutos,
 } from "@/Utils/dataSelect";
-import { maskCep, maskCpfCnpj, maskPhone, unMask } from "@/Utils/mask";
-import { Head, useForm, usePage } from "@inertiajs/react";
+import { maskCep, maskCpfCnpj, maskMoney, maskPhone, unMask } from "@/Utils/mask";
+import { Head, router, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React, { useCallback, useEffect } from "react";
 import { FaBasketShopping } from "react-icons/fa6";
@@ -58,12 +58,23 @@ const EditProduto = ({ produtos }: any) => {
 
     function handleSubmit(e: any) {
         e.preventDefault();
-        patch(route("produtos.update", produtos.id));
+        router.post(`/produtos/${produtos.id}`, {
+            _method: "patch",
+            codbarra: data.codbarra,
+            descricao: data.descricao,
+            movimento: data.movimento,
+            valcompra: unMask(data.valcompra.toString()).replace(/(\d+)(\d{2})$/, "$1.$2"),
+            valvenda: unMask(data.valvenda.toString()).replace(/(\d+)(\d{2})$/, "$1.$2"),
+            unidade: data.unidade,
+            estmaximo: data.estmaximo,
+            estminimo: data.estminimo,
+            tipo: data.tipo,
+        });
     }
 
     return (
-        <AuthLayout>            
-        <Head title="Produtos" />
+        <AuthLayout>
+            <Head title="Produtos" />
             <Card>
                 <HeaderContent>
                     <TitleTop>
@@ -167,10 +178,10 @@ const EditProduto = ({ produtos }: any) => {
                                         <input
                                             id="valcompra"
                                             type="text"
-                                            value={data.valcompra}
+                                            value={maskMoney(data.valcompra.toString())}
                                             onChange={(e) =>
                                                 setData(
-                                                    "valcompra",
+                                                    "valcompra", 
                                                     e.target.value,
                                                 )
                                             }
@@ -192,7 +203,7 @@ const EditProduto = ({ produtos }: any) => {
                                         <input
                                             id="valvenda"
                                             type="text"
-                                            value={data.valvenda}
+                                            value={maskMoney(data.valvenda.toString())}
                                             onChange={(e) =>
                                                 setData(
                                                     "valvenda",

@@ -55,8 +55,8 @@ class ProdutoController extends Controller
             [
                 'descricao' => 'required',
                 'movimento' => 'required',
-                'valcompra' => 'required|numeric',
-                'valvenda' => 'required|numeric',
+                'valcompra' => 'required',
+                'valvenda' => 'required',
                 'unidade' => 'required',
                 'estmaximo' => 'required|numeric',
                 'estminimo' => 'required|numeric',
@@ -108,8 +108,8 @@ class ProdutoController extends Controller
             [
                 'descricao' => 'required',
                 'movimento' => 'required',
-                'valcompra' => 'required|numeric',
-                'valvenda' => 'required|numeric',
+                'valcompra' => 'required',
+                'valvenda' => 'required',
                 'unidade' => 'required',
                 'estmaximo' => 'required|numeric',
                 'estminimo' => 'required|numeric',

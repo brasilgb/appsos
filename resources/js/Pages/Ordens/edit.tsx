@@ -11,6 +11,7 @@ import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { statusServico } from "@/Utils/dataSelect";
+import { maskMoney } from "@/Utils/mask";
 import { Head, Link, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React, { useEffect, useState } from "react";
@@ -160,9 +161,7 @@ const EditOrdem = ({
                                         <input
                                             id="ordem"
                                             type="text"
-                                            value={("00000000" + data.id).slice(
-                                                -8,
-                                            )}
+                                            value={data.id}
                                             className="input-form"
                                             disabled
                                         />
@@ -363,7 +362,7 @@ const EditOrdem = ({
                                         <input
                                             id="valpecas"
                                             type="text"
-                                            value={data.valpecas}
+                                            value={maskMoney(data.valpecas.toString())}
                                             onChange={(e) =>
                                                 setData(
                                                     "valpecas",
@@ -383,7 +382,7 @@ const EditOrdem = ({
                                         <input
                                             id="valservico"
                                             type="text"
-                                            value={data.valservico}
+                                            value={maskMoney(data.valservico.toString())}
                                             onChange={(e) =>
                                                 setData(
                                                     "valservico",
@@ -403,7 +402,7 @@ const EditOrdem = ({
                                         <input
                                             id="custo"
                                             type="text"
-                                            value={data.custo}
+                                            value={maskMoney(data.custo.toString())}
                                             onChange={(e) =>
                                                 setData("custo", e.target.value)
                                             }

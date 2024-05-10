@@ -14,8 +14,8 @@ import {
     tiposProdutos,
     unidadesProdutos,
 } from "@/Utils/dataSelect";
-import { maskCep, maskCpfCnpj, maskPhone, unMask } from "@/Utils/mask";
-import { Head, useForm } from "@inertiajs/react";
+import { maskCep, maskCpfCnpj, maskMoney, maskPhone, unMask } from "@/Utils/mask";
+import { Head, router, useForm } from "@inertiajs/react";
 import React, { useCallback, useEffect } from "react";
 import { FaBasketShopping } from "react-icons/fa6";
 import { IoPeopleSharp } from "react-icons/io5";
@@ -35,12 +35,22 @@ const AddCliente = () => {
 
     function handleSubmit(e: any) {
         e.preventDefault();
-        post(route("produtos.store"));
+        router.post("/produtos", {
+            codbarra: data.codbarra,
+            descricao: data.descricao,
+            movimento: data.movimento,
+            valcompra: unMask(data.valcompra.toString()).replace(/(\d+)(\d{2})$/, "$1.$2"),
+            valvenda: unMask(data.valvenda.toString()).replace(/(\d+)(\d{2})$/, "$1.$2"),
+            unidade: data.unidade,
+            estmaximo: data.estmaximo,
+            estminimo: data.estminimo,
+            tipo: data.tipo,
+        });
     }
 
     return (
-        <AuthLayout>            
-        <Head title="Produtos" />
+        <AuthLayout>
+            <Head title="Produtos" />
             <Card>
                 <HeaderContent>
                     <TitleTop>
@@ -143,7 +153,7 @@ const AddCliente = () => {
                                         <input
                                             id="valcompra"
                                             type="text"
-                                            value={data.valcompra}
+                                            value={maskMoney(data.valcompra)}
                                             onChange={(e) =>
                                                 setData(
                                                     "valcompra",
@@ -168,7 +178,7 @@ const AddCliente = () => {
                                         <input
                                             id="valvenda"
                                             type="text"
-                                            value={data.valvenda}
+                                            value={maskMoney(data.valvenda)}
                                             onChange={(e) =>
                                                 setData(
                                                     "valvenda",

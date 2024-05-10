@@ -16,8 +16,8 @@ return new class extends Migration
             $table->text('codbarra')->nullable();
             $table->string('descricao');
             $table->tinyInteger('movimento');
-            $table->double('valcompra');
-            $table->double('valvenda');
+            $table->decimal('valcompra', 10,2);
+            $table->decimal('valvenda', 10,2);
             $table->tinyInteger('unidade');
             $table->string('estmaximo');
             $table->string('estminimo');
