@@ -11,7 +11,7 @@ import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { statusServico } from "@/Utils/dataSelect";
-import { maskMoney } from "@/Utils/mask";
+import { maskMoney, unMask } from "@/Utils/mask";
 import { Head, Link, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React, { useEffect, useState } from "react";
@@ -30,7 +30,6 @@ interface ClientesProps {
     descorcamento: string;
     valorcamento: string;
     preorcamento: string;
-    pecas: any;
     valpecas: string;
     valservico: string;
     custo: string;
@@ -49,7 +48,6 @@ const EditOrdem = ({
     currentPage,
 }: any) => {
     const { flash } = usePage().props;
-    console.log(currentPage);
     const options = produtos.map((produto: any) => ({
         value: produto.id,
         label: produto.descricao,
@@ -80,10 +78,9 @@ const EditOrdem = ({
         descorcamento: ordens.descorcamento,
         valorcamento: ordens.valorcamento,
         preorcamento: ordens.preorcamento,
-        pecas: [],
-        valpecas: ordens.valpecas ? ordens.valpecas : "0",
-        valservico: ordens.valservico ? ordens.valservico : "0",
-        custo: ordens.custo ? ordens.custo : "0",
+        valpecas: ordens.valpecas,
+        valservico: ordens.valservico,
+        custo: ordens.custo,
         status: ordens.status,
         tecnico: ordens.tecnico,
         detalhes: ordens.detalhes,
@@ -93,7 +90,28 @@ const EditOrdem = ({
 
     function handleSubmit(e: any) {
         e.preventDefault();
-        patch(route("ordens.update", ordens.id));
+        route(`/ordens/${ordens.id}`, {
+            _method: "patch",
+            id: data.id,
+            equipamento: data.equipamento,
+            modelo: data.modelo,
+            senha: data.senha,
+            defeito: data.defeito,
+            estado: data.estado,
+            acessorios: data.acessorios,
+            previsao: data.previsao,
+            descorcamento: data.descorcamento,
+            valorcamento: data.valorcamento,
+            preorcamento: data.preorcamento,
+            valpecas: unMask(data.valpecas.toString()).replace(/(\d+)(\d{2})$/, "$1.$2"),
+            valservico: unMask(data.valservico.toString()).replace(/(\d+)(\d{2})$/, "$1.$2"),
+            custo: unMask(data.custo.toString()).replace(/(\d+)(\d{2})$/, "$1.$2"),
+            status: data.status,
+            tecnico: data.tecnico,
+            detalhes: data.detalhes,
+            obs: data.obs,
+            page: currentPage,
+        });
     }
 
     const handleChange = (selected: any) => {
@@ -105,18 +123,18 @@ const EditOrdem = ({
             return t + q;
         }, 0);
 
-        setData((data) => ({ ...data, valpecas: totPecas.toFixed(2) }));
+        setData((data) => ({ ...data, valpecas: totPecas }));
         setData((data) => ({
             ...data,
             pecas: selected.map((v: any) => v.value),
         }));
-        // setData("pecas",selected.map((v: any) => v.value));
+
     };
 
-    useEffect(() => {
-        const custo = parseFloat(data.valservico) + parseFloat(data.valpecas);
-        setData("custo", `${custo.toFixed(2)}`);
-    }, [data]);
+    // useEffect(() => {
+    //     const custo = parseFloat(data.valservico) + parseFloat(data.valpecas);
+    //     setData("custo", `${custo}`);
+    // }, [data]);
 
     return (
         <AuthLayout>

@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::create('ordem_produto', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('produto_id')->unsigned();
-            $table->bigInteger('ordem_id')->unsigned();
-            $table->foreign('produto_id')->references('id')->on('produtos')->onDelete('cascade');
-            $table->foreign('ordem_id')->references('id')->on('ordens')->onDelete('cascade');
+            $table->foreignId('ordem_id')->nullable()->constrained(table: 'ordens', indexName: 'col_ordem_id')->onDelete('cascade');
+            $table->foreignId('produto_id')->nullable()->constrained(table: 'produtos', indexName: 'col_produto_id')->onDelete('cascade');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

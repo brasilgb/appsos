@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::create('mensagens', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('remetente');
-            $table->foreign('remetente')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('destinatario');
-            $table->foreign('destinatario')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('remetente')->nullable()->constrained(table: 'users', indexName: 'rem_user_id')->onDelete('cascade');
+            $table->foreignId('destinatario')->nullable()->constrained(table: 'users', indexName: 'des_user_id')->onDelete('cascade');
             $table->text('mensagem');
             $table->tinyInteger('status')->nullable();
             $table->timestamp('created_at')->useCurrent();
@@ -24,7 +22,7 @@ return new class extends Migration
         });
     }
 
-    /**
+    /**     
      * Reverse the migrations.
      */
     public function down(): void

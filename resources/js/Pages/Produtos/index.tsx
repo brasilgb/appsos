@@ -76,7 +76,7 @@ const Produtos = ({ produtos }: any) => {
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {produtos.data.map((produto: any) => (
+                                {produtos?.data.map((produto: any) => (
                                     <Fragment key={produto.id}>
                                         <TableRow>
                                             <TableCell>

@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('imagens', function (Blueprint $table) {
             $table->id();            
-            $table->unsignedBigInteger('ordem_id');
-            $table->foreign('ordem_id')->references('id')->on('ordens')->onDelete('cascade');
+            $table->foreignId('ordem_id')->nullable()->constrained(table: 'ordens', indexName: 'ordem_id')->onDelete('cascade');
             $table->text('imagem');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

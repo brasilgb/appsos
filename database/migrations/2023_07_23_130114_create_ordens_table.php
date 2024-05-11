@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ordens', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
-            $table->unsignedBigInteger('cliente_id');
-            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('cliente_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('equipamento', 40);
             $table->string('modelo', 50)->nullable();
             $table->string('senha', 50)->nullable();
@@ -27,9 +26,9 @@ return new class extends Migration
             $table->text('valorcamento')->nullable();
             $table->text('detalhes')->nullable(); // servicos executados
             $table->text('pecas')->nullable();
-            $table->decimal('valpecas', 6, 2)->nullable();
-            $table->decimal('valservico', 6, 2)->nullable();
-            $table->decimal('custo', 6, 2)->nullable();
+            $table->decimal('valpecas', 10, 2)->default(0);
+            $table->decimal('valservico', 10, 2)->default(0);
+            $table->decimal('custo', 10, 2)->default(0);
             $table->string('previsao')->nullable();
             $table->tinyInteger('status')->default('1');
             $table->dateTime('dtentrega')->nullable();
