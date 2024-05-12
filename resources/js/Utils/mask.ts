@@ -66,14 +66,17 @@ function maskMoney(value:string) {
 	valorAlterado = valorAlterado.replace(/\D/g, ""); // Remove todos os não dígitos
 	valorAlterado = valorAlterado.replace(/(\d+)(\d{2})$/, "$1,$2"); // Adiciona a parte de centavos
 	valorAlterado = valorAlterado.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."); // Adiciona pontos a cada três dígitos
-	valorAlterado = "R$ " + valorAlterado;
+	valorAlterado = valorAlterado;
 	return value = valorAlterado;
 }
 
-function maskDecimal(value:any) {
-	var valorAlterado = value.toString();
-	valorAlterado = valorAlterado.replace(/(\d+)(\d{2})$/, "$1.$2");
+
+function maskMoneyDot(value:string) {
+	var valorAlterado = value;
+	valorAlterado = valorAlterado.replace(/\D/g, ""); // Remove todos os não dígitos
+	valorAlterado = valorAlterado.replace(/(\d+)(\d{2})$/, "$1.$2"); // Adiciona a parte de centavos
+	valorAlterado = valorAlterado;
 	return value = valorAlterado;
 }
 
-export { maskCep, maskPhone, maskDate, maskCpfCnpj, maskCnpj, unMask, maskMoney, maskDecimal };
+export { maskCep, maskPhone, maskDate, maskCpfCnpj, maskCnpj, unMask, maskMoney, maskMoneyDot };

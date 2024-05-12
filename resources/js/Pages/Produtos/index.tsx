@@ -89,7 +89,7 @@ const Produtos = ({ produtos }: any) => {
                                                 {produto.estmaximo}
                                             </TableCell>
                                             <TableCell>
-                                                {maskMoney(produto.valvenda)}
+                                                R$ {maskMoney(produto.valvenda)}
                                             </TableCell>
                                             <TableCell>
                                                 {moment(

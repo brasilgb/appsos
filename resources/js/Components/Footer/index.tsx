@@ -12,7 +12,9 @@ const Footer = () => {
                 </p>
             </div>
             <div className="flex flex-1 justify-end">
+                <a href="https://megb.com.br/" target="_blank" rel="noopener noreferrer">
                 <span className="text-sm text-megb-yellow font-semibold">MEGB</span>
+                </a>
             </div>
         </footer>
     );

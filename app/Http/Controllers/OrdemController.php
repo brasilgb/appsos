@@ -23,7 +23,7 @@ class OrdemController extends Controller
     use HttpResponses;
 
     // Display and linting order for id
-    public function allOrder() 
+    public function allOrder()
     {
         $dashData = [
             'numorder' => count(Ordem::get()),
@@ -38,9 +38,9 @@ class OrdemController extends Controller
             'result' => $dashData
         ];
     }
-  
+
     // Display and linting order for id
-    public function getOrder($order) 
+    public function getOrder($order)
     {
         $query = Ordem::where('id', $order)->with('cliente')->get();
         return [
@@ -50,7 +50,7 @@ class OrdemController extends Controller
     }
 
     // Display and listing customers for id order
-    public function getOrderCli($customer) 
+    public function getOrderCli($customer)
     {
         $query = Ordem::where('cliente_id', $customer)->with('cliente')->get();
         return [
@@ -93,7 +93,7 @@ class OrdemController extends Controller
 
         return Inertia::render('Ordens/add', ['clientes' => $clientes, 'ordem' => $ordem]);
     }
-    
+
     /**
      * Store a newly created resource in storage.
      */
@@ -131,12 +131,14 @@ class OrdemController extends Controller
         $ordens = Ordem::with('cliente')->where('id', $ordem->id)->first();
         $tecnicos = User::where('role', 3)->where('status', 1)->get();
         $produtos = Produto::get();
-        return Inertia::render('Ordens/edit', [
-            'ordens' => $ordens, 
-            'tecnicos' => $tecnicos, 
-            'produtos' => $produtos, 
-            'ordemProduto' => $ordem->produtos, 
-            'currentPage' => $page
+        return Inertia::render(
+            'Ordens/edit',
+            [
+                'ordens' => $ordens,
+                'tecnicos' => $tecnicos,
+                'produtos' => $produtos,
+                'ordemProduto' => $ordem->produtos,
+                'currentPage' => $page
             ]
         );
     }
@@ -172,10 +174,20 @@ class OrdemController extends Controller
         $dtformat = Carbon::now();
         $data['dtentrega'] = $request->status === '8' ? $dtformat->toDateTimeString() : null;
         $ordem->update($data);
-
-        if ($request->pecas != null) {
+        // dd(($request->pecas));
+        // dd(!empty($request->pecas));
+        if (!empty($request->pecas)) {
+            foreach ($request->pecas as $peca) {
+                $pec[] = [
+                    'ordem_id' => $ordem->id,
+                    'produto_id' => $peca
+                ];
+            }
             $ord = Ordem::find($ordem->id);
-            $ord->produtos()->sync($request->pecas);
+            $ord->produtos()->sync($pec);
+        } else {
+            $ord = Ordem::find($ordem->id);
+            $ord->produtos()->sync([]);
         }
 
         Session::flash('success', 'Ordem de serviço editada com sucesso!');

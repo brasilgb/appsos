@@ -11,8 +11,7 @@ import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { statusServico } from "@/Utils/dataSelect";
-import { maskMoney, unMask } from "@/Utils/mask";
-import { Head, Link, useForm, usePage } from "@inertiajs/react";
+import { Head, Link, router, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React, { useEffect, useState } from "react";
 import { IoPeopleSharp, IoPrint } from "react-icons/io5";
@@ -30,6 +29,7 @@ interface ClientesProps {
     descorcamento: string;
     valorcamento: string;
     preorcamento: string;
+    pecas: any;
     valpecas: string;
     valservico: string;
     custo: string;
@@ -48,6 +48,7 @@ const EditOrdem = ({
     currentPage,
 }: any) => {
     const { flash } = usePage().props;
+    
     const options = produtos.map((produto: any) => ({
         value: produto.id,
         label: produto.descricao,
@@ -78,8 +79,9 @@ const EditOrdem = ({
         descorcamento: ordens.descorcamento,
         valorcamento: ordens.valorcamento,
         preorcamento: ordens.preorcamento,
+        pecas: ordemProduto.map((produto: any) => (produto.id)),
         valpecas: ordens.valpecas,
-        valservico: ordens.valservico,
+        valservico: ordens.valservico?ordens.valservico:'0',
         custo: ordens.custo,
         status: ordens.status,
         tecnico: ordens.tecnico,
@@ -90,7 +92,7 @@ const EditOrdem = ({
 
     function handleSubmit(e: any) {
         e.preventDefault();
-        route(`/ordens/${ordens.id}`, {
+        router.post(`/ordens/${ordens.id}`, {
             _method: "patch",
             id: data.id,
             equipamento: data.equipamento,
@@ -103,9 +105,10 @@ const EditOrdem = ({
             descorcamento: data.descorcamento,
             valorcamento: data.valorcamento,
             preorcamento: data.preorcamento,
-            valpecas: unMask(data.valpecas.toString()).replace(/(\d+)(\d{2})$/, "$1.$2"),
-            valservico: unMask(data.valservico.toString()).replace(/(\d+)(\d{2})$/, "$1.$2"),
-            custo: unMask(data.custo.toString()).replace(/(\d+)(\d{2})$/, "$1.$2"),
+            pecas: data.pecas,
+            valpecas: data.valpecas,
+            valservico: data.valservico,
+            custo: data.custo,
             status: data.status,
             tecnico: data.tecnico,
             detalhes: data.detalhes,
@@ -118,23 +121,19 @@ const EditOrdem = ({
         const valueId = selected.map((v: any) => v.value);
         const vpecas = produtos
             .filter((fil: any) => valueId.includes(fil.id))
-            .map((peca: any) => peca.valvenda);
+            .map((peca: any) => parseFloat(peca.valvenda));
+
         const totPecas = vpecas.reduce((t: any, q: any) => {
             return t + q;
         }, 0);
-
         setData((data) => ({ ...data, valpecas: totPecas }));
-        setData((data) => ({
-            ...data,
-            pecas: selected.map((v: any) => v.value),
-        }));
+        setData((data) => ({ ...data, pecas: selected.map((v: any) => v.value) }));
 
     };
-
-    // useEffect(() => {
-    //     const custo = parseFloat(data.valservico) + parseFloat(data.valpecas);
-    //     setData("custo", `${custo}`);
-    // }, [data]);
+    useEffect(() => {
+        const custo = parseFloat(data.valpecas) + parseFloat(data.valservico);
+        setData((data: any) => ({ ...data, custo: custo }));
+    }, [data])
 
     return (
         <AuthLayout>
@@ -380,13 +379,12 @@ const EditOrdem = ({
                                         <input
                                             id="valpecas"
                                             type="text"
-                                            value={maskMoney(data.valpecas.toString())}
+                                            value={data.valpecas}
                                             onChange={(e) =>
                                                 setData(
                                                     "valpecas",
                                                     e.target.value,
-                                                )
-                                            }
+                                                )}
                                             className="input-form"
                                         />
                                     </div>
@@ -400,7 +398,7 @@ const EditOrdem = ({
                                         <input
                                             id="valservico"
                                             type="text"
-                                            value={maskMoney(data.valservico.toString())}
+                                            value={data.valservico}
                                             onChange={(e) =>
                                                 setData(
                                                     "valservico",
@@ -420,7 +418,7 @@ const EditOrdem = ({
                                         <input
                                             id="custo"
                                             type="text"
-                                            value={maskMoney(data.custo.toString())}
+                                            value={data.custo}
                                             onChange={(e) =>
                                                 setData("custo", e.target.value)
                                             }

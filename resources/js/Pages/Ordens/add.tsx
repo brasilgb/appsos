@@ -49,7 +49,6 @@ const AddOrdem = ({ clientes, ordem }) => {
             setFilterSearch([]);
         }
     }, [data]);
-
     const handleChangeCustomer = (id: any, nome: any) => {
         setData((data) => ({ ...data, cliente_id: id }));
         setData((data) => ({ ...data, cliente: nome }));
@@ -96,7 +95,7 @@ const AddOrdem = ({ clientes, ordem }) => {
                                         <input
                                             id="ordem"
                                             type="text"
-                                            value={("000000" + data.id).slice(-6)}
+                                            value={data.id}
                                             className="input-form"
                                             disabled
                                         />
