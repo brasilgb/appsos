@@ -296,6 +296,7 @@ const EditOrdem = ({
                                         <textarea
                                             id="defeito"
                                             value={data.defeito}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "defeito",
@@ -304,7 +305,13 @@ const EditOrdem = ({
                                             }
                                             className="input-form"
                                         />
+                                        {errors.defeito && (
+                                            <div className="text-sm text-red-500">
+                                                {errors.defeito}
+                                            </div>
+                                        )}
                                     </div>
+
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
@@ -508,7 +515,6 @@ const EditOrdem = ({
                                         <textarea
                                             id="preorcamento"
                                             value={data.preorcamento}
-                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "preorcamento",
@@ -517,11 +523,6 @@ const EditOrdem = ({
                                             }
                                             className="input-form"
                                         />
-                                        {errors.preorcamento && (
-                                            <div className="text-red-500">
-                                                {errors.preorcamento}
-                                            </div>
-                                        )}
                                     </div>
                                     <div className="flex flex-col">
                                         <label
