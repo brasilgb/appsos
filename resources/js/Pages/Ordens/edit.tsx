@@ -80,7 +80,7 @@ const EditOrdem = ({
         valorcamento: ordens.valorcamento,
         preorcamento: ordens.preorcamento,
         pecas: ordemProduto.map((produto: any) => (produto.id)),
-        valpecas: ordens.valpecas,
+        valpecas: ordens.valpecas?ordens.valpecas:'0',
         valservico: ordens.valservico?ordens.valservico:'0',
         custo: ordens.custo?ordens.custo:'0',
         status: ordens.status,
