@@ -63,8 +63,8 @@ const EditProduto = ({ produtos }: any) => {
             codbarra: data.codbarra,
             descricao: data.descricao,
             movimento: data.movimento,
-            valcompra: unMask(data.valcompra.toString()).replace(/(\d+)(\d{2})$/, "$1.$2"),
-            valvenda: unMask(data.valvenda.toString()).replace(/(\d+)(\d{2})$/, "$1.$2"),
+            valcompra: data.valcompra,
+            valvenda: data.valvenda,
             unidade: data.unidade,
             estmaximo: data.estmaximo,
             estminimo: data.estminimo,
@@ -178,7 +178,7 @@ const EditProduto = ({ produtos }: any) => {
                                         <input
                                             id="valcompra"
                                             type="text"
-                                            value={maskMoney(data.valcompra.toString())}
+                                            value={data.valcompra}
                                             onChange={(e) =>
                                                 setData(
                                                     "valcompra", 
@@ -203,7 +203,7 @@ const EditProduto = ({ produtos }: any) => {
                                         <input
                                             id="valvenda"
                                             type="text"
-                                            value={maskMoney(data.valvenda.toString())}
+                                            value={data.valvenda}
                                             onChange={(e) =>
                                                 setData(
                                                     "valvenda",

@@ -39,8 +39,8 @@ const AddCliente = () => {
             codbarra: data.codbarra,
             descricao: data.descricao,
             movimento: data.movimento,
-            valcompra: unMask(data.valcompra.toString()).replace(/(\d+)(\d{2})$/, "$1.$2"),
-            valvenda: unMask(data.valvenda.toString()).replace(/(\d+)(\d{2})$/, "$1.$2"),
+            valcompra: data.valcompra,
+            valvenda: data.valvenda,
             unidade: data.unidade,
             estmaximo: data.estmaximo,
             estminimo: data.estminimo,
@@ -153,7 +153,7 @@ const AddCliente = () => {
                                         <input
                                             id="valcompra"
                                             type="text"
-                                            value={maskMoney(data.valcompra)}
+                                            value={data.valcompra}
                                             onChange={(e) =>
                                                 setData(
                                                     "valcompra",
@@ -178,7 +178,7 @@ const AddCliente = () => {
                                         <input
                                             id="valvenda"
                                             type="text"
-                                            value={maskMoney(data.valvenda)}
+                                            value={data.valvenda}
                                             onChange={(e) =>
                                                 setData(
                                                     "valvenda",
