@@ -48,7 +48,7 @@ const EditOrdem = ({
     currentPage,
 }: any) => {
     const { flash } = usePage().props;
-    
+
     const options = produtos.map((produto: any) => ({
         value: produto.id,
         label: produto.descricao,
@@ -62,11 +62,9 @@ const EditOrdem = ({
     const {
         data,
         setData,
-        patch,
         progress,
         processing,
         errors,
-        setDefaults,
     }: InertiaFormProps<ClientesProps> = useForm({
         id: ordens.id,
         equipamento: ordens.equipamento,
@@ -80,9 +78,9 @@ const EditOrdem = ({
         valorcamento: ordens.valorcamento,
         preorcamento: ordens.preorcamento,
         pecas: ordemProduto.map((produto: any) => (produto.id)),
-        valpecas: ordens.valpecas?ordens.valpecas:'0',
-        valservico: ordens.valservico?ordens.valservico:'0',
-        custo: ordens.custo?ordens.custo:'0',
+        valpecas: ordens.valpecas ? ordens.valpecas : '0',
+        valservico: ordens.valservico ? ordens.valservico : '0',
+        custo: ordens.custo ? ordens.custo : '0',
         status: ordens.status,
         tecnico: ordens.tecnico,
         detalhes: ordens.detalhes,
@@ -210,6 +208,7 @@ const EditOrdem = ({
                                             id="equipamento"
                                             type="text"
                                             value={data.equipamento}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "equipamento",
@@ -437,6 +436,7 @@ const EditOrdem = ({
                                         <select
                                             id="tecnico"
                                             value={data.tecnico}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "tecnico",
@@ -458,7 +458,7 @@ const EditOrdem = ({
                                             ))}
                                         </select>
                                         {errors.tecnico && (
-                                            <div className="text-red-500">
+                                            <div className="text-sm text-red-500">
                                                 {errors.tecnico}
                                             </div>
                                         )}
@@ -508,6 +508,7 @@ const EditOrdem = ({
                                         <textarea
                                             id="preorcamento"
                                             value={data.preorcamento}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "preorcamento",

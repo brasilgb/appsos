@@ -88,6 +88,7 @@ const AddCliente = () => {
                                             id="descricao"
                                             type="text"
                                             value={data.descricao}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "descricao",
@@ -112,6 +113,7 @@ const AddCliente = () => {
                                         <select
                                             id="movimento"
                                             value={data.movimento}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "movimento",
@@ -154,6 +156,7 @@ const AddCliente = () => {
                                             id="valcompra"
                                             type="text"
                                             value={data.valcompra}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "valcompra",
@@ -179,6 +182,7 @@ const AddCliente = () => {
                                             id="valvenda"
                                             type="text"
                                             value={data.valvenda}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "valvenda",
@@ -206,6 +210,7 @@ const AddCliente = () => {
                                         <select
                                             id="unidade"
                                             value={data.unidade}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "unidade",
@@ -245,6 +250,7 @@ const AddCliente = () => {
                                             id="estmaximo"
                                             type="text"
                                             value={data.estmaximo}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "estmaximo",
@@ -270,6 +276,7 @@ const AddCliente = () => {
                                             id="estminimo"
                                             type="text"
                                             value={data.estminimo}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "estminimo",
@@ -295,6 +302,7 @@ const AddCliente = () => {
                                         <select
                                             id="tipo"
                                             value={data.tipo}
+                                            required
                                             onChange={(e) =>
                                                 setData("tipo", e.target.value)
                                             }

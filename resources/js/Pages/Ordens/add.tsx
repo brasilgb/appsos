@@ -12,7 +12,6 @@ import AuthLayout from "@/Layouts/AuthLayout";
 import { Head, useForm } from "@inertiajs/react";
 import React, { useEffect, useState } from "react";
 import { IoPeopleSharp } from "react-icons/io5";
-import Select from "react-select";
 
 const AddOrdem = ({ clientes, ordem }) => {
     const [filterSearch, setFilterSearch] = useState<any>([]);

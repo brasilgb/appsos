@@ -73,8 +73,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('/configuracoes/whatsapp', WhatsController::class)->parameters([
         'whatsapp' => 'whats'
     ]);
-
-    Route::post('/ordens/insertpart', [OrdemController::class, 'insertParts'])->name('ordens.insertpart');
 });
 
 require __DIR__ . '/auth.php';

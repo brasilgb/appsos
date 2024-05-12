@@ -113,6 +113,7 @@ const EditProduto = ({ produtos }: any) => {
                                             id="descricao"
                                             type="text"
                                             value={data.descricao}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "descricao",
@@ -137,6 +138,7 @@ const EditProduto = ({ produtos }: any) => {
                                         <select
                                             id="movimento"
                                             value={data.movimento}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "movimento",
@@ -179,6 +181,7 @@ const EditProduto = ({ produtos }: any) => {
                                             id="valcompra"
                                             type="text"
                                             value={data.valcompra}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "valcompra", 
@@ -204,6 +207,7 @@ const EditProduto = ({ produtos }: any) => {
                                             id="valvenda"
                                             type="text"
                                             value={data.valvenda}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "valvenda",
@@ -231,6 +235,7 @@ const EditProduto = ({ produtos }: any) => {
                                         <select
                                             id="unidade"
                                             value={data.unidade}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "unidade",
@@ -270,6 +275,7 @@ const EditProduto = ({ produtos }: any) => {
                                             id="estmaximo"
                                             type="text"
                                             value={data.estmaximo}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "estmaximo",
@@ -295,6 +301,7 @@ const EditProduto = ({ produtos }: any) => {
                                             id="estminimo"
                                             type="text"
                                             value={data.estminimo}
+                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "estminimo",
@@ -320,6 +327,7 @@ const EditProduto = ({ produtos }: any) => {
                                         <select
                                             id="tipo"
                                             value={data.tipo}
+                                            required
                                             onChange={(e) =>
                                                 setData("tipo", e.target.value)
                                             }
