@@ -92,7 +92,7 @@ console.log(statusorder?.messages);
                                     href={`ordens/${gerado.id}`}
                                     key={idx}
                                     className="bg-rose-600 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
-                                    {("000000" + gerado.id).slice(-6)}
+                                    {gerado.id}
                                 </Link>
                             ))}
                         </div>
@@ -107,7 +107,7 @@ console.log(statusorder?.messages);
                                     href={`ordens/${gerado.id}`}
                                     key={idx}
                                     className="bg-blue-500 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
-                                    {("000000" + gerado.id).slice(-6)}
+                                    {gerado.id}
                                 </Link>
                             ))}
                         </div>
@@ -121,14 +121,14 @@ console.log(statusorder?.messages);
                                 <Link
                                     href={`ordens/${gerado.id}`}
                                     key={idx} className="bg-cyan-600 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
-                                    {("000000" + gerado.id).slice(-6)}
+                                    {gerado.id}
                                 </Link>
                             ))}
                             {statusorder?.concluidoscn?.map((gerado: any, idx: number) => (
                                 <Link
                                     href={`ordens/${gerado.id}`}
                                     key={idx} className="bg-amber-500 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
-                                    {("000000" + gerado.id).slice(-6)}
+                                    {gerado.id}
                                 </Link>
                             ))}
                         </div>
