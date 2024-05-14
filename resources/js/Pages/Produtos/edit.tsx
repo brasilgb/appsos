@@ -25,6 +25,7 @@ import { IoPeopleSharp } from "react-icons/io5";
 interface ClientesProps {
     codbarra: string;
     descricao: string;
+    partnumber: string;
     movimento: string;
     valcompra: string;
     valvenda: string;
@@ -46,6 +47,7 @@ const EditProduto = ({ produtos }: any) => {
     }: InertiaFormProps<ClientesProps> = useForm({
         codbarra: produtos.codbarra,
         descricao: produtos.descricao,
+        partnumber: produtos.partnumber,
         movimento: produtos.movimento,
         valcompra: produtos.valcompra,
         valvenda: produtos.valvenda,
@@ -61,6 +63,7 @@ const EditProduto = ({ produtos }: any) => {
             _method: "patch",
             codbarra: data.codbarra,
             descricao: data.descricao,
+            partnumber: data.partnumber,
             movimento: data.movimento,
             valcompra: maskMoneyDot(data.valcompra.toString()),
             valvenda: maskMoneyDot(data.valvenda.toString()),
@@ -100,7 +103,7 @@ const EditProduto = ({ produtos }: any) => {
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <CardBody className=" border-y border-gray-100">
                             <div className="px-3 my-4">
-                                <div className="grid grid-cols-3 gap-4">
+                                <div className="grid grid-cols-5 gap-4">
                                     <div className="flex flex-col col-span-2">
                                         <label
                                             className="label-form"
@@ -125,6 +128,26 @@ const EditProduto = ({ produtos }: any) => {
                                                 {errors.descricao}
                                             </div>
                                         )}
+                                    </div>
+                                    <div className="flex flex-col col-span-2">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="partnumber"
+                                        >
+                                            Part Number
+                                        </label>
+                                        <input
+                                            id="partnumber"
+                                            type="text"
+                                            value={data.partnumber}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "partnumber",
+                                                    e.target.value,
+                                                )
+                                            }
+                                            className="input-form"
+                                        />
                                     </div>
                                     <div className="flex flex-col">
                                         <label

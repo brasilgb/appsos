@@ -123,11 +123,6 @@ const AddCliente = () => {
                                             }
                                             className="input-form"
                                         />
-                                        {errors.partnumber && (
-                                            <div className="text-sm text-red-500">
-                                                {errors.partnumber}
-                                            </div>
-                                        )}
                                     </div>
                                     <div className="flex flex-col">
                                         <label
