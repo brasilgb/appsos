@@ -15,7 +15,7 @@ import {
     tiposProdutos,
     unidadesProdutos,
 } from "@/Utils/dataSelect";
-import { maskCep, maskCpfCnpj, maskMoney, maskPhone, unMask } from "@/Utils/mask";
+import { maskCep, maskCpfCnpj, maskMoney, maskMoneyDot, maskPhone, unMask } from "@/Utils/mask";
 import { Head, router, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React, { useCallback, useEffect } from "react";
@@ -35,7 +35,7 @@ interface ClientesProps {
 }
 
 const EditProduto = ({ produtos }: any) => {
-    const { flash } = usePage().props;
+    const { flash, errors } = usePage().props;
 
     const {
         data,
@@ -43,7 +43,6 @@ const EditProduto = ({ produtos }: any) => {
         patch,
         progress,
         processing,
-        errors,
     }: InertiaFormProps<ClientesProps> = useForm({
         codbarra: produtos.codbarra,
         descricao: produtos.descricao,
@@ -63,8 +62,8 @@ const EditProduto = ({ produtos }: any) => {
             codbarra: data.codbarra,
             descricao: data.descricao,
             movimento: data.movimento,
-            valcompra: data.valcompra,
-            valvenda: data.valvenda,
+            valcompra: maskMoneyDot(data.valcompra.toString()),
+            valvenda: maskMoneyDot(data.valvenda.toString()),
             unidade: data.unidade,
             estmaximo: data.estmaximo,
             estminimo: data.estminimo,
@@ -113,7 +112,6 @@ const EditProduto = ({ produtos }: any) => {
                                             id="descricao"
                                             type="text"
                                             value={data.descricao}
-                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "descricao",
@@ -138,7 +136,6 @@ const EditProduto = ({ produtos }: any) => {
                                         <select
                                             id="movimento"
                                             value={data.movimento}
-                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "movimento",
@@ -162,7 +159,7 @@ const EditProduto = ({ produtos }: any) => {
                                             )}
                                         </select>
                                         {errors.movimento && (
-                                            <div className="text-red-500">
+                                            <div className="text-sm text-red-500">
                                                 {errors.movimento}
                                             </div>
                                         )}
@@ -180,18 +177,17 @@ const EditProduto = ({ produtos }: any) => {
                                         <input
                                             id="valcompra"
                                             type="text"
-                                            value={data.valcompra}
-                                            required
+                                            value={maskMoney(data.valcompra.toString())}
                                             onChange={(e) =>
                                                 setData(
-                                                    "valcompra", 
+                                                    "valcompra",
                                                     e.target.value,
                                                 )
                                             }
                                             className="input-form"
                                         />
                                         {errors.valcompra && (
-                                            <div className="text-red-500">
+                                            <div className="text-sm text-red-500">
                                                 {errors.valcompra}
                                             </div>
                                         )}
@@ -206,8 +202,7 @@ const EditProduto = ({ produtos }: any) => {
                                         <input
                                             id="valvenda"
                                             type="text"
-                                            value={data.valvenda}
-                                            required
+                                            value={maskMoney(data.valvenda.toString())}
                                             onChange={(e) =>
                                                 setData(
                                                     "valvenda",
@@ -217,7 +212,7 @@ const EditProduto = ({ produtos }: any) => {
                                             className="input-form"
                                         />
                                         {errors.valvenda && (
-                                            <div className="text-red-500">
+                                            <div className="text-sm text-red-500">
                                                 {errors.valvenda}
                                             </div>
                                         )}
@@ -235,7 +230,6 @@ const EditProduto = ({ produtos }: any) => {
                                         <select
                                             id="unidade"
                                             value={data.unidade}
-                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "unidade",
@@ -275,7 +269,6 @@ const EditProduto = ({ produtos }: any) => {
                                             id="estmaximo"
                                             type="text"
                                             value={data.estmaximo}
-                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "estmaximo",
@@ -301,7 +294,6 @@ const EditProduto = ({ produtos }: any) => {
                                             id="estminimo"
                                             type="text"
                                             value={data.estminimo}
-                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "estminimo",
@@ -327,7 +319,6 @@ const EditProduto = ({ produtos }: any) => {
                                         <select
                                             id="tipo"
                                             value={data.tipo}
-                                            required
                                             onChange={(e) =>
                                                 setData("tipo", e.target.value)
                                             }

@@ -171,6 +171,7 @@ class OrdemController extends Controller
         );
         $dtformat = Carbon::now();
         $data['dtentrega'] = $request->status === '8' ? $dtformat->toDateTimeString() : null;
+        // dd($request->pecas);
         if (!empty($request->pecas)) {
             foreach ($request->pecas as $peca) {
                 $pec[] = [
@@ -184,6 +185,7 @@ class OrdemController extends Controller
             $ord = Ordem::find($ordem->id);
             $ord->produtos()->sync([]);
         }
+
         $ordem->update($data);
         Session::flash('success', 'Ordem de serviço editada com sucesso!');
         return Redirect::route('ordens.show', ['ordem' => $ordem->id, 'page' => $request->page]);
@@ -195,7 +197,6 @@ class OrdemController extends Controller
     public function destroy(Ordem $ordem)
     {
         $ordem->delete();
-
         $ordem->produtos()->detach();
         $ordem->delete($ordem);
 

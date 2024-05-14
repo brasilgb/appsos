@@ -14,16 +14,17 @@ import {
     tiposProdutos,
     unidadesProdutos,
 } from "@/Utils/dataSelect";
-import { maskCep, maskCpfCnpj, maskMoney, maskPhone, unMask } from "@/Utils/mask";
-import { Head, router, useForm } from "@inertiajs/react";
-import React, { useCallback, useEffect } from "react";
+import { maskMoney, maskMoneyDot } from "@/Utils/mask";
+import { Head, router, useForm, usePage } from "@inertiajs/react";
+import React from "react";
 import { FaBasketShopping } from "react-icons/fa6";
-import { IoPeopleSharp } from "react-icons/io5";
 
 const AddCliente = () => {
-    const { data, setData, post, progress, processing, errors } = useForm({
+    const { errors } = usePage().props;
+    const { data, setData, post, progress, processing } = useForm({
         codbarra: "",
         descricao: "",
+        partnumber: "",
         movimento: "",
         valcompra: "",
         valvenda: "",
@@ -38,9 +39,10 @@ const AddCliente = () => {
         router.post("/produtos", {
             codbarra: data.codbarra,
             descricao: data.descricao,
+            partnumber: data.partnumber,
             movimento: data.movimento,
-            valcompra: data.valcompra,
-            valvenda: data.valvenda,
+            valcompra: maskMoneyDot(data.valcompra.toString()),
+            valvenda: maskMoneyDot(data.valvenda.toString()),
             unidade: data.unidade,
             estmaximo: data.estmaximo,
             estminimo: data.estminimo,
@@ -76,7 +78,7 @@ const AddCliente = () => {
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <CardBody className=" border-y border-gray-100">
                             <div className="px-3 my-4">
-                                <div className="grid grid-cols-3 gap-4">
+                                <div className="grid grid-cols-5 gap-4">
                                     <div className="flex flex-col col-span-2">
                                         <label
                                             className="label-form"
@@ -88,7 +90,6 @@ const AddCliente = () => {
                                             id="descricao"
                                             type="text"
                                             value={data.descricao}
-                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "descricao",
@@ -103,6 +104,31 @@ const AddCliente = () => {
                                             </div>
                                         )}
                                     </div>
+                                    <div className="flex flex-col col-span-2">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="partnumber"
+                                        >
+                                            Part Number
+                                        </label>
+                                        <input
+                                            id="partnumber"
+                                            type="text"
+                                            value={data.partnumber}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "partnumber",
+                                                    e.target.value,
+                                                )
+                                            }
+                                            className="input-form"
+                                        />
+                                        {errors.partnumber && (
+                                            <div className="text-sm text-red-500">
+                                                {errors.partnumber}
+                                            </div>
+                                        )}
+                                    </div>
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
@@ -113,7 +139,6 @@ const AddCliente = () => {
                                         <select
                                             id="movimento"
                                             value={data.movimento}
-                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "movimento",
@@ -137,7 +162,7 @@ const AddCliente = () => {
                                             )}
                                         </select>
                                         {errors.movimento && (
-                                            <div className="text-red-500">
+                                            <div className="text-sm text-red-500">
                                                 {errors.movimento}
                                             </div>
                                         )}
@@ -155,8 +180,7 @@ const AddCliente = () => {
                                         <input
                                             id="valcompra"
                                             type="text"
-                                            value={data.valcompra}
-                                            required
+                                            value={maskMoney(data.valcompra.toString())}
                                             onChange={(e) =>
                                                 setData(
                                                     "valcompra",
@@ -166,7 +190,7 @@ const AddCliente = () => {
                                             className="input-form"
                                         />
                                         {errors.valcompra && (
-                                            <div className="text-red-500">
+                                            <div className="text-sm text-red-500">
                                                 {errors.valcompra}
                                             </div>
                                         )}
@@ -181,8 +205,7 @@ const AddCliente = () => {
                                         <input
                                             id="valvenda"
                                             type="text"
-                                            value={data.valvenda}
-                                            required
+                                            value={maskMoney(data.valvenda.toString())}
                                             onChange={(e) =>
                                                 setData(
                                                     "valvenda",
@@ -192,7 +215,7 @@ const AddCliente = () => {
                                             className="input-form"
                                         />
                                         {errors.valvenda && (
-                                            <div className="text-red-500">
+                                            <div className="text-sm text-red-500">
                                                 {errors.valvenda}
                                             </div>
                                         )}
@@ -210,7 +233,6 @@ const AddCliente = () => {
                                         <select
                                             id="unidade"
                                             value={data.unidade}
-                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "unidade",
@@ -250,7 +272,6 @@ const AddCliente = () => {
                                             id="estmaximo"
                                             type="text"
                                             value={data.estmaximo}
-                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "estmaximo",
@@ -276,7 +297,6 @@ const AddCliente = () => {
                                             id="estminimo"
                                             type="text"
                                             value={data.estminimo}
-                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "estminimo",
@@ -302,7 +322,6 @@ const AddCliente = () => {
                                         <select
                                             id="tipo"
                                             value={data.tipo}
-                                            required
                                             onChange={(e) =>
                                                 setData("tipo", e.target.value)
                                             }

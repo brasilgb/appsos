@@ -11,9 +11,10 @@ import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { statusServico } from "@/Utils/dataSelect";
+import { maskMoney, maskMoneyDot, unMask } from "@/Utils/mask";
 import { Head, Link, router, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { IoPeopleSharp, IoPrint } from "react-icons/io5";
 import Select from "react-select";
 
@@ -47,7 +48,7 @@ const EditOrdem = ({
     ordemProduto,
     currentPage,
 }: any) => {
-    const { flash } = usePage().props;
+    const { flash, errors } = usePage().props;
 
     const options = produtos.map((produto: any) => ({
         value: produto.id,
@@ -64,7 +65,6 @@ const EditOrdem = ({
         setData,
         progress,
         processing,
-        errors,
     }: InertiaFormProps<ClientesProps> = useForm({
         id: ordens.id,
         equipamento: ordens.equipamento,
@@ -104,15 +104,19 @@ const EditOrdem = ({
             valorcamento: data.valorcamento,
             preorcamento: data.preorcamento,
             pecas: data.pecas,
-            valpecas: data.valpecas,
-            valservico: data.valservico,
-            custo: data.custo,
+            valpecas: maskMoneyDot(data.valpecas.toString()),
+            valservico: maskMoneyDot(data.valservico.toString()),
+            custo: maskMoneyDot(data.custo.toString()),
             status: data.status,
             tecnico: data.tecnico,
             detalhes: data.detalhes,
             obs: data.obs,
             page: currentPage,
         });
+    }
+
+    const sum = (a: any, b: any) => {
+        return parseInt(unMask(a)) + parseInt(unMask(b));
     }
 
     const handleChange = (selected: any) => {
@@ -128,10 +132,11 @@ const EditOrdem = ({
         setData((data) => ({ ...data, pecas: selected.map((v: any) => v.value) }));
 
     };
+
     useEffect(() => {
-        const custo = parseFloat(data.valpecas) + parseFloat(data.valservico);
+        const custo = sum(data.valpecas.toString(), data.valservico.toString());
         setData((data: any) => ({ ...data, custo: custo }));
-    }, [data])
+    }, [data]);
 
     return (
         <AuthLayout>
@@ -208,7 +213,7 @@ const EditOrdem = ({
                                             id="equipamento"
                                             type="text"
                                             value={data.equipamento}
-                                            required
+                                            
                                             onChange={(e) =>
                                                 setData(
                                                     "equipamento",
@@ -218,7 +223,7 @@ const EditOrdem = ({
                                             className="input-form"
                                         />
                                         {errors.equipamento && (
-                                            <div className="text-red-500">
+                                            <div className="text-sm text-red-500">
                                                 {errors.equipamento}
                                             </div>
                                         )}
@@ -296,7 +301,6 @@ const EditOrdem = ({
                                         <textarea
                                             id="defeito"
                                             value={data.defeito}
-                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "defeito",
@@ -385,13 +389,14 @@ const EditOrdem = ({
                                         <input
                                             id="valpecas"
                                             type="text"
-                                            value={data.valpecas}
+                                            value={maskMoney(data.valpecas.toString())}
                                             onChange={(e) =>
                                                 setData(
                                                     "valpecas",
                                                     e.target.value,
                                                 )}
                                             className="input-form"
+                                            readOnly
                                         />
                                     </div>
                                     <div className="flex flex-col">
@@ -404,7 +409,7 @@ const EditOrdem = ({
                                         <input
                                             id="valservico"
                                             type="text"
-                                            value={data.valservico}
+                                            value={maskMoney(data.valservico.toString())}
                                             onChange={(e) =>
                                                 setData(
                                                     "valservico",
@@ -424,11 +429,12 @@ const EditOrdem = ({
                                         <input
                                             id="custo"
                                             type="text"
-                                            value={data.custo}
+                                            value={maskMoney(data.custo.toString())}
                                             onChange={(e) =>
                                                 setData("custo", e.target.value)
                                             }
                                             className="input-form"
+                                            readOnly
                                         />
                                     </div>
                                 </div>
@@ -443,7 +449,6 @@ const EditOrdem = ({
                                         <select
                                             id="tecnico"
                                             value={data.tecnico}
-                                            required
                                             onChange={(e) =>
                                                 setData(
                                                     "tecnico",

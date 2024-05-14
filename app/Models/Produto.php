@@ -14,6 +14,7 @@ class Produto extends Model
     protected $fillable = [
         'codbarra',
         'descricao',
+        'partnumber',
         'movimento',
         'valcompra',
         'valvenda',
