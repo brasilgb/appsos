@@ -100,7 +100,7 @@ class OrdemController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
+// dd($request->status);
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido'
         ];
@@ -117,6 +117,7 @@ class OrdemController extends Controller
                 'cliente_id' => 'cliente',
             ]
         );
+        $data['status'] = $request->status ? '4' : '1';
         Ordem::create($data);
         Session::flash('success', 'Ordem de serviço cadastrada com sucesso!');
         return redirect()->route('ordens.index');

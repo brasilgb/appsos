@@ -15,7 +15,6 @@ import { IoPeopleSharp } from "react-icons/io5";
 
 const AddOrdem = ({ clientes, ordem }) => {
     const [filterSearch, setFilterSearch] = useState<any>([]);
-    const [showCustomers, setShowCustomers] = useState<boolean>(false);
     const { data, setData, post, errors } = useForm({
 
         id: ordem > 0 ? ordem + 1 : 1,
@@ -28,10 +27,10 @@ const AddOrdem = ({ clientes, ordem }) => {
         estado: "",
         acessorios: "",
         preorcamento: "",
+        status: false,
         previsao: "",
         obs: "",
     });
-
     function handleSubmit(e: any) {
         e.preventDefault();
         post(route("ordens.store"));
@@ -322,22 +321,38 @@ const AddOrdem = ({ clientes, ordem }) => {
                                             className="input-form"
                                         />
                                     </div>
-                                    <div className="flex flex-col">
+                                    <div className="h-full flex items-center justify-center">
                                         <label
-                                            className="label-form"
-                                            htmlFor="obs"
+                                            className="label-form mr-2"
+                                            htmlFor="status"
                                         >
-                                            Observações
+                                            Orçamento aprovado
                                         </label>
-                                        <textarea
-                                            id="obs"
-                                            value={data.obs}
+                                        <input
+                                            id="status"
+                                            type="checkbox"
+                                            checked={data.status}
                                             onChange={(e) =>
-                                                setData("obs", e.target.value)
+                                                setData("status", e.target.checked)
                                             }
-                                            className="input-form"
                                         />
                                     </div>
+                                </div>
+                                <div className="flex flex-col mt-6">
+                                    <label
+                                        className="label-form"
+                                        htmlFor="obs"
+                                    >
+                                        Observações
+                                    </label>
+                                    <textarea
+                                        id="obs"
+                                        value={data.obs}
+                                        onChange={(e) =>
+                                            setData("obs", e.target.value)
+                                        }
+                                        className="input-form"
+                                    />
                                 </div>
                             </div>
                         </CardBody>
