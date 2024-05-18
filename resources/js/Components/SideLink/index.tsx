@@ -13,7 +13,7 @@ const SideLink = (props: SideLinkProps) => {
     return (
         <li>
             <Link
-                className={`flex items-center p-2 gap-2 rounded-md transition-all duration-300 
+                className={`flex items-center h-10 p-2 gap-2 rounded-md transition-all duration-300 
                 ${props.sublink
                         ? route().current(props.url) ? "text-gray-50 bg-blue-quatro" : "text-gray-500 hover:bg-blue-quatro hover:text-gray-100"
                         : route().current(props.url) ? "text-white bg-blue-quatro" : "text-gray-100 hover:bg-blue-quatro hover:text-gray-400"
