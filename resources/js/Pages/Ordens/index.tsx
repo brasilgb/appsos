@@ -37,6 +37,36 @@ import { IoConstruct, IoPrint } from "react-icons/io5";
 const Ordens = ({ ordens, whats, printers }: any) => {
     const { flash, ziggy } = usePage().props;
     const { oc } = (ziggy as any).query
+
+    const stylesOrderStatus = (value: any) => {
+        switch (value) {
+            case 1:
+                return "bg-gray-300/50 border border-gray-300 text-gray-500 text-xs uppercase";;
+            case 2:
+                return "bg-cyan-600/50 border border-cyan-600 text-cyan-800 text-xs uppercase";
+            case 3:
+                return "bg-orange-600/50 border border-orange-600 text-orange-800 text-xs uppercase";
+            case 4:
+                return "bg-sky-600/50 border border-sky-600 text-sky-800 text-xs uppercase";
+            case 5:
+                return "bg-red-600/50 border border-red-600 text-red-800 text-xs uppercase";
+            case 6:
+                return "bg-green-600/50 border border-green-600 text-green-800 text-xs uppercase";
+            case 7:
+                return "bg-green-600/50 border border-green-600 text-green-800 text-xs uppercase";
+            case 8:
+                return "bg-blue-600/50 border border-blue-600 text-blue-800 text-xs uppercase";
+        }
+    };
+//     case 'active':
+//         return "bg-green-600/50 border border-green-600 text-green-800 text-xs uppercase";
+//     case 'waiting':
+//         return "bg-sky-600/50 border border-sky-600 text-sky-800 text-xs uppercase";
+//     case 'suspended':
+//         return "bg-orange-600/50 border border-orange-600 text-orange-800 text-xs uppercase";
+//     case 'canceled':
+//         return "bg-red-600/50 border border-red-600 text-red-800 text-xs uppercase";
+// }
     return (
         <AuthLayout>
             <Head title="Ordens" />
@@ -44,7 +74,7 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                 <HeaderContent>
                     <TitleTop>
                         <IoConstruct size={30} />
-                        <span className="ml-2">Ordens</span>
+                        <span className="ml-2 text-">Ordens</span>
                     </TitleTop>
                     <BreadCrumbTop links={[{ url: null, label: "Ordens" }]} />
                 </HeaderContent>
@@ -84,13 +114,7 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                                 {ordem.id}
                                             </TableCell>
                                             <TableCell>
-                                                <Link
-                                                    href={`/ordens?oc=${ordem.cliente_id}`}
-                                                    className="underline text-blue-800 font-medium"
-                                                    title={`Ordens de ${ordem.cliente.nome}`}
-                                                >
                                                     {ordem.cliente.nome}
-                                                </Link>
                                             </TableCell>
                                             <TableCell>
                                                 {ordem.cliente.telefone}
@@ -107,9 +131,11 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                                 {ordem.modelo}
                                             </TableCell>
                                             <TableCell>
+                                                <span className={`px-3 py-1  rounded-full font-medium ${stylesOrderStatus(ordem.status)}`}>
                                                 {statusOrdemByValue(
                                                     ordem.status,
                                                 )}
+                                                </span>
                                             </TableCell>
                                             <TableCell>
                                                 {ordem.dtentrega !=

@@ -37,6 +37,14 @@ import { IoPerson } from "react-icons/io5";
 const Usuarios = ({ usuarios }: any) => {
     const { flash } = usePage().props;
 
+    const colorStatus = (status: number) => {
+        switch (status) {
+            case 1:
+                return "bg-green-600/50 border border-green-600 text-green-800 text-xs uppercase";
+            case 2:
+                return "bg-red-600/50 border border-red-600 text-red-800 text-xs uppercase";
+        }
+    }
     return (
         <AuthLayout>            
         <Head title="Usuários" />
@@ -92,9 +100,11 @@ const Usuarios = ({ usuarios }: any) => {
                                                 {roleUserByValue(usuario.role)}
                                             </TableCell>
                                             <TableCell>
+                                            <span className={`px-3 py-1  rounded-full font-medium ${colorStatus(usuario.status)}`}>
                                                 {statusUserByValue(
                                                     usuario.status,
                                                 )}
+                                                </span>
                                             </TableCell>
                                             <TableCell>
                                                 {moment(

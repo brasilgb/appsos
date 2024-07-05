@@ -19,6 +19,7 @@ interface ClientesProps {
     recebimento: string;
     entrega: string;
     orcamento: string;
+    checklist: string;
 }
 
 const Impressoes = ({ impressao }: any) => {
@@ -34,6 +35,7 @@ const Impressoes = ({ impressao }: any) => {
         recebimento: impressao.recebimento,
         entrega: impressao.entrega,
         orcamento: impressao.orcamento,
+        checklist: impressao.checklist,
     });
 
     function handleSubmit(e: any) {
@@ -107,6 +109,23 @@ const Impressoes = ({ impressao }: any) => {
                                         value={data.orcamento}
                                         onChange={(e) =>
                                             setData("orcamento", e.target.value)
+                                        }
+                                        className="input-form"
+                                    />
+                                </div>
+
+                                <div className="flex flex-col mt-6">
+                                    <label
+                                        className="label-form"
+                                        htmlFor="checklist"
+                                    >
+                                        Checklist (separar com ;)
+                                    </label>
+                                    <textarea
+                                        id="checklist"
+                                        value={data.checklist}
+                                        onChange={(e) =>
+                                            setData("checklist", e.target.value)
                                         }
                                         className="input-form"
                                     />

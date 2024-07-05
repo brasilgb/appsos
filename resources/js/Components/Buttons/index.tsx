@@ -143,6 +143,17 @@ export const PrintButton = ({ url, status }: ButtonsProps) => {
                                     Orçamento
                                 </Link>
                             </li>
+                            <li
+                                className={`bg-gray-300 hover:bg-gray-200 text-blue-light rounded-md text-center border border-white shadow transition-all duration-300`}
+                            >
+                                <Link
+                                    as="button"
+                                    href={`/docs/printer?or=${url}&tp=4`}
+                                    className="py-1.5 w-full"
+                                >
+                                    Checklist
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -214,7 +225,7 @@ export const EditButton = ({ url, param }: ButtonsProps) => {
             as="button"
             type="button"
             title={`Editar registro`}
-            data={{page: param}}
+            data={{ page: param }}
         >
             <TbEdit size={18} />
         </Link>

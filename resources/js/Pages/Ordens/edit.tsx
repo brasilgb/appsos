@@ -396,7 +396,6 @@ const EditOrdem = ({
                                                     e.target.value,
                                                 )}
                                             className="input-form"
-                                            readOnly
                                         />
                                     </div>
                                     <div className="flex flex-col">

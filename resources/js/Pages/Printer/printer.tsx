@@ -1,5 +1,6 @@
 import { maskCpfCnpj } from "@/Utils/mask";
 import moment from "moment";
+import { split } from "postcss/lib/list";
 import React from "react";
 
 interface PrintProps {
@@ -10,6 +11,8 @@ interface PrintProps {
 }
 
 const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
+
+    const checklistArray = printer.checklist.split(";")
     return (
         <div className="text-[10px] text-gray-600">
             <div className="flex items-start justify-start py-1 px-2 border-b border-gray-200 font-semibold">
@@ -72,7 +75,7 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                             <span className="font-semibold mr-1">
                                 CPF/CNPJ:
                             </span>
-                            {ordem.cliente.cpf?maskCpfCnpj(ordem.cliente.cpf):''}
+                            {ordem.cliente.cpf ? maskCpfCnpj(ordem.cliente.cpf) : ''}
                         </h1>
                         <h1>
                             <span className="font-semibold mr-1">Contato:</span>
@@ -124,6 +127,7 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                         </h1>
                     </div>
                 </div>
+
                 <div className="flex items-start justify-start w-full">
                     <h1>
                         <span className="font-semibold mr-1">
@@ -142,18 +146,36 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                 <div className="flex items-start justify-start w-full">
                     <div className="flex-1">
                         <div className="mb-1">
-                            <p
-                                dangerouslySetInnerHTML={{
-                                    __html: `${printer ? printer : ""}`,
-                                }}
-                            />
+                            {tipo == "4"
+                                ? <p
+                                    dangerouslySetInnerHTML={{
+                                        __html: `${printer ? printer.entrega : ""}`,
+                                    }}
+                                />
+                                : <p
+                                    dangerouslySetInnerHTML={{
+                                        __html: `${printer ? printer : ""}`,
+                                    }}
+                                />
+                            }
                         </div>
                         <div>{ordem.obs}</div>
                     </div>
                 </div>
             </div>
-
-            {tipo !== "1" && (
+            {tipo == "4" &&
+                <div className="p-2">
+                    <div className="bg-gray-100 border rounded-md grid grid-cols-2 py-4 px-8 gap-2">
+                        {checklistArray.map((ch:any, idx:number) => (
+                            <div className="flex items-center justify-start">
+                                <div className="w-2 h-2 rounded-sm border border-gray-600"/>
+                                <div className="text-sm ml-2">{ch}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            }
+            {tipo !== "1" && tipo !== "4" && (
                 <div className="flex flex-col items-start justify-start border border-gray-200 mt-4 py-0.5 px-0.5">
                     <div className="mb-1 flex items-center justify-center w-full">
                         <h1 className="font-semibold">
@@ -221,12 +243,14 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                 <div className="w-80 border-t border-gray-400 text-center">
                     Assinatura Cliente
                 </div>
-                {tipo !== "1" ? (
+                {tipo !== "1" && tipo !== "4" ? (
                     <div className="w-80 border-t border-gray-400 text-center">
                         Assinatura Responsável Técnico
                     </div>
                 ) : (
-                    <div className="w-80"></div>
+                    tipo == "4"
+                        ? <p>{empresa.cidade}__/__/____</p>
+                        : <div className="w-80"></div>
                 )}
             </div>
 

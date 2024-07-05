@@ -16,7 +16,6 @@ import { IoPeopleSharp } from "react-icons/io5";
 const AddOrdem = ({ clientes, ordem }) => {
     const [filterSearch, setFilterSearch] = useState<any>([]);
     const { data, setData, post, errors } = useForm({
-
         id: ordem > 0 ? ordem + 1 : 1,
         cliente_id: "",
         cliente: "",

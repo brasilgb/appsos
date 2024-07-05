@@ -13,13 +13,17 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
                 printer={printer}
                 tipo={tipo}
             />
-            <hr className="border border-dashed"/>
-            <PrinterData
-            empresa={empresa}
-            ordem={ordem}
-            printer={printer}
-            tipo={tipo}
-        />
+            {tipo !== "4" &&
+                <>
+                    <hr className="border border-dashed" />
+                    <PrinterData
+                        empresa={empresa}
+                        ordem={ordem}
+                        printer={printer}
+                        tipo={tipo}
+                    />
+                </>
+            }
         </PrinterLayout>
     );
 };

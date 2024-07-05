@@ -130,7 +130,7 @@ class OrdemController extends Controller
     {
         $page = $request->page;
         $ordens = Ordem::with('cliente')->where('id', $ordem->id)->first();
-        $tecnicos = User::where('role', 3)->where('status', 1)->get();
+        $tecnicos = User::where('role', 3)->orWhere('role', 1)->where('status', 1)->get();
         $produtos = Produto::get();
         return Inertia::render('Ordens/edit', [
             'ordens' => $ordens, 

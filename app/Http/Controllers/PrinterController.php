@@ -35,6 +35,9 @@ class PrinterController extends Controller
             case 3:
                 $printer = $pres->orcamento;
                 break;
+            case 4:
+                $printer = ["entrega" => $pres->entrega, "checklist" => $pres->checklist];
+                break;
         }
         
 

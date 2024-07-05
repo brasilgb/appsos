@@ -15,5 +15,6 @@ class Impressao extends Model
         'recebimento',
         'entrega',
         'orcamento',
+        'checklist',
     ];
 }
