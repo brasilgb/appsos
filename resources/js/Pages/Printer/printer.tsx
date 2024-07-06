@@ -166,14 +166,14 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
             {tipo == "4" &&
                 <div className="p-2">
                     <div className="mb-1 flex items-center justify-center w-full">
-                    <h1 className="border-b w-full border-gray-100 uppercase font-semibold text-center mt-8">
-                        Checklist
-                    </h1>
-                </div>
+                        <h1 className="border-b w-full border-gray-100 uppercase font-semibold text-center mt-8">
+                            Checklist
+                        </h1>
+                    </div>
                     <div className="bg-gray-100 border rounded-md grid grid-cols-2 py-4 px-8 gap-2">
-                        {checklistArray.map((ch:any, idx:number) => (
+                        {checklistArray.map((ch: any, idx: number) => (
                             <div key={idx} className="flex items-center justify-start">
-                                <div className="w-3 h-3 rounded-sm border border-gray-600"/>
+                                <div className="w-3 h-3 rounded-sm border border-gray-600" />
                                 <div className="text-sm ml-2">{ch}</div>
                             </div>
                         ))}
@@ -254,16 +254,19 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                     </div>
                 ) : (
                     tipo == "4"
-                        ? <p>{empresa?.cidade}__/__/____</p>
+                        ? <p>{empresa?.cidade} <span className="ml-2 text-base">__/__/____</span></p>
                         : <div className="w-80"></div>
                 )}
             </div>
 
-            <div className="mt-4 mb-2 ml-8">
-                <p className="">
-                    {empresa?.cidade}, {moment().locale("pt").format("LL")}.
-                </p>
-            </div>
+            {tipo !== "4" &&
+                <div className="mt-4 mb-2 ml-8">
+                    <p className="">
+                        {empresa?.cidade}, {moment().locale("pt").format("LL")}.
+                    </p>
+                </div>
+            }
+
         </div>
     );
 };
