@@ -12,7 +12,7 @@ interface PrintProps {
 
 const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
 
-    const checklistArray = printer.checklist.split(";")
+    const checklistArray = printer?.checklist ? printer?.checklist?.split(";") : [];
     return (
         <div className="text-[10px] text-gray-600">
             <div className="flex items-start justify-start py-1 px-2 border-b border-gray-200 font-semibold">
