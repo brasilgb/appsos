@@ -18,20 +18,20 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
             <div className="flex items-start justify-start py-1 px-2 border-b border-gray-200 font-semibold">
                 <div className="flex items-center justify-start w-8 mr-4">
                     <img
-                        src={`/storage/images/${empresa.logo ? empresa.logo : "default.png"}`}
+                        src={`/storage/images/${empresa?.logo ? empresa?.logo : "default.png"}`}
                         alt=""
                     />
                 </div>
                 <div className="flex-1 flex-col items-start justify-start">
-                    <h1>{empresa.razao}</h1>
-                    <h1>CNPJ: {empresa.cnpj}</h1>
+                    <h1>{empresa?.razao}</h1>
+                    <h1>CNPJ: {empresa?.cnpj}</h1>
                 </div>
                 <div className="flex-1 flex-col items-start justify-start">
                     <h1>
-                        {empresa.endereco} - {empresa.bairro}
+                        {empresa?.endereco} - {empresa?.bairro}
                     </h1>
                     <h1>
-                        {empresa.cidade} - {empresa.telefone}
+                        {empresa?.cidade} - {empresa?.telefone}
                     </h1>
                 </div>
             </div>
@@ -165,10 +165,15 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
             </div>
             {tipo == "4" &&
                 <div className="p-2">
+                    <div className="mb-1 flex items-center justify-center w-full">
+                    <h1 className="border-b w-full border-gray-100 uppercase font-semibold text-center mt-8">
+                        Checklist
+                    </h1>
+                </div>
                     <div className="bg-gray-100 border rounded-md grid grid-cols-2 py-4 px-8 gap-2">
                         {checklistArray.map((ch:any, idx:number) => (
-                            <div className="flex items-center justify-start">
-                                <div className="w-2 h-2 rounded-sm border border-gray-600"/>
+                            <div key={idx} className="flex items-center justify-start">
+                                <div className="w-3 h-3 rounded-sm border border-gray-600"/>
                                 <div className="text-sm ml-2">{ch}</div>
                             </div>
                         ))}
@@ -249,14 +254,14 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                     </div>
                 ) : (
                     tipo == "4"
-                        ? <p>{empresa.cidade}__/__/____</p>
+                        ? <p>{empresa?.cidade}__/__/____</p>
                         : <div className="w-80"></div>
                 )}
             </div>
 
             <div className="mt-4 mb-2 ml-8">
                 <p className="">
-                    {empresa.cidade}, {moment().locale("pt").format("LL")}.
+                    {empresa?.cidade}, {moment().locale("pt").format("LL")}.
                 </p>
             </div>
         </div>
