@@ -15,7 +15,6 @@ class Produto extends Model
         'codbarra',
         'descricao',
         'partnumber',
-        'movimento',
         'valcompra',
         'valvenda',
         'unidade',

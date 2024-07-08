@@ -16,7 +16,6 @@ return new class extends Migration
             $table->text('codbarra')->nullable();
             $table->string('descricao');
             $table->string('partnumber')->nullable();
-            $table->tinyInteger('movimento');
             $table->decimal('valcompra', 10,2)->default(0);
             $table->decimal('valvenda', 10,2)->default(0);
             $table->tinyInteger('unidade');

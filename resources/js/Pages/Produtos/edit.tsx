@@ -26,9 +26,9 @@ interface ClientesProps {
     codbarra: string;
     descricao: string;
     partnumber: string;
-    movimento: string;
     valcompra: string;
     valvenda: string;
+    quantidade: string;
     unidade: string;
     estmaximo: string;
     estminimo: string;
@@ -48,9 +48,9 @@ const EditProduto = ({ produtos }: any) => {
         codbarra: produtos.codbarra,
         descricao: produtos.descricao,
         partnumber: produtos.partnumber,
-        movimento: produtos.movimento,
         valcompra: produtos.valcompra,
         valvenda: produtos.valvenda,
+        quantidade: produtos.quantidade,
         unidade: produtos.unidade,
         estmaximo: produtos.estmaximo,
         estminimo: produtos.estminimo,
@@ -64,9 +64,9 @@ const EditProduto = ({ produtos }: any) => {
             codbarra: data.codbarra,
             descricao: data.descricao,
             partnumber: data.partnumber,
-            movimento: data.movimento,
             valcompra: maskMoneyDot(data.valcompra.toString()),
             valvenda: maskMoneyDot(data.valvenda.toString()),
+            quantidade: data.quantidade,
             unidade: data.unidade,
             estmaximo: data.estmaximo,
             estminimo: data.estminimo,
@@ -103,8 +103,8 @@ const EditProduto = ({ produtos }: any) => {
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <CardBody className=" border-y border-gray-100">
                             <div className="px-3 my-4">
-                                <div className="grid grid-cols-5 gap-4">
-                                    <div className="flex flex-col col-span-2">
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="flex flex-col">
                                         <label
                                             className="label-form"
                                             htmlFor="descricao"
@@ -129,7 +129,7 @@ const EditProduto = ({ produtos }: any) => {
                                             </div>
                                         )}
                                     </div>
-                                    <div className="flex flex-col col-span-2">
+                                    <div className="flex flex-col">
                                         <label
                                             className="label-form"
                                             htmlFor="partnumber"
@@ -149,47 +149,9 @@ const EditProduto = ({ produtos }: any) => {
                                             className="input-form"
                                         />
                                     </div>
-                                    <div className="flex flex-col">
-                                        <label
-                                            className="label-form"
-                                            htmlFor="movimento"
-                                        >
-                                            Movimento
-                                        </label>
-                                        <select
-                                            id="movimento"
-                                            value={data.movimento}
-                                            onChange={(e) =>
-                                                setData(
-                                                    "movimento",
-                                                    e.target.value,
-                                                )
-                                            }
-                                            className="input-form"
-                                        >
-                                            <option value="">
-                                                Selecione a movimento
-                                            </option>
-                                            {movimentosProdutos.map(
-                                                (movimento: any) => (
-                                                    <option
-                                                        key={movimento.value}
-                                                        value={movimento.value}
-                                                    >
-                                                        {movimento.label}
-                                                    </option>
-                                                ),
-                                            )}
-                                        </select>
-                                        {errors.movimento && (
-                                            <div className="text-sm text-red-500">
-                                                {errors.movimento}
-                                            </div>
-                                        )}
-                                    </div>
                                 </div>
 
-                                <div className="grid grid-cols-2 gap-4 mt-6">
+                                <div className="grid grid-cols-3 gap-4 mt-6">
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
@@ -237,6 +199,31 @@ const EditProduto = ({ produtos }: any) => {
                                         {errors.valvenda && (
                                             <div className="text-sm text-red-500">
                                                 {errors.valvenda}
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="valvenda"
+                                        >
+                                            Quantidade
+                                        </label>
+                                        <input
+                                            id="quantidade"
+                                            type="text"
+                                            value={maskMoney(data.quantidade.toString())}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "quantidade",
+                                                    e.target.value,
+                                                )
+                                            }
+                                            className="input-form"
+                                        />
+                                        {errors.quantidade && (
+                                            <div className="text-sm text-red-500">
+                                                {errors.quantidade}
                                             </div>
                                         )}
                                     </div>

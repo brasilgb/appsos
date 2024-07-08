@@ -54,7 +54,6 @@ class ProdutoController extends Controller
         $request->validate(
             [
                 'descricao' => 'required',
-                'movimento' => 'required',
                 'valcompra' => 'required',
                 'valvenda' => 'required',
                 'unidade' => 'required',
@@ -107,7 +106,6 @@ class ProdutoController extends Controller
         $request->validate(
             [
                 'descricao' => 'required',
-                'movimento' => 'required',
                 'valcompra' => 'required',
                 'valvenda' => 'required',
                 'unidade' => 'required',

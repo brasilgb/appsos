@@ -18,9 +18,9 @@ return new class extends Migration
             IN `SP_produto_id` INT(10),
             IN `SP_quantidade` INT(10))
             BEGIN declare contador int(10);
-            select count(*) into contador from estoque_produtos where id = SP_produto_id;
+            select count(*) into contador from estoque_produtos where produto_id = SP_produto_id;
             if contador > 0 then
-            update estoque_produtos set id_produto = SP_produto, quantidade = quantidade + SP_quantidade where id = SP_produto_id;
+            update estoque_produtos set produto_id = SP_produto_id, quantidade = quantidade + SP_quantidade where produto_id = SP_produto_id;
             else
             insert into estoque_produtos ( produto_id, quantidade ) values( SP_produto_id, SP_quantidade );
             end if;

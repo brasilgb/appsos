@@ -25,7 +25,6 @@ const AddCliente = () => {
         codbarra: "",
         descricao: "",
         partnumber: "",
-        movimento: "",
         valcompra: "",
         valvenda: "",
         unidade: "",
@@ -41,7 +40,6 @@ const AddCliente = () => {
             codbarra: data.codbarra,
             descricao: data.descricao,
             partnumber: data.partnumber,
-            movimento: data.movimento,
             valcompra: maskMoneyDot(data.valcompra.toString()),
             valvenda: maskMoneyDot(data.valvenda.toString()),
             unidade: data.unidade,
@@ -80,8 +78,8 @@ const AddCliente = () => {
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <CardBody className=" border-y border-gray-100">
                             <div className="px-3 my-4">
-                                <div className="grid grid-cols-5 gap-4">
-                                    <div className="flex flex-col col-span-2">
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="flex flex-col">
                                         <label
                                             className="label-form"
                                             htmlFor="descricao"
@@ -106,7 +104,7 @@ const AddCliente = () => {
                                             </div>
                                         )}
                                     </div>
-                                    <div className="flex flex-col col-span-2">
+                                    <div className="flex flex-col">
                                         <label
                                             className="label-form"
                                             htmlFor="partnumber"
@@ -125,44 +123,6 @@ const AddCliente = () => {
                                             }
                                             className="input-form"
                                         />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <label
-                                            className="label-form"
-                                            htmlFor="movimento"
-                                        >
-                                            Movimento
-                                        </label>
-                                        <select
-                                            id="movimento"
-                                            value={data.movimento}
-                                            onChange={(e) =>
-                                                setData(
-                                                    "movimento",
-                                                    e.target.value,
-                                                )
-                                            }
-                                            className="input-form"
-                                        >
-                                            <option value="">
-                                                Selecione a movimento
-                                            </option>
-                                            {movimentosProdutos.map(
-                                                (movimento: any) => (
-                                                    <option
-                                                        key={movimento.value}
-                                                        value={movimento.value}
-                                                    >
-                                                        {movimento.label}
-                                                    </option>
-                                                ),
-                                            )}
-                                        </select>
-                                        {errors.movimento && (
-                                            <div className="text-sm text-red-500">
-                                                {errors.movimento}
-                                            </div>
-                                        )}
                                     </div>
                                 </div>
 
