@@ -3,8 +3,10 @@
 namespace App\Http\Middleware;
 
 use App\Models\Empresa;
+use App\Models\Mensagem;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -59,6 +61,10 @@ class HandleInertiaRequests extends Middleware
                 'location' => $request->url(),
                 'query'=>$request->query()
             ],
+            'messages' => fn () => [
+                auth()->check() ? DB::table('mensagens')->where('destinatario', Auth::user()->id)->where('status', 0)->get() : []
+            ]
         ];
     }
 } 
+// 'nummen' => count(Mensagem::where('destinatario', Auth::user()->id)->where('status', 0)->get()),

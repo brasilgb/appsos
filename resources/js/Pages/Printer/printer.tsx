@@ -36,13 +36,24 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                 </div>
             </div>
             <div className="flex items-center justify-between px-2 py-0.5 bg-gray-200">
+                
+                    <div>
+                        <span className="font-semibold mr-2 uppercase">
+                            Recibo de 
+                            {ordem.status == "8" && ' entrega '}
+                            {ordem.status == "1" && ' entrada '}
+                            {ordem.status == "3" && ' orçamento '}
+                            de equipamento
+                        </span>
+                    </div>
+                
                 <div>
                     <span className="font-semibold mr-2">O.S. N°:</span>
                     <span>{("00000000" + ordem.id).slice(-8)}</span>
                 </div>
                 <div>
-                    <span className="font-semibold mr-2">
-                        Data de abertura:
+                    <span className="font-semibold mr-2 uppercase">
+                        Entrada:
                     </span>
                     <span>{moment(ordem.created_at).format("DD/MM/YYYY")}</span>
                 </div>
@@ -180,7 +191,7 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                     </div>
                 </div>
             }
-            {tipo !== "1" && tipo !== "4" && (
+            {tipo !== "1" && (
                 <div className="flex flex-col items-start justify-start border border-gray-200 mt-4 py-0.5 px-0.5">
                     <div className="mb-1 flex items-center justify-center w-full">
                         <h1 className="font-semibold">
@@ -196,7 +207,7 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                             ? ordem.descorcamento
                             : ordem.detalhes}
                     </div>
-                    {ordem.status != 3 && (
+                    {ordem.status === 8 && (
                         <div className="flex items-start justify-between w-full bg-gray-200 px-2">
                             <div>
                                 <span className="mr-2">

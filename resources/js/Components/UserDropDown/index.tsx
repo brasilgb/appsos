@@ -39,19 +39,26 @@ const UserDropDown = (props: Props) => {
                     </div>
                 </button>
                 <div
-                    className={`absolute top-11 right-0 z-30 w-[250px] flex flex-col py-4 bg-gray-50 rounded-md shadow-lg border border-white ${transClass}`}
+                    className={`absolute text-sm top-14 right-0 z-30 w-[250px] flex flex-col bg-gray-50 rounded-md shadow-lg border border-white ${transClass}`}
                 >
-                    <Link
-                        className="text-gray-600 hover:text-gray-500 px-4 pb-3 flex items-center"
-                        href={`/usuarios/${auth.user.id}`}
-                        onClick={toggle}
+                    <div
+                        className="text-gray-600 hover:text-gray-500 px-4 py-2 flex items-center"
                     >
                         <IoPerson />
                         <span className="ml-1">{auth.user.name}</span>
+                    </div>
+                    <span className="w-full border-b border-gray-200"></span>
+                    <Link
+                        className="text-gray-600 hover:text-gray-400 px-4 py-2 flex items-center"
+                        href={route('usuarios.edit', auth.user.id)}
+                        onClick={toggle}
+                    >
+                        <IoPerson color="#6d6a6a" />
+                        <span className="ml-1">Profile</span>
                     </Link>
                     <span className="w-full border-b border-gray-200"></span>
                     <Link
-                        className="text-gray-600 hover:text-gray-500 px-4 pt-2 flex items-center"
+                        className="text-gray-600 hover:text-gray-500 px-4 py-2 flex items-center"
                         as="button"
                         type="button"
                         href="#"

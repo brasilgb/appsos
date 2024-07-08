@@ -11,7 +11,7 @@
 
 @layer components {
     .btn-login {
-        @apply flex items-center justify-center rounded-md border-2 shadow-md bg-blue-700 hover:bg-blue-600 border-white px-5 py-2 font-roboto font-medium text-base text-gray-100 transition-colors w-full;
+        @apply flex items-center justify-center rounded-md border-2 shadow-md bg-blue-cinco hover:bg-blue-cinco/90 border-white px-2 py-2 font-roboto font-medium text-base text-gray-100 transition-colors duration-300 w-full;
     }
     .label-form {
         @apply text-sm text-gray-500 font-medium;

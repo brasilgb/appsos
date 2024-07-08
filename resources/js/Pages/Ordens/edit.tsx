@@ -588,21 +588,36 @@ const EditOrdem = ({
                             </div>
                         </CardBody>
                         <CardFooter>
-                            <div className="flex items-center justify-end gap-8">
+                            <div className="flex items-center justify-end gap-4">
                                 {ordens.status === 8 && (
+                                    <>
                                     <Link
-                                        disabled={
-                                            ordens.status == "8" ? false : true
-                                        }
-                                        as="button"
-                                        href={`/docs/printer?or=${ordens.id}&tp=2`}
-                                        className="flex items-center justify-center bg-zinc-600 hover:bg-zinc-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
-                                    >
-                                        <IoPrint size={18} />
-                                        <span className="ml-2">
-                                            Imprimir recibo
-                                        </span>
-                                    </Link>
+                                    disabled={
+                                        ordens.status == "8" ? false : true
+                                    }
+                                    as="button"
+                                    href={`/docs/printer?or=${ordens.id}&tp=2`}
+                                    className="flex items-center justify-center bg-teal-700 hover:bg-teal-700/90 py-1.5 px-3 rounded-md shadow text-gray-50 self-end transition-colors duration-300"
+                                >
+                                    <IoPrint size={18} />
+                                    <span className="ml-2">
+                                        Recibo de entrega
+                                    </span>
+                                </Link>
+                                    <Link
+                                    disabled={
+                                        ordens.status == "8" ? false : true
+                                    }
+                                    as="button"
+                                    href={`/docs/printer?or=${ordens.id}&tp=4`}
+                                    className="flex items-center justify-center bg-teal-700 hover:bg-teal-700/90 py-1.5 px-3 rounded-md shadow text-gray-50 self-end transition-colors duration-300"
+                                >
+                                    <IoPrint size={18} />
+                                    <span className="ml-2">
+                                        Checklist de entrega
+                                    </span>
+                                </Link>
+                                </>
                                 )}
                                 <SaveButton />
                             </div>

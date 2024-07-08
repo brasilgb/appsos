@@ -97,61 +97,62 @@ export const PrintButton = ({ url, status }: ButtonsProps) => {
             {openMenuButton && (
                 <div className="absolute w-full flex items-center justify-center bg-gray-700 bg-opacity-10 top-0 right-0 bottom-0 left-0 z-50">
                     <div className="w-1/4 bg-gray-50 border border-white rounded-md shadow-lg">
-                        <div className="h-10 flex items-center justify-between border-b px-2 bg-blue-600 text-white rounded-t-lg">
-                            <IoPrint size={20} />
-                            <h1 className="ml-2 flex-1 text-base font-semibold">
+                        <div className="h-8 flex items-center justify-between border-b px-2 bg-blue-cinco text-white rounded-t-lg">
+                            <IoPrint size={18} />
+                            <h1 className="ml-2 flex-1 text-sm font-semibold">
                                 Selecione o documento para impressão
                             </h1>
                             <button onClick={() => setOpenMenuButton(false)}>
-                                <IoClose size={20} />
+                                <IoClose size={18} />
                             </button>
                         </div>
-                        <ul className="p-2 text-base text-blue-middle font-medium flex flex-col gap-2">
+                        <ul className="p-2 uppercase text-xs font-medium flex flex-col gap-2">
                             <li
-                                className={`${status == "1" ? "bg-gray-300 hover:bg-gray-200 text-blue-light" : "text-gray-200"} rounded-md text-center border border-white shadow transition-all duration-300`}
+                                className={`${status == "1" ? "bg-blue-quatro hover:bg-blue-quatro/90 text-white" : "text-gray-200"} rounded-md text-center border border-white shadow transition-all duration-300`}
                             >
                                 <Link
                                     disabled={status == "1" ? false : true}
                                     as="button"
                                     href={`/docs/printer?or=${url}&tp=1`}
-                                    className="py-1.5 w-full"
+                                    className="py-1.5 w-full uppercase"
                                 >
-                                    Recibo entrada
+                                    Recibo entrada de equipamento
                                 </Link>
                             </li>
                             <li
-                                className={`${status == "8" ? "bg-gray-300 hover:bg-gray-200 text-blue-light" : "text-gray-200"} rounded-md text-center border border-white shadow transition-all duration-300`}
-                            >
-                                <Link
-                                    disabled={status == "8" ? false : true}
-                                    as="button"
-                                    href={`/docs/printer?or=${url}&tp=2`}
-                                    className="py-1.5 w-full"
-                                >
-                                    Recibo Saída
-                                </Link>
-                            </li>
-                            <li
-                                className={`${status == "3" || status == "4" ? "bg-gray-300 hover:bg-gray-200 text-blue-light" : "text-gray-200"} rounded-md text-center border border-white shadow transition-all duration-300`}
+                                className={`${status == "3" || status == "4" ? "bg-blue-quatro hover:bg-blue-quatro/90 text-white" : "text-gray-200"} rounded-md text-center border border-white shadow transition-all duration-300`}
                             >
                                 <Link
                                     disabled={status == "3" || status == "4" ? false : true}
                                     as="button"
                                     href={`/docs/printer?or=${url}&tp=3`}
-                                    className="py-1.5 w-full"
+                                    className="py-1.5 w-full uppercase"
                                 >
-                                    Orçamento
+                                    Recibo de orçamento de serviços
                                 </Link>
                             </li>
                             <li
-                                className={`bg-gray-300 hover:bg-gray-200 text-blue-light rounded-md text-center border border-white shadow transition-all duration-300`}
+                                className={`${status == "8" ? "bg-blue-quatro hover:bg-blue-quatro/90 text-white" : "text-gray-200"} rounded-md text-center border border-white shadow transition-all duration-300`}
                             >
                                 <Link
+                                    disabled={status == "8" ? false : true}
+                                    as="button"
+                                    href={`/docs/printer?or=${url}&tp=2`}
+                                    className="py-1.5 w-full uppercase"
+                                >
+                                    Recibo de entrega de equipamento
+                                </Link>
+                            </li>
+                            <li
+                                className={`${status == "8" ? "bg-blue-quatro hover:bg-blue-quatro/90 text-white" : "text-gray-200"} rounded-md text-center border border-white shadow transition-all duration-300`}
+                                >
+                                <Link
+                                disabled={status == "8" ? false : true}
                                     as="button"
                                     href={`/docs/printer?or=${url}&tp=4`}
-                                    className="py-1.5 w-full"
+                                    className="py-1.5 w-full uppercase"
                                 >
-                                    Checklist
+                                    Checklist de entrega de equipamento
                                 </Link>
                             </li>
                         </ul>

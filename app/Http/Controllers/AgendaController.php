@@ -44,7 +44,7 @@ class AgendaController extends Controller
     public function create()
     {
         $clientes = Cliente::get();
-        $tecnicos = User::where('role', 3)->where('status', 1)->get();
+        $tecnicos = User::where('role', 3)->orWhere('role', 1)->where('status', 1)->get();
         return Inertia::render('Agendas/add', ['clientes' => $clientes, 'tecnicos' => $tecnicos]);
     }
 

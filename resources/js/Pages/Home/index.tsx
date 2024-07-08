@@ -11,12 +11,11 @@ import {
     IoCalendar,
     IoChatboxEllipses,
     IoConstruct,
+    IoList,
     IoPeople,
 } from "react-icons/io5";
 
 const Home = ({ dashdata, statusorder }: any) => {
-
-console.log(statusorder?.messages);
 
     return (
         <AuthLayout>
@@ -26,15 +25,6 @@ console.log(statusorder?.messages);
                     <TitleTop>
                         <AiOutlineDashboard size={30} />
                         <span className="ml-2">Dashboard</span>
-                    </TitleTop>
-                    <TitleTop>
-                        {dashdata.nummen ? (
-                            <MessageDropDown mensagens={statusorder?.messages} />
-                        ) : (
-                            <div className="text-red-300">
-                                <IoChatboxEllipses size={34} />
-                            </div>
-                        )}
                     </TitleTop>
                 </HeaderContent>
                 <div className="grid md:md:grid-cols-5 sm:grid-cols-2 gap-6">
@@ -81,54 +71,72 @@ console.log(statusorder?.messages);
                         }}
                     />
                 </div>
-                <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-6 mt-4">
+                <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-6 mt-4">
                     <div className="bg-gray-50 rounded shadow-sm p-2">
-                        <div className="border-b mb-2">
-                            <h1 className="text-sm text-gray-500 uppercase font-medium">Orçamentos gerados</h1>
+                        <div className="border-b mb-2 text-gray-500 flex items-center justify-start gap-1">
+                            <IoList size={20} />
+                            <h1 className="text-sm uppercase font-medium">Orçamentos gerados</h1>
                         </div>
                         <div className="grid md:grid-cols-5 gap-2 text-center">
                             {statusorder?.gerados?.map((gerado: any, idx: number) => (
                                 <Link
                                     href={`ordens/${gerado.id}`}
                                     key={idx}
-                                    className="bg-rose-600 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
+                                    className="bg-rose-600 hover:bg-rose-600/80 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
                                     {gerado.id}
                                 </Link>
                             ))}
                         </div>
                     </div>
                     <div className="bg-gray-50 rounded shadow-sm p-2">
-                        <div className="border-b mb-2">
-                            <h1 className="text-sm text-gray-500 uppercase font-medium">Orçamentos aprovados</h1>
+                        <div className="border-b mb-2 text-gray-500 flex items-center justify-start gap-1">
+                            <IoList size={20} />
+                            <h1 className="text-sm uppercase font-medium">Orçamentos aprovados</h1>
                         </div>
                         <div className="grid md:grid-cols-5 gap-2 text-center">
                             {statusorder?.aprovados?.map((gerado: any, idx: number) => (
                                 <Link
                                     href={`ordens/${gerado.id}`}
                                     key={idx}
-                                    className="bg-blue-500 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
+                                    className="bg-blue-500 hover:bg-blue-500/80 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
                                     {gerado.id}
                                 </Link>
                             ))}
                         </div>
                     </div>
                     <div className="bg-gray-50 rounded shadow-sm p-2">
-                        <div className="border-b mb-2">
-                            <h1 className="text-sm text-gray-500 uppercase font-medium">Serviços concluídos <span className="text-cyan-600">(CA)</span> <span className="text-amber-500">(CN)</span></h1>
+                        <div className="border-b mb-2 text-gray-500 flex items-center justify-start gap-1">
+                            <IoList size={20} />
+                            <h1 className="text-sm uppercase font-medium">Serviços concluídos <span className="text-cyan-600">(CA)</span> <span className="text-amber-500">(CN)</span></h1>
                         </div>
                         <div className="grid md:grid-cols-5 gap-2 text-center">
                             {statusorder?.concluidosca?.map((gerado: any, idx: number) => (
                                 <Link
                                     href={`ordens/${gerado.id}`}
-                                    key={idx} className="bg-cyan-600 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
+                                    key={idx} className="bg-cyan-600 hover:bg-cyan-600/80 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
                                     {gerado.id}
                                 </Link>
                             ))}
                             {statusorder?.concluidoscn?.map((gerado: any, idx: number) => (
                                 <Link
                                     href={`ordens/${gerado.id}`}
-                                    key={idx} className="bg-amber-500 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
+                                    key={idx} className="bg-amber-500 hover:bg-amber-500/80 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
                                     {gerado.id}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="bg-gray-50 rounded shadow-sm p-2">
+                        <div className="border-b mb-2 text-gray-500 flex items-center justify-start gap-1">
+                            <IoList size={20} />
+                            <h1 className="text-sm uppercase font-medium">Visitas agendadas</h1>
+                        </div>
+                        <div className="grid md:grid-cols-5 gap-2 text-center">
+                            {statusorder?.agendados?.map((agenda: any, idx: number) => (
+                                <Link
+                                    href={`agendas/${agenda.id}`}
+                                    key={idx} className="bg-rose-600 hover:bg-rose-600/80 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
+                                    {agenda.id}
                                 </Link>
                             ))}
                         </div>
