@@ -20,6 +20,14 @@ function maskPhone(value: string) {
     }
 }
 
+function maskWhatsApp(value: string) {
+    if (value) {
+            value = value.replace(/\D/g, "");
+            value = value.replace(/^(\d{2})(\d{2})(\d{5})(\d{4})/, "$1$2$3$4");
+            return value;
+    }
+}
+
 function maskDate(value: string) {
     if (value) {
         value = value.replace(/\D/g, "");
@@ -79,4 +87,4 @@ function maskMoneyDot(value:string) {
 	return value = valorAlterado;
 }
 
-export { maskCep, maskPhone, maskDate, maskCpfCnpj, maskCnpj, unMask, maskMoney, maskMoneyDot };
+export { maskCep, maskPhone, maskDate, maskCpfCnpj, maskCnpj, unMask, maskMoney, maskMoneyDot, maskWhatsApp };

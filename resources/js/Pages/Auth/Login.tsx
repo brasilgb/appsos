@@ -54,7 +54,7 @@ export default function Login({ status, canResetPassword }) {
                 <div className="w-full sm:max-w-md mx-4 p-4 bg-gradient-to-t from-gray-300 via-white to-gray-200 shadow-md overflow-hidden rounded-md border border-white">
                     <div className="flex flex-col items-center justify-center mb-10">
                         <div className="flex items-start justify-between mb-6 border-b border-gray-300 w-full">
-                            <h1 className="text-sm font-medium text-gray-500">
+                            <h1 className="text-sm font-medium text-gray-500"> 
                                 Faça login em sua conta
                             </h1>
                             <span className="text-sm font-medium text-gray-500">

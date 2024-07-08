@@ -125,7 +125,7 @@ const Etiquetas = ({ etiquetas }: any) => {
                             <a
                                 className="flex items-center justify-center bg-blue-700 hover:bg-blue-600 py-1.5 px-4 rounded-md shadow text-gray-50 self-end"
                                 target="_blank"
-                                href={`/configuracoes/etiquetas/printer/${data.ordeminicial}/${data.ordemfinal}`}
+                                href={`/configuracoes/etiquetas/printer/${data.ordeminicial}/${data.ordemfinal}/${data.paginas}`}
                             >
                                 <IoPricetagsSharp size={18} />
                                 <span className="ml-2">Gerar etiquetas</span>

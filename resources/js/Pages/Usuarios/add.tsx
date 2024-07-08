@@ -10,7 +10,7 @@ import {
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { roleUser, statusUser } from "@/Utils/dataSelect";
-import { maskPhone } from "@/Utils/mask";
+import { maskPhone, maskWhatsApp } from "@/Utils/mask";
 import { Head, useForm } from "@inertiajs/react";
 import React, { useState } from "react";
 import { IoEye, IoEyeOff, IoPerson } from "react-icons/io5";
@@ -113,7 +113,7 @@ const AddUsuario = () => {
                                             className="label-form"
                                             htmlFor="telefone"
                                         >
-                                            Celular
+                                            Telefone
                                         </label>
                                         <input
                                             id="telefone"
@@ -139,12 +139,12 @@ const AddUsuario = () => {
                                             className="label-form"
                                             htmlFor="whatsapp"
                                         >
-                                            Whatsapp
+                                            Whatsapp (5551995874158)
                                         </label>
                                         <input
                                             id="whatsapp"
                                             type="text"
-                                            value={data.whatsapp}
+                                            value={maskWhatsApp(data.whatsapp)}
                                             onChange={(e) =>
                                                 setData(
                                                     "whatsapp",
@@ -152,7 +152,7 @@ const AddUsuario = () => {
                                                 )
                                             }
                                             className="input-form"
-                                            maxLength={15}
+                                            maxLength={13}
                                         />
                                     </div>
                                 </div>

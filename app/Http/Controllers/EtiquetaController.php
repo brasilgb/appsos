@@ -33,7 +33,7 @@ class EtiquetaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function printer($inicial, $final)
+    public function printer($inicial, $final, $paginas)
     {
         // $etiquetas = $request->all();
         // dd($inicial, $final);
@@ -45,6 +45,6 @@ class EtiquetaController extends Controller
                 'empresa' => $empresa->empresa,
             ];
         }
-        return Inertia::render('Etiquetas/printer', ['etiquetas' => $data]);
+        return Inertia::render('Etiquetas/printer', ['etiquetas' => $data, 'paginas' => $paginas]);
     }
 }

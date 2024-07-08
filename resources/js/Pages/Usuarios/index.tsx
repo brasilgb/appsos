@@ -35,7 +35,7 @@ import React, { Fragment } from "react";
 import { IoPerson } from "react-icons/io5";
 
 const Usuarios = ({ usuarios }: any) => {
-    const { flash } = usePage().props;
+    const { flash, auth } = usePage().props as any;
 
     const colorStatus = (status: number) => {
         switch (status) {
@@ -45,6 +45,7 @@ const Usuarios = ({ usuarios }: any) => {
                 return "bg-red-600/50 border border-red-600 text-red-800 text-xs uppercase";
         }
     }
+
     return (
         <AuthLayout>            
         <Head title="Usuários" />
@@ -68,6 +69,7 @@ const Usuarios = ({ usuarios }: any) => {
                             <AddButton
                                 url={"/usuarios/create"}
                                 label={"Usuário"}
+                                disabled={auth.user.role === 1 ? false : true}
                             />
                         </CardHeaderContent>
                     </CardHeader>
@@ -123,6 +125,7 @@ const Usuarios = ({ usuarios }: any) => {
                                                     url="usuarios.destroy"
                                                     param={usuario.id}
                                                     identify={`o usuário ${usuario.name}`}
+                                                    disabled={auth.user.role === 1 ? false : true}
                                                 />
                                             </TableCell>
                                         </TableRow>

@@ -68,7 +68,7 @@ Route::middleware('auth')->group(function () {
     ]);
     Route::resource('/configuracoes/etiquetas', EtiquetaController::class);
     Route::get('/docs/printer', [PrinterController::class, 'index'])->name('docs.index');
-    Route::get('/configuracoes/etiquetas/printer/{inicial}/{final}', [EtiquetaController::class, 'printer']);
+    Route::get('/configuracoes/etiquetas/printer/{inicial}/{final}/{paginas}', [EtiquetaController::class, 'printer']);
     
     Route::resource('/configuracoes/whatsapp', WhatsController::class)->parameters([
         'whatsapp' => 'whats'

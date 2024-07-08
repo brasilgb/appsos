@@ -11,11 +11,11 @@ import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { roleUser, statusUser } from "@/Utils/dataSelect";
-import { maskCep, maskCpfCnpj, maskPhone, unMask } from "@/Utils/mask";
+import { maskPhone, maskWhatsApp } from "@/Utils/mask";
 import { Head, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
-import React, { useCallback, useEffect, useState } from "react";
-import { IoEye, IoEyeOff, IoPeopleSharp, IoPerson } from "react-icons/io5";
+import React, { useState } from "react";
+import { IoEye, IoEyeOff, IoPerson } from "react-icons/io5";
 
 interface ClientesProps {
     name: string;
@@ -31,7 +31,7 @@ interface ClientesProps {
 const EditUsuario = ({ usuarios }: any) => {
     const [showPassword, setShowPassword] = useState(false);
     const [showPassword2, setShowPassword2] = useState(false);
-    const { flash } = usePage().props;
+    const { flash, auth } = usePage().props as any;
 
     const {
         data,
@@ -167,7 +167,7 @@ const EditUsuario = ({ usuarios }: any) => {
                                         <input
                                             id="whatsapp"
                                             type="text"
-                                            value={maskPhone(data.whatsapp)}
+                                            value={maskWhatsApp(data.whatsapp)}
                                             onChange={(e) =>
                                                 setData(
                                                     "whatsapp",
@@ -175,7 +175,7 @@ const EditUsuario = ({ usuarios }: any) => {
                                                 )
                                             }
                                             className="input-form"
-                                            maxLength={15}
+                                            maxLength={13}
                                         />
                                         {errors.whatsapp && (
                                             <div className="text-sm text-red-500">
@@ -291,6 +291,7 @@ const EditUsuario = ({ usuarios }: any) => {
                                                 setData("role", e.target.value)
                                             }
                                             className="input-form"
+                                            disabled={auth.user?.role === 1 ? false : true}
                                         >
                                             <option value="">
                                                 Selecione a função
@@ -327,6 +328,7 @@ const EditUsuario = ({ usuarios }: any) => {
                                                 )
                                             }
                                             className="input-form"
+                                            disabled={auth.user?.role === 1 ? false : true}
                                         >
                                             {statusUser.map((stat: any) => (
                                                 <option

@@ -29,6 +29,7 @@ const AddCliente = () => {
         valcompra: "",
         valvenda: "",
         unidade: "",
+        quantidade: "",
         estmaximo: "",
         estminimo: "",
         tipo: "",
@@ -44,6 +45,7 @@ const AddCliente = () => {
             valcompra: maskMoneyDot(data.valcompra.toString()),
             valvenda: maskMoneyDot(data.valvenda.toString()),
             unidade: data.unidade,
+            quantidade: data.quantidade,
             estmaximo: data.estmaximo,
             estminimo: data.estminimo,
             tipo: data.tipo,
@@ -164,7 +166,7 @@ const AddCliente = () => {
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-2 gap-4 mt-6">
+                                <div className="grid grid-cols-3 gap-4 mt-6">
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
@@ -212,6 +214,31 @@ const AddCliente = () => {
                                         {errors.valvenda && (
                                             <div className="text-sm text-red-500">
                                                 {errors.valvenda}
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="valvenda"
+                                        >
+                                            Quantidade
+                                        </label>
+                                        <input
+                                            id="quantidade"
+                                            type="text"
+                                            value={maskMoney(data.quantidade.toString())}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "quantidade",
+                                                    e.target.value,
+                                                )
+                                            }
+                                            className="input-form"
+                                        />
+                                        {errors.quantidade && (
+                                            <div className="text-sm text-red-500">
+                                                {errors.quantidade}
                                             </div>
                                         )}
                                     </div>

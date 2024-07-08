@@ -10,13 +10,14 @@ import {
 } from "@/Components/Card";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { Head, useForm } from "@inertiajs/react";
-import Select from "react-select";
+import { Head, useForm, usePage } from "@inertiajs/react";
 import { IoChatboxEllipses } from "react-icons/io5";
 
 const AddMensagem = ({ users }) => {
+    const { auth } = usePage().props as any;
+
     const { data, setData, post, progress, processing, errors } = useForm({
-        remetente: "",
+        remetente: auth.user.id,
         destinatario: "",
         mensagem: "",
         status: "0",
@@ -28,8 +29,8 @@ const AddMensagem = ({ users }) => {
     }
 
     return (
-        <AuthLayout>            
-        <Head title="Mensagens" />
+        <AuthLayout>
+            <Head title="Mensagens" />
             <Card>
                 <HeaderContent>
                     <TitleTop>
@@ -73,10 +74,8 @@ const AddMensagem = ({ users }) => {
                                                 )
                                             }
                                             className="input-form"
+                                            disabled
                                         >
-                                            <option value="">
-                                                Selecione o remetente
-                                            </option>
                                             {users.map((user: any) => (
                                                 <option
                                                     key={user.value}
@@ -113,7 +112,7 @@ const AddMensagem = ({ users }) => {
                                             <option value="">
                                                 Selecione o destinatário
                                             </option>
-                                            {users.map((user: any) => (
+                                            {users.filter((fu: any) => (fu.id !== auth.user.id)).map((user: any) => (
                                                 <option
                                                     key={user.value}
                                                     value={user.id}

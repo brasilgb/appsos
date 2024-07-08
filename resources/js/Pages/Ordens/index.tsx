@@ -58,15 +58,15 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                 return "bg-blue-600/50 border border-blue-600 text-blue-800 text-xs uppercase";
         }
     };
-//     case 'active':
-//         return "bg-green-600/50 border border-green-600 text-green-800 text-xs uppercase";
-//     case 'waiting':
-//         return "bg-sky-600/50 border border-sky-600 text-sky-800 text-xs uppercase";
-//     case 'suspended':
-//         return "bg-orange-600/50 border border-orange-600 text-orange-800 text-xs uppercase";
-//     case 'canceled':
-//         return "bg-red-600/50 border border-red-600 text-red-800 text-xs uppercase";
-// }
+    //     case 'active':
+    //         return "bg-green-600/50 border border-green-600 text-green-800 text-xs uppercase";
+    //     case 'waiting':
+    //         return "bg-sky-600/50 border border-sky-600 text-sky-800 text-xs uppercase";
+    //     case 'suspended':
+    //         return "bg-orange-600/50 border border-orange-600 text-orange-800 text-xs uppercase";
+    //     case 'canceled':
+    //         return "bg-red-600/50 border border-red-600 text-red-800 text-xs uppercase";
+    // }
     return (
         <AuthLayout>
             <Head title="Ordens" />
@@ -114,7 +114,13 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                                 {ordem.id}
                                             </TableCell>
                                             <TableCell>
+                                                <Link
+                                                    className="text-blue-quatro hover:text-blue-quatro/80 font-medium underline"
+                                                    href={`/ordens?oc=${ordem.cliente_id}`}
+                                                    title={`Ordens do cliente ${ordem.cliente.nome}`}
+                                                >
                                                     {ordem.cliente.nome}
+                                                </Link>
                                             </TableCell>
                                             <TableCell>
                                                 {ordem.cliente.telefone}
@@ -132,9 +138,9 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                             </TableCell>
                                             <TableCell>
                                                 <span className={`px-3 py-1  rounded-full font-medium ${stylesOrderStatus(ordem.status)}`}>
-                                                {statusOrdemByValue(
-                                                    ordem.status,
-                                                )}
+                                                    {statusOrdemByValue(
+                                                        ordem.status,
+                                                    )}
                                                 </span>
                                             </TableCell>
                                             <TableCell>
@@ -146,8 +152,8 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                                         ).format(
                                                             "DD/MM/YYYY HH:mm",
                                                         )
-                                                        : "__/__/____"
-                                                    : "__/__/____"}
+                                                        : "__/__/____ __:__"
+                                                    : "__/__/____ __:__"}
                                             </TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
                                                 <WhatsAppButton

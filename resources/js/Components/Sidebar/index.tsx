@@ -21,8 +21,9 @@ import { HiBuildingOffice } from "react-icons/hi2";
 import SideLink from "../SideLink";
 
 const Sidebar = () => {
-    const { url } = usePage();
+    const { url } = usePage() as any;
     const [openDropDown, setOpenDropDown] = useState<boolean>(false);
+    const [openDropDown2, setOpenDropDown2] = useState<boolean>(false);
     const [openSide, setOpenSide] = useState(true);
     return (
         <aside className={`${openSide ? "md:w-72 " : "w-20"} h-full relative bg-blue-cinco duration-300 p-5 pt-8 shadow-lg`}>
@@ -31,8 +32,8 @@ const Sidebar = () => {
             </div>
             <div className="flex items-center justify-center border-b border-blue-quatro h-24">
                 <div className="w-20">
-                    <Link 
-                    href={route('dashboard')}
+                    <Link
+                        href={route('dashboard')}
                     >
                         <Logo />
                     </Link>

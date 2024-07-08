@@ -19,6 +19,7 @@ class Produto extends Model
         'valcompra',
         'valvenda',
         'unidade',
+        'quantidade',
         'estmaximo',
         'estminimo',
         'tipo',

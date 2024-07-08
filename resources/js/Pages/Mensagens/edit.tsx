@@ -26,7 +26,7 @@ interface ClientesProps {
 }
 
 const EditMensagem = ({ mensagens, users }: any) => {
-    const { flash } = usePage().props;
+    const { flash, auth } = usePage().props as any;
 
     const {
         data,
@@ -91,7 +91,7 @@ const EditMensagem = ({ mensagens, users }: any) => {
                                             className="label-form"
                                             htmlFor="remetente"
                                         >
-                                            Remetente {mensagens.status}
+                                            Remetente
                                         </label>
                                         <select
                                             id="remetente"
@@ -103,6 +103,7 @@ const EditMensagem = ({ mensagens, users }: any) => {
                                                 )
                                             }
                                             className="input-form"
+                                            disabled
                                         >
                                             {users.map((user: any) => (
                                                 <option
@@ -131,6 +132,7 @@ const EditMensagem = ({ mensagens, users }: any) => {
                                                 )
                                             }
                                             className="input-form"
+                                            disabled
                                         >
                                             {users.map((user: any) => (
                                                 <option

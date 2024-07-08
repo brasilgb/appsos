@@ -56,9 +56,9 @@ export default function Register() {
                     backgroundSize: "cover",
                 }}
             >
-                <div className="w-1/4 bg-gray-50  shadow-md shadow-gray-800 rounded-md p-2 bg-opacity-80">
-                    <div className="bg-gray-50 rounded-md p-4">
-                        <div className="flex flex-col items-center justify-center mb-20">
+                <div className="w-full sm:max-w-md mx-4 p-4 bg-gradient-to-t from-gray-300 via-white to-gray-200 shadow-md overflow-hidden rounded-md border border-white">
+                    <div className=" p-4">
+                        <div className="flex flex-col items-center justify-center mb-10">
                             <div className="flex items-start justify-between mb-6 border-b border-gray-200 w-full">
                                 <h1 className="text-sm font-medium text-blue-dark">
                                     Registrar administrador
