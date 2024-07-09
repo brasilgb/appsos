@@ -10,10 +10,10 @@ interface PecasProps {
 
 const InsertParts = ({ produtos }: PecasProps) => {
     const {
-        showModalParts, 
+        showModalParts,
         setShowModalParts,
-        sendOrderParts, 
-        setSendOrderParts} = useAppContext();
+        sendOrderParts,
+        setSendOrderParts } = useAppContext();
     const [filterSearch, setFilterSearch] = useState<any>([]);
     const [partySelected, setPartySelected] = useState<any>([]);
     const { data, setData } = useForm({
@@ -38,12 +38,13 @@ const InsertParts = ({ produtos }: PecasProps) => {
     const handleChangePecas = (data: any) => {
         setPartySelected([...partySelected, data]);
         // setData((data) => ({ ...data, cliente_id: id }));
-        // setData((data) => ({ ...data, pecas: nome }));
+        setData((data) => ({ ...data, pecas: '' }));
         setFilterSearch([]);
     };
 
     const handleRemovePeca = (idx: number) => {
         const select = partySelected.splice(partySelected.indexOf(idx), 1);
+        setPartySelected(select);
     }
 
     return (
@@ -51,10 +52,10 @@ const InsertParts = ({ produtos }: PecasProps) => {
             {showModalParts &&
                 <div className="fixed top-0 right-0 bottom-0 left-0 flex items-center justify-center bg-gray-800/100 z-40">
                     <div className="w-full sm:max-w-md mx-4 p-4 bg-gradient-to-t from-gray-300 via-white to-gray-200 shadow-md overflow-hidden rounded-md border border-white text-gray-600">
-                        <form autoComplete="off">
+                        
                             <div className="border-b border-b-gray-300 mb-4 flex items-center justify-between">
                                 <div className="">Adicione peças/produtos a ordem { }</div>
-                                <div><IoClose size={20} onClick={() => setShowModalParts(false)} /></div>
+                                <div className="cursor-pointer"><IoClose size={20} onClick={() => setShowModalParts(false)} /></div>
                             </div>
                             <div className="flex flex-col col-span-2 relative">
                                 <label
@@ -105,6 +106,7 @@ const InsertParts = ({ produtos }: PecasProps) => {
                                         <div>{peca.valor}</div>
                                         <div>
                                             <button
+                                                type="button"
                                                 onClick={() => handleRemovePeca(idx)}
                                                 className="bg-red-500 rounded text-white p-1"
                                             >
@@ -116,13 +118,14 @@ const InsertParts = ({ produtos }: PecasProps) => {
                             </div>
                             <div className="mt-4 flex justify-end">
                                 <button
+                                onClick={() => setSendOrderParts(partySelected)}
                                     className="flex items-center justify-center bg-blue-700 hover:bg-blue-600 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
                                 >
 
                                     <span>Inserir peças</span>
                                 </button>
                             </div>
-                        </form >
+                       
                     </div>
                 </div>
             }

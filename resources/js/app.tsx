@@ -4,7 +4,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { createInertiaApp } from "@inertiajs/react";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
-import { AppProvider } from "./Contexts";
+import { AppProvider } from "./Contexts/appContext";
 
 const appName = import.meta.env.VITE_APP_NAME || "SOS";
 
