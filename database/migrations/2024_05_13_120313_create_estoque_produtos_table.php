@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('estoque_produtos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('produto_id')->nullable()->constrained(table: 'produtos', indexName: 'estoque_produto_id')->onDelete('cascade');
+            $table->foreignId('produto_id');
             $table->integer("quantidade");
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

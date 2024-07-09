@@ -70,7 +70,9 @@ class ProdutoController extends Controller
                 'estminimo' => 'estoque mínimo',
             ]
         );
+        $id = Produto::orderBy('id', 'desc')->first();
 
+        $data['id'] = $id ? $id->id + 1 : 1;
         Produto::create($data);
         Session::flash('success', 'Produto cadastrado com sucesso!');
         return redirect()->route('produtos.index');

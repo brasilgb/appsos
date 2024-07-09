@@ -130,7 +130,6 @@ const EditOrdem = ({
         }, 0);
         setData((data) => ({ ...data, valpecas: totPecas }));
         setData((data) => ({ ...data, pecas: selected.map((v: any) => v.value) }));
-
     };
 
     useEffect(() => {
