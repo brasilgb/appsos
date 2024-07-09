@@ -8,6 +8,7 @@ import {
     CardHeaderContent,
 } from "@/Components/Card";
 import FlashMessage from "@/Components/FlashMessage";
+import InsertParts from "@/Components/InsertParts";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { statusServico } from "@/Utils/dataSelect";
@@ -138,6 +139,8 @@ const EditOrdem = ({
     }, [data]);
 
     return (
+        <>
+        <InsertParts produtos={produtos} />
         <AuthLayout>
             <Head title="Ordens" />
             <Card>
@@ -625,6 +628,7 @@ const EditOrdem = ({
                 </CardContainer>
             </Card>
         </AuthLayout>
+        </>
     );
 };
 export default EditOrdem;
