@@ -33,7 +33,7 @@ interface ClientesProps {
     descorcamento: string;
     valorcamento: string;
     preorcamento: string;
-    pecas: any;
+    pecas: string;
     valpecas: string;
     valservico: string;
     custo: string;

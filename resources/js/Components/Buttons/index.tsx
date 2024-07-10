@@ -97,9 +97,9 @@ export const PrintButton = ({ url, status }: ButtonsProps) => {
             >
                 <IoPrint size={18} />
             </button>
-            {openMenuButton && (
-                <div className="absolute w-full flex items-center justify-center bg-gray-700 bg-opacity-10 top-0 right-0 bottom-0 left-0 z-50">
-                    <div className="w-1/4 bg-gray-50 border border-white rounded-md shadow-lg">
+            {openMenuButton && ( 
+                <div className="fixed w-full flex items-center justify-center bg-gray-800/90 top-0 right-0 bottom-0 left-0 z-50">
+                    <div className="w-full sm:max-w-md mx-4 bg-gradient-to-t from-gray-300 via-white to-gray-200 shadow-md overflow-hidden rounded-md border border-white text-gray-600">
                         <div className="h-8 flex items-center justify-between border-b px-2 bg-blue-cinco text-white rounded-t-lg">
                             <IoPrint size={18} />
                             <h1 className="ml-2 flex-1 text-sm font-semibold">

@@ -70,7 +70,7 @@ console.log(estoque);
                                 <TableRow>
                                     <TableHead>#</TableHead>
                                     <TableHead>Descrição</TableHead>
-                                    <TableHead>Estoque Inicial</TableHead>
+                                    <TableHead>Estoque</TableHead>
                                     <TableHead>Preço</TableHead>
                                     <TableHead>Cadastro</TableHead>
                                     <TableHead></TableHead>
@@ -87,7 +87,7 @@ console.log(estoque);
                                                 {produto.descricao}
                                             </TableCell>
                                             <TableCell>
-                                                {produto.estmaximo}
+                                                {estoque.filter((fp:any) => (fp.produto_id === produto.id)).map((pro:any) => (pro.quantidade))}
                                             </TableCell>
                                             <TableCell>
                                                 R$ {maskMoney(produto.valvenda)}
