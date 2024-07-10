@@ -1,0 +1,524 @@
+{
+  "_AuthLayout-cd96a75d.js": {
+    "file": "assets/AuthLayout-cd96a75d.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_moment-fbc5633a.js",
+      "_index.esm-2158556a.js"
+    ]
+  },
+  "_dataSelect-51f2092f.js": {
+    "file": "assets/dataSelect-51f2092f.js"
+  },
+  "_functions-e928f381.js": {
+    "file": "assets/functions-e928f381.js"
+  },
+  "_index-7a5c1ab0.js": {
+    "file": "assets/index-7a5c1ab0.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index.esm-2158556a.js"
+    ]
+  },
+  "_index-801a1316.js": {
+    "file": "assets/index-801a1316.js",
+    "imports": [
+      "resources/js/app.tsx"
+    ]
+  },
+  "_index-a22c4d29.js": {
+    "file": "assets/index-a22c4d29.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index.esm-2158556a.js",
+      "_AuthLayout-cd96a75d.js"
+    ]
+  },
+  "_index-f8683352.js": {
+    "file": "assets/index-f8683352.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index.esm-2158556a.js"
+    ]
+  },
+  "_index.esm-2158556a.js": {
+    "file": "assets/index.esm-2158556a.js",
+    "imports": [
+      "resources/js/app.tsx"
+    ]
+  },
+  "_index.esm-82fdef20.js": {
+    "file": "assets/index.esm-82fdef20.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_moment-fbc5633a.js",
+      "_index.esm-2158556a.js"
+    ]
+  },
+  "_mask-c14164de.js": {
+    "file": "assets/mask-c14164de.js"
+  },
+  "_moment-fbc5633a.js": {
+    "file": "assets/moment-fbc5633a.js"
+  },
+  "resources/js/Pages/Agendas/add.tsx": {
+    "file": "assets/add-abf8ac1d.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_AuthLayout-cd96a75d.js",
+      "_dataSelect-51f2092f.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Agendas/add.tsx"
+  },
+  "resources/js/Pages/Agendas/edit.tsx": {
+    "file": "assets/edit-dc170542.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_index-f8683352.js",
+      "_AuthLayout-cd96a75d.js",
+      "_dataSelect-51f2092f.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Agendas/edit.tsx"
+  },
+  "resources/js/Pages/Agendas/index.tsx": {
+    "file": "assets/index-dd3d6b25.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_index-f8683352.js",
+      "_index-7a5c1ab0.js",
+      "_AuthLayout-cd96a75d.js",
+      "_functions-e928f381.js",
+      "_moment-fbc5633a.js",
+      "_index.esm-2158556a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Agendas/index.tsx"
+  },
+  "resources/js/Pages/Auth/Login.tsx": {
+    "file": "assets/Login-905743cc.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index.esm-82fdef20.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Auth/Login.tsx"
+  },
+  "resources/js/Pages/Auth/Register.tsx": {
+    "file": "assets/Register-41858963.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index.esm-82fdef20.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Auth/Register.tsx"
+  },
+  "resources/js/Pages/Clientes/add.tsx": {
+    "file": "assets/add-fd62ea03.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_AuthLayout-cd96a75d.js",
+      "_mask-c14164de.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Clientes/add.tsx"
+  },
+  "resources/js/Pages/Clientes/edit.tsx": {
+    "file": "assets/edit-d292fe91.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_index-f8683352.js",
+      "_AuthLayout-cd96a75d.js",
+      "_mask-c14164de.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Clientes/edit.tsx"
+  },
+  "resources/js/Pages/Clientes/index.tsx": {
+    "file": "assets/index-7cd2fc20.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_index-f8683352.js",
+      "_index-7a5c1ab0.js",
+      "_AuthLayout-cd96a75d.js",
+      "_moment-fbc5633a.js",
+      "_index.esm-2158556a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Clientes/index.tsx"
+  },
+  "resources/js/Pages/Empresa/index.tsx": {
+    "file": "assets/index-80b813f1.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_index-f8683352.js",
+      "_AuthLayout-cd96a75d.js",
+      "_mask-c14164de.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Empresa/index.tsx"
+  },
+  "resources/js/Pages/Etiquetas/index.tsx": {
+    "file": "assets/index-dc0951fd.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-801a1316.js",
+      "_index-f8683352.js",
+      "_AuthLayout-cd96a75d.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Etiquetas/index.tsx"
+  },
+  "resources/js/Pages/Etiquetas/printer.tsx": {
+    "file": "assets/printer-d33c1820.js",
+    "imports": [
+      "resources/js/app.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Etiquetas/printer.tsx"
+  },
+  "resources/js/Pages/Gerais/index.tsx": {
+    "file": "assets/index-b960a501.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_index-f8683352.js",
+      "_AuthLayout-cd96a75d.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Gerais/index.tsx"
+  },
+  "resources/js/Pages/Home/index.tsx": {
+    "file": "assets/index-d48ae2f5.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_AuthLayout-cd96a75d.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Home/index.tsx"
+  },
+  "resources/js/Pages/Images/index.tsx": {
+    "file": "assets/index-28b573c4.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_AuthLayout-cd96a75d.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Images/index.tsx"
+  },
+  "resources/js/Pages/Impressoes/index.tsx": {
+    "file": "assets/index-ca975441.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_index-f8683352.js",
+      "_AuthLayout-cd96a75d.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Impressoes/index.tsx"
+  },
+  "resources/js/Pages/Mensagens/add.tsx": {
+    "file": "assets/add-5610cf1c.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_AuthLayout-cd96a75d.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Mensagens/add.tsx"
+  },
+  "resources/js/Pages/Mensagens/edit.tsx": {
+    "file": "assets/edit-cd133c6a.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_index-f8683352.js",
+      "_AuthLayout-cd96a75d.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Mensagens/edit.tsx"
+  },
+  "resources/js/Pages/Mensagens/index.tsx": {
+    "file": "assets/index-7232db05.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_index-f8683352.js",
+      "_index-7a5c1ab0.js",
+      "_AuthLayout-cd96a75d.js",
+      "_moment-fbc5633a.js",
+      "_index.esm-2158556a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Mensagens/index.tsx"
+  },
+  "resources/js/Pages/Ordens/add.tsx": {
+    "file": "assets/add-a4c22b06.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_AuthLayout-cd96a75d.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Ordens/add.tsx"
+  },
+  "resources/js/Pages/Ordens/edit.tsx": {
+    "file": "assets/edit-67cb3424.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_index-f8683352.js",
+      "_index.esm-2158556a.js",
+      "_AuthLayout-cd96a75d.js",
+      "_dataSelect-51f2092f.js",
+      "_mask-c14164de.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Ordens/edit.tsx"
+  },
+  "resources/js/Pages/Ordens/index.tsx": {
+    "file": "assets/index-dd53c8f4.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_index-f8683352.js",
+      "_index-7a5c1ab0.js",
+      "_AuthLayout-cd96a75d.js",
+      "_functions-e928f381.js",
+      "_moment-fbc5633a.js",
+      "_index.esm-2158556a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Ordens/index.tsx"
+  },
+  "resources/js/Pages/Printer/index.tsx": {
+    "file": "assets/index-7f3e59d8.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js",
+      "resources/js/Pages/Printer/printer.tsx",
+      "_mask-c14164de.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Printer/index.tsx"
+  },
+  "resources/js/Pages/Printer/printer.tsx": {
+    "file": "assets/printer-d2045373.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_mask-c14164de.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Printer/printer.tsx"
+  },
+  "resources/js/Pages/Produtos/add.tsx": {
+    "file": "assets/add-ce8cc5b9.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_AuthLayout-cd96a75d.js",
+      "_dataSelect-51f2092f.js",
+      "_mask-c14164de.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Produtos/add.tsx"
+  },
+  "resources/js/Pages/Produtos/edit.tsx": {
+    "file": "assets/edit-48de29fb.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_index-f8683352.js",
+      "_AuthLayout-cd96a75d.js",
+      "_dataSelect-51f2092f.js",
+      "_mask-c14164de.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Produtos/edit.tsx"
+  },
+  "resources/js/Pages/Produtos/index.tsx": {
+    "file": "assets/index-1b082875.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_index-f8683352.js",
+      "_index-7a5c1ab0.js",
+      "_AuthLayout-cd96a75d.js",
+      "_mask-c14164de.js",
+      "_moment-fbc5633a.js",
+      "_index.esm-2158556a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Produtos/index.tsx"
+  },
+  "resources/js/Pages/Usuarios/add.tsx": {
+    "file": "assets/add-dab58311.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_AuthLayout-cd96a75d.js",
+      "_dataSelect-51f2092f.js",
+      "_mask-c14164de.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Usuarios/add.tsx"
+  },
+  "resources/js/Pages/Usuarios/edit.tsx": {
+    "file": "assets/edit-6bfb5692.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_index-f8683352.js",
+      "_AuthLayout-cd96a75d.js",
+      "_dataSelect-51f2092f.js",
+      "_mask-c14164de.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Usuarios/edit.tsx"
+  },
+  "resources/js/Pages/Usuarios/index.tsx": {
+    "file": "assets/index-72a6957a.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_index-f8683352.js",
+      "_index-7a5c1ab0.js",
+      "_AuthLayout-cd96a75d.js",
+      "_functions-e928f381.js",
+      "_moment-fbc5633a.js",
+      "_index.esm-2158556a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Usuarios/index.tsx"
+  },
+  "resources/js/Pages/Whats/index.tsx": {
+    "file": "assets/index-f6cd0c8b.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_index-a22c4d29.js",
+      "_index-801a1316.js",
+      "_index-f8683352.js",
+      "_AuthLayout-cd96a75d.js",
+      "_index.esm-2158556a.js",
+      "_moment-fbc5633a.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Whats/index.tsx"
+  },
+  "resources/js/app.css": {
+    "file": "assets/app-db051b2d.css",
+    "src": "resources/js/app.css"
+  },
+  "resources/js/app.tsx": {
+    "css": [
+      "assets/app-db051b2d.css"
+    ],
+    "dynamicImports": [
+      "resources/js/Pages/Agendas/add.tsx",
+      "resources/js/Pages/Agendas/edit.tsx",
+      "resources/js/Pages/Agendas/index.tsx",
+      "resources/js/Pages/Auth/Login.tsx",
+      "resources/js/Pages/Auth/Register.tsx",
+      "resources/js/Pages/Clientes/add.tsx",
+      "resources/js/Pages/Clientes/edit.tsx",
+      "resources/js/Pages/Clientes/index.tsx",
+      "resources/js/Pages/Empresa/index.tsx",
+      "resources/js/Pages/Etiquetas/index.tsx",
+      "resources/js/Pages/Etiquetas/printer.tsx",
+      "resources/js/Pages/Gerais/index.tsx",
+      "resources/js/Pages/Home/index.tsx",
+      "resources/js/Pages/Images/index.tsx",
+      "resources/js/Pages/Impressoes/index.tsx",
+      "resources/js/Pages/Mensagens/add.tsx",
+      "resources/js/Pages/Mensagens/edit.tsx",
+      "resources/js/Pages/Mensagens/index.tsx",
+      "resources/js/Pages/Ordens/add.tsx",
+      "resources/js/Pages/Ordens/edit.tsx",
+      "resources/js/Pages/Ordens/index.tsx",
+      "resources/js/Pages/Printer/index.tsx",
+      "resources/js/Pages/Printer/printer.tsx",
+      "resources/js/Pages/Produtos/add.tsx",
+      "resources/js/Pages/Produtos/edit.tsx",
+      "resources/js/Pages/Produtos/index.tsx",
+      "resources/js/Pages/Usuarios/add.tsx",
+      "resources/js/Pages/Usuarios/edit.tsx",
+      "resources/js/Pages/Usuarios/index.tsx",
+      "resources/js/Pages/Whats/index.tsx"
+    ],
+    "file": "assets/app-39d32580.js",
+    "isEntry": true,
+    "src": "resources/js/app.tsx"
+  }
+}
