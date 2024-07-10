@@ -33,8 +33,9 @@ import React, { Fragment } from "react";
 import { FaBasketShopping } from "react-icons/fa6";
 import { IoPeopleSharp } from "react-icons/io5";
 
-const Produtos = ({ produtos }: any) => {
+const Produtos = ({ produtos, estoque }: any) => {
     const { flash } = usePage().props;
+console.log(estoque);
 
     return (
         <AuthLayout>            

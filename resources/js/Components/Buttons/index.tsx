@@ -147,10 +147,10 @@ export const PrintButton = ({ url, status }: ButtonsProps) => {
                                 </Link>
                             </li>
                             <li
-                                className={`${status == "8" ? "bg-blue-quatro hover:bg-blue-quatro/90 text-white" : "text-gray-200"} rounded-md text-center border border-white shadow transition-all duration-300`}
+                                className={`${status == "6" || status == "7" ? "bg-blue-quatro hover:bg-blue-quatro/90 text-white" : "text-gray-200"} rounded-md text-center border border-white shadow transition-all duration-300`}
                                 >
                                 <Link
-                                disabled={status == "8" ? false : true}
+                                disabled={status == "6" || status == "7" ? false : true}
                                     as="button"
                                     href={`/docs/printer?or=${url}&tp=4`}
                                     className="py-1.5 w-full uppercase"

@@ -16,13 +16,14 @@ import { statusServico } from "@/Utils/dataSelect";
 import { maskMoney, maskMoneyDot, unMask } from "@/Utils/mask";
 import { Head, Link, router, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FaMemory } from "react-icons/fa6";
 import { IoPeopleSharp, IoPrint } from "react-icons/io5";
 
 interface ClientesProps {
     id: number;
     equipamento: string;
+    produtos:any;
     modelo: string;
     senha: string;
     defeito: string;
@@ -49,14 +50,12 @@ const EditOrdem = ({
     produtos,
     ordemProduto,
     currentPage,
-}: any) => {    
-    const {
-    showModalParts, 
-    setShowModalParts,
-    sendOrderParts, 
-    setSendOrderParts} = useAppContext();
+}: any) => {
+    const { setShowModalParts, sendOrderParts } = useAppContext();
     const { flash, errors } = usePage().props;
- 
+    const [valueInputPecas, setValueInputPecas] = useState<any>([]);
+    const [valueInputValPecas, setValueInputValPecas] = useState<any>("0");
+
     const options = produtos.map((produto: any) => ({
         value: produto.id,
         label: produto.descricao,
@@ -84,7 +83,8 @@ const EditOrdem = ({
         descorcamento: ordens.descorcamento,
         valorcamento: ordens.valorcamento,
         preorcamento: ordens.preorcamento,
-        pecas: ordemProduto.map((produto: any) => (produto.id)),
+        produtos: "",
+        pecas: ordens.pecas,
         valpecas: ordens.valpecas ? ordens.valpecas : '0',
         valservico: ordens.valservico ? ordens.valservico : '0',
         custo: ordens.custo ? ordens.custo : '0',
@@ -111,6 +111,7 @@ const EditOrdem = ({
             valorcamento: data.valorcamento,
             preorcamento: data.preorcamento,
             pecas: data.pecas,
+            produtos: sendOrderParts.map((produto: any) => (produto.pecaid)),
             valpecas: maskMoneyDot(data.valpecas.toString()),
             valservico: maskMoneyDot(data.valservico.toString()),
             custo: maskMoneyDot(data.custo.toString()),
@@ -121,6 +122,17 @@ const EditOrdem = ({
             page: currentPage,
         });
     }
+
+    useEffect(() => {
+        const getOrderParts = () => {
+            if (sendOrderParts.length > 0) {
+                let totPecas = sendOrderParts?.map((val:any) => parseFloat(val.valor)).reduce((total: any, value: any, index:number) => total + value)
+                setData((data) => ({ ...data, valpecas: totPecas }));
+                setData((data) => ({ ...data, pecas: sendOrderParts?.map((v: any) => v.descricao) }));
+            }
+        };
+        getOrderParts();
+    }, [sendOrderParts]);
 
     const sum = (a: any, b: any) => {
         return parseInt(unMask(a)) + parseInt(unMask(b));
@@ -373,25 +385,25 @@ const EditOrdem = ({
                                                 Peças utilizadas
                                             </label>
                                             <div className="flex items-center justify-start w-full">
-                                            <input
-                                                id="pecas"
-                                                value={data.pecas}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "pecas",
-                                                        e.target.value,
-                                                    )
-                                                }
-                                                className="input-form !rounded-r-none w-full"
-                                            />
-                                            <button
-                                            title="Inserir peças"
-                                            type="button"
-                                            className="bg-blue-700 hover:bg-blue-600 py-2.5 px-3 rounded-r-md shadow text-gray-50 self-end"
-                                            onClick={() => setShowModalParts(true)}
-                                            >
-                                                <FaMemory size={22} />
-                                            </button>
+                                                <input
+                                                    id="pecas"
+                                                    value={data.pecas}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            "pecas",
+                                                            e.target.value,
+                                                        )
+                                                    }
+                                                    className="input-form !rounded-r-none w-full"
+                                                />
+                                                <button
+                                                    title="Inserir peças"
+                                                    type="button"
+                                                    className="bg-blue-700 hover:bg-blue-600 py-2.5 px-3 rounded-r-md shadow text-gray-50 self-end"
+                                                    onClick={() => setShowModalParts(true)}
+                                                >
+                                                    <FaMemory size={22} />
+                                                </button>
                                             </div>
                                         </div>
                                         <div className="flex flex-col">

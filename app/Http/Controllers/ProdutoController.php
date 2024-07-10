@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProdutoResource;
+use App\Models\Estoque;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
@@ -21,7 +22,7 @@ class ProdutoController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('q');
-
+        $estoque = Estoque::get();
         $query = Produto::orderBy('id', 'DESC');
 
         if ($search) {
@@ -29,7 +30,7 @@ class ProdutoController extends Controller
         }
 
         $produtos = $query->paginate(12);
-        return Inertia::render('Produtos/index', ["produtos" => $produtos]);
+        return Inertia::render('Produtos/index', ["produtos" => $produtos, 'estoque' => $estoque]);
     }
 
     /**

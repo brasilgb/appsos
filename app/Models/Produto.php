@@ -29,4 +29,5 @@ class Produto extends Model
     {
         return $this->belongsToMany(Ordem::class);
     }
+
 }

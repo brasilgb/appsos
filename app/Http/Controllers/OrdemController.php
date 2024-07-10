@@ -173,11 +173,12 @@ class OrdemController extends Controller
         $dtformat = Carbon::now();
         $data['dtentrega'] = $request->status === '8' ? $dtformat->toDateTimeString() : null;
         // dd($request->pecas);
-        if (!empty($request->pecas)) {
-            foreach ($request->pecas as $peca) {
+        if (!empty($request->produtos)) {
+            foreach ($request->produtos as $peca) {
                 $pec[] = [
                     'ordem_id' => $ordem->id,
-                    'produto_id' => $peca
+                    'produto_id' => $peca,
+                    'quantidade' => 1
                 ];
             }
             $ord = Ordem::find($ordem->id);

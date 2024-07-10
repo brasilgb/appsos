@@ -45,4 +45,5 @@ class Ordem extends Model
     {
         return $this->belongsToMany(Produto::class);
     }
+
 }
