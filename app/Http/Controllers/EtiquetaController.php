@@ -27,7 +27,8 @@ class EtiquetaController extends Controller
         }else{
             $etiquetas = ['id' => 0];
         }
-        return Inertia::render('Etiquetas/index', ["etiquetas" => $etiquetas]);
+        $empresa = Empresa::first();
+        return Inertia::render('Etiquetas/index', ["etiquetas" => $etiquetas, "empresa" => $empresa]);
     }
 
     /**

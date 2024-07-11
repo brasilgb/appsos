@@ -1,3 +1,4 @@
+import FlashMessage from "@/Components/FlashMessage";
 import { maskCpfCnpj } from "@/Utils/mask";
 import moment from "moment";
 import { split } from "postcss/lib/list";
@@ -41,22 +42,22 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                     <div>
                         <span className="font-semibold mr-2 uppercase">
                             Recibo de 
-                            {ordem.status == "8" && ' entrega '}
-                            {ordem.status == "1" && ' entrada '}
-                            {ordem.status == "3" && ' orçamento '}
+                            {ordem?.status == "8" && ' entrega '}
+                            {ordem?.status == "1" && ' entrada '}
+                            {ordem?.status == "3" && ' orçamento '}
                             de equipamento
                         </span>
                     </div>
                 
                 <div>
                     <span className="font-semibold mr-2">O.S. N°:</span>
-                    <span>{("00000000" + ordem.id).slice(-8)}</span>
+                    <span>{("00000000" + ordem?.id).slice(-8)}</span>
                 </div>
                 <div>
                     <span className="font-semibold mr-2 uppercase">
                         Entrada:
                     </span>
-                    <span>{moment(ordem.created_at).format("DD/MM/YYYY")}</span>
+                    <span>{moment(ordem?.created_at).format("DD/MM/YYYY")}</span>
                 </div>
             </div>
 
@@ -71,15 +72,15 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                     <div className="flex-1">
                         <h1>
                             <span className="font-semibold mr-1">Nome:</span>
-                            {ordem.cliente.nome}
+                            {ordem?.cliente.nome}
                         </h1>
                         <h1>
                             <span className="font-semibold mr-1">
                                 Endereço:
                             </span>
-                            {ordem.cliente.endereco}
-                            {ordem.cliente.bairro}
-                            {ordem.cliente.cidade}
+                            {ordem?.cliente.endereco}
+                            {ordem?.cliente.bairro}
+                            {ordem?.cliente.cidade}
                         </h1>
                     </div>
                     <div className="flex-1">
@@ -87,12 +88,12 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                             <span className="font-semibold mr-1">
                                 CPF/CNPJ:
                             </span>
-                            {ordem.cliente.cpf ? maskCpfCnpj(ordem.cliente.cpf) : ''}
+                            {ordem?.cliente.cpf ? maskCpfCnpj(ordem?.cliente.cpf) : ''}
                         </h1>
                         <h1>
                             <span className="font-semibold mr-1">Contato:</span>
-                            {ordem.cliente.telefone}
-                            {ordem.cliente.email}
+                            {ordem?.cliente.telefone}
+                            {ordem?.cliente.email}
                         </h1>
                     </div>
                 </div>
@@ -111,13 +112,13 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                             <span className="font-semibold mr-1">
                                 Equipamento:
                             </span>
-                            {ordem.equipamento}
+                            {ordem?.equipamento}
                         </h1>
                     </div>
                     <div className="flex-1">
                         <h1>
                             <span className="font-semibold mr-1">Modelo:</span>
-                            {ordem.modelo}
+                            {ordem?.modelo}
                         </h1>
                     </div>
                 </div>
@@ -127,7 +128,7 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                             <span className="font-semibold mr-1">
                                 Defeito relatado:
                             </span>
-                            {ordem.defeito}
+                            {ordem?.defeito}
                         </h1>
                     </div>
                     <div className="flex-1">
@@ -135,7 +136,7 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                             <span className="font-semibold mr-1">
                                 Pré-orçamento:
                             </span>
-                            {ordem.preorcamento}
+                            {ordem?.preorcamento}
                         </h1>
                     </div>
                 </div>
@@ -145,7 +146,7 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                         <span className="font-semibold mr-1">
                             Estado do equipamento:
                         </span>
-                        {ordem.estado}
+                        {ordem?.estado}
                     </h1>
                 </div>
             </div>
@@ -171,7 +172,7 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                                 />
                             }
                         </div>
-                        <div>{ordem.obs}</div>
+                        <div>{ordem?.obs}</div>
                     </div>
                 </div>
             </div>
@@ -196,27 +197,27 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                 <div className="flex flex-col items-start justify-start border border-gray-200 mt-4 py-0.5 px-0.5">
                     <div className="mb-1 flex items-center justify-center w-full">
                         <h1 className="font-semibold">
-                            {ordem.status == 3
+                            {ordem?.status == 3
                                 ? "Orçamento"
                                 : "Serviços prestados"}
                         </h1>
                     </div>
                     <div
-                        className={`${ordem.status == 3 ? "" : "border-b"} w-full`}
+                        className={`${ordem?.status == 3 ? "" : "border-b"} w-full`}
                     >
-                        {ordem.status == 3
-                            ? ordem.descorcamento
-                            : ordem.detalhes}
+                        {ordem?.status == 3
+                            ? ordem?.descorcamento
+                            : ordem?.detalhes}
                     </div>
-                    {ordem.status === 8 && (
+                    {ordem?.status === 8 && (
                         <div className="flex items-start justify-between w-full bg-gray-200 px-2">
                             <div>
                                 <span className="mr-2">
                                     Valor dos serviços:
                                 </span>
                                 <span className="font-semibold">
-                                    {(ordem.valservico
-                                        ? Number(ordem.valservico)
+                                    {(ordem?.valservico
+                                        ? Number(ordem?.valservico)
                                         : 0
                                     ).toLocaleString("pt-br", {
                                         style: "currency",
@@ -230,8 +231,8 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                                     Valor de peças/produtos:
                                 </span>
                                 <span className="font-semibold">
-                                    {(ordem.valpecas
-                                        ? Number(ordem.valpecas)
+                                    {(ordem?.valpecas
+                                        ? Number(ordem?.valpecas)
                                         : 0
                                     ).toLocaleString("pt-br", {
                                         style: "currency",
@@ -243,8 +244,8 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                                 <span className="mr-2">Valor total:</span>
                                 <span className="font-semibold">
                                     {(
-                                        Number(ordem.valservico) +
-                                        Number(ordem.valpecas)
+                                        Number(ordem?.valservico) +
+                                        Number(ordem?.valpecas)
                                     ).toLocaleString("pt-br", {
                                         style: "currency",
                                         currency: "BRL",

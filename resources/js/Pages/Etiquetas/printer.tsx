@@ -34,12 +34,13 @@ const styles = StyleSheet.create({
         height: '17mm',
         // marginRight: '2mm',
         // marginBottom: '0.5mm',
-        // paddingTop: '0.5mm',
-        paddingBottom: '5.7mm',
+        paddingVertical: '1.5mm',
         border: 1,
-        borderColor: "#FFF",
+        borderColor: "#000",
         textAlign: 'center',
         alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'space-around'
     },
     textmd: {
@@ -65,7 +66,7 @@ const Printer = ({ etiquetas, paginas }: any) => {
                     {/*render a single page*/}
                     <Page size="A4" style={styles.page} wrap>
                         <View style={styles.section}>
-                            {etiquetas.map((etiqueta: any, idx:number) => (
+                            {etiquetas.map((etiqueta: any, idx: number) => (
                                 <View key={etiqueta.ordem} style={styles.etiqueta} wrap={false}  >
                                     <View style={styles.textxs}>
                                         <Text>{etiqueta.empresa}</Text>

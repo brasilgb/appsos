@@ -1,3 +1,4 @@
+import { AlertInfo } from "@/Components/Alert";
 import {
     Card,
     CardBody,
@@ -19,7 +20,7 @@ interface ClientesProps {
     ordemfinal: number;
 }
 
-const Etiquetas = ({ etiquetas }: any) => {
+const Etiquetas = ({ etiquetas, empresa }: any) => {
     const { flash } = usePage().props;
     const {
         data,
@@ -40,6 +41,7 @@ const Etiquetas = ({ etiquetas }: any) => {
             }));
         }
     };
+    console.log(empresa.empresa);
 
     return (
         <AuthLayout>
@@ -55,7 +57,9 @@ const Etiquetas = ({ etiquetas }: any) => {
                     />
                 </HeaderContent>
                 <CardContainer>
-                    <FlashMessage message={flash} />
+                    {empresa.empresa === null || empresa.telefone === null &&
+                        <AlertInfo message={"Preencha os dados da empresa corretamente!"} />
+                    }
                     <form autoComplete="off">
                         <CardBody className=" border-y border-gray-100">
                             <div className="px-3 my-4">
@@ -121,15 +125,24 @@ const Etiquetas = ({ etiquetas }: any) => {
                             </div>
                         </CardBody>
                         <CardFooter>
-                        <div className="flex justify-end">
-                            <a
-                                className="flex items-center justify-center bg-blue-700 hover:bg-blue-600 py-1.5 px-4 rounded-md shadow text-gray-50 self-end"
-                                target="_blank"
-                                href={`/configuracoes/etiquetas/printer/${data.ordeminicial}/${data.ordemfinal}/${data.paginas}`}
-                            >
-                                <IoPricetagsSharp size={18} />
-                                <span className="ml-2">Gerar etiquetas</span>
-                            </a>
+                            <div className="flex justify-end">
+                                {empresa.empresa === null || empresa.telefone === null
+                                    ? <div
+                                        className="flex items-center justify-center bg-blue-700/50 hover:bg-blue-700/50 py-1.5 px-4 rounded-md shadow text-gray-50 self-end"
+                                    >
+                                        <IoPricetagsSharp size={18} />
+                                        <span className="ml-2">Gerar etiquetas</span>
+                                    </div>
+                                    : <a
+                                        className="flex items-center justify-center bg-blue-700 hover:bg-blue-600 py-1.5 px-4 rounded-md shadow text-gray-50 self-end"
+                                        target="_blank"
+                                        href={`/configuracoes/etiquetas/printer/${data.ordeminicial}/${data.ordemfinal}/${data.paginas}`}
+                                    >
+                                        <IoPricetagsSharp size={18} />
+                                        <span className="ml-2">Gerar etiquetas</span>
+                                    </a>
+                                }
+
                             </div>
                         </CardFooter>
                     </form>
