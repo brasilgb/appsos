@@ -114,7 +114,7 @@ const Usuarios = ({ usuarios }: any) => {
                                                 ).format("DD/MM/YYYY")}
                                             </TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
-                                                <WhatsAppButton url="" />
+                                                {/* <WhatsAppButton url="" /> */}
                                                 <EditButton
                                                     url={route(
                                                         "usuarios.edit",
