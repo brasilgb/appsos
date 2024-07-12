@@ -394,16 +394,16 @@ const EditOrdem = ({
                                                             e.target.value,
                                                         )
                                                     }
-                                                    className="input-form !rounded-r-none w-full"
+                                                    className="input-form w-full"
                                                 />
-                                                <button
+                                                {/* <button
                                                     title="Inserir peças"
                                                     type="button"
                                                     className="bg-blue-700 hover:bg-blue-600 py-2.5 px-3 rounded-r-md shadow text-gray-50 self-end"
                                                     onClick={() => setShowModalParts(true)}
                                                 >
                                                     <FaMemory size={22} />
-                                                </button>
+                                                </button> */}
                                             </div>
                                         </div>
                                         <div className="flex flex-col">
