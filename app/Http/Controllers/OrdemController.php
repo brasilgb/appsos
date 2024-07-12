@@ -196,12 +196,22 @@ class OrdemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    public function delPecaOrdem(Ordem $ordem)
+    {
+        // dd($ordem);
+        $ordem->where('id', $ordem->id)->update(['valpecas' => '0']);
+        $ordem->produtos()->detach();
+        return Redirect::route('ordens.show', ['ordem' => $ordem->id]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(Ordem $ordem)
     {
         $ordem->delete();
         $ordem->produtos()->detach();
         $ordem->delete($ordem);
-
         Session::flash('success', 'Ordem deletada com sucesso');
         return Redirect::route('ordens.index');
     }

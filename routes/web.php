@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/ordens', OrdemController::class)->parameters([
         'ordens' => 'ordem'
     ]);
+    Route::get('/delpecaordem/{ordem}', [OrdemController::class, 'delPecaOrdem'])->name('delpecaordem');
     Route::resource('/imagens', ImagemController::class)->parameters([
         'imagens' => 'imagem'
     ]);

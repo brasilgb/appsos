@@ -18,12 +18,11 @@ import { Head, Link, router, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import React, { useEffect, useState } from "react";
 import { FaMemory } from "react-icons/fa6";
-import { IoPeopleSharp, IoPrint } from "react-icons/io5";
+import { IoPeopleSharp, IoPrint, IoTrash } from "react-icons/io5";
 
 interface ClientesProps {
     id: number;
     equipamento: string;
-    produtos:any;
     modelo: string;
     senha: string;
     defeito: string;
@@ -51,7 +50,7 @@ const EditOrdem = ({
     ordemProduto,
     currentPage,
 }: any) => {
-    const { setShowModalParts, sendOrderParts } = useAppContext();
+    const { setShowModalParts, sendOrderParts, setSendOrderParts } = useAppContext();
     const { flash, errors } = usePage().props;
     const [valueInputPecas, setValueInputPecas] = useState<any>([]);
     const [valueInputValPecas, setValueInputValPecas] = useState<any>("0");
@@ -60,6 +59,9 @@ const EditOrdem = ({
         value: produto.id,
         label: produto.descricao,
     }));
+
+    const dataEstoque = sendOrderParts.length > 0 ? sendOrderParts : ordemProduto;
+// console.log(dataEstoque);
 
     const optionsDefault = ordemProduto.map((produto: any) => ({
         value: produto.id,
@@ -83,7 +85,6 @@ const EditOrdem = ({
         descorcamento: ordens.descorcamento,
         valorcamento: ordens.valorcamento,
         preorcamento: ordens.preorcamento,
-        produtos: "",
         pecas: ordens.pecas,
         valpecas: ordens.valpecas ? ordens.valpecas : '0',
         valservico: ordens.valservico ? ordens.valservico : '0',
@@ -126,9 +127,9 @@ const EditOrdem = ({
     useEffect(() => {
         const getOrderParts = () => {
             if (sendOrderParts.length > 0) {
-                let totPecas = sendOrderParts?.map((val:any) => parseFloat(val.valor)).reduce((total: any, value: any, index:number) => total + value)
+                let totPecas = (sendOrderParts.length > 0 ? sendOrderParts : ordemProduto).map((val: any) => parseFloat(val.valvenda)).reduce((total: any, value: any, index: number) => total + value)
                 setData((data) => ({ ...data, valpecas: totPecas }));
-                setData((data) => ({ ...data, pecas: sendOrderParts?.map((v: any) => v.descricao) }));
+                // setData((data) => ({ ...data, pecas: sendOrderParts?.map((v: any) => v.descricao) }));
             }
         };
         getOrderParts();
@@ -150,6 +151,20 @@ const EditOrdem = ({
         setData((data) => ({ ...data, valpecas: totPecas }));
         setData((data) => ({ ...data, pecas: selected.map((v: any) => v.value) }));
     };
+
+    const handleRemovePecaData = (id: number) => {
+
+    }
+    const { get } = useForm();
+    const handleRemovePeca = () => {
+        if (sendOrderParts.length > 0) {
+            // const select = sendOrderParts.filter((item: any, idxb: number) => (idxb !== id));
+            setSendOrderParts([]);
+        } else {
+            get(route('delpecaordem', ordens.id));
+        }
+        setData((data) => ({ ...data, valpecas: '0' }));
+    }
 
     useEffect(() => {
         const custo = sum(data.valpecas.toString(), data.valservico.toString());
@@ -376,16 +391,17 @@ const EditOrdem = ({
                                         </div>
                                     </div>
 
-                                    <div className="grid grid-cols-6 gap-4 mt-6">
-                                        <div className="flex flex-col col-span-3">
+                                    <div className="grid grid-cols-7 gap-4 mt-6">
+
+                                        <div className="flex flex-col col-span-2">
                                             <label
                                                 className="label-form"
                                                 htmlFor="pecas"
                                             >
-                                                Peças utilizadas
+                                                Peças utilizadas (manual)
                                             </label>
-                                            <div className="flex items-center justify-start w-full">
-                                                <input
+                                            <div className="flex items-center justify-start gap-4 w-full">
+                                                <textarea
                                                     id="pecas"
                                                     value={data.pecas}
                                                     onChange={(e) =>
@@ -394,18 +410,53 @@ const EditOrdem = ({
                                                             e.target.value,
                                                         )
                                                     }
-                                                    className="input-form w-full"
+                                                    className="input-form !h-20 w-full"
                                                 />
-                                                {/* <button
-                                                    title="Inserir peças"
-                                                    type="button"
-                                                    className="bg-blue-700 hover:bg-blue-600 py-2.5 px-3 rounded-r-md shadow text-gray-50 self-end"
-                                                    onClick={() => setShowModalParts(true)}
-                                                >
-                                                    <FaMemory size={22} />
-                                                </button> */}
                                             </div>
                                         </div>
+
+                                        <div className="flex flex-col col-span-2">
+                                            <label
+                                                className="label-form"
+                                                htmlFor="pecas"
+                                            >
+                                                Peças utilizadas (estoque)
+                                            </label>
+                                            <div className="flex items-center justify-start gap-4 w-full">
+
+                                                <div className="flex items-start justify-start w-full">
+                                                    <div className="h-20 input-form !rounded-r-none overflow-y-auto w-full">
+                                                        {(sendOrderParts.length > 0 ? sendOrderParts : ordemProduto).map((peca: any, idx: number) => (
+                                                            <div key={idx} className={`py-1 flex justify-between ${(sendOrderParts.length > 0 ? sendOrderParts : ordemProduto).length - 1 == idx ? '' : 'border-b border-b-gray-300'}`}>
+                                                                {/* <div>{peca.id}</div> */}
+                                                                <div>{peca.descricao}</div>
+                                                                <div>{maskMoney(peca.valvenda)}</div>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                    <div>
+                                                    <button
+                                                        title="Inserir peças"
+                                                        type="button"
+                                                        className="bg-blue-700 hover:bg-blue-700/90 py-2.5 px-3 rounded-r-md rounded-b-none shadow text-gray-50 h-10"
+                                                        onClick={() => setShowModalParts(true)}
+                                                    >
+                                                        <FaMemory size={22} />
+                                                    </button>
+                                                        <button
+                                                            title="Limpa peças"
+                                                            type="button"
+                                                            onClick={handleRemovePeca}
+                                                            className="bg-red-600 hover:bg-red-600/90 py-2.5 px-3 rounded-r-md rounded-t-none shadow text-gray-50 h-10"
+                                                        >
+                                                            <IoTrash size={22} />
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div className="flex flex-col">
                                             <label
                                                 className="label-form"

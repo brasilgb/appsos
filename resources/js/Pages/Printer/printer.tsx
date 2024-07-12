@@ -14,7 +14,17 @@ interface PrintProps {
 const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
 
     const checklistArray = printer?.checklist ? printer?.checklist?.split(";") : [];
-    
+
+    const statusPrint = (status: number) => {
+        switch (status) {
+            case 1: return ' entrada ';
+            case 3: return ' orçamento ';
+            case 6: return ' entrega ';
+            case 7: return ' entrega ';
+            case 8: return ' entrega ';
+        }
+    }
+
     return (
         <div className="text-[10px] text-gray-600">
             <div className="flex items-start justify-start py-1 px-2 border-b border-gray-200 font-semibold">
@@ -38,17 +48,13 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                 </div>
             </div>
             <div className="flex items-center justify-between px-2 py-0.5 bg-gray-200">
-                
-                    <div>
-                        <span className="font-semibold mr-2 uppercase">
-                            Recibo de 
-                            {ordem?.status == "6" || ordem?.status == "7" || ordem?.status == "8" && ' entrega '}
-                            {ordem?.status == "1" && ' entrada '}
-                            {ordem?.status == "3" && ' orçamento '}
-                            de equipamento
-                        </span>
-                    </div>
-                
+
+                <div>
+                    <span className="font-semibold mr-2 uppercase">
+                        Recibo de {statusPrint(ordem?.status)} de equipamento
+                    </span>
+                </div>
+
                 <div>
                     <span className="font-semibold mr-2">O.S. N°:</span>
                     <span>{("00000000" + ordem?.id).slice(-8)}</span>

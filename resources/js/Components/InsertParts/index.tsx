@@ -37,15 +37,13 @@ const InsertParts = ({ produtos }: PecasProps) => {
     }, [data]);
 
     const handleChangePecas = (id: any, descricao: any, valor: any) => {
-        let data = { 'pecaid': id, 'descricao': descricao, 'valor': valor }
+        let data = { 'id': id, 'descricao': descricao, 'valvenda': valor }
         setPartySelected([...partySelected, data]);
         setData((data) => ({ ...data, pecas: '' }));
         setFilterSearch([]);
     };
 
     const handleRemovePeca = (idx: number) => {
-        console.log(idx, partySelected);
-
         const select = partySelected.filter((item: any, idxb: number) => (idxb !== idx));
         setPartySelected(select);
     }
@@ -104,15 +102,16 @@ const InsertParts = ({ produtos }: PecasProps) => {
                                     </div>
                                 }
                             </div>
+                            {partySelected.length > 0 &&
                             <div className="mt-4 p-2 border border-gray-300 rounded-md">
-                                <div>
+                                {/* <div>
                                     <h1 className="text-sm font-medium uppercase border-b border-b-gray-300">Peças selecionadas</h1>
-                                </div>
+                                </div> */}
                                 {partySelected.map((peca: any, idx: number) => (
                                     <div key={idx} className={`py-1 grid grid-cols-4 ${partySelected.length - 1 == idx ? '' : 'border-b border-b-gray-300'}`}>
-                                        <div>{peca.pecaid}</div>
+                                        {/* <div>{peca.id}</div> */}
                                         <div>{peca.descricao}</div>
-                                        <div>{peca.valor}</div>
+                                        <div>{peca.valvenda}</div>
                                         <div>
                                             <button
                                                 type="button"
@@ -125,6 +124,7 @@ const InsertParts = ({ produtos }: PecasProps) => {
                                     </div>
                                 ))}
                             </div>
+            }
                             <div className="mt-4 flex justify-end">
                                 <button
                                     onClick={handleInsertPecas}

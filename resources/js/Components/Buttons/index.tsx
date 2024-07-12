@@ -246,7 +246,7 @@ export const DeleteButton = ({ identify, param, url, disabled = false }: Buttons
         e.preventDefault();
         destroy(route(url, param));
         setShowConfirme(false);
-    }
+    } 
 
     const ModalDelete = () => {
         return (
