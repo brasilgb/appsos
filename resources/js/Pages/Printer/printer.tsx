@@ -42,7 +42,7 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                     <div>
                         <span className="font-semibold mr-2 uppercase">
                             Recibo de 
-                            {ordem?.status == "8" || ordem?.status == "8" || ordem?.status == "8" && ' entrega '}
+                            {ordem?.status == "6" || ordem?.status == "7" || ordem?.status == "8" && ' entrega '}
                             {ordem?.status == "1" && ' entrada '}
                             {ordem?.status == "3" && ' orçamento '}
                             de equipamento
