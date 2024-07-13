@@ -31,14 +31,14 @@ const Home = ({ dashdata, statusorder }: any) => {
                             <AiOutlineDashboard size={30} />
                             <span className="ml-2">Dashboard</span>
                         </TitleTop>
-                        <TitleTop>
+                        {/* <TitleTop>
                             <button
                                 onClick={() => setShowModalPDV(true)}
                                 className="px-6 bg-gradient-to-t from-gray-100 via-gray-50 to-gray-100 text-green-600 shadow-md rounded-md"
                             >
                                 <IoBasket size={40} />
                             </button>
-                        </TitleTop>
+                        </TitleTop> */}
                     </HeaderContent>
                     <div className="grid md:md:grid-cols-5 sm:grid-cols-2 gap-6">
                         <Kpis
