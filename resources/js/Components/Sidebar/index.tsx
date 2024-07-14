@@ -42,11 +42,11 @@ const Sidebar = () => {
             <nav className="mt-3">
                 <ul className="flex flex-col gap-2">
                     <SideLink openside={openSide} url="dashboard" icon={<AiOutlineDashboard size={20} />} value={"Dashboard"} />
-                    <SideLink openside={openSide} url="clientes.index" icon={<IoPeopleSharp size={20} />} value={"Clientes"} />
-                    <SideLink openside={openSide} url="ordens.index" icon={<IoConstruct size={20} />} value={"Ordens"} />
-                    <SideLink openside={openSide} url="produtos.index" icon={<FaBasketShopping size={20} />} value={"Produtos/Peças"} />
-                    <SideLink openside={openSide} url="agendas.index" icon={<FaCalendarDays size={20} />} value={"Agenda"} />
-                    <SideLink openside={openSide} url="mensagens.index" icon={<IoChatboxEllipses size={20} />} value={"Mensagens"} />
+                    <SideLink openside={openSide} url="clientes" icon={<IoPeopleSharp size={20} />} value={"Clientes"} />
+                    <SideLink openside={openSide} url="ordens" icon={<IoConstruct size={20} />} value={"Ordens"} />
+                    <SideLink openside={openSide} url="produtos" icon={<FaBasketShopping size={20} />} value={"Produtos/Peças"} />
+                    <SideLink openside={openSide} url="agendas" icon={<FaCalendarDays size={20} />} value={"Agenda"} />
+                    <SideLink openside={openSide} url="mensagens" icon={<IoChatboxEllipses size={20} />} value={"Mensagens"} />
                     <li className="">
                         <div
                             className={`flex items-center justify-between pl-2.5 py-2 pr-2 cursor-pointer ${url.startsWith("/configuracoes") ? "text-gray500 bg-blue-quatro" : "text-gray-100 hover:bg-blue-middle hover:text-gray-400"} ${openDropDown ? "bg-gray-50 hover:bg-gray-50 text-gray-600  border-b rounded-t-lg" : "text-gray-100 rounded-lg"}`}
@@ -68,15 +68,15 @@ const Sidebar = () => {
                         </div>
                         {openDropDown && (
                             <ul className={`bg-gray-50 flex flex-col gap-1 rounded-b-lg p-2 absolute ${!openSide ? 'w-52' : 'w-[248px]'} `}>
-                                <SideLink openside={true} url="empresa.index" icon={<HiBuildingOffice size={20} />} value={"Empresa"} sublink={true} />
-                                <SideLink openside={true} url="whatsapp.index" icon={<IoLogoWhatsapp size={20} />} value={"Whatsapp"} sublink={true} />
-                                <SideLink openside={true} url="impressoes.index" icon={<AiFillPrinter size={20} />} value={"Impressões"} sublink={true} />
-                                <SideLink openside={true} url="etiquetas.index" icon={<AiFillTags size={20} />} value={"Etiquetas"} sublink={true} />
-                                <SideLink openside={true} url="gerais.index" icon={<IoCog size={20} />} value={"Gerais"} sublink={true} />
+                                <SideLink openside={true} url="empresa" icon={<HiBuildingOffice size={20} />} value={"Empresa"} sublink={true} />
+                                <SideLink openside={true} url="whatsapp" icon={<IoLogoWhatsapp size={20} />} value={"Whatsapp"} sublink={true} />
+                                <SideLink openside={true} url="impressoes" icon={<AiFillPrinter size={20} />} value={"Impressões"} sublink={true} />
+                                <SideLink openside={true} url="etiquetas" icon={<AiFillTags size={20} />} value={"Etiquetas"} sublink={true} />
+                                <SideLink openside={true} url="gerais" icon={<IoCog size={20} />} value={"Gerais"} sublink={true} />
                             </ul>
                         )}
                     </li>
-                    <SideLink openside={openSide} url="usuarios.index" icon={<IoPerson size={20} />} value={"Usuários"} />
+                    <SideLink openside={openSide} url="usuarios" icon={<IoPerson size={20} />} value={"Usuários"} />
                 </ul>
             </nav>
         </aside>
