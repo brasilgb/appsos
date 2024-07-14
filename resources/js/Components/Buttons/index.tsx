@@ -97,7 +97,7 @@ export const PrintButton = ({ url, status }: ButtonsProps) => {
             >
                 <IoPrint size={18} />
             </button>
-            {openMenuButton && ( 
+            {openMenuButton && (
                 <div className="fixed w-full flex items-center justify-center bg-gray-800/90 top-0 right-0 bottom-0 left-0 z-50">
                     <div className="w-full sm:max-w-md mx-4 bg-gradient-to-t from-gray-300 via-white to-gray-200 shadow-md overflow-hidden rounded-md border border-white text-gray-600">
                         <div className="h-8 flex items-center justify-between border-b px-2 bg-blue-cinco text-white rounded-t-lg">
@@ -148,9 +148,9 @@ export const PrintButton = ({ url, status }: ButtonsProps) => {
                             </li>
                             <li
                                 className={`${status == "6" || status == "7" ? "bg-blue-quatro hover:bg-blue-quatro/90 text-white" : "text-gray-200"} rounded-md text-center border border-white shadow transition-all duration-300`}
-                                >
+                            >
                                 <Link
-                                disabled={status == "6" || status == "7" ? false : true}
+                                    disabled={status == "6" || status == "7" ? false : true}
                                     as="button"
                                     href={`/docs/printer?or=${url}&tp=4`}
                                     className="py-1.5 w-full uppercase"
@@ -246,7 +246,7 @@ export const DeleteButton = ({ identify, param, url, disabled = false }: Buttons
         e.preventDefault();
         destroy(route(url, param));
         setShowConfirme(false);
-    } 
+    }
 
     const ModalDelete = () => {
         return (

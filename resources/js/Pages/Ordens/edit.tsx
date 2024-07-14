@@ -155,9 +155,9 @@ const EditOrdem = ({
         setData((data) => ({ ...data, pecas: selected.map((v: any) => v.value) }));
     };
 
-    const handleRemovePecaData = (id: number) => {
+    // const handleRemovePecaData = (id: number) => {
 
-    }
+    // }
     const { get } = useForm();
     const handleRemovePeca = () => {
         if (sendOrderParts.length > 0) {
@@ -259,6 +259,9 @@ const EditOrdem = ({
                                             className="input-form"
                                         >
                                             <option value="">Selecione o tipo de equipamento</option>
+                                            <option value="Notebook">Notebook</option>
+                                            <option value="Mobile">Mobile</option>
+                                            <option value="PC">PC</option>
                                             {equtipo.map((tipo: any, idx: number) => (
                                                 <option value={tipo}>{tipo}</option>
                                             ))}
@@ -450,7 +453,7 @@ const EditOrdem = ({
                                                         <button
                                                             title="Inserir peças"
                                                             type="button"
-                                                            className="bg-blue-700 hover:bg-blue-700/90 py-2.5 px-3 rounded-t-md rounded-l-none  shadow text-gray-50 h-10"
+                                                            className="bg-blue-700 hover:bg-blue-700/90 py-2.5 px-3 rounded-r-md rounded-b-none  shadow text-gray-50 h-10"
                                                             onClick={() => setShowModalParts(true)}
                                                         >
                                                             <FaMemory size={22} />

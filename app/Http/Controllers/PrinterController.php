@@ -36,10 +36,16 @@ class PrinterController extends Controller
                 $printer = $pres->orcamento;
                 break;
             case 4:
-                $printer = ["entrega" => $pres->entrega, "checklist" => $pres->checklist];
+                $printer = [
+                    "entrega" => $pres->entrega,
+                    "checkmobile" => $pres->checkmobile,
+                    "checknote" => $pres->checknote,
+                    "checkpc" => $pres->checkpc,
+                    "checkoutros" => $pres->checkoutros
+                ];
                 break;
         }
-        
+
 
         $empresa = Empresa::first();
         return Inertia::render('Printer/index', ["empresa" => $empresa, "ordem" => $ordem, 'printer' => $printer, 'tipo' => $tp]);
