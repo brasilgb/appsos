@@ -12,6 +12,8 @@ import { IoClose } from "react-icons/io5";
 interface GeraisProps {
     bgimage: any;
     bgcolor: string;
+    equtipo: string;
+    equestado: string;
 }
 
 const Gerais = ({ geral }: any) => {
@@ -28,6 +30,8 @@ const Gerais = ({ geral }: any) => {
     }: InertiaFormProps<GeraisProps> = useForm({
         bgimage: geral.bgimage,
         bgcolor: geral.bgcolor,
+        equtipo: geral.equtipo,
+        equestado: geral.equestado,
     });
 
     function handleSubmit(e: any) {
@@ -36,6 +40,8 @@ const Gerais = ({ geral }: any) => {
             _method: "put",
             bgimage: data.bgimage,
             bgcolor: data.bgcolor,
+            equtipo: data.equtipo,
+            equestado: data.equestado,
         });
         reset;
     }
@@ -44,8 +50,8 @@ const Gerais = ({ geral }: any) => {
         destroy(route("gerais.destroy", geral.id));
     };
     return (
-        <AuthLayout>            
-        <Head title="Gerais" />
+        <AuthLayout>
+            <Head title="Gerais" />
             <Card>
                 <HeaderContent>
                     <TitleTop>
@@ -127,6 +133,43 @@ const Gerais = ({ geral }: any) => {
                                         />
                                     </div>
                                 </div>
+
+                                <div className="flex flex-col mt-6">
+                                    <label
+                                        className="label-form"
+                                        htmlFor="equtipo"
+                                    >
+                                        Tipo de equipamento (separar com ;)
+                                    </label>
+                                    <textarea
+                                        id="equtipo"
+                                        value={data.equtipo}
+                                        onChange={(e) =>
+                                            setData("equtipo", e.target.value)
+                                        }
+                                        className="input-form"
+                                        rows={2}
+                                    />
+                                </div>
+
+                                <div className="flex flex-col mt-6">
+                                    <label
+                                        className="label-form"
+                                        htmlFor="equestado"
+                                    >
+                                        Estado do equipamento (separar com ;)
+                                    </label>
+                                    <textarea
+                                        id="equestado"
+                                        value={data.equestado}
+                                        onChange={(e) =>
+                                            setData("equestado", e.target.value)
+                                        }
+                                        className="input-form"
+                                        rows={2}
+                                    />
+                                </div>
+
                             </div>
                         </CardBody>
                         <CardFooter>

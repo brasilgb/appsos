@@ -19,7 +19,10 @@ interface ClientesProps {
     recebimento: string;
     entrega: string;
     orcamento: string;
-    checklist: string;
+    checkmobile: string;
+    checkpc: string;
+    checknote: string;
+    checkoutros: string;
 }
 
 const Impressoes = ({ impressao }: any) => {
@@ -35,7 +38,10 @@ const Impressoes = ({ impressao }: any) => {
         recebimento: impressao.recebimento,
         entrega: impressao.entrega,
         orcamento: impressao.orcamento,
-        checklist: impressao.checklist,
+        checkmobile: impressao.checkmobile,
+        checkpc: impressao.checkpc,
+        checknote: impressao.checknote,
+        checkoutros: impressao.checkoutros,
     });
 
     function handleSubmit(e: any) {
@@ -77,6 +83,7 @@ const Impressoes = ({ impressao }: any) => {
                                             )
                                         }
                                         className="input-form"
+                                        rows={2}
                                     />
                                 </div>
 
@@ -94,6 +101,7 @@ const Impressoes = ({ impressao }: any) => {
                                             setData("entrega", e.target.value)
                                         }
                                         className="input-form"
+                                        rows={2}
                                     />
                                 </div>
 
@@ -111,25 +119,82 @@ const Impressoes = ({ impressao }: any) => {
                                             setData("orcamento", e.target.value)
                                         }
                                         className="input-form"
+                                        rows={2}
                                     />
                                 </div>
 
                                 <div className="flex flex-col mt-6">
                                     <label
                                         className="label-form"
-                                        htmlFor="checklist"
+                                        htmlFor="checkmobile"
                                     >
-                                        Checklist (separar com ;)
+                                        Checklist mobile (separar com ;)
                                     </label>
                                     <textarea
-                                        id="checklist"
-                                        value={data.checklist}
+                                        id="checkmobile"
+                                        value={data.checkmobile}
                                         onChange={(e) =>
-                                            setData("checklist", e.target.value)
+                                            setData("checkmobile", e.target.value)
                                         }
                                         className="input-form"
+                                        rows={1}
                                     />
                                 </div>
+                                
+                                <div className="flex flex-col mt-6">
+                                    <label
+                                        className="label-form"
+                                        htmlFor="checkpc"
+                                    >
+                                        Checklist Computadores (separar com ;)
+                                    </label>
+                                    <textarea
+                                        id="checkpc"
+                                        value={data.checkpc}
+                                        onChange={(e) =>
+                                            setData("checkpc", e.target.value)
+                                        }
+                                        className="input-form"
+                                        rows={1}
+                                    />
+                                </div>
+                                
+                                <div className="flex flex-col mt-6">
+                                    <label
+                                        className="label-form"
+                                        htmlFor="checknote"
+                                    >
+                                        Checklist notebooks (separar com ;)
+                                    </label>
+                                    <textarea
+                                        id="checknote"
+                                        value={data.checknote}
+                                        onChange={(e) =>
+                                            setData("checknote", e.target.value)
+                                        }
+                                        className="input-form"
+                                        rows={1}
+                                    />
+                                </div>
+                                
+                                <div className="flex flex-col mt-6">
+                                    <label
+                                        className="label-form"
+                                        htmlFor="checkoutros"
+                                    >
+                                        Checklist outros (separar com ;)
+                                    </label>
+                                    <textarea
+                                        id="checkoutros"
+                                        value={data.checkoutros}
+                                        onChange={(e) =>
+                                            setData("checkoutros", e.target.value)
+                                        }
+                                        className="input-form"
+                                        rows={1}
+                                    />
+                                </div>
+
                             </div>
                         </CardBody>
                         <CardFooter>

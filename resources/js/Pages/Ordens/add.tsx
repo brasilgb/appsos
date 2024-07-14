@@ -13,8 +13,11 @@ import { Head, useForm } from "@inertiajs/react";
 import React, { useEffect, useState } from "react";
 import { IoPeopleSharp } from "react-icons/io5";
 
-const AddOrdem = ({ clientes, ordem }) => {
+const AddOrdem = ({ clientes, ordem, gerais }) => {
     const [filterSearch, setFilterSearch] = useState<any>([]);
+    const equtipo = gerais?.equtipo ? gerais?.equtipo?.split(";") : [];
+    const equestado = gerais?.equestado ? gerais?.equestado?.split(";") : [];
+
     const { data, setData, post, errors } = useForm({
         id: ordem > 0 ? ordem + 1 : 1,
         cliente_id: "",
@@ -158,9 +161,8 @@ const AddOrdem = ({ clientes, ordem }) => {
                                         >
                                             Tipo de equipamento
                                         </label>
-                                        <input
+                                        <select
                                             id="equipamento"
-                                            type="text"
                                             value={data.equipamento}
                                             onChange={(e) =>
                                                 setData(
@@ -169,7 +171,12 @@ const AddOrdem = ({ clientes, ordem }) => {
                                                 )
                                             }
                                             className="input-form"
-                                        />
+                                        >
+                                            <option value="">Selecione o tipo de equipamento</option>
+                                            {equtipo.map((tipo: any, idx: number) => (
+                                                <option value={tipo}>{tipo}</option>
+                                            ))}
+                                        </select>
                                         {errors.equipamento && (
                                             <div className="text-red-500">
                                                 {errors.equipamento}
@@ -263,6 +270,7 @@ const AddOrdem = ({ clientes, ordem }) => {
                                             </div>
                                         )}
                                     </div>
+                                    
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
@@ -270,7 +278,7 @@ const AddOrdem = ({ clientes, ordem }) => {
                                         >
                                             Estado do equipamento
                                         </label>
-                                        <textarea
+                                        <select
                                             id="estado"
                                             value={data.estado}
                                             onChange={(e) =>
@@ -280,7 +288,12 @@ const AddOrdem = ({ clientes, ordem }) => {
                                                 )
                                             }
                                             className="input-form"
-                                        />
+                                            >
+                                            <option value="">Selecione o estado equipamento</option>
+                                            {equestado.map((estado: any, idx: number) => (
+                                                <option value={estado}>{estado}</option>
+                                            ))}
+                                        </select>
                                     </div>
                                 </div>
 

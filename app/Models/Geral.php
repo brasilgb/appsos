@@ -13,6 +13,8 @@ class Geral extends Model
 
     protected $fillable = [
         'bgimage',
-        'bgcolor'
+        'bgcolor',
+        'equtipo',
+        'equestado'
     ];
 }

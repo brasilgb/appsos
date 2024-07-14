@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrdemResource;
 use App\Models\Cliente;
+use App\Models\Geral;
 use App\Models\Imagem;
 use App\Models\Impressao;
 use App\Models\Ordem;
@@ -89,9 +90,11 @@ class OrdemController extends Controller
     public function create()
     {
         $clientes = Cliente::get();
+        $clientes = Cliente::get();
+        $gerais = Geral::first();
         $ordem = Ordem::exists() ? Ordem::orderBy('id', 'desc')->first()->id : [];
 
-        return Inertia::render('Ordens/add', ['clientes' => $clientes, 'ordem' => $ordem]);
+        return Inertia::render('Ordens/add', ['clientes' => $clientes, 'ordem' => $ordem, 'gerais' => $gerais]);
     }
     
     /**
@@ -132,12 +135,14 @@ class OrdemController extends Controller
         $ordens = Ordem::with('cliente')->where('id', $ordem->id)->first();
         $tecnicos = User::where('role', 3)->orWhere('role', 1)->where('status', 1)->get();
         $produtos = Produto::get();
+        $gerais = Geral::first();
         return Inertia::render('Ordens/edit', [
             'ordens' => $ordens, 
             'tecnicos' => $tecnicos, 
             'produtos' => $produtos, 
             'ordemProduto' => $ordem->produtos, 
-            'currentPage' => $page
+            'currentPage' => $page,
+            'gerais' => $gerais,
             ]
         );
     }

@@ -12,9 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('gerais', function (Blueprint $table) {
-            $table->id();            
+            $table->id();
             $table->text('bgimage')->nullable();
             $table->string('bgcolor')->nullable();
+            $table->string('equtipo')->nullable();
+            $table->string('equestado')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

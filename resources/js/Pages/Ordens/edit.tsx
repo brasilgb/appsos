@@ -49,8 +49,11 @@ const EditOrdem = ({
     produtos,
     ordemProduto,
     currentPage,
+    gerais
 }: any) => {
     const { setShowModalParts, sendOrderParts, setSendOrderParts } = useAppContext();
+    const equtipo = gerais?.equtipo ? gerais?.equtipo?.split(";") : [];
+    const equestado = gerais?.equestado ? gerais?.equestado?.split(";") : [];
     const { flash, errors } = usePage().props;
     const [valueInputPecas, setValueInputPecas] = useState<any>([]);
     const [valueInputValPecas, setValueInputValPecas] = useState<any>("0");
@@ -238,31 +241,34 @@ const EditOrdem = ({
                                             />
                                         </div>
                                         <div className="flex flex-col col-span-2">
-                                            <label
-                                                className="label-form"
-                                                htmlFor="equipamento"
-                                            >
-                                                Tipo de equipamento
-                                            </label>
-                                            <input
-                                                id="equipamento"
-                                                type="text"
-                                                value={data.equipamento}
-
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "equipamento",
-                                                        e.target.value,
-                                                    )
-                                                }
-                                                className="input-form"
-                                            />
-                                            {errors.equipamento && (
-                                                <div className="text-sm text-red-500">
-                                                    {errors.equipamento}
-                                                </div>
-                                            )}
-                                        </div>
+                                        <label
+                                            className="label-form"
+                                            htmlFor="equipamento"
+                                        >
+                                            Tipo de equipamento
+                                        </label>
+                                        <select
+                                            id="equipamento"
+                                            value={data.equipamento}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "equipamento",
+                                                    e.target.value,
+                                                )
+                                            }
+                                            className="input-form"
+                                        >
+                                            <option value="">Selecione o tipo de equipamento</option>
+                                            {equtipo.map((tipo: any, idx: number) => (
+                                                <option value={tipo}>{tipo}</option>
+                                            ))}
+                                        </select>
+                                        {errors.equipamento && (
+                                            <div className="text-red-500">
+                                                {errors.equipamento}
+                                            </div>
+                                        )}
+                                    </div>
                                     </div>
 
                                     <div className="grid grid-cols-4 gap-4 mt-6">
@@ -352,24 +358,30 @@ const EditOrdem = ({
                                         </div>
 
                                         <div className="flex flex-col">
-                                            <label
-                                                className="label-form"
-                                                htmlFor="estado"
+                                        <label
+                                            className="label-form"
+                                            htmlFor="estado"
+                                        >
+                                            Estado do equipamento
+                                        </label>
+                                        <select
+                                            id="estado"
+                                            value={data.estado}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "estado",
+                                                    e.target.value,
+                                                )
+                                            }
+                                            className="input-form"
                                             >
-                                                Estado do equipamento
-                                            </label>
-                                            <textarea
-                                                id="estado"
-                                                value={data.estado}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "estado",
-                                                        e.target.value,
-                                                    )
-                                                }
-                                                className="input-form"
-                                            />
-                                        </div>
+                                            <option value="">Selecione o estado equipamento</option>
+                                            {equestado.map((estado: any, idx: number) => (
+                                                <option value={estado}>{estado}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+
                                         <div className="flex flex-col">
                                             <label
                                                 className="label-form"
@@ -438,7 +450,7 @@ const EditOrdem = ({
                                                         <button
                                                             title="Inserir peças"
                                                             type="button"
-                                                            className="bg-blue-700 hover:bg-blue-700/90 py-2.5 px-3 rounded-r-md rounded-b-none shadow text-gray-50 h-10"
+                                                            className="bg-blue-700 hover:bg-blue-700/90 py-2.5 px-3 rounded-t-md rounded-l-none  shadow text-gray-50 h-10"
                                                             onClick={() => setShowModalParts(true)}
                                                         >
                                                             <FaMemory size={22} />

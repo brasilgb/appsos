@@ -16,7 +16,10 @@ return new class extends Migration
             $table->text('recebimento')->nullable();
             $table->text('entrega')->nullable();
             $table->text('orcamento')->nullable();
-            $table->text('checklist')->nullable();
+            $table->text('checkmobile')->nullable();
+            $table->text('checkpc')->nullable();
+            $table->text('checknote')->nullable();
+            $table->text('checkoutros')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
