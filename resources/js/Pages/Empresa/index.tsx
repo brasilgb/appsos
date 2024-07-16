@@ -1,22 +1,18 @@
-import { BackButton, SaveButton } from "@/Components/Buttons";
+import { SaveButton } from "@/Components/Buttons";
 import {
     Card,
     CardBody,
     CardContainer,
     CardFooter,
-    CardHeader,
-    CardHeaderContent,
 } from "@/Components/Card";
 import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { Head, router, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
-import React from "react";
 import {
     maskCep,
     maskCnpj,
-    maskCpfCnpj,
     maskPhone,
     unMask,
 } from "@/Utils/mask";
@@ -94,8 +90,8 @@ const Impressoes = ({ empresa }: any) => {
     };
 
     return (
-        <AuthLayout>            
-        <Head title="Empresa" />
+        <AuthLayout>
+            <Head title="Empresa" />
             <Card>
                 <HeaderContent>
                     <TitleTop>

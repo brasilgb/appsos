@@ -34,7 +34,8 @@ import React, { Fragment } from "react";
 import { IoPeopleSharp } from "react-icons/io5";
 
 const Clientes = ({ clientes }: any) => {
-    const { flash } = usePage().props;
+    const { flash, ziggy } = usePage().props;
+    const { cl } = (ziggy as any).query
 
     return (
         <AuthLayout>

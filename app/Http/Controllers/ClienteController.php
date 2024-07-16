@@ -22,25 +22,31 @@ class ClienteController extends Controller
             "result" => $clientes
         ];
     }
-
+    
     /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request)
-    {
-        $search = $request->get('q');
+    * Display a listing of the resource.
+    */
+   public function index(Request $request)
+   {
+       $search = $request->get('q');
+       $cl = $request->get('cl');
 
-        $query = Cliente::with('ordens')->orderBy('id', 'DESC');
+       $query = Cliente::with('ordens')->orderBy('id', 'DESC');
 
-        if ($search) {
-            $query->where('nome', 'like', '%' . $search . '%')
-                ->orWhere('cpf', 'like', '%' . $search . '%');
-        }
+       if ($search) {
+           $query->where('nome', 'like', '%' . $search . '%')
+               ->orWhere('cpf', 'like', '%' . $search . '%');
+       }
 
-        $clientes = $query->paginate(12);
+       if ($cl) {
+           $query->where('id', $cl);
+       }
+       
+       $clientes = $query->paginate(5)->withQueryString();
+       $clientes->appends(['p' => $search]);
 
-        return Inertia::render('Clientes/index', ["clientes" => $clientes]);
-    }
+       return Inertia::render('Clientes/index', ["clientes" => $clientes]);
+   }
 
     /**
      * Show the form for creating a new resource.

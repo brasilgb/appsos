@@ -151,7 +151,7 @@ const Gerais = ({ geral }: any) => {
                                         rows={2}
                                     />
                                 </div>
-
+                                {/* 
                                 <div className="flex flex-col mt-6">
                                     <label
                                         className="label-form"
@@ -168,8 +168,7 @@ const Gerais = ({ geral }: any) => {
                                         className="input-form"
                                         rows={2}
                                     />
-                                </div>
-
+                                </div> */}
                             </div>
                         </CardBody>
                         <CardFooter>

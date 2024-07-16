@@ -367,22 +367,17 @@ const EditOrdem = ({
                                             >
                                                 Estado do equipamento
                                             </label>
-                                            <select
-                                                id="estado"
-                                                value={data.estado}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "estado",
-                                                        e.target.value,
-                                                    )
-                                                }
-                                                className="input-form"
-                                            >
-                                                <option value="">Selecione o estado equipamento</option>
-                                                {equestado.map((estado: any, idx: number) => (
-                                                    <option value={estado}>{estado}</option>
-                                                ))}
-                                            </select>
+                                            <textarea
+                                            id="estado"
+                                            value={data.estado}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "estado",
+                                                    e.target.value,
+                                                )
+                                            }
+                                            className="input-form"
+                                        />
                                         </div>
 
                                         <div className="flex flex-col">

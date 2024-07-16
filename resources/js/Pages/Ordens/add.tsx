@@ -273,7 +273,7 @@ const AddOrdem = ({ clientes, ordem, gerais }) => {
                                             </div>
                                         )}
                                     </div>
-                                    
+
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
@@ -281,7 +281,7 @@ const AddOrdem = ({ clientes, ordem, gerais }) => {
                                         >
                                             Estado do equipamento
                                         </label>
-                                        <select
+                                        <textarea
                                             id="estado"
                                             value={data.estado}
                                             onChange={(e) =>
@@ -291,12 +291,7 @@ const AddOrdem = ({ clientes, ordem, gerais }) => {
                                                 )
                                             }
                                             className="input-form"
-                                            >
-                                            <option value="">Selecione o estado do equipamento</option>
-                                            {equestado.map((estado: any, idx: number) => (
-                                                <option value={estado}>{estado}</option>
-                                            ))}
-                                        </select>
+                                        />
                                     </div>
                                 </div>
 

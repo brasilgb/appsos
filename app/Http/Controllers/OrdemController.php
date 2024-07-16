@@ -24,7 +24,7 @@ class OrdemController extends Controller
     use HttpResponses;
 
     // Display and linting order for id
-    public function allOrder() 
+    public function allOrder()
     {
         $dashData = [
             'numorder' => count(Ordem::get()),
@@ -39,9 +39,9 @@ class OrdemController extends Controller
             'result' => $dashData
         ];
     }
-  
+
     // Display and linting order for id
-    public function getOrder($order) 
+    public function getOrder($order)
     {
         $query = Ordem::where('id', $order)->with('cliente')->get();
         return [
@@ -51,7 +51,7 @@ class OrdemController extends Controller
     }
 
     // Display and listing customers for id order
-    public function getOrderCli($customer) 
+    public function getOrderCli($customer)
     {
         $query = Ordem::where('cliente_id', $customer)->with('cliente')->get();
         return [
@@ -78,7 +78,8 @@ class OrdemController extends Controller
             $query->where('cliente_id', $oc);
         }
 
-        $ordens = $query->paginate(12);
+        $ordens = $query->paginate(12)->withQueryString();
+        $ordens->appends(['p' => $search, 'oc' => $oc]);
         $whats = Whats::orderBy('id', 'DESC')->first();
         $printers = Impressao::orderBy('id', 'DESC')->first();
         return Inertia::render('Ordens/index', ["ordens" => $ordens, 'whats' => $whats, 'printers' => $printers]);
@@ -96,14 +97,14 @@ class OrdemController extends Controller
 
         return Inertia::render('Ordens/add', ['clientes' => $clientes, 'ordem' => $ordem, 'gerais' => $gerais]);
     }
-    
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         $data = $request->all();
-// dd($request->status);
+        // dd($request->status);
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido'
         ];
@@ -136,13 +137,15 @@ class OrdemController extends Controller
         $tecnicos = User::where('role', 3)->orWhere('role', 1)->where('status', 1)->get();
         $produtos = Produto::get();
         $gerais = Geral::first();
-        return Inertia::render('Ordens/edit', [
-            'ordens' => $ordens, 
-            'tecnicos' => $tecnicos, 
-            'produtos' => $produtos, 
-            'ordemProduto' => $ordem->produtos, 
-            'currentPage' => $page,
-            'gerais' => $gerais,
+        return Inertia::render(
+            'Ordens/edit',
+            [
+                'ordens' => $ordens,
+                'tecnicos' => $tecnicos,
+                'produtos' => $produtos,
+                'ordemProduto' => $ordem->produtos,
+                'currentPage' => $page,
+                'gerais' => $gerais,
             ]
         );
     }
