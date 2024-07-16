@@ -292,7 +292,7 @@ const AddOrdem = ({ clientes, ordem, gerais }) => {
                                             }
                                             className="input-form"
                                             >
-                                            <option value="">Selecione o estado equipamento</option>
+                                            <option value="">Selecione o estado do equipamento</option>
                                             {equestado.map((estado: any, idx: number) => (
                                                 <option value={estado}>{estado}</option>
                                             ))}
