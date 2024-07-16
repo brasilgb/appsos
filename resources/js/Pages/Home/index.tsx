@@ -90,7 +90,7 @@ const Home = ({ dashdata, statusorder }: any) => {
                                 <IoList size={20} />
                                 <h1 className="text-sm uppercase font-medium">Orçamentos gerados</h1>
                             </div>
-                            <div className="grid md:grid-cols-5 gap-2 text-center">
+                            <div className="grid md:grid-cols-5 gap-2 text-center max-h-96 overflow-y-auto">
                                 {statusorder?.gerados?.map((gerado: any, idx: number) => (
                                     <Link
                                         href={`ordens/${gerado.id}`}
@@ -106,7 +106,7 @@ const Home = ({ dashdata, statusorder }: any) => {
                                 <IoList size={20} />
                                 <h1 className="text-sm uppercase font-medium">Orçamentos aprovados</h1>
                             </div>
-                            <div className="grid md:grid-cols-5 gap-2 text-center">
+                            <div className="grid md:grid-cols-5 gap-2 text-center max-h-96 overflow-y-auto">
                                 {statusorder?.aprovados?.map((gerado: any, idx: number) => (
                                     <Link
                                         href={`ordens/${gerado.id}`}
@@ -122,7 +122,7 @@ const Home = ({ dashdata, statusorder }: any) => {
                                 <IoList size={20} />
                                 <h1 className="text-sm uppercase font-medium">Serviços concluídos <span className="text-cyan-600">(CA)</span> <span className="text-amber-500">(CN)</span></h1>
                             </div>
-                            <div className="grid md:grid-cols-5 gap-2 text-center">
+                            <div className="grid md:grid-cols-5 gap-2 text-center max-h-96 overflow-y-auto">
                                 {statusorder?.concluidosca?.map((gerado: any, idx: number) => (
                                     <Link
                                         href={`ordens/${gerado.id}`}
@@ -144,7 +144,7 @@ const Home = ({ dashdata, statusorder }: any) => {
                                 <IoList size={20} />
                                 <h1 className="text-sm uppercase font-medium">Visitas agendadas</h1>
                             </div>
-                            <div className="grid md:grid-cols-5 gap-2 text-center">
+                            <div className="grid md:grid-cols-5 gap-2 text-center max-h-96 overflow-y-auto">
                                 {statusorder?.agendados?.map((agenda: any, idx: number) => (
                                     <Link
                                         href={`agendas/${agenda.id}`}
