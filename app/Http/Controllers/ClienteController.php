@@ -29,7 +29,6 @@ class ClienteController extends Controller
    public function index(Request $request)
    {
        $search = $request->get('q');
-       $cl = $request->get('cl');
 
        $query = Cliente::with('ordens')->orderBy('id', 'DESC');
 
@@ -37,13 +36,8 @@ class ClienteController extends Controller
            $query->where('nome', 'like', '%' . $search . '%')
                ->orWhere('cpf', 'like', '%' . $search . '%');
        }
-
-       if ($cl) {
-           $query->where('id', $cl);
-       }
        
        $clientes = $query->paginate(5)->withQueryString();
-       $clientes->appends(['p' => $search]);
 
        return Inertia::render('Clientes/index', ["clientes" => $clientes]);
    }

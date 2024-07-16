@@ -79,7 +79,6 @@ class OrdemController extends Controller
         }
 
         $ordens = $query->paginate(12)->withQueryString();
-        $ordens->appends(['p' => $search, 'oc' => $oc]);
         $whats = Whats::orderBy('id', 'DESC')->first();
         $printers = Impressao::orderBy('id', 'DESC')->first();
         return Inertia::render('Ordens/index', ["ordens" => $ordens, 'whats' => $whats, 'printers' => $printers]);
