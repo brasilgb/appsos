@@ -37,7 +37,7 @@ class ClienteController extends Controller
                ->orWhere('cpf', 'like', '%' . $search . '%');
        }
        
-       $clientes = $query->paginate(5)->withQueryString();
+       $clientes = $query->paginate(12)->withQueryString();
 
        return Inertia::render('Clientes/index', ["clientes" => $clientes]);
    }
