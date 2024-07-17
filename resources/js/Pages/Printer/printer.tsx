@@ -102,9 +102,7 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                                 <span className="font-semibold mr-1">
                                     Endereço:
                                 </span>
-                                {ordem?.cliente.endereco}
-                                {ordem?.cliente.bairro}
-                                {ordem?.cliente.cidade}
+                                {ordem?.cliente.endereco} - {ordem?.cliente.bairro} - {ordem?.cliente.cidade}
                             </h1>
                         </div>
                         <div className="flex-1">
@@ -117,7 +115,6 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                             <h1>
                                 <span className="font-semibold mr-1">Contato:</span>
                                 {ordem?.cliente.telefone}
-                                {ordem?.cliente.email}
                             </h1>
                         </div>
                     </div>
