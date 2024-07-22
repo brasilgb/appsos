@@ -95,7 +95,7 @@ const Home = ({ dashdata, statusorder }: any) => {
                                     <Link
                                         href={`ordens/${gerado.id}`}
                                         key={idx}
-                                        className="bg-rose-600 hover:bg-rose-600/80 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
+                                        className="bg-rose-600 hover:bg-rose-600/90 text-sm font-medium text-gray-50 rounded shadow border-2 border-gray-50 py-1">
                                         {gerado.id}
                                     </Link>
                                 ))}
@@ -111,7 +111,7 @@ const Home = ({ dashdata, statusorder }: any) => {
                                     <Link
                                         href={`ordens/${gerado.id}`}
                                         key={idx}
-                                        className="bg-blue-500 hover:bg-blue-500/80 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
+                                        className="bg-blue-500 hover:bg-blue-500/90 text-sm font-medium text-gray-50 rounded shadow border-2 border-gray-50 py-1">
                                         {gerado.id}
                                     </Link>
                                 ))}
@@ -126,14 +126,14 @@ const Home = ({ dashdata, statusorder }: any) => {
                                 {statusorder?.concluidosca?.map((gerado: any, idx: number) => (
                                     <Link
                                         href={`ordens/${gerado.id}`}
-                                        key={idx} className="bg-cyan-600 hover:bg-cyan-600/80 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
+                                        key={idx} className="bg-cyan-600 hover:bg-cyan-600/90 text-sm font-medium text-gray-50 rounded shadow border-2 border-gray-50 py-1">
                                         {gerado.id}
                                     </Link>
                                 ))}
                                 {statusorder?.concluidoscn?.map((gerado: any, idx: number) => (
                                     <Link
                                         href={`ordens/${gerado.id}`}
-                                        key={idx} className="bg-amber-500 hover:bg-amber-500/80 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
+                                        key={idx} className="bg-amber-500 hover:bg-amber-500/90 text-sm font-medium text-gray-50 rounded shadow border-2 border-gray-50 py-1">
                                         {gerado.id}
                                     </Link>
                                 ))}
@@ -148,7 +148,7 @@ const Home = ({ dashdata, statusorder }: any) => {
                                 {statusorder?.agendados?.map((agenda: any, idx: number) => (
                                     <Link
                                         href={`agendas/${agenda.id}`}
-                                        key={idx} className="bg-rose-600 hover:bg-rose-600/80 text-sm font-medium text-gray-50 rounded shadow-sm border border-white py-1">
+                                        key={idx} className="bg-rose-600 hover:bg-rose-600/90 text-sm font-medium text-gray-50 rounded shadow border-2 border-gray-50 py-1">
                                         {agenda.id}
                                     </Link>
                                 ))}

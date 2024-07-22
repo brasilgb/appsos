@@ -14,6 +14,8 @@ import {
 } from "react-icons/io5";
 import { TbEdit } from "react-icons/tb";
 import { FaCalendarDays, FaRegTrashCan } from "react-icons/fa6";
+import { Inertia } from "@inertiajs/inertia";
+import { MdJavascript } from "react-icons/md";
 
 interface ButtonsProps {
     url?: any;
@@ -33,7 +35,7 @@ export const AddButton = ({ url, label, disabled = false }: ButtonsProps) => {
 
     return (
         <Link
-            className={`flex items-center justify-center ${!disabled ? 'bg-blue-700 hover:bg-blue-700/90' : 'bg-blue-700/50'}  py-1.5 px-3 rounded-md shadow text-gray-50 self-end`}
+            className={`flex items-center justify-center ${!disabled ? 'bg-blue-700 hover:bg-blue-700/90' : 'bg-blue-700/50'}  py-1.5 px-3 rounded-md shadow border-2 border-gray-50 text-gray-50 self-end`}
             href={url}
             as="button"
             type="button"
@@ -57,7 +59,7 @@ export const MessageLidaButton = ({ url, id, sttmessage }: ButtonsProps) => {
 
     return (
         <Link
-            className="flex items-center justify-center bg-gray-50 hover:bg-gray-100 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+            className="flex items-center justify-center bg-gray-100 hover:bg-gray-100/90 py-1.5 px-3 rounded-md shadow border-2 border-gray-50 text-gray-50 self-end"
             href="#"
             onClick={handleMessageRead}
             as="button"
@@ -73,16 +75,21 @@ export const MessageLidaButton = ({ url, id, sttmessage }: ButtonsProps) => {
 };
 
 export const BackButton = ({ url, label }: ButtonsProps) => {
+    let back = function()
+    {
+        window.history.back();
+    }
     return (
-        <Link
-            className="flex items-center justify-center bg-blue-700 hover:bg-blue-600 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
-            href={url}
-            as="button"
+        <button
+            className="flex items-center justify-center bg-blue-700 hover:bg-blue-700/90 border-2 border-gray-50 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+            // href={url}
+            onClick={back}
+            // as="button"
             type="button"
         >
             <IoArrowBackOutline size={18} />
             <span>{label}</span>
-        </Link>
+        </button>
     );
 };
 
@@ -91,7 +98,7 @@ export const PrintButton = ({ url, status }: ButtonsProps) => {
     return (
         <>
             <button
-                className="relative flex items-center justify-center bg-zinc-600 hover:bg-zinc-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+                className="relative flex items-center justify-center bg-zinc-600 hover:bg-zinc-600/90 border-2 border-gray-50 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
                 onClick={() => setOpenMenuButton(!openMenuButton)}
                 title={`Imprimir recibo`}
             >
@@ -111,7 +118,7 @@ export const PrintButton = ({ url, status }: ButtonsProps) => {
                         </div>
                         <ul className="p-2 uppercase text-xs font-medium flex flex-col gap-2">
                             <li
-                                className={`${status == "1" ? "bg-blue-quatro hover:bg-blue-quatro/90 text-white" : "text-gray-200"} rounded-md text-center border border-white shadow transition-all duration-300`}
+                                className={`${status == "1" ? "bg-blue-quatro hover:bg-blue-quatro/90 text-white" : "text-gray-200"} rounded-md text-center border-2 border-gray-50 shadow transition-all duration-300`}
                             >
                                 <Link
                                     disabled={status == "1" ? false : true}
@@ -123,7 +130,7 @@ export const PrintButton = ({ url, status }: ButtonsProps) => {
                                 </Link>
                             </li>
                             <li
-                                className={`${status == "3" || status == "4" ? "bg-blue-quatro hover:bg-blue-quatro/90 text-white" : "text-gray-200"} rounded-md text-center border border-white shadow transition-all duration-300`}
+                                className={`${status == "3" || status == "4" ? "bg-blue-quatro hover:bg-blue-quatro/90 text-white" : "text-gray-200"} rounded-md text-center border-2 border-gray-50 shadow transition-all duration-300`}
                             >
                                 <Link
                                     disabled={status == "3" || status == "4" ? false : true}
@@ -135,7 +142,7 @@ export const PrintButton = ({ url, status }: ButtonsProps) => {
                                 </Link>
                             </li>
                             <li
-                                className={`${status == "8" ? "bg-blue-quatro hover:bg-blue-quatro/90 text-white" : "text-gray-200"} rounded-md text-center border border-white shadow transition-all duration-300`}
+                                className={`${status == "8" ? "bg-blue-quatro hover:bg-blue-quatro/90 text-white" : "text-gray-200"} rounded-md text-center border-2 border-gray-50 shadow transition-all duration-300`}
                             >
                                 <Link
                                     disabled={status == "8" ? false : true}
@@ -147,7 +154,7 @@ export const PrintButton = ({ url, status }: ButtonsProps) => {
                                 </Link>
                             </li>
                             <li
-                                className={`${status == "6" || status == "7" ? "bg-blue-quatro hover:bg-blue-quatro/90 text-white" : "text-gray-200"} rounded-md text-center border border-white shadow transition-all duration-300`}
+                                className={`${status == "6" || status == "7" ? "bg-blue-quatro hover:bg-blue-quatro/90 text-white" : "text-gray-200"} rounded-md text-center border-2 border-gray-50 shadow transition-all duration-300`}
                             >
                                 <Link
                                     disabled={status == "6" || status == "7" ? false : true}
@@ -169,7 +176,7 @@ export const PrintButton = ({ url, status }: ButtonsProps) => {
 export const WhatsAppButton = ({ url }: ButtonsProps) => {
     return (
         <a
-            className="flex items-center justify-center bg-green-600 hover:bg-green-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+            className="flex items-center justify-center bg-green-600 hover:bg-green-600/90 border-2 border-gray-50 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
             href={url}
             target="_blank"
             title={`Enviar mensagem`}
@@ -182,7 +189,7 @@ export const WhatsAppButton = ({ url }: ButtonsProps) => {
 export const ImagesAppButton = ({ url }: ButtonsProps) => {
     return (
         <Link
-            className="flex items-center justify-center bg-sky-700 hover:bg-sky-600 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+            className="flex items-center justify-center bg-sky-700 hover:bg-sky-700/90 border-2 border-gray-50 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
             href={`/imagens?or=${url}`}
             as="button"
             type="button"
@@ -196,7 +203,7 @@ export const ImagesAppButton = ({ url }: ButtonsProps) => {
 export const AgendaClienteButton = ({ url }: ButtonsProps) => {
     return (
         <Link
-            className="flex items-center justify-center bg-teal-600 hover:bg-teal-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+            className="flex items-center justify-center bg-teal-600 hover:bg-teal-600/90 border-2 border-gray-50 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
             href={url}
             as="button"
             type="button"
@@ -210,7 +217,7 @@ export const AgendaClienteButton = ({ url }: ButtonsProps) => {
 export const OrderButton = ({ url }: ButtonsProps) => {
     return (
         <Link
-            className="flex items-center justify-center bg-zinc-600 hover:bg-zinc-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+            className="flex items-center justify-center bg-zinc-600 hover:bg-zinc-600/90 border-2 border-gray-50 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
             href={url}
             as="button"
             type="button"
@@ -224,7 +231,7 @@ export const OrderButton = ({ url }: ButtonsProps) => {
 export const EditButton = ({ url, param }: ButtonsProps) => {
     return (
         <Link
-            className="flex items-center justify-center bg-orange-600 hover:bg-orange-500 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+            className="flex items-center justify-center bg-orange-600 hover:bg-orange-600/90 border-2 border-gray-50 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
             href={url}
             as="button"
             type="button"
@@ -280,7 +287,7 @@ export const DeleteButton = ({ identify, param, url, disabled = false }: Buttons
                     <div className="flex items-center justify-end gap-3 p-3 mt-2">
                         <button
                             onClick={() => setShowConfirme(false)}
-                            className="py-2 px-3 flex-1 bg-zinc-600 hover:bg-zinc-700 rounded-md"
+                            className="py-2 px-3 flex-1 bg-zinc-600 hover:bg-zinc-600/90 border-2 border-gray-50 rounded-md"
                         >
                             <span className="text-sm text-gray-50">
                                 Cancelar
@@ -288,7 +295,7 @@ export const DeleteButton = ({ identify, param, url, disabled = false }: Buttons
                         </button>
                         <button
                             onClick={onsubmit}
-                            className="py-2 px-3 flex-1 bg-red-500 hover:bg-red-600 rounded-md"
+                            className="py-2 px-3 flex-1 bg-red-500 hover:bg-red-500/90 border-2 border-gray-50 rounded-md"
                         >
                             <span className="text-sm text-gray-50">
                                 Excluir
@@ -304,7 +311,7 @@ export const DeleteButton = ({ identify, param, url, disabled = false }: Buttons
         <>
             {showConfirme && <ModalDelete />}
             <button
-                className={`flex items-center justify-center ${!disabled ? 'bg-red-600 hover:bg-red-500/90' : 'bg-red-600/50'} py-1.5 px-3 rounded-md shadow text-gray-50 self-end`}
+                className={`flex items-center justify-center ${!disabled ? 'bg-red-600 hover:bg-red-500/90' : 'bg-red-600/50'} border-2 border-gray-50 py-1.5 px-3 rounded-md shadow text-gray-50 self-end`}
                 onClick={() => setShowConfirme(true)}
                 title={`Deletar registro ${param}`}
                 disabled={disabled}
@@ -319,7 +326,7 @@ export const SaveButton = ({ processing, value = "Salvar" }: ButtonsProps) => {
     return (
         <div className="flex justify-end">
             <button
-                className="flex items-center justify-center bg-blue-700 hover:bg-blue-600 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+                className="flex items-center justify-center bg-blue-700 hover:bg-blue-700/90 border-2 border-gray-50 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
                 disabled={processing}
                 type="submit"
             >
