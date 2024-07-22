@@ -26,7 +26,7 @@ class HomeController extends Controller
             'numord' => count(Ordem::get()),
             'numpro' => count(Produto::get()),
             'numage' => count(Agenda::get()),
-            
+            'nummen' => count(Mensagem::get()),
         ];
         return Inertia::render('Home/index', ['dashdata' => $dashData, 'statusorder' => $statusOrder]);
     }
