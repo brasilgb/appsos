@@ -544,7 +544,7 @@ const EditOrdem = ({
                                                 className="input-form"
                                             >
                                                 <option value="">
-                                                    Slecione o técnico
+                                                    Selecione o técnico
                                                 </option>
                                                 {tecnicos.map((tecnico: any) => (
                                                     <option
