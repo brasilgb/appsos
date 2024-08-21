@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\Models\Geral;
+use App\Models\Ordem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -20,8 +22,9 @@ class GeralController extends Controller
         }
         $query = Geral::orderBy("id", "DESC")->first();
         $geral = Geral::where("id", $query->id)->first();
-
-        return Inertia::render('Gerais/index', ["geral" => $geral]);
+        $clientes = Cliente::get(["nome", "cpf", "email"]);
+        $ordens = Ordem::get(['id','detalhes','orcamento','status']);
+        return Inertia::render('Gerais/index', ["geral" => $geral, 'clientes' => $clientes, 'ordens' => $ordens]);
     }
 
     /**

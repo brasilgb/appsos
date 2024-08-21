@@ -1,3 +1,4 @@
+import apios from "@/bootstrap";
 import { SaveButton } from "@/Components/Buttons";
 import { Card, CardBody, CardContainer, CardFooter } from "@/Components/Card";
 import FlashMessage from "@/Components/FlashMessage";
@@ -5,9 +6,10 @@ import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
 import { Head, router, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
-import React from "react";
+import React, { useState } from "react";
 import { AiFillTags } from "react-icons/ai";
-import { IoClose } from "react-icons/io5";
+import { IoClose, IoCloudUpload, IoInformationCircleOutline, IoRefresh } from "react-icons/io5";
+import { RiLoader2Fill } from "react-icons/ri";
 
 interface GeraisProps {
     bgimage: any;
@@ -16,8 +18,12 @@ interface GeraisProps {
     equestado: string;
 }
 
-const Gerais = ({ geral }: any) => {
+const Gerais = ({ geral, clientes, ordens }: any) => {
     const { flash } = usePage().props;
+    const [loading, setLoading] = useState<boolean>(false);
+    const [messageUploadCustomer, setMessageUploadCustomer] = useState<boolean>(false);
+    const [messageUploadOrder, setMessageUploadOrder] = useState<boolean>(false);
+
     const {
         data,
         setData,
@@ -49,6 +55,29 @@ const Gerais = ({ geral }: any) => {
         e.preventDefault();
         destroy(route("gerais.destroy", geral.id));
     };
+
+    const handleUpDataSite = (async () => {
+        setLoading(true);
+        await apios.post('customers', {
+            "clientes": clientes
+        })
+            .then((res) => {
+                setMessageUploadCustomer(res.data.response.message);
+                setLoading(false);
+            }).catch((err) => {
+                console.log(err);
+            });
+        await apios.post('orders', {
+            "ordens": ordens
+        })
+            .then((res) => {
+                setMessageUploadOrder(res.data.response.message);
+                setLoading(false);
+            }).catch((err) => {
+                console.log(err);
+            });
+    });
+
     return (
         <AuthLayout>
             <Head title="Gerais" />
@@ -62,10 +91,31 @@ const Gerais = ({ geral }: any) => {
                         links={[{ url: null, label: "Configurações gerais" }]}
                     />
                 </HeaderContent>
-                <CardContainer>
+                <CardContainer className="">
                     <FlashMessage message={flash} />
                     <form onSubmit={handleSubmit} autoComplete="off">
-                        <CardBody className=" border-y border-gray-100">
+                        <CardBody className=" border-y border-gray-100 rounded-t-md">
+                            <div className="flex items-center justify-start gap-2 px-3 py-6">
+                                <h1 className="text-base text-gray-600">Upload de dados ao website de informações sobre clientes e ordens de serviços</h1>
+                                <button
+                                    type="button"
+                                    onClick={() => handleUpDataSite()}
+                                    className="flex items-center justify-center gap-1 px-3 h-10 bg-blue-600 hover:blue-600/90 text-gray-50 shadow-md rounded-md"
+                                >
+
+                                    {loading ? <RiLoader2Fill size={22} className="animate-spin" /> : <><IoCloudUpload size={22} /> <span>Upload</span></>}
+                                </button>
+                            </div>
+                            {messageUploadCustomer &&
+                                <div className="flex items-center bg-green-100 p-4 mb-0 text-sm text-green-700 border border-green-200 gap-1">
+                                    <IoInformationCircleOutline size={20} />{messageUploadCustomer}
+                                </div>
+                            }
+                            {messageUploadOrder &&
+                                <div className="flex items-center bg-green-100 p-4 mb-0 text-sm text-green-700 border border-green-200 gap-1">
+                                    <IoInformationCircleOutline size={20} />{messageUploadOrder}
+                                </div>
+                            }
                             {geral.bgimage && (
                                 <div className="relative w-48">
                                     <div className="absolute rounded-full w-5 h-5 bg-red-500 text-white top-0 right-0">
