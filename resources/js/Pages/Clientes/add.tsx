@@ -1,3 +1,4 @@
+import apios from "@/bootstrap";
 import { BackButton, SaveButton } from "@/Components/Buttons";
 import {
     Card,
@@ -34,9 +35,22 @@ const AddCliente = ({ cliente }) => {
         obs: "",
     });
 
-    function handleSubmit(e: any) {
+    async function handleSubmit(e: any) {
         e.preventDefault();
         post(route("clientes.store"));
+        await apios.post('customers', {
+            "clientes": [{
+                "id": data.id,
+                "nome": data.nome,
+                "cpf": data.cpf,
+                "email": data.email
+            }]
+        })
+            .then((res) => {
+                console.log(res.data.response.message);
+            }).catch((err) => {
+                console.log(err);
+            });
     }
 
     const getCep = (cep: string) => {

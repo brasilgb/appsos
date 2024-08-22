@@ -1,3 +1,4 @@
+import apios from "@/bootstrap";
 import { BackButton, SaveButton } from "@/Components/Buttons";
 import {
     Card,
@@ -33,9 +34,19 @@ const AddOrdem = ({ clientes, ordem, gerais }) => {
         previsao: "",
         obs: "",
     });
-    function handleSubmit(e: any) {
+    async function handleSubmit(e: any) {
         e.preventDefault();
         post(route("ordens.store"));
+        await apios.post('orders', {
+            "ordens": [{
+
+            }]
+        })
+            .then((res) => {
+                console.log(res.data.response.message);
+            }).catch((err) => {
+                console.log(err);
+            });
     }
 
     const handleSearch = (value: any) => {
@@ -49,6 +60,7 @@ const AddOrdem = ({ clientes, ordem, gerais }) => {
             setFilterSearch([]);
         }
     }, [data]);
+
     const handleChangeCustomer = (id: any, nome: any) => {
         setData((data) => ({ ...data, cliente_id: id }));
         setData((data) => ({ ...data, cliente: nome }));

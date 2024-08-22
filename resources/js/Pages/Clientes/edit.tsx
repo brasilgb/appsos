@@ -1,3 +1,4 @@
+import apios from "@/bootstrap";
 import { BackButton, SaveButton } from "@/Components/Buttons";
 import {
     Card,
@@ -64,9 +65,23 @@ const EditCliente = ({ clientes }: any) => {
         obs: clientes.obs,
     });
 
-    function handleSubmit(e: any) {
+    async function handleSubmit(e: any) {
         e.preventDefault();
         patch(route("clientes.update", clientes.id));
+
+        await apios.post('customers', {
+            "clientes": [{
+                "id": clientes.id,
+                "nome": data.nome,
+                "cpf": data.cpf,
+                "email": data.email
+            }]
+        })
+            .then((res) => {
+                console.log(res.data.response.message);
+            }).catch((err) => {
+                console.log(err);
+            });
     }
 
     const getCep = (cep: string) => {
@@ -87,12 +102,12 @@ const EditCliente = ({ clientes }: any) => {
     };
 
     useEffect(() => {
-        const getCliente = () => {};
+        const getCliente = () => { };
         getCliente();
     }, []);
     return (
-        <AuthLayout>            
-        <Head title="Clientes" />
+        <AuthLayout>
+            <Head title="Clientes" />
             <Card>
                 <HeaderContent>
                     <TitleTop>
@@ -130,7 +145,7 @@ const EditCliente = ({ clientes }: any) => {
                                         <input
                                             id="cpf"
                                             type="text"
-                                            value={data.cpf?maskCpfCnpj(data.cpf):''}
+                                            value={data.cpf ? maskCpfCnpj(data.cpf) : ''}
                                             onChange={(e) =>
                                                 setData("cpf", e.target.value)
                                             }
