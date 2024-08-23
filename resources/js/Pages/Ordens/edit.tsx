@@ -1,3 +1,4 @@
+import apios from "@/bootstrap";
 import { BackButton, SaveButton } from "@/Components/Buttons";
 import {
     Card,
@@ -99,7 +100,7 @@ const EditOrdem = ({
         page: currentPage,
     });
 
-    function handleSubmit(e: any) {
+    async function handleSubmit(e: any) {
         e.preventDefault();
         router.post(`/ordens/${ordens.id}`, {
             _method: "patch",
@@ -125,6 +126,21 @@ const EditOrdem = ({
             obs: data.obs,
             page: currentPage,
         });
+
+        await apios.post('orders', {
+            "ordens": [{
+                "id": data.id,
+                "cliente_id": ordens.cliente_id,
+                "detalhes": data.detalhes,
+                "orcamento": data.descorcamento,
+                "status": data.status
+            }]
+        })
+            .then((res) => {
+                console.log(res.data.response.message);
+            }).catch((err) => {
+                console.log(err);
+            });
     }
 
     useEffect(() => {
@@ -368,16 +384,16 @@ const EditOrdem = ({
                                                 Estado do equipamento
                                             </label>
                                             <textarea
-                                            id="estado"
-                                            value={data.estado}
-                                            onChange={(e) =>
-                                                setData(
-                                                    "estado",
-                                                    e.target.value,
-                                                )
-                                            }
-                                            className="input-form"
-                                        />
+                                                id="estado"
+                                                value={data.estado}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "estado",
+                                                        e.target.value,
+                                                    )
+                                                }
+                                                className="input-form"
+                                            />
                                         </div>
 
                                         <div className="flex flex-col">

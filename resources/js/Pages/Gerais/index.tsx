@@ -19,12 +19,11 @@ interface GeraisProps {
 }
 
 const Gerais = ({ geral, clientes, ordens }: any) => {
-   
+
     const { flash } = usePage().props;
     const [loading, setLoading] = useState<boolean>(false);
     const [messageUploadCustomer, setMessageUploadCustomer] = useState<boolean>(false);
     const [messageUploadOrder, setMessageUploadOrder] = useState<boolean>(false);
-
     const {
         data,
         setData,

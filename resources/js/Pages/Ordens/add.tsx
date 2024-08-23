@@ -37,16 +37,6 @@ const AddOrdem = ({ clientes, ordem, gerais }) => {
     async function handleSubmit(e: any) {
         e.preventDefault();
         post(route("ordens.store"));
-        await apios.post('orders', {
-            "ordens": [{
-
-            }]
-        })
-            .then((res) => {
-                console.log(res.data.response.message);
-            }).catch((err) => {
-                console.log(err);
-            });
     }
 
     const handleSearch = (value: any) => {
@@ -65,7 +55,6 @@ const AddOrdem = ({ clientes, ordem, gerais }) => {
         setData((data) => ({ ...data, cliente_id: id }));
         setData((data) => ({ ...data, cliente: nome }));
         setFilterSearch([]);
-
     };
 
     return (
