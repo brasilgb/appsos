@@ -132,7 +132,8 @@ const EditOrdem = ({
                 "id": data.id,
                 "cliente_id": ordens.cliente_id,
                 "detalhes": data.detalhes,
-                "orcamento": data.descorcamento,
+                "defeito": data.defeito,
+                "descorcamento": data.descorcamento,
                 "status": data.status
             }]
         })

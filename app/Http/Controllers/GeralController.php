@@ -23,7 +23,7 @@ class GeralController extends Controller
         $query = Geral::orderBy("id", "DESC")->first();
         $geral = Geral::where("id", $query->id)->first();
         $clientes = Cliente::get(["id","nome", "cpf", "email"]);
-        $ordens = Ordem::get(['id','cliente_id','detalhes','descorcamento','status']);
+        $ordens = Ordem::get(['id','cliente_id', 'defeito','detalhes','descorcamento','status']);
         return Inertia::render('Gerais/index', ["geral" => $geral, 'clientes' => $clientes, 'ordens' => $ordens]);
     }
 
