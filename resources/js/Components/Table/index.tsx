@@ -9,7 +9,7 @@ interface TableProps {
 export const Table = ({ children, className }: TableProps) => {
     return (
         <div className="overflow-y-auto">
-            <table className={`table-auto md:w-full  ${className} text-sm`}>
+            <table className={`table-fixed md:w-full  ${className} text-sm`}>
                 {children}
             </table>
         </div>
@@ -44,7 +44,7 @@ export const TableHead = ({ children, className }: TableProps) => {
 
 export const TableCell = ({ children, className }: TableProps) => {
     return (
-        <td className={`border-b py-2 px-2 text-gray-500 ${className}`}>
+        <td className={`border-b py-2 px-2 text-gray-500 !whitespace-nowrap ${className}`}>
             {children}
         </td>
     );
