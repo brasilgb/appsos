@@ -17,6 +17,7 @@ import { statusServico } from "@/Utils/dataSelect";
 import { maskMoney, maskMoneyDot, unMask } from "@/Utils/mask";
 import { Head, Link, router, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { FaMemory } from "react-icons/fa6";
 import { IoPeopleSharp, IoPrint, IoTrash } from "react-icons/io5";
@@ -32,7 +33,6 @@ interface ClientesProps {
     previsao: any;
     descorcamento: string;
     valorcamento: string;
-    preorcamento: string;
     pecas: string;
     valpecas: string;
     valservico: string;
@@ -87,8 +87,7 @@ const EditOrdem = ({
         acessorios: ordens.acessorios,
         previsao: ordens.previsao,
         descorcamento: ordens.descorcamento,
-        valorcamento: ordens.valorcamento,
-        preorcamento: ordens.preorcamento,
+        valorcamento: ordens.valorcamento ? ordens.valorcamento : '0',
         pecas: ordens.pecas,
         valpecas: ordens.valpecas ? ordens.valpecas : '0',
         valservico: ordens.valservico ? ordens.valservico : '0',
@@ -113,8 +112,7 @@ const EditOrdem = ({
             acessorios: data.acessorios,
             previsao: data.previsao,
             descorcamento: data.descorcamento,
-            valorcamento: data.valorcamento,
-            preorcamento: data.preorcamento,
+            valorcamento: maskMoneyDot(data.valorcamento.toString()),
             pecas: data.pecas,
             produtos: sendOrderParts.map((produto: any) => (produto.pecaid)),
             valpecas: maskMoneyDot(data.valpecas.toString()),
@@ -134,6 +132,12 @@ const EditOrdem = ({
                 "detalhes": data.detalhes,
                 "defeito": data.defeito,
                 "descorcamento": data.descorcamento,
+                "valorcamento": maskMoneyDot(data.valorcamento.toString()),
+                "valservico": maskMoneyDot(data.valservico.toString()),
+                "custo": maskMoneyDot(data.custo.toString()),
+                "valpecas": maskMoneyDot(data.valpecas.toString()),
+                "dtentrada": moment(ordens.created_at).format("YYYY-MM-DD HH:mm:ss"),
+                "dtentrega": data.status === '8' ? moment().format("YYYY-MM-DD HH:mm:ss") : null,
                 "status": data.status
             }]
         })
@@ -155,8 +159,8 @@ const EditOrdem = ({
         getOrderParts();
     }, [sendOrderParts]);
 
-    const sum = (a: any, b: any) => {
-        return parseInt(unMask(a)) + parseInt(unMask(b));
+    const sum = (a: any, b: any, c: any) => {
+        return parseInt(unMask(a)) + parseInt(unMask(b)) + parseInt(unMask(c));
     }
 
     const handleChange = (selected: any) => {
@@ -187,7 +191,7 @@ const EditOrdem = ({
     }
 
     useEffect(() => {
-        const custo = sum(data.valpecas.toString(), data.valservico.toString());
+        const custo = sum(data.valorcamento.toString(), data.valpecas.toString(), data.valservico.toString());
         setData((data: any) => ({ ...data, custo: custo }));
     }, [data]);
 
@@ -416,6 +420,48 @@ const EditOrdem = ({
                                                 className="input-form"
                                             />
                                         </div>
+                                    </div>           
+
+                                    <div className="grid grid-cols-2 gap-4 mt-6 px-2 py-4 bg-gray-50 rounded-md border">
+                                        <div className="flex flex-col">
+                                            <label
+                                                className="label-form"
+                                                htmlFor="valorcamento"
+                                            >
+                                                Valor orçamento
+                                            </label>
+                                            <input
+                                                id="valorcamento"
+                                                type="text"
+                                                value={maskMoney(data.valorcamento.toString())}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "valorcamento",
+                                                        e.target.value,
+                                                    )
+                                                }
+                                                className="input-form"
+                                            />
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <label
+                                                className="label-form"
+                                                htmlFor="descorcamento"
+                                            >
+                                                Descrição do orçamento
+                                            </label>
+                                            <textarea
+                                                id="descorcamento"
+                                                value={data.descorcamento}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "descorcamento",
+                                                        e.target.value,
+                                                    )
+                                                }
+                                                className="input-form"
+                                            />
+                                        </div>
                                     </div>
 
                                     <div className="grid grid-cols-7 gap-4 mt-6">
@@ -612,46 +658,7 @@ const EditOrdem = ({
                                             </select>
                                         </div>
                                     </div>
-                                    <div className="grid grid-cols-2 gap-4 mt-6">
-                                        <div className="flex flex-col">
-                                            <label
-                                                className="label-form"
-                                                htmlFor="preorcamento"
-                                            >
-                                                Pré-orçamento
-                                            </label>
-                                            <textarea
-                                                id="preorcamento"
-                                                value={data.preorcamento}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "preorcamento",
-                                                        e.target.value,
-                                                    )
-                                                }
-                                                className="input-form"
-                                            />
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <label
-                                                className="label-form"
-                                                htmlFor="descorcamento"
-                                            >
-                                                Descrição do orçamento
-                                            </label>
-                                            <textarea
-                                                id="descorcamento"
-                                                value={data.descorcamento}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "descorcamento",
-                                                        e.target.value,
-                                                    )
-                                                }
-                                                className="input-form"
-                                            />
-                                        </div>
-                                    </div>
+
                                     <div className="grid grid-cols-2 gap-4 mt-6">
                                         <div className="flex flex-col">
                                             <label

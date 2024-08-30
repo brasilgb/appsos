@@ -20,10 +20,8 @@ return new class extends Migration
             $table->text('defeito')->nullable();
             $table->string('estado', 100)->nullable();
             $table->text('acessorios')->nullable();
-            $table->string('orcamento', 50)->nullable();
             $table->text('descorcamento')->nullable();
-            $table->text('preorcamento')->nullable();
-            $table->text('valorcamento')->nullable();
+            $table->decimal('valorcamento', 10,2)->default(0);
             $table->text('detalhes')->nullable(); // servicos executados
             $table->text('pecas')->nullable();
             $table->decimal('valpecas', 10, 2)->default(0);

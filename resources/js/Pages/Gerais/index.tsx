@@ -4,8 +4,10 @@ import { Card, CardBody, CardContainer, CardFooter } from "@/Components/Card";
 import FlashMessage from "@/Components/FlashMessage";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
+import { maskMoneyDot } from "@/Utils/mask";
 import { Head, router, useForm, usePage } from "@inertiajs/react";
 import { InertiaFormProps } from "@inertiajs/react/types/useForm";
+import moment from "moment";
 import React, { useState } from "react";
 import { AiFillTags } from "react-icons/ai";
 import { IoClose, IoCloudUpload, IoInformationCircleOutline, IoRefresh } from "react-icons/io5";
@@ -19,6 +21,21 @@ interface GeraisProps {
 }
 
 const Gerais = ({ geral, clientes, ordens }: any) => {
+//     const myOrder = ordens.map((val: any) => ({
+//         "id": val.id,
+//         "cliente_id": val.cliente_id,
+//         "detalhes": val.detalhes,
+//         "defeito": val.defeito,
+//         "descorcamento": val.descorcamento,
+//         "valorcamento": val.valorcamento ? val.valorcamento : '0',
+//         "valservico": val.valservico ? val.valservico : '0',
+//         "custo": val.custo ? val.custo : '0',
+//         "valpecas": val.valpecas ? val.valpecas : '0',
+//         "dtentrada": moment(val.created_at).format("YYYY-MM-DD HH:mm:ss"),
+//         "dtentrega": val.status === '8' ? moment().format("YYYY-MM-DD HH:mm:ss") : null,
+//         "status": val.status
+//     }));
+//     console.log(myOrder);
 
     const { flash } = usePage().props;
     const [loading, setLoading] = useState<boolean>(false);
@@ -68,7 +85,20 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
                 console.log(err);
             });
         await apios.post('orders', {
-            "ordens": ordens
+            "ordens": {
+                "id": ordens.id,
+                "cliente_id": ordens.cliente_id,
+                "detalhes": ordens.detalhes,
+                "defeito": ordens.defeito,
+                "descorcamento": ordens.descorcamento,
+                "valorcamento": ordens.valorcamento ? ordens.valorcamento : '0',
+                "valservico": ordens.valservico ? ordens.valservico : '0',
+                "custo": ordens.custo ? ordens.custo : '0',
+                "valpecas": ordens.valpecas ? ordens.valpecas : '0',
+                "dtentrada": moment(ordens.created_at).format("YYYY-MM-DD HH:mm:ss"),
+                "dtentrega": ordens.status === '8' ? moment().format("YYYY-MM-DD HH:mm:ss") : null,
+                "status": ordens.status
+            }
         })
             .then((res) => {
                 setMessageUploadOrder(res.data.response.message);

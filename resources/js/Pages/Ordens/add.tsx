@@ -10,7 +10,9 @@ import {
 } from "@/Components/Card";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
+import { maskMoney, maskMoneyDot } from "@/Utils/mask";
 import { Head, useForm } from "@inertiajs/react";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { IoPeopleSharp } from "react-icons/io5";
 
@@ -29,14 +31,38 @@ const AddOrdem = ({ clientes, ordem, gerais }) => {
         defeito: "",
         estado: "",
         acessorios: "",
-        preorcamento: "",
+        descorcamento: "",
+        valorcamento: "",
         status: false,
         previsao: "",
         obs: "",
     });
     async function handleSubmit(e: any) {
         e.preventDefault();
+        setData('valorcamento', maskMoneyDot(data.valorcamento.toString()));
         post(route("ordens.store"));
+
+        await apios.post('orders', {
+            "ordens": [{
+                "id": data.id,
+                "cliente_id": data.cliente_id,
+                "detalhes": "",
+                "defeito": data.defeito,
+                "descorcamento": data.descorcamento,
+                "valorcamento": maskMoneyDot(data.valorcamento.toString()),
+                "custo": '0',
+                "valservico": '0',
+                "valpecas": '0',
+                "dtentrada": moment().format("YYYY-MM-DD H:mm:ss"),
+                "dtentrega": null,
+                "status": data.status
+            }]
+        })
+            .then((res) => {
+                console.log(res.data.response.message);
+            }).catch((err) => {
+                console.log(err);
+            });
     }
 
     const handleSearch = (value: any) => {
@@ -296,7 +322,7 @@ const AddOrdem = ({ clientes, ordem, gerais }) => {
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-3 gap-4 mt-6">
+                                <div className="grid grid-cols-4 gap-4 mt-6">
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
@@ -317,22 +343,42 @@ const AddOrdem = ({ clientes, ordem, gerais }) => {
                                         />
                                     </div>
                                     <div className="flex flex-col">
+                                            <label
+                                                className="label-form"
+                                                htmlFor="descorcamento"
+                                            >
+                                                Descrição pré-orçamento
+                                            </label>
+                                            <textarea
+                                                id="descorcamento"
+                                                value={data.descorcamento}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "descorcamento",
+                                                        e.target.value,
+                                                    )
+                                                }
+                                                className="input-form"
+                                            />
+                                        </div>
+                                    <div className="flex flex-col">
                                         <label
                                             className="label-form"
-                                            htmlFor="preorcamento"
+                                            htmlFor="valorcamento"
                                         >
-                                            Pré-orçamento
+                                            Valor pré-orçamento
                                         </label>
-                                        <textarea
-                                            id="preorcamento"
-                                            value={data.preorcamento}
+                                        <input
+                                            type="text"
+                                            id="valorcamento"
+                                            value={maskMoney(data.valorcamento.toString())}
                                             onChange={(e) =>
-                                                setData("preorcamento", e.target.value)
+                                                setData("valorcamento", e.target.value)
                                             }
                                             className="input-form"
                                         />
                                     </div>
-                                    <div className="h-full flex items-center justify-center">
+                                    <div className="flex items-center justify-center h-full">
                                         <label
                                             className="label-form mr-2"
                                             htmlFor="status"

@@ -22,8 +22,8 @@ class GeralController extends Controller
         }
         $query = Geral::orderBy("id", "DESC")->first();
         $geral = Geral::where("id", $query->id)->first();
-        $clientes = Cliente::get(["id","nome", "cpf", "email"]);
-        $ordens = Ordem::get(['id','cliente_id', 'defeito','detalhes','descorcamento','status']);
+        $clientes = Cliente::get(["id", "nome", "cpf", "email"]);
+        $ordens = Ordem::get();
         return Inertia::render('Gerais/index', ["geral" => $geral, 'clientes' => $clientes, 'ordens' => $ordens]);
     }
 
@@ -36,9 +36,8 @@ class GeralController extends Controller
         $storePath = public_path('storage/images');
         if ($request->hasfile('bgimage')) {
             $fileName = time() . '.' . $request->bgimage->extension();
-            
+
             $request->bgimage->move($storePath, $fileName);
-            
         }
         $data['bgimage'] = $request->hasfile('bgimage') ? $fileName : $geral->bgimage;
         if (file_exists($storePath . DIRECTORY_SEPARATOR . $geral->bgimage && $geral->bgimage)) {
@@ -48,7 +47,7 @@ class GeralController extends Controller
         Session::flash('success', 'Dados das configurações gerais editados com sucesso!');
         return Redirect::route('gerais.index');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      */
