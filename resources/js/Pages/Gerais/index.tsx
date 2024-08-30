@@ -21,21 +21,21 @@ interface GeraisProps {
 }
 
 const Gerais = ({ geral, clientes, ordens }: any) => {
-//     const myOrder = ordens.map((val: any) => ({
-//         "id": val.id,
-//         "cliente_id": val.cliente_id,
-//         "detalhes": val.detalhes,
-//         "defeito": val.defeito,
-//         "descorcamento": val.descorcamento,
-//         "valorcamento": val.valorcamento ? val.valorcamento : '0',
-//         "valservico": val.valservico ? val.valservico : '0',
-//         "custo": val.custo ? val.custo : '0',
-//         "valpecas": val.valpecas ? val.valpecas : '0',
-//         "dtentrada": moment(val.created_at).format("YYYY-MM-DD HH:mm:ss"),
-//         "dtentrega": val.status === '8' ? moment().format("YYYY-MM-DD HH:mm:ss") : null,
-//         "status": val.status
-//     }));
-//     console.log(myOrder);
+    //     const myOrder = ordens.map((val: any) => ({
+    //         "id": val.id,
+    //         "cliente_id": val.cliente_id,
+    //         "detalhes": val.detalhes,
+    //         "defeito": val.defeito,
+    //         "descorcamento": val.descorcamento,
+    //         "valorcamento": val.valorcamento ? val.valorcamento : '0',
+    //         "valservico": val.valservico ? val.valservico : '0',
+    //         "custo": val.custo ? val.custo : '0',
+    //         "valpecas": val.valpecas ? val.valpecas : '0',
+    //         "dtentrada": moment(val.created_at).format("YYYY-MM-DD HH:mm:ss"),
+    //         "dtentrega": val.status === '8' ? moment().format("YYYY-MM-DD HH:mm:ss") : null,
+    //         "status": val.status
+    //     }));
+    //     console.log(myOrder);
 
     const { flash } = usePage().props;
     const [loading, setLoading] = useState<boolean>(false);
@@ -73,41 +73,6 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
         destroy(route("gerais.destroy", geral.id));
     };
 
-    const handleUpDataSite = (async () => {
-        setLoading(true);
-        await apios.post('customers', {
-            "clientes": clientes
-        })
-            .then((res) => {
-                setMessageUploadCustomer(res.data.response.message);
-                setLoading(false);
-            }).catch((err) => {
-                console.log(err);
-            });
-        await apios.post('orders', {
-            "ordens": {
-                "id": ordens.id,
-                "cliente_id": ordens.cliente_id,
-                "detalhes": ordens.detalhes,
-                "defeito": ordens.defeito,
-                "descorcamento": ordens.descorcamento,
-                "valorcamento": ordens.valorcamento ? ordens.valorcamento : '0',
-                "valservico": ordens.valservico ? ordens.valservico : '0',
-                "custo": ordens.custo ? ordens.custo : '0',
-                "valpecas": ordens.valpecas ? ordens.valpecas : '0',
-                "dtentrada": moment(ordens.created_at).format("YYYY-MM-DD HH:mm:ss"),
-                "dtentrega": ordens.status === '8' ? moment().format("YYYY-MM-DD HH:mm:ss") : null,
-                "status": ordens.status
-            }
-        })
-            .then((res) => {
-                setMessageUploadOrder(res.data.response.message);
-                setLoading(false);
-            }).catch((err) => {
-                console.log(err);
-            });
-    });
-
     return (
         <AuthLayout>
             <Head title="Gerais" />
@@ -125,17 +90,6 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
                     <FlashMessage message={flash} />
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <CardBody className=" border-y border-gray-100 rounded-t-md">
-                            <div className="flex items-center justify-between gap-2 px-3 py-6">
-                                <h1 className="text-base text-gray-600">Upload de dados ao website de informações sobre clientes e ordens de serviços</h1>
-                                <button
-                                    type="button"
-                                    onClick={() => handleUpDataSite()}
-                                    className="flex items-center justify-center gap-1 px-3 h-10 bg-blue-600 hover:blue-600/90 text-gray-50 shadow-md rounded-md"
-                                >
-
-                                    {loading ? <RiLoader2Fill size={22} className="animate-spin" /> : <><IoCloudUpload size={22} /> <span>Upload</span></>}
-                                </button>
-                            </div>
                             {messageUploadCustomer &&
                                 <div className="flex items-center bg-green-100 p-4 mb-0 text-sm text-green-700 border border-green-200 gap-1">
                                     <IoInformationCircleOutline size={20} />{messageUploadCustomer}
