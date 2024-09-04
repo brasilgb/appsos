@@ -1,5 +1,0 @@
-<<<<<<<< HEAD:public/build/assets/index-92f803b3.js
-import{j as e,r as s}from"./app-177f901d.js";import{f as t,g as n}from"./index.esm-221377a0.js";const x=({message:r})=>e.jsx(s.Fragment,{children:r.message&&e.jsxs("div",{className:"flex items-center bg-green-100 p-4 mb-0 text-sm text-green-700 border border-green-200",children:[e.jsx(t.Provider,{value:{className:"text-xl text-green-700"},children:e.jsx(n,{})}),e.jsx("div",{children:e.jsx("span",{className:"font-medium",children:r.message})})]})});export{x as F};
-========
-import{j as e,r as s}from"./app-109e0d25.js";import{f as t,g as n}from"./index.esm-d3789500.js";const x=({message:r})=>e.jsx(s.Fragment,{children:r.message&&e.jsxs("div",{className:"flex items-center bg-green-100 p-4 mb-0 text-sm text-green-700 border border-green-200",children:[e.jsx(t.Provider,{value:{className:"text-xl text-green-700"},children:e.jsx(n,{})}),e.jsx("div",{children:e.jsx("span",{className:"font-medium",children:r.message})})]})});export{x as F};
->>>>>>>> 4c05d9a (Push):public/build/assets/index-a25d1aa3.js
