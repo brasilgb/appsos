@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('detalhes')->nullable();
             $table->string('defeito')->nullable();
             $table->text('descorcamento')->nullable();
-            $table->decimal('valorcamento', 10,2)->nullable();
-            $table->decimal('custo', 10,2)->nullable();
-            $table->decimal('valservico', 10,2)->nullable();
-            $table->decimal('valpecas', 10,2)->nullable();
+            $table->decimal('valorcamento', 15,2)->nullable();
+            $table->decimal('custo', 15,2)->nullable();
+            $table->decimal('valservico', 15,2)->nullable();
+            $table->decimal('valpecas', 15,2)->nullable();
             $table->string('status')->nullable();
             $table->dateTime('dtentrada')->nullable();
             $table->dateTime('dtentrega')->nullable();
