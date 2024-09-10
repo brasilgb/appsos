@@ -137,7 +137,7 @@ const EditOrdem = ({
                 "custo": maskMoneyDot(data.custo.toString()),
                 "valpecas": maskMoneyDot(data.valpecas.toString()),
                 "dtentrada": moment(ordens.created_at).format("YYYY-MM-DD HH:mm:ss"),
-                "dtentrega": data.status === '8' ? moment().format("YYYY-MM-DD HH:mm:ss") : null,
+                "dtentrega": moment(ordens.updated_at).format("YYYY-MM-DD HH:mm:ss"),
                 "status": data.status
             }]
         })
