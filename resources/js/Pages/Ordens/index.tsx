@@ -144,16 +144,13 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                                 </span>
                                             </TableCell>
                                             <TableCell>
-                                                {ordem.dtentrega !=
-                                                    "0000-00-00 00:00:00"
-                                                    ? ordem.dtentrega !== null
+                                                {ordem.status === '8'
                                                         ? moment(
                                                             ordem.dtentrega,
                                                         ).format(
                                                             "DD/MM/YYYY HH:mm",
                                                         )
-                                                        : "__/__/____ __:__"
-                                                    : "__/__/____ __:__"}
+                                                        : "__/__/____ __:__"}
                                             </TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
                                                 <WhatsAppButton
