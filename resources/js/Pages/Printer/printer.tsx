@@ -280,6 +280,7 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                     <div className="w-80 border-t border-gray-400 text-center">
                         Assinatura Cliente
                     </div>
+                    
                     {tipo !== "1" && tipo !== "4" ? (
                         <div className="w-80 border-t border-gray-400 text-center">
                             Assinatura Responsável Técnico

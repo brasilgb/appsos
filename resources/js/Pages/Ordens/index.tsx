@@ -35,8 +35,21 @@ import React, { Fragment, useEffect, useState } from "react";
 import { IoConstruct, IoPrint } from "react-icons/io5";
 
 const Ordens = ({ ordens, whats, printers }: any) => {
-    const { flash, ziggy } = usePage().props;
+    const { flash, ziggy } = usePage().props as any;
     const { oc } = (ziggy as any).query
+console.log((ziggy?.location).split('/')[3]);
+
+    const [nOrders, setNOrders] = useState<any>([]);
+
+    useEffect(() => {
+        const getNOrders = () => {
+            setNOrders(ordens.data);
+            route('ordens.index');
+        }
+        if((ziggy?.location).split('/')[3] == 'ordens'){
+            getNOrders();
+        }
+    }, [ordens])
 
     const stylesOrderStatus = (value: any) => {
         switch (value) {
@@ -102,12 +115,12 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                     <TableHead>Equipamento</TableHead>
                                     <TableHead>Modelo</TableHead>
                                     <TableHead>Status</TableHead>
-                                    <TableHead>Entrega</TableHead>
+                                    <TableHead><div className="w-96">Entrega</div></TableHead>
                                     <TableHead></TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {ordens.data.map((ordem: any) => (
+                                {nOrders?.map((ordem: any) => (
                                     <Fragment key={ordem.id}>
                                         <TableRow>
                                             <TableCell>
@@ -144,13 +157,13 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                                 </span>
                                             </TableCell>
                                             <TableCell>
-                                                {ordem.status === '8'
-                                                        ? moment(
-                                                            ordem.dtentrega,
-                                                        ).format(
-                                                            "DD/MM/YYYY HH:mm",
-                                                        )
-                                                        : "__/__/____ __:__"}
+                                                {ordem.status == '8'
+                                                    ? moment(
+                                                        ordem.update_at,
+                                                    ).format(
+                                                        "DD/MM/YYYY HH:mm",
+                                                    )
+                                                    : "__/__/____ __:__"}
                                             </TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
                                                 <WhatsAppButton
