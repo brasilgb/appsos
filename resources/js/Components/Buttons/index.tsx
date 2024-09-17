@@ -23,6 +23,7 @@ interface ButtonsProps {
     processing?: any;
     onclick?: any;
     param?: string;
+    cli?: string;
     identify?: string;
     value?: string;
     status?: string;
@@ -80,16 +81,16 @@ export const BackButton = ({ url, label }: ButtonsProps) => {
         window.history.back();
     }
     return (
-        <button
+        <Link
             className="flex items-center justify-center bg-blue-700 hover:bg-blue-700/90 border-2 border-gray-50 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
-            // href={url}
-            onClick={back}
-            // as="button"
+            href={url}
+            // onClick={back}
+            as="button"
             type="button"
         >
             <IoArrowBackOutline size={18} />
             <span>{label}</span>
-        </button>
+        </Link>
     );
 };
 
@@ -228,7 +229,7 @@ export const OrderButton = ({ url }: ButtonsProps) => {
     );
 };
 
-export const EditButton = ({ url, param }: ButtonsProps) => {
+export const EditButton = ({ url, param, cli }: ButtonsProps) => {
     return (
         <Link
             className="flex items-center justify-center bg-orange-600 hover:bg-orange-600/90 border-2 border-gray-50 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
@@ -236,7 +237,7 @@ export const EditButton = ({ url, param }: ButtonsProps) => {
             as="button"
             type="button"
             title={`Editar registro`}
-            data={{ page: param }}
+            data={{ page: param, oc: cli }}
         >
             <TbEdit size={18} />
         </Link>

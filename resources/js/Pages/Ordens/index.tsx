@@ -37,19 +37,7 @@ import { IoConstruct, IoPrint } from "react-icons/io5";
 const Ordens = ({ ordens, whats, printers }: any) => {
     const { flash, ziggy } = usePage().props as any;
     const { oc } = (ziggy as any).query
-console.log((ziggy?.location).split('/')[3]);
-
-    const [nOrders, setNOrders] = useState<any>([]);
-
-    useEffect(() => {
-        const getNOrders = () => {
-            setNOrders(ordens.data);
-            route('ordens.index');
-        }
-        if((ziggy?.location).split('/')[3] == 'ordens'){
-            getNOrders();
-        }
-    }, [ordens])
+    console.log(oc);
 
     const stylesOrderStatus = (value: any) => {
         switch (value) {
@@ -120,7 +108,7 @@ console.log((ziggy?.location).split('/')[3]);
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {nOrders?.map((ordem: any) => (
+                                {ordens?.data?.map((ordem: any) => (
                                     <Fragment key={ordem.id}>
                                         <TableRow>
                                             <TableCell>
@@ -188,6 +176,7 @@ console.log((ziggy?.location).split('/')[3]);
                                                 <EditButton
                                                     url={`/ordens/${ordem.id}`}
                                                     param={ordens.current_page}
+                                                    cli={oc}
                                                 />
                                                 <DeleteButton
                                                     url="ordens.destroy"
