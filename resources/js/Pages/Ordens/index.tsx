@@ -37,7 +37,6 @@ import { IoConstruct, IoPrint } from "react-icons/io5";
 const Ordens = ({ ordens, whats, printers }: any) => {
     const { flash, ziggy } = usePage().props as any;
     const { oc } = (ziggy as any).query
-    console.log(oc);
 
     const stylesOrderStatus = (value: any) => {
         switch (value) {

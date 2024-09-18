@@ -144,6 +144,7 @@ class OrdemController extends Controller
                 'produtos' => $produtos,
                 'ordemProduto' => $ordem->produtos,
                 'currentPage' => $page,
+                'ocli' => $request->oc,
                 'gerais' => $gerais,
             ]
         );
@@ -197,7 +198,7 @@ class OrdemController extends Controller
 
         $ordem->update($data);
         Session::flash('success', 'Ordem de serviço editada com sucesso!');
-        return Redirect::route('ordens.show', ['ordem' => $ordem->id, 'page' => $request->page]);
+        return Redirect::route('ordens.show', ['ordem' => $ordem->id, 'page' => $request->page, 'oc' => $request->get('oc')]);
     }
 
     /**

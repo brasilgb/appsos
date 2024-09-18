@@ -55,22 +55,9 @@ const EditOrdem = ({
     const { setShowModalParts, sendOrderParts, setSendOrderParts } = useAppContext();
     const equtipo = gerais?.equtipo ? gerais?.equtipo?.split(";") : [];
     const equestado = gerais?.equestado ? gerais?.equestado?.split(";") : [];
-    const { flash, errors } = usePage().props;
-    const [valueInputPecas, setValueInputPecas] = useState<any>([]);
-    const [valueInputValPecas, setValueInputValPecas] = useState<any>("0");
-
-    const options = produtos.map((produto: any) => ({
-        value: produto.id,
-        label: produto.descricao,
-    }));
-
+    const { flash, errors, ziggy} = usePage().props;
+    const { oc } = (ziggy as any).query
     const dataEstoque = sendOrderParts.length > 0 ? sendOrderParts : ordemProduto;
-    // console.log(dataEstoque);
-
-    const optionsDefault = ordemProduto.map((produto: any) => ({
-        value: produto.id,
-        label: produto.descricao,
-    }));
 
     const {
         data,
@@ -101,7 +88,7 @@ const EditOrdem = ({
 
     async function handleSubmit(e: any) {
         e.preventDefault();
-        router.post(`/ordens/${ordens.id}`, {
+        router.post(`/ordens/${ordens.id}${oc ? '?oc='+oc : ''}`, {
             _method: "patch",
             id: data.id,
             equipamento: data.equipamento,
@@ -218,11 +205,7 @@ const EditOrdem = ({
                         <CardHeader>
                             <CardHeaderContent>
                                 <BackButton
-<<<<<<< HEAD
-                                    url={`/ordens?oc=${ordens.cliente_id}`}
-=======
-                                    url={`/ordens?page=2`}
->>>>>>> 42fbe34 (Push)
+                                    url={`/ordens?page=${currentPage}${oc ? '&oc='+oc : ''}`}
                                     label={"Voltar"}
                                 />
                             </CardHeaderContent>
