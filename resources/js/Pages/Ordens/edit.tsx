@@ -218,7 +218,11 @@ const EditOrdem = ({
                         <CardHeader>
                             <CardHeaderContent>
                                 <BackButton
+<<<<<<< HEAD
                                     url={`/ordens?oc=${ordens.cliente_id}`}
+=======
+                                    url={`/ordens?page=2`}
+>>>>>>> 42fbe34 (Push)
                                     label={"Voltar"}
                                 />
                             </CardHeaderContent>

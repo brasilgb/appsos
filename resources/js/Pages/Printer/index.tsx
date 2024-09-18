@@ -12,6 +12,7 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
                 ordem={ordem}
                 printer={printer}
                 tipo={tipo}
+                codigobarras={false}
             />
             {tipo !== "4" &&
                 <>
@@ -21,6 +22,7 @@ const Printer = ({ empresa, ordem, printer, tipo }: any) => {
                         ordem={ordem}
                         printer={printer}
                         tipo={tipo}
+                        codigobarras={true}
                     />
                 </>
             }

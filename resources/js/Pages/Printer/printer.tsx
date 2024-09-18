@@ -10,9 +10,10 @@ interface PrintProps {
     ordem: any;
     printer: any;
     tipo: any;
+    codigobarras?: boolean;
 }
 
-const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
+const PrinterData = ({ empresa, ordem, printer, tipo, codigobarras }: PrintProps) => {
 
     const checklistmobile = printer?.checkmobile ? printer?.checkmobile?.split(";") : [];
     const checklistnote = printer?.checknote ? printer?.checknote?.split(";") : [];
@@ -44,7 +45,7 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
     return (
         <>
             <Head title="Ordens" />
-            <div className="text-[10px] text-gray-600">
+            <div className="text-[10px] text-gray-600 relative">
                 <div className="flex items-start justify-start py-1 px-2 border-b border-gray-200 font-semibold">
                     <div className="flex items-center justify-start w-8 mr-4">
                         <img
@@ -280,7 +281,7 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                     <div className="w-80 border-t border-gray-400 text-center">
                         Assinatura Cliente
                     </div>
-                    
+
                     {tipo !== "1" && tipo !== "4" ? (
                         <div className="w-80 border-t border-gray-400 text-center">
                             Assinatura Responsável Técnico
@@ -299,7 +300,15 @@ const PrinterData = ({ empresa, ordem, printer, tipo }: PrintProps) => {
                         </p>
                     </div>
                 }
-
+                
+                {codigobarras && tipo == "1" &&
+                    <div className="flex-auto pr-8 flex flex-col items-end justify-end absolute right-0 -bottom-16">
+                        <p className="text-center">Acompanhe o status de  sua ordem de serviço em  <br />https://eplusteutonia.com.br/login</p>
+                        <div className="w-full flex justify-end pr-16">
+                            <img className="w-24" src="/storage/images/qrcodeeplus.jpeg" alt="QRCode Eplus" />
+                        </div>
+                    </div>
+                }
             </div>
         </>
     );
