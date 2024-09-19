@@ -146,7 +146,7 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                             <TableCell>
                                                 {ordem.status == '8'
                                                     ? moment(
-                                                        ordem.update_at,
+                                                        ordem.dtentrega,
                                                     ).format(
                                                         "DD/MM/YYYY HH:mm",
                                                     )

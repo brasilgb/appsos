@@ -303,10 +303,11 @@ const PrinterData = ({ empresa, ordem, printer, tipo, codigobarras }: PrintProps
                 
                 {codigobarras && tipo == "1" &&
                     <div className="flex-auto pr-8 flex flex-col items-end justify-end absolute right-0 -bottom-16">
-                        <p className="text-center">Acompanhe o status de  sua ordem de serviço em  <br />https://eplusteutonia.com.br/login</p>
+                        <p className="text-center">Acompanhe o status de  sua ordem de serviço em  <br />https://eplusteutonia.com.br/login <br/>Usuário: CPF - senha: 12345</p>
                         <div className="w-full flex justify-end pr-16">
                             <img className="w-24" src="/storage/images/qrcodeeplus.jpeg" alt="QRCode Eplus" />
                         </div>
+                        
                     </div>
                 }
             </div>

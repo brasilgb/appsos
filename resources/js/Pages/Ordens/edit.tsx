@@ -106,6 +106,7 @@ const EditOrdem = ({
             valservico: maskMoneyDot(data.valservico.toString()),
             custo: maskMoneyDot(data.custo.toString()),
             status: data.status,
+            dtentrega: ordens.dtentrega ? ordens.dtentrega : moment(ordens.updated_at).format("YYYY-MM-DD HH:mm:ss"),
             tecnico: data.tecnico,
             detalhes: data.detalhes,
             obs: data.obs,
