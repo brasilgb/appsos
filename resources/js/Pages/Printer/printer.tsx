@@ -155,10 +155,10 @@ const PrinterData = ({ empresa, ordem, printer, tipo, codigobarras }: PrintProps
                         </div>
                         <div className="flex-1">
                             <h1>
-                                <span className="font-semibold mr-1">
-                                    Pré-orçamento:
+                                <span className="font-semibold mr-0.5">
+                                    Pré-orçamento: R$
                                 </span>
-                                {ordem?.preorcamento}
+                                {ordem?.valorcamento}
                             </h1>
                         </div>
                     </div>
