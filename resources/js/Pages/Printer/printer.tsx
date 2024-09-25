@@ -1,5 +1,5 @@
 import FlashMessage from "@/Components/FlashMessage";
-import { maskCpfCnpj } from "@/Utils/mask";
+import { maskCpfCnpj, maskMoney } from "@/Utils/mask";
 import { Head } from "@inertiajs/react";
 import moment from "moment";
 import { split } from "postcss/lib/list";
@@ -158,7 +158,7 @@ const PrinterData = ({ empresa, ordem, printer, tipo, codigobarras }: PrintProps
                                 <span className="font-semibold mr-0.5">
                                     Pré-orçamento: R$
                                 </span>
-                                {ordem?.valorcamento}
+                                {maskMoney(ordem?.valorcamento)}
                             </h1>
                         </div>
                     </div>
