@@ -32,7 +32,7 @@ const AddOrdem = ({ clientes, ordem, gerais }) => {
         estado: "",
         acessorios: "",
         descorcamento: "",
-        valorcamento: "",
+        valorcamento: "0",
         status: false,
         previsao: "",
         obs: "",
