@@ -5,6 +5,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const [showModalParts, setShowModalParts] = useState<boolean>(false);
     const [showModalPDV, setShowModalPDV] = useState<boolean>(false);
     const [sendOrderParts, setSendOrderParts] = useState<any>([]);
+    const [openSide, setOpenSide] = useState(true);
     return (
         <AppContext.Provider
             value={{
@@ -13,7 +14,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
                 sendOrderParts,
                 setSendOrderParts,
                 showModalPDV,
-                setShowModalPDV
+                setShowModalPDV,
+                openSide, 
+                setOpenSide
             }}
         >
             {children}

@@ -19,12 +19,12 @@ import {
 } from "react-icons/fa6";
 import { HiBuildingOffice } from "react-icons/hi2";
 import SideLink from "../SideLink";
+import { useAppContext } from "@/Contexts/appContext";
 
 const Sidebar = () => {
     const { url } = usePage() as any;
+    const {openSide, setOpenSide} = useAppContext();
     const [openDropDown, setOpenDropDown] = useState<boolean>(false);
-    const [openDropDown2, setOpenDropDown2] = useState<boolean>(false);
-    const [openSide, setOpenSide] = useState(true);
     return (
         <aside className={`${openSide ? "md:w-72 " : "w-20"} h-full relative bg-blue-cinco duration-300 p-5 pt-8 shadow-lg`}>
             <div onClick={() => setOpenSide(!openSide)} className={`${openSide ? "rotate-180 " : "0"} duration-300 absolute cursor-pointer flex items-center justify-center -right-2 w-7 h-7 rounded-full bg-white top-16 shadow-sm border-2 border-sky-800 text-sky-800 `}>

@@ -154,7 +154,8 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                             </TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
                                                 <WhatsAppButton
-                                                    url={`https://api.whatsapp.com/send?phone=${encodeURIComponent(ordem.cliente.whatsapp)}&text=${encodeURIComponent(ordem.status == 6 || ordem.status == 7 ? whats?.concluido : ordem.status == 3 ? whats?.orcamento : "")}`}
+                                                disabled={ordem.cliente.whatsapp ? false : true}
+                                                    url={`https://api.whatsapp.com/send?phone=${encodeURIComponent(ordem.cliente.whatsapp)}&text=${encodeURIComponent(ordem.status == 6 || ordem.status == 7 ? whats?.concluido : ordem.status == 3 ? whats?.orcamento : "Olá, cliente!")}`}
                                                 />
                                                 <ImagesAppButton
                                                     url={`${ordem.id}`}

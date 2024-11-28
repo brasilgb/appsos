@@ -174,10 +174,10 @@ export const PrintButton = ({ url, status }: ButtonsProps) => {
     );
 };
 
-export const WhatsAppButton = ({ url }: ButtonsProps) => {
+export const WhatsAppButton = ({ url, disabled }: ButtonsProps) => {
     return (
         <a
-            className="flex items-center justify-center bg-green-600 hover:bg-green-600/90 border-2 border-gray-50 py-1.5 px-3 rounded-md shadow text-gray-50 self-end"
+            className={`${disabled ? 'pointer-events-none' : 'pointer-events-auto'} flex items-center justify-center bg-green-600 hover:bg-green-600/90 border-2 border-gray-50 py-1.5 px-3 rounded-md shadow text-gray-50 self-end`}
             href={url}
             target="_blank"
             title={`Enviar mensagem`}
