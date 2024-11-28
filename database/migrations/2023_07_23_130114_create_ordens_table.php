@@ -14,19 +14,19 @@ return new class extends Migration
         Schema::create('ordens', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cliente_id')->nullable()->constrained()->onDelete('cascade');
-            $table->string('equipamento', 40);
+            $table->string('equipamento', 100);
             $table->string('modelo', 50)->nullable();
             $table->string('senha', 50)->nullable();
             $table->text('defeito')->nullable();
-            $table->string('estado', 100)->nullable();
+            $table->text('estado')->nullable();
             $table->text('acessorios')->nullable();
             $table->text('descorcamento')->nullable();
-            $table->decimal('valorcamento', 10,2)->default(0);
+            $table->decimal('valorcamento', 10,2)->nullable();
             $table->text('detalhes')->nullable(); // servicos executados
             $table->text('pecas')->nullable();
-            $table->decimal('valpecas', 10, 2)->default(0);
-            $table->decimal('valservico', 10, 2)->default(0);
-            $table->decimal('custo', 10, 2)->default(0);
+            $table->decimal('valpecas', 10, 2)->nullable();
+            $table->decimal('valservico', 10, 2)->nullable();
+            $table->decimal('custo', 10, 2)->nullable();
             $table->string('previsao')->nullable();
             $table->tinyInteger('status')->default('1');
             $table->dateTime('dtentrega')->nullable();

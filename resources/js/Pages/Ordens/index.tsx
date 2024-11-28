@@ -95,13 +95,13 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead>#</TableHead>
-                                    <TableHead>Nome</TableHead>
-                                    <TableHead>Telefone</TableHead>
-                                    <TableHead>Recebimento</TableHead>
+                                    <TableHead className="w-20">#</TableHead>
+                                    <TableHead className="w-64">Cliente</TableHead>
+                                    <TableHead className="w-32">Telefone</TableHead>
+                                    <TableHead className="w-32">Recebimento</TableHead>
                                     <TableHead>Equipamento</TableHead>
                                     <TableHead>Modelo</TableHead>
-                                    <TableHead>Status</TableHead>
+                                    <TableHead className="w-44">Status</TableHead>
                                     <TableHead><div className="w-96">Entrega</div></TableHead>
                                     <TableHead></TableHead>
                                 </TableRow>
@@ -115,7 +115,7 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                             </TableCell>
                                             <TableCell>
                                                 <Link
-                                                    className="text-blue-quatro hover:text-blue-quatro/80 font-medium underline"
+                                                    className="text-xs text-blue-quatro hover:text-blue-quatro/80 font-medium underline"
                                                     href={`/ordens?oc=${ordem.cliente_id}`}
                                                     title={`Ordens do cliente ${ordem.cliente.nome}`}
                                                 >

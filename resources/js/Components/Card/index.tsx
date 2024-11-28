@@ -26,7 +26,7 @@ export const CardHeaderContent = ({ children, className }: CardProps) => {
 };
 
 export const CardBody = ({ children, className }: CardProps) => {
-    return <div className={`bg-white ${className}`}>{children}</div>;
+    return <div className={`bg-white  ${className}`}>{children}</div>;
 };
 
 export const CardFooter = ({ children }: CardProps) => {

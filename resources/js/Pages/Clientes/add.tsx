@@ -350,7 +350,7 @@ const AddCliente = ({ cliente }) => {
                                             className="label-form"
                                             htmlFor="whatsapp"
                                         >
-                                            Whatsapp(Utilizar número padrão)
+                                            Whatsapp(Ex: 5551985471163)
                                         </label>
                                         <input
                                             id="whatsapp"
@@ -364,7 +364,6 @@ const AddCliente = ({ cliente }) => {
                                             }
                                             className="input-form"
                                             maxLength={13}
-                                            placeholder="5551985471163"
                                         />
                                         {errors.whatsapp && (
                                             <div className="text-sm text-red-500">
