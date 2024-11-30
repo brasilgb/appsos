@@ -68,9 +68,9 @@ const Clientes = ({ clientes }: any) => {
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead>#</TableHead>
-                                    <TableHead>Nome</TableHead>
-                                    <TableHead>E-mail</TableHead>
+                                    <TableHead className="w-20">#</TableHead>
+                                    <TableHead className="w-80">Nome</TableHead>
+                                    <TableHead className="w-64">E-mail</TableHead>
                                     <TableHead>CPF</TableHead>
                                     <TableHead>Telefone</TableHead>
                                     <TableHead>Cadastro</TableHead>

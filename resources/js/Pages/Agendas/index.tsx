@@ -69,8 +69,8 @@ const Agendas = ({ agendas }: any) => {
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead>#</TableHead>
-                                    <TableHead>Cliente</TableHead>
+                                    <TableHead className="w-20">#</TableHead>
+                                    <TableHead className="w-64">Cliente</TableHead>
                                     <TableHead>Período</TableHead>
                                     <TableHead>Técnico</TableHead>
                                     <TableHead>Status</TableHead>
