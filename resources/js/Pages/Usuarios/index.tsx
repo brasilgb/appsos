@@ -2,7 +2,6 @@ import {
     AddButton,
     DeleteButton,
     EditButton,
-    WhatsAppButton,
 } from "@/Components/Buttons";
 import {
     Card,
