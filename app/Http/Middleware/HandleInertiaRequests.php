@@ -44,9 +44,7 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'confemp' => fn () => [
-                DB::table('empresa')
-                    ->select('logo', 'empresa', 'cnpj')
-                    ->first()
+                Empresa::get()->count() > 0 ? DB::table('empresa')->select('logo', 'empresa', 'cnpj')->first() : [] 
             ],
             'confger' => fn () => [
                 DB::table('gerais')
