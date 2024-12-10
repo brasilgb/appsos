@@ -90,7 +90,6 @@ class OrdemController extends Controller
     public function create()
     {
         $clientes = Cliente::get();
-        $clientes = Cliente::get();
         $gerais = Geral::first();
         $ordem = Ordem::exists() ? Ordem::orderBy('id', 'desc')->first()->id : [];
 
@@ -103,7 +102,6 @@ class OrdemController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        // dd($request->status);
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido'
         ];
@@ -179,8 +177,8 @@ class OrdemController extends Controller
             ]
         );
         $dtformat = Carbon::now();
-        $data['dtentrega'] = $request->status === '8' ? $dtformat->toDateTimeString() : null;
-        // dd($request->pecas);
+        $data['dtentrega'] = $request->status == '8' ? $dtformat->toDateTimeString() : null;
+
         if (!empty($request->produtos)) {
             foreach ($request->produtos as $peca) {
                 $pec[] = [
