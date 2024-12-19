@@ -59,4 +59,5 @@ export {
     unidadesProdutos,
     tiposProdutos,
     statusAgenda,
+    statusMessage
 };
