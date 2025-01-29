@@ -13,6 +13,7 @@ use App\Http\Controllers\OrdemController;
 use App\Http\Controllers\PrinterController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServicoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WhatsController;
 use Illuminate\Foundation\Application;
@@ -57,6 +58,7 @@ Route::middleware('auth')->group(function () {
         'imagens' => 'imagem'
     ]);
     Route::resource('/produtos', ProdutoController::class);
+    Route::resource('/servicos', ServicoController::class);
     Route::resource('/agendas', AgendaController::class);
     Route::resource('/mensagens', MensagemController::class)->parameters([
         'mensagens' => 'mensagem'

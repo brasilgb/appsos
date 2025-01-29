@@ -18,6 +18,8 @@ interface GeraisProps {
     bgcolor: string;
     equtipo: string;
     equestado: string;
+    marcas: string;
+    modelos: string;
 }
 
 const Gerais = ({ geral, clientes, ordens }: any) => {
@@ -55,6 +57,8 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
         bgcolor: geral.bgcolor,
         equtipo: geral.equtipo,
         equestado: geral.equestado,
+        marcas: geral.marcas,
+        modelos: geral.modelos,
     });
 
     function handleSubmit(e: any) {
@@ -65,6 +69,8 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
             bgcolor: data.bgcolor,
             equtipo: data.equtipo,
             equestado: data.equestado,
+            marcas: data.marcas,
+            modelos: data.modelos,
         });
         reset;
     }
@@ -185,7 +191,7 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
                                         rows={2}
                                     />
                                 </div>
-                                {/* 
+                                
                                 <div className="flex flex-col mt-6">
                                     <label
                                         className="label-form"
@@ -202,7 +208,43 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
                                         className="input-form"
                                         rows={2}
                                     />
-                                </div> */}
+                                </div>
+                                
+                                <div className="flex flex-col mt-6">
+                                    <label
+                                        className="label-form"
+                                        htmlFor="marcas"
+                                    >
+                                        Marca de Peça (separar com ;)
+                                    </label>
+                                    <textarea
+                                        id="marcas"
+                                        value={data.marcas}
+                                        onChange={(e) =>
+                                            setData("marcas", e.target.value)
+                                        }
+                                        className="input-form"
+                                        rows={2}
+                                    />
+                                </div>
+                                
+                                <div className="flex flex-col mt-6">
+                                    <label
+                                        className="label-form"
+                                        htmlFor="modelos"
+                                    >
+                                        Modelos de Peças (separar com ;)
+                                    </label>
+                                    <textarea
+                                        id="modelos"
+                                        value={data.modelos}
+                                        onChange={(e) =>
+                                            setData("modelos", e.target.value)
+                                        }
+                                        className="input-form"
+                                        rows={2}
+                                    />
+                                </div>
                             </div>
                         </CardBody>
                         <CardFooter>
