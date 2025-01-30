@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('servicos', function (Blueprint $table) {
+        Schema::create('modelos', function (Blueprint $table) {
             $table->id();
-            $table->string('servico');
-            $table->integer('marca')->nullable();
-            $table->integer('modelo')->nullable();
-            $table->text('descricao')->nullable();
-            $table->float('valor', 9,2);
+            $table->foreignId('marca_id')->nullable()->constrained('marcas')->onDelete('cascade');
+            $table->string('modelo');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('servicos');
+        Schema::dropIfExists('modelos');
     }
 };

@@ -26,7 +26,7 @@ interface ClientesProps {
 }
 
 const EditMensagem = ({ mensagens, users }: any) => {
-    const { flash, auth } = usePage().props as any;
+    const { flash } = usePage().props as any;
 
     const {
         data,

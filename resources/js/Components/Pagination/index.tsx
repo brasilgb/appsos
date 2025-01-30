@@ -12,17 +12,17 @@ interface PaginationProps {
 
 const Pagination = ({ data }: PaginationProps) => {
 
-    const clearLinks = [...data.links];
+    const clearLinks = [...data?.links];
     clearLinks.shift();
     clearLinks.pop();
 
     return (
         <ul className="flex items-center justify-center py-2 gap-2">
             <li>
-                {data.prev_page_url !== null ? (
+                {data?.prev_page_url !== null ? (
                     <Link
                         className="flex items-center jus h-10 w-10 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-600 duration-300 rounded-full"
-                        href={data.first_page_url}
+                        href={data?.first_page_url}
                     >
                         <RiArrowLeftSLine size={16} />
                     </Link>
@@ -33,10 +33,10 @@ const Pagination = ({ data }: PaginationProps) => {
                 )}
             </li>
             <li>
-                {data.prev_page_url !== null ? (
+                {data?.prev_page_url !== null ? (
                     <Link
                         className="flex items-center justify-center h-10 w-10 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-600 duration-300 rounded-full"
-                        href={data.prev_page_url}
+                        href={data?.prev_page_url}
                     >
                         <RiArrowLeftDoubleLine size={16} />
                     </Link>
@@ -59,10 +59,10 @@ const Pagination = ({ data }: PaginationProps) => {
             ))}
 
             <li>
-                {data.next_page_url !== null ? (
+                {data?.next_page_url !== null ? (
                     <Link
                         className="flex items-center justify-center h-10 w-10 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-600 duration-300 rounded-full"
-                        href={data.next_page_url}
+                        href={data?.next_page_url}
                     >
                         <RiArrowRightDoubleLine size={16} />
                     </Link>
@@ -73,10 +73,10 @@ const Pagination = ({ data }: PaginationProps) => {
                 )}
             </li>
             <li>
-                {data.next_page_url !== null ? (
+                {data?.next_page_url !== null ? (
                     <Link
                         className="flex items-center justify-center h-10 w-10 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-600 duration-300 rounded-full"
-                        href={data.last_page_url}
+                        href={data?.last_page_url}
                     >
                         <RiArrowRightSLine size={16} />
                     </Link>

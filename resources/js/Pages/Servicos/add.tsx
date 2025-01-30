@@ -19,35 +19,19 @@ import { Head, router, useForm, usePage } from "@inertiajs/react";
 import React from "react";
 import { FaBasketShopping } from "react-icons/fa6";
 
-const AddServico = () => {
+const AddServico = ({ marcas, modelos }: any) => {
     const { errors } = usePage().props;
     const { data, setData, post, progress, processing } = useForm({
-        codbarra: "",
+        servico: "",
+        marca: "",
+        modelo: "",
         descricao: "",
-        partnumber: "",
-        valcompra: "",
-        valvenda: "",
-        unidade: "",
-        quantidade: "",
-        estmaximo: "",
-        estminimo: "",
-        tipo: "",
+        valor: ""
     });
 
     function handleSubmit(e: any) {
         e.preventDefault();
-        router.post("/produtos", {
-            codbarra: data.codbarra,
-            descricao: data.descricao,
-            partnumber: data.partnumber,
-            valcompra: maskMoneyDot(data.valcompra.toString()),
-            valvenda: maskMoneyDot(data.valvenda.toString()),
-            unidade: data.unidade,
-            quantidade: data.quantidade,
-            estmaximo: data.estmaximo,
-            estminimo: data.estminimo,
-            tipo: data.tipo,
-        });
+        post(route("servicos.store"));
     }
 
     return (
@@ -78,29 +62,29 @@ const AddServico = () => {
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <CardBody className=" border-y border-gray-100">
                             <div className="px-3 my-4">
-                                <div className="grid grid-cols-4 gap-4">
+                                <div className="grid grid-cols-3 gap-4">
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
                                             htmlFor="descricao"
                                         >
-                                            Descrição
+                                            Serviço
                                         </label>
                                         <input
                                             id="descricao"
                                             type="text"
-                                            value={data.descricao}
+                                            value={data.servico}
                                             onChange={(e) =>
                                                 setData(
-                                                    "descricao",
+                                                    "servico",
                                                     e.target.value,
                                                 )
                                             }
                                             className="input-form"
                                         />
-                                        {errors.descricao && (
+                                        {errors.servico && (
                                             <div className="text-sm text-red-500">
-                                                {errors.descricao}
+                                                {errors.servico}
                                             </div>
                                         )}
                                     </div>
@@ -108,69 +92,72 @@ const AddServico = () => {
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
-                                            htmlFor="tipo"
+                                            htmlFor="marca"
                                         >
-                                            Tipo do produto
+                                            Marca de Produto
                                         </label>
                                         <select
-                                            id="tipo"
-                                            value={data.tipo}
+                                            id="marca"
+                                            value={data.marca}
                                             onChange={(e) =>
-                                                setData("tipo", e.target.value)
+                                                setData("marca", e.target.value)
                                             }
                                             className="input-form"
                                         >
                                             <option value="">
-                                                Selecione o tipo
+                                                Selecione a marca
                                             </option>
-                                            {tiposProdutos.map((tipo: any) => (
+                                            {marcas.map((marca: any) => (
                                                 <option
-                                                    key={tipo.value}
-                                                    value={tipo.value}
+                                                    key={marca.id}
+                                                    value={marca.id}
                                                 >
-                                                    {tipo.label}
+                                                    {marca.marca}
                                                 </option>
                                             ))}
                                         </select>
-                                        {errors.tipo && (
+                                        {errors.marca && (
                                             <div className="text-sm text-red-500">
-                                                {errors.tipo}
+                                                {errors.marca}
                                             </div>
                                         )}
                                     </div>
+
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
-                                            htmlFor="tipo"
+                                            htmlFor="modelo"
                                         >
-                                            Tipo do produto
+                                            Modelo Produto
                                         </label>
                                         <select
-                                            id="tipo"
-                                            value={data.tipo}
+                                            id="modelo"
+                                            value={data.modelo}
                                             onChange={(e) =>
-                                                setData("tipo", e.target.value)
+                                                setData("modelo", e.target.value)
                                             }
                                             className="input-form"
                                         >
                                             <option value="">
-                                                Selecione o tipo
+                                                Selecione o modelo
                                             </option>
-                                            {tiposProdutos.map((tipo: any) => (
+                                            {modelos.map((modelo: any) => (
                                                 <option
-                                                    key={tipo.value}
-                                                    value={tipo.value}
+                                                    key={modelo.id}
+                                                    id={modelo.id}
                                                 >
-                                                    {tipo.label}
+                                                    {modelo.modelo}
                                                 </option>
                                             ))}
                                         </select>
-                                        {errors.tipo && (
+                                        {errors.modelo && (
                                             <div className="text-sm text-red-500">
-                                                {errors.tipo}
+                                                {errors.modelo}
                                             </div>
                                         )}
                                     </div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4 mt-4">
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
@@ -178,9 +165,8 @@ const AddServico = () => {
                                         >
                                             Descrição
                                         </label>
-                                        <input
+                                        <textarea
                                             id="descricao"
-                                            type="text"
                                             value={data.descricao}
                                             onChange={(e) =>
                                                 setData(
@@ -193,6 +179,31 @@ const AddServico = () => {
                                         {errors.descricao && (
                                             <div className="text-sm text-red-500">
                                                 {errors.descricao}
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="valor"
+                                        >
+                                            Valor do Serviço
+                                        </label>
+                                        <input
+                                            id="valor"
+                                            type="text"
+                                            value={data.valor}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "valor",
+                                                    e.target.value,
+                                                )
+                                            }
+                                            className="input-form"
+                                        />
+                                        {errors.valor && (
+                                            <div className="text-sm text-red-500">
+                                                {errors.valor}
                                             </div>
                                         )}
                                     </div>

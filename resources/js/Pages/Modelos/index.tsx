@@ -26,40 +26,42 @@ import {
     TableRow,
 } from "@/Components/Table";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { maskMoney } from "@/Utils/mask";
 import { Head, usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment } from "react";
-import { FaBasketShopping } from "react-icons/fa6";
-import { IoPeopleSharp } from "react-icons/io5";
+import { AiFillFileMarkdown } from "react-icons/ai";
+import {
+    IoChatboxEllipses
+} from "react-icons/io5";
 
-const Servicos = ({ servicos }: any) => {
+const Modelos = ({ modelos }: any) => {
     const { flash } = usePage().props;
-    console.log(servicos);
 
     return (
         <AuthLayout>
-            <Head title="Servicos" />
+            <Head title="Modelos" />
             <Card>
                 <HeaderContent>
                     <TitleTop>
-                        <FaBasketShopping size={30} />
-                        <span className="ml-2">Servicos</span>
+                        <AiFillFileMarkdown size={30} />
+                        <span className="ml-2">Modelos</span>
                     </TitleTop>
-                    <BreadCrumbTop links={[{ url: null, label: "Servicos" }]} />
+                    <BreadCrumbTop
+                        links={[{ url: null, label: "Modelos" }]}
+                    />
                 </HeaderContent>
                 <CardContainer>
                     <CardHeader>
                         <CardHeaderContent>
                             <InputSearch
-                                placeholder={"Buscar serviço"}
-                                url={"servicos.index"}
+                                placeholder={"Buscar por marca"}
+                                url={"modelos.index"}
                             />
                         </CardHeaderContent>
                         <CardHeaderContent>
                             <AddButton
-                                url={"/servicos/create"}
-                                label={"Produto"}
+                                url={"/modelos/create"}
+                                label={"Modelos"}
                             />
                         </CardHeaderContent>
                     </CardHeader>
@@ -69,45 +71,39 @@ const Servicos = ({ servicos }: any) => {
                             <TableHeader>
                                 <TableRow>
                                     <TableHead>#</TableHead>
-                                    <TableHead>Serviço</TableHead>
-                                    <TableHead>Descrição</TableHead>
-                                    <TableHead>Preço</TableHead>
+                                    <TableHead>Modelo</TableHead>
+                                    <TableHead>Marca</TableHead>
                                     <TableHead>Cadastro</TableHead>
                                     <TableHead></TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {servicos?.data.map((servico: any) => (
-                                    <Fragment key={servico.id}>
+                                {modelos.data.map((modelo: any) => (
+                                    <Fragment key={modelo.id}>
                                         <TableRow>
+                                            <TableCell>{modelo.id}</TableCell>
                                             <TableCell>
-                                                {servico.id}
+                                                {modelo.modelo}
                                             </TableCell>
                                             <TableCell>
-                                                {servico.servico}
-                                            </TableCell>
-                                            <TableCell>
-                                                {servico.descricao}
-                                            </TableCell>
-                                            <TableCell>
-                                                R$ {maskMoney(servico.valvenda)}
+                                                {modelo.marca.marca}
                                             </TableCell>
                                             <TableCell>
                                                 {moment(
-                                                    servico.created_at,
-                                                ).format("DD/MM/YYYY")}
+                                                    modelo.created_at,
+                                                ).format("DD/MM/YYYY HH:mm")}
                                             </TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
                                                 <EditButton
                                                     url={route(
-                                                        "servicos.edit",
-                                                        servico.id,
+                                                        "modelos.edit",
+                                                        modelo.id,
                                                     )}
                                                 />
                                                 <DeleteButton
-                                                    url="servicos.destroy"
-                                                    param={servico.id}
-                                                    identify={`o servico ${servico.descricao}`}
+                                                    url="modelos.destroy"
+                                                    param={modelo.id}
+                                                    identify={`a modelo de ${modelo.marca}`}
                                                 />
                                             </TableCell>
                                         </TableRow>
@@ -117,11 +113,11 @@ const Servicos = ({ servicos }: any) => {
                         </Table>
                     </CardBody>
                     <CardFooter>
-                        <Pagination data={servicos} />
+                        <Pagination data={modelos} />
                     </CardFooter>
                 </CardContainer>
             </Card>
         </AuthLayout>
     );
 };
-export default Servicos;
+export default Modelos;

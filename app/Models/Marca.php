@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Servico extends Model
+class Marca extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'servico',
-        'marca',
-        'modelo',
-        'descricao',
-        'valor',
+        'marca'
     ];
+
+    public function modelos()
+    {
+        return $this->belongsToMany(Modelo::class);
+    }
 }

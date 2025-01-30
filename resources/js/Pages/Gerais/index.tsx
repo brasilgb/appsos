@@ -213,7 +213,7 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
                                     />
                                 </div>
                                 
-                                <div className="flex flex-col mt-6">
+                                {/* <div className="flex flex-col mt-6">
                                     <label
                                         className="label-form"
                                         htmlFor="servicos"
@@ -266,7 +266,7 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
                                         className="input-form"
                                         rows={2}
                                     />
-                                </div>
+                                </div> */}
                             </div>
                         </CardBody>
                         <CardFooter>
