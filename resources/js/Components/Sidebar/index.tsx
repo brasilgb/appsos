@@ -46,7 +46,7 @@ const Sidebar = () => {
                     <SideLink openside={openSide} url="clientes" icon={<IoPeopleSharp size={20} />} value={"Clientes"} />
                     <SideLink openside={openSide} url="ordens" icon={<IoConstruct size={20} />} value={"Ordens"} />
                     <SideLink openside={openSide} url="produtos" icon={<FaBasketShopping size={20} />} value={"Produtos/Peças"} />
-                    <SideLink openside={openSide} url="servicos" icon={<GiAutoRepair size={20} />} value={"Serviços"} />
+                    {/* <SideLink openside={openSide} url="servicos" icon={<GiAutoRepair size={20} />} value={"Serviços"} /> */}
                     <SideLink openside={openSide} url="agendas" icon={<FaCalendarDays size={20} />} value={"Agenda"} />
                     <SideLink openside={openSide} url="mensagens" icon={<IoChatboxEllipses size={20} />} value={"Mensagens"} />
                     <li className="">

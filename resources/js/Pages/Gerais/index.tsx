@@ -215,7 +215,7 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
                                         className="label-form"
                                         htmlFor="marcas"
                                     >
-                                        Marca de Peça (separar com ;)
+                                        Marcas de Peças (separar com ;)
                                     </label>
                                     <textarea
                                         id="marcas"

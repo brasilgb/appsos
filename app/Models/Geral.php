@@ -15,6 +15,8 @@ class Geral extends Model
         'bgimage',
         'bgcolor',
         'equtipo',
-        'equestado'
+        'equestado',
+        'marcas',
+        'modelos'
     ];
 }
