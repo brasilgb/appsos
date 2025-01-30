@@ -18,6 +18,7 @@ interface GeraisProps {
     bgcolor: string;
     equtipo: string;
     equestado: string;
+    servicos: string;
     marcas: string;
     modelos: string;
 }
@@ -57,6 +58,7 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
         bgcolor: geral.bgcolor,
         equtipo: geral.equtipo,
         equestado: geral.equestado,
+        servicos: geral.servicos,
         marcas: geral.marcas,
         modelos: geral.modelos,
     });
@@ -69,6 +71,7 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
             bgcolor: data.bgcolor,
             equtipo: data.equtipo,
             equestado: data.equestado,
+            servicos: data.servicos,
             marcas: data.marcas,
             modelos: data.modelos,
         });
@@ -209,6 +212,25 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
                                         rows={2}
                                     />
                                 </div>
+                                
+                                <div className="flex flex-col mt-6">
+                                    <label
+                                        className="label-form"
+                                        htmlFor="servicos"
+                                    >
+                                        Serviços (separar com ;)
+                                    </label>
+                                    <textarea
+                                        id="servicos"
+                                        value={data.servicos}
+                                        onChange={(e) =>
+                                            setData("servicos", e.target.value)
+                                        }
+                                        className="input-form"
+                                        rows={2}
+                                    />
+                                </div>
+                                
                                 
                                 <div className="flex flex-col mt-6">
                                     <label

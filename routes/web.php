@@ -8,7 +8,9 @@ use App\Http\Controllers\GeralController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImagemController;
 use App\Http\Controllers\ImpressaoController;
+use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\MensagemController;
+use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\OrdemController;
 use App\Http\Controllers\PrinterController;
 use App\Http\Controllers\ProdutoController;
@@ -58,6 +60,8 @@ Route::middleware('auth')->group(function () {
         'imagens' => 'imagem'
     ]);
     Route::resource('/produtos', ProdutoController::class);
+    Route::resource('/marcas', MarcaController::class);
+    Route::resource('/modelos', ModeloController::class);
     Route::resource('/servicos', ServicoController::class);
     Route::resource('/agendas', AgendaController::class);
     Route::resource('/mensagens', MensagemController::class)->parameters([

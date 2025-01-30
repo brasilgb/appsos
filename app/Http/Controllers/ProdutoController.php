@@ -9,7 +9,6 @@ use App\Models\Produto;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Session;
 
