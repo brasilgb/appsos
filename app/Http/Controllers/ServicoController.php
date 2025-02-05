@@ -18,14 +18,15 @@ class ServicoController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('q');
-        $query = Servico::with('marcas')->with('modelos')->orderBy('id', 'DESC');
+        $query = Servico::orderBy('id', 'DESC');
 
         if ($search) {
             $query->where('servico', 'like', '%' . $search . '%');
         }
-
+        $marcas = Marca::get();
+        $modelos = Modelo::get();
         $servicos = $query->paginate(12);
-        return Inertia::render('Servicos/index', ["servicos" => $servicos]);
+        return Inertia::render('Servicos/index', ["servicos" => $servicos, 'marcas' => $marcas, 'modelos' => $modelos]);
     }
 
     /**

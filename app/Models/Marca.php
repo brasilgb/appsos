@@ -17,9 +17,4 @@ class Marca extends Model
     {
         return $this->belongsToMany(Modelo::class);
     }
-     
-    public function servico()
-    {
-        return $this->belongsTo(Servico::class);
-    }
 }

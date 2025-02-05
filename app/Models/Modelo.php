@@ -19,9 +19,4 @@ class Modelo extends Model
         return $this->belongsTo(Marca::class);
     }
     
-    public function servico()
-    {
-        return $this->belongsTo(Servico::class);
-    }
-    
 }
