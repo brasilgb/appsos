@@ -106,7 +106,7 @@ class MarcaController extends Controller
     public function destroy(Marca $marca)
     {
         $marca->delete();
-        Session::flash('success', 'Marca deletado com sucesso');
+        Session::flash('success', 'Marca deletada com sucesso!');
         return Redirect::route('marcas.index');
     }
 }

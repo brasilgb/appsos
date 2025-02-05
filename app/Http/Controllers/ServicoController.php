@@ -6,6 +6,7 @@ use App\Models\Marca;
 use App\Models\Modelo;
 use App\Models\Servico;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 
@@ -17,7 +18,7 @@ class ServicoController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('q');
-        $query = Servico::orderBy('id', 'DESC');
+        $query = Servico::with('marcas')->with('modelos')->orderBy('id', 'DESC');
 
         if ($search) {
             $query->where('servico', 'like', '%' . $search . '%');
@@ -41,7 +42,7 @@ class ServicoController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    { 
         $data = $request->all();
 
         $messages = [
@@ -60,38 +61,70 @@ class ServicoController extends Controller
 
         Servico::create($data);
         Session::flash('success', 'Servico cadastrada com sucesso!');
-        return redirect()->route('servicos.index');
+        return redirect::route('servicos.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Servico $servico)
     {
-        //
+        $marcas   = Marca::get();
+        $modelos  = Modelo::get();
+        return Inertia::render('Servicos/edit', ['servico' => $servico, 'marcas' => $marcas, 'modelos' => $modelos]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Servico $servico)
     {
-        //
+        return Redirect::route('servicos.show', ['servico' => $servico->id]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Servico $servico)
     {
-        //
+        
+        $data = $request->all();
+
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido',
+        ];
+        $request->validate(
+            [
+                'servico' => 'required',
+                'valor' => 'required'
+            ],
+            $messages,
+            [
+                'servico' => 'serviço',
+            ]
+        );
+
+        $servico->update($data);
+        Session::flash('success', 'Servico editado com sucesso!');
+        return redirect::route('servicos.show', ['servico' => $servico->id]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Servico $servico)
     {
-        //
+        $servico->delete();
+        Session::flash('success', 'Serviço deletado com sucesso!');
+    }
+
+    public function getServiceQuote(Request $request)
+    {
+        $servico = Servico::where('id', $request->servico)->first();
+        
+        return response()->json([
+            'status' => true,
+            'data' => $servico,
+        ], 200);
     }
 }

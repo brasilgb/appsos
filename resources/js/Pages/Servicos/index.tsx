@@ -2,8 +2,6 @@ import {
     AddButton,
     DeleteButton,
     EditButton,
-    OrderButton,
-    WhatsAppButton,
 } from "@/Components/Buttons";
 import {
     Card,
@@ -30,12 +28,11 @@ import { maskMoney } from "@/Utils/mask";
 import { Head, usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment } from "react";
-import { FaBasketShopping } from "react-icons/fa6";
-import { IoPeopleSharp } from "react-icons/io5";
+import { GiAutoRepair } from "react-icons/gi";
 
 const Servicos = ({ servicos }: any) => {
     const { flash } = usePage().props;
-    console.log(servicos);
+console.log(servicos);
 
     return (
         <AuthLayout>
@@ -43,7 +40,7 @@ const Servicos = ({ servicos }: any) => {
             <Card>
                 <HeaderContent>
                     <TitleTop>
-                        <FaBasketShopping size={30} />
+                        <GiAutoRepair size={30} />
                         <span className="ml-2">Servicos</span>
                     </TitleTop>
                     <BreadCrumbTop links={[{ url: null, label: "Servicos" }]} />
@@ -59,7 +56,7 @@ const Servicos = ({ servicos }: any) => {
                         <CardHeaderContent>
                             <AddButton
                                 url={"/servicos/create"}
-                                label={"Produto"}
+                                label={"Serviço"}
                             />
                         </CardHeaderContent>
                     </CardHeader>
@@ -70,7 +67,8 @@ const Servicos = ({ servicos }: any) => {
                                 <TableRow>
                                     <TableHead>#</TableHead>
                                     <TableHead>Serviço</TableHead>
-                                    <TableHead>Descrição</TableHead>
+                                    <TableHead>Marca</TableHead>
+                                    <TableHead>Modelo</TableHead>
                                     <TableHead>Preço</TableHead>
                                     <TableHead>Cadastro</TableHead>
                                     <TableHead></TableHead>
@@ -87,10 +85,13 @@ const Servicos = ({ servicos }: any) => {
                                                 {servico.servico}
                                             </TableCell>
                                             <TableCell>
-                                                {servico.descricao}
+                                                {servico.marca}
                                             </TableCell>
                                             <TableCell>
-                                                R$ {maskMoney(servico.valvenda)}
+                                                {servico.modelo}
+                                            </TableCell>
+                                            <TableCell>
+                                                R$ {maskMoney(`${servico.valor}`)}
                                             </TableCell>
                                             <TableCell>
                                                 {moment(

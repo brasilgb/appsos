@@ -16,4 +16,12 @@ class Servico extends Model
         'descricao',
         'valor',
     ];
+    public function marcas()
+    {
+        return $this->hasMany(Marca::class);
+    }
+    public function modelos()
+    {
+        return $this->hasMany(Modelo::class);
+    }
 }

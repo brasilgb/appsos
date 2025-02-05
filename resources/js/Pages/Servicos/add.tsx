@@ -9,15 +9,10 @@ import {
 } from "@/Components/Card";
 import { BreadCrumbTop, HeaderContent, TitleTop } from "@/Components/PageTop";
 import AuthLayout from "@/Layouts/AuthLayout";
-import {
-    movimentosProdutos,
-    tiposProdutos,
-    unidadesProdutos,
-} from "@/Utils/dataSelect";
-import { maskMoney, maskMoneyDot } from "@/Utils/mask";
+import { maskMoney, maskMoneyDot, unMask } from "@/Utils/mask";
 import { Head, router, useForm, usePage } from "@inertiajs/react";
-import React from "react";
-import { FaBasketShopping } from "react-icons/fa6";
+import { useEffect, useState } from "react";
+import { GiAutoRepair } from "react-icons/gi";
 
 const AddServico = ({ marcas, modelos }: any) => {
     const { errors } = usePage().props;
@@ -29,8 +24,16 @@ const AddServico = ({ marcas, modelos }: any) => {
         valor: ""
     });
 
+    const [modeloFiltered, setModeloFiltered] = useState<any>([]);
+
+    function handleModelo(marca: any) {
+        const mf = modelos.filter((fm: any) => (parseInt(fm.marca_id) === parseInt(marca)));
+        setModeloFiltered(mf);
+    }
+
     function handleSubmit(e: any) {
         e.preventDefault();
+        setData('valor', maskMoneyDot(data.valor.toString()));
         post(route("servicos.store"));
     }
 
@@ -40,20 +43,20 @@ const AddServico = ({ marcas, modelos }: any) => {
             <Card>
                 <HeaderContent>
                     <TitleTop>
-                        <FaBasketShopping size={30} />
-                        <span className="ml-2">Produtos</span>
+                        <GiAutoRepair size={30} />
+                        <span className="ml-2">Serviços</span>
                     </TitleTop>
                     <BreadCrumbTop
                         links={[
-                            { url: "/produtos", label: "Produtos" },
-                            { url: null, label: "Adicionar produto" },
+                            { url: "/servicos", label: "Serviços" },
+                            { url: null, label: "Adicionar serviço" },
                         ]}
                     />
                 </HeaderContent>
                 <CardContainer>
                     <CardHeader>
                         <CardHeaderContent>
-                            <BackButton url={"/produtos"} label={"Voltar"} />
+                            <BackButton url={"/servicos"} label={"Voltar"} />
                         </CardHeaderContent>
                         <CardHeaderContent>
                             <></>
@@ -88,7 +91,7 @@ const AddServico = ({ marcas, modelos }: any) => {
                                             </div>
                                         )}
                                     </div>
-
+ 
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
@@ -99,8 +102,10 @@ const AddServico = ({ marcas, modelos }: any) => {
                                         <select
                                             id="marca"
                                             value={data.marca}
-                                            onChange={(e) =>
+                                            onChange={(e:any) => {
                                                 setData("marca", e.target.value)
+                                                handleModelo(e.target.value)
+                                            }
                                             }
                                             className="input-form"
                                         >
@@ -141,10 +146,10 @@ const AddServico = ({ marcas, modelos }: any) => {
                                             <option value="">
                                                 Selecione o modelo
                                             </option>
-                                            {modelos.map((modelo: any) => (
+                                            {modeloFiltered?.map((modelo: any) => (
                                                 <option
                                                     key={modelo.id}
-                                                    id={modelo.id}
+                                                    value={modelo.id}
                                                 >
                                                     {modelo.modelo}
                                                 </option>
@@ -192,7 +197,7 @@ const AddServico = ({ marcas, modelos }: any) => {
                                         <input
                                             id="valor"
                                             type="text"
-                                            value={data.valor}
+                                            value={maskMoney(data.valor.toString())}
                                             onChange={(e) =>
                                                 setData(
                                                     "valor",
@@ -212,7 +217,7 @@ const AddServico = ({ marcas, modelos }: any) => {
                             </div>
                         </CardBody>
                         <CardFooter>
-                            <SaveButton />
+                            <SaveButton disabled={processing} />
                         </CardFooter>
                     </form>
                 </CardContainer>

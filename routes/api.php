@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ImagemController;
 use App\Http\Controllers\OrdemController;
+use App\Http\Controllers\ServicoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +20,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/ordercli/{customer}', [OrdemController::class, 'getOrderCli'])->name('ordercli');
-Route::get('/clientes', [ClienteController::class, 'getClientes'])->name('clientes');
+Route::get('/clientes', [ClienteController::class, 'getClientes']);
+Route::get('/services', [ServicoController::class, 'getServiceQuote']);
 Route::get('/allorder', [OrdemController::class, 'allOrder'])->name('allrder');
 Route::get('/order/{order}', [OrdemController::class, 'getOrder'])->name('order');
 Route::delete('/deleteimage/{image}', [ImagemController::class, 'deleteImageOrder'])->name('deleteimage');
