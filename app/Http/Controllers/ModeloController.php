@@ -116,4 +116,13 @@ class ModeloController extends Controller
         Session::flash('success', 'Modelo deletado com sucesso');
         return Redirect::route('modelos.index');
     }
+    
+    public function getModelos(Request $request)
+    {
+        $modelos = Modelo::where('marca_id', $request->marca)->get();
+        return response()->json([
+            "success" => true,
+            "data" => $modelos
+        ]);
+    }
 }

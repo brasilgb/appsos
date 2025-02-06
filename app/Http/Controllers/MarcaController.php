@@ -109,4 +109,13 @@ class MarcaController extends Controller
         Session::flash('success', 'Marca deletada com sucesso!');
         return Redirect::route('marcas.index');
     }
+
+    public function getMarcas()
+    {
+        $marcas = Marca::get();
+        return response()->json([
+            "success" => true,
+            "data" => $marcas
+        ]);
+    }
 }

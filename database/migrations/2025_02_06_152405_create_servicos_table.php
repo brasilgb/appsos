@@ -14,10 +14,6 @@ return new class extends Migration
         Schema::create('servicos', function (Blueprint $table) {
             $table->id();
             $table->string('servico');
-            $table->integer('marca')->nullable();
-            $table->integer('modelo')->nullable();
-            $table->text('descricao')->nullable();
-            $table->float('valor');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

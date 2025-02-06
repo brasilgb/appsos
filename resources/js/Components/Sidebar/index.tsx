@@ -12,7 +12,6 @@ import {
     IoPerson,
 } from "react-icons/io5";
 import {
-    FaBasketShopping,
     FaCalendarDays,
     FaChevronDown,
     FaSliders,
@@ -48,33 +47,7 @@ const Sidebar = () => {
                     <SideLink openside={openSide} url="clientes" icon={<IoPeopleSharp size={20} />} value={"Clientes"} />
                     <SideLink openside={openSide} url="ordens" icon={<IoConstruct size={20} />} value={"Ordens"} />
                     {/* <SideLink openside={openSide} url="produtos" icon={<FaBasketShopping size={20} />} value={"Produtos/Peças"} /> */}
-                    <li className="">
-                        <div
-                            className={`flex items-center justify-between pl-2.5 py-2 pr-2 cursor-pointer ${url.startsWith("/marcas") || url.startsWith("/modelos")  ? "text-gray500 bg-blue-quatro" : "text-gray-100 hover:bg-blue-middle hover:text-gray-400"} ${openDropDown ? "bg-gray-50 hover:bg-gray-50 text-gray-600  border-b rounded-t-lg" : "text-gray-100 rounded-lg"}`}
-                            onClick={() => setOpenDropDown((state) => !state)}
-                        >
-                            <MdAutoAwesomeMotion size={20} />
-                            {openSide &&
-                                <>
-                                    <div className="self-start w-full pl-2">
-                                        Marcas/Modelos
-                                    </div>
-                                    <FaChevronDown
-                                        size={12}
-                                        className={`${openDropDown ? "-rotate-180" : "rotate-0"
-                                            } transition-all duration-300`}
-                                    />
-                                </>
-                            }
-                        </div>
-                        {openDropDown && (
-                            <ul className={`bg-gray-50 flex flex-col gap-1 rounded-b-lg p-2 ${!openSide ? 'w-52 absolute' : 'w-[248px]'} `}>
-                                <SideLink openside={true} url="marcas" icon={<AiFillFileMarkdown size={20} />} value={"Marcas"} sublink={true} />
-                                <SideLink openside={true} url="modelos" icon={<AiFillFileMarkdown size={20} />} value={"Modelos"} sublink={true} />
-                            </ul>
-                        )}
-                    </li>
-                    <SideLink openside={openSide} url="servicos" icon={<GiAutoRepair size={20} />} value={"Serviços"} />
+                    
                     <SideLink openside={openSide} url="agendas" icon={<FaCalendarDays size={20} />} value={"Agenda"} />
                     <SideLink openside={openSide} url="mensagens" icon={<IoChatboxEllipses size={20} />} value={"Mensagens"} />
                     <li className="">
@@ -91,7 +64,7 @@ const Sidebar = () => {
                                     <FaChevronDown
                                         size={12}
                                         className={`${openDropDownTwo ? "-rotate-180" : "rotate-0"
-                                            } transition-all duration-300`}
+                                        } transition-all duration-300`}
                                     />
                                 </>
                             }
@@ -106,6 +79,34 @@ const Sidebar = () => {
                             </ul>
                         )}
                     </li>
+                    <li className="">
+                        <div
+                            className={`flex items-center justify-between pl-2.5 py-2 pr-2 cursor-pointer ${url.startsWith("/marcas") || url.startsWith("/modelos") || url.startsWith("/servicos")  ? "text-gray500 bg-blue-quatro" : "text-gray-100 hover:bg-blue-middle hover:text-gray-400"} ${openDropDown ? "bg-gray-50 hover:bg-gray-50 text-gray-600  border-b rounded-t-lg" : "text-gray-100 rounded-lg"}`}
+                            onClick={() => setOpenDropDown((state) => !state)}
+                        >
+                            <MdAutoAwesomeMotion size={20} />
+                            {openSide &&
+                                <>
+                                    <div className="self-start w-full pl-2">
+                                        Marcas/Modelos/Serviços
+                                    </div>
+                                    <FaChevronDown
+                                        size={12}
+                                        className={`${openDropDown ? "-rotate-180" : "rotate-0"
+                                        } transition-all duration-300`}
+                                    />
+                                </>
+                            }
+                        </div>
+                        {openDropDown && (
+                            <ul className={`bg-gray-50 flex flex-col gap-1 rounded-b-lg p-2 ${!openSide ? 'w-52 absolute' : 'w-[248px]'} `}>
+                                <SideLink openside={true} url="marcas" icon={<AiFillFileMarkdown size={20} />} value={"Marcas"} sublink={true} />
+                                <SideLink openside={true} url="modelos" icon={<AiFillFileMarkdown size={20} />} value={"Modelos"} sublink={true} />
+                                <SideLink openside={true} url="servicos" icon={<AiFillFileMarkdown size={20} />} value={"Serviços"} sublink={true} />
+                            </ul>
+                        )}
+                    </li>
+                    <SideLink openside={openSide} url="orcamentos" icon={<GiAutoRepair size={20} />} value={"Orçamento de Serviços"} />
                     <SideLink openside={openSide} url="usuarios" icon={<IoPerson size={20} />} value={"Usuários"} />
                 </ul>
             </nav>

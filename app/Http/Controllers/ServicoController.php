@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Marca;
-use App\Models\Modelo;
 use App\Models\Servico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -23,10 +21,9 @@ class ServicoController extends Controller
         if ($search) {
             $query->where('servico', 'like', '%' . $search . '%');
         }
-        $marcas = Marca::get();
-        $modelos = Modelo::get();
+
         $servicos = $query->paginate(12);
-        return Inertia::render('Servicos/index', ["servicos" => $servicos, 'marcas' => $marcas, 'modelos' => $modelos]);
+        return Inertia::render('Servicos/index', ["servicos" => $servicos]);
     }
 
     /**
@@ -34,16 +31,14 @@ class ServicoController extends Controller
      */
     public function create()
     {
-        $marcas = Marca::get();
-        $modelos = Modelo::get();
-        return Inertia::render('Servicos/add', ['marcas' => $marcas, 'modelos' => $modelos]);
+        return Inertia::render('Servicos/add');
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    { 
+    {
         $data = $request->all();
 
         $messages = [
@@ -51,8 +46,7 @@ class ServicoController extends Controller
         ];
         $request->validate(
             [
-                'servico' => 'required',
-                'valor' => 'required'
+                'servico' => 'required'
             ],
             $messages,
             [
@@ -61,8 +55,8 @@ class ServicoController extends Controller
         );
 
         Servico::create($data);
-        Session::flash('success', 'Servico cadastrada com sucesso!');
-        return redirect::route('servicos.index');
+        Session::flash('success', 'Serviço cadastrado com sucesso!');
+        return redirect()->route('servicos.index');
     }
 
     /**
@@ -70,9 +64,7 @@ class ServicoController extends Controller
      */
     public function show(Servico $servico)
     {
-        $marcas   = Marca::get();
-        $modelos  = Modelo::get();
-        return Inertia::render('Servicos/edit', ['servico' => $servico, 'marcas' => $marcas, 'modelos' => $modelos]);
+        return Inertia::render('Servicos/edit', ['servicos' => $servico]);
     }
 
     /**
@@ -88,7 +80,6 @@ class ServicoController extends Controller
      */
     public function update(Request $request, Servico $servico)
     {
-        
         $data = $request->all();
 
         $messages = [
@@ -96,8 +87,7 @@ class ServicoController extends Controller
         ];
         $request->validate(
             [
-                'servico' => 'required',
-                'valor' => 'required'
+                'servico' => 'required'
             ],
             $messages,
             [
@@ -106,8 +96,8 @@ class ServicoController extends Controller
         );
 
         $servico->update($data);
-        Session::flash('success', 'Servico editado com sucesso!');
-        return redirect::route('servicos.show', ['servico' => $servico->id]);
+        Session::flash('success', 'Serviço editado com sucesso!');
+        return Redirect::route('servicos.show', ['servico' => $servico->id]);
     }
 
     /**
@@ -117,15 +107,15 @@ class ServicoController extends Controller
     {
         $servico->delete();
         Session::flash('success', 'Serviço deletado com sucesso!');
+        return Redirect::route('servicos.index');
     }
-
-    public function getServiceQuote(Request $request)
+    
+    public function getServicos()
     {
-        $servico = Servico::where('id', $request->servico)->first();
-        
+        $servicos = Servico::get();
         return response()->json([
-            'status' => true,
-            'data' => $servico,
-        ], 200);
+            "success" => true,
+            "data" => $servicos
+        ]);
     }
 }

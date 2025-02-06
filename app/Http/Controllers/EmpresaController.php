@@ -47,4 +47,13 @@ class EmpresaController extends Controller
         Session::flash('success', 'Dados da empresa editado com sucesso!');
         return Redirect::route('empresa.index');
     }
+
+    public function getEmpresaInfo()
+    {
+        $empresa = Empresa::first();
+        return response()->json([
+            "success" => true,
+            "data" => $empresa
+        ]);
+    }
 }

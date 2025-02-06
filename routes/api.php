@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ImagemController;
+use App\Http\Controllers\MarcaController;
+use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\OrdemController;
 use App\Http\Controllers\ServicoController;
 use App\Http\Controllers\UserController;
@@ -21,7 +24,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/ordercli/{customer}', [OrdemController::class, 'getOrderCli'])->name('ordercli');
 Route::get('/clientes', [ClienteController::class, 'getClientes']);
-Route::get('/services', [ServicoController::class, 'getServiceQuote']);
+Route::post('/servicos', [ServicoController::class, 'getServiceQuote']);
+Route::get('/marcas', [MarcaController::class, 'getMarcas']);
+Route::post('/modelos', [ModeloController::class, 'getModelos']);
+Route::get('/empresa', [EmpresaController::class, 'getEmpresaInfo']);
 Route::get('/allorder', [OrdemController::class, 'allOrder'])->name('allrder');
 Route::get('/order/{order}', [OrdemController::class, 'getOrder'])->name('order');
 Route::delete('/deleteimage/{image}', [ImagemController::class, 'deleteImageOrder'])->name('deleteimage');

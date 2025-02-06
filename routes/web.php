@@ -11,6 +11,7 @@ use App\Http\Controllers\ImpressaoController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\MensagemController;
 use App\Http\Controllers\ModeloController;
+use App\Http\Controllers\OrcamentoController;
 use App\Http\Controllers\OrdemController;
 use App\Http\Controllers\PrinterController;
 use App\Http\Controllers\ProdutoController;
@@ -63,6 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/marcas', MarcaController::class);
     Route::resource('/modelos', ModeloController::class);
     Route::resource('/servicos', ServicoController::class);
+    Route::resource('/orcamentos', OrcamentoController::class);
     Route::resource('/agendas', AgendaController::class);
     Route::resource('/mensagens', MensagemController::class)->parameters([
         'mensagens' => 'mensagem'
