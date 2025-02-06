@@ -46,7 +46,7 @@ class OrcamentoController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    { 
+    {
         $data = $request->all();
 
         $messages = [
@@ -92,7 +92,7 @@ class OrcamentoController extends Controller
      */
     public function update(Request $request, Orcamento $orcamento)
     {
-        
+
         $data = $request->all();
 
         $messages = [
@@ -123,15 +123,23 @@ class OrcamentoController extends Controller
         Session::flash('success', 'Orçamento deletado com sucesso!');
     }
 
-    public function getServiceQuote(Request $request)
+    public function getOrcamentos(Request $request)
     {
-        if ($request->orcamento){
-            $orcamento = Orcamento::where('id', $request->orcamento)->get();
-        }
-        
+        $orcamento = Orcamento::where('servico', $request->servico)->orWhere('marca', $request->marca)->orWhere('modelo', $request->modelo)->first();
+        $servicos  = Servico::where('id', $request->servico)->first()->servico;
+        $marcas    = $request->marca ? Marca::where('id', $request->marca)->first()->marca : null;
+        $modelos   = $request->modelo ? Modelo::where('id', $request->modelo)->first()->modelo : null;
         return response()->json([
             'status' => true,
-            'data' => $orcamento,
+            'data' => [
+                "id" =>  $orcamento->id,
+                "servico" =>  $servicos,
+                "marca" =>  $marcas,
+                "modelo" =>  $modelos,
+                "descricao" =>  $orcamento->descricao,
+                "valor" =>  $orcamento->valor,
+                "created_at" =>  $orcamento->created_at,
+            ],
         ], 200);
     }
 }

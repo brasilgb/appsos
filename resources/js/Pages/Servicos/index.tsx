@@ -2,8 +2,6 @@ import {
     AddButton,
     DeleteButton,
     EditButton,
-    OrderButton,
-    WhatsAppButton,
 } from "@/Components/Buttons";
 import {
     Card,
@@ -28,11 +26,8 @@ import {
 import AuthLayout from "@/Layouts/AuthLayout";
 import { Head, usePage } from "@inertiajs/react";
 import moment from "moment";
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { AiFillFileMarkdown } from "react-icons/ai";
-import {
-    IoChatboxEllipses
-} from "react-icons/io5";
 
 const Servicos = ({ servicos }: any) => {
     const { flash } = usePage().props;

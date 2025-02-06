@@ -27,7 +27,7 @@ import AuthLayout from "@/Layouts/AuthLayout";
 import { maskMoney } from "@/Utils/mask";
 import { Head, usePage } from "@inertiajs/react";
 import moment from "moment";
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { GiAutoRepair } from "react-icons/gi";
 
 const Orcamentos = ({ orcamentos, servicos, marcas, modelos }: any) => {
@@ -42,7 +42,6 @@ const Orcamentos = ({ orcamentos, servicos, marcas, modelos }: any) => {
     const getServicos = (servico_id: number) => {
         return servicos.filter((mf: any) => (mf.id === servico_id)).map((m: any) => (m.servico));
     }
-    console.log(servicos);
 
     return (
         <AuthLayout>
