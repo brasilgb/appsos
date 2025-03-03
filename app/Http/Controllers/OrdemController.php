@@ -67,6 +67,11 @@ class OrdemController extends Controller
     {
         $search = $request->get('q');
         $oc = $request->get('oc');
+        $feedback = $request->get('f');
+
+       if ($search && $feedback) {
+        Ordem::where('id', $search)->update(['feedback' => $feedback]);
+       }
 
         $query = Ordem::with('cliente')->orderBy('id', 'DESC');
 

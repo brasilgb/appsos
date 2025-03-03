@@ -147,7 +147,7 @@ const Home = ({ dashdata, statusorder }: any) => {
                             <div className="grid md:grid-cols-5 gap-2 text-center max-h-96 overflow-y-auto">
                                 {dashdata?.trintadias?.map((gerado: any, idx: number) => (
                                     <Link
-                                        href={`ordens/${gerado.id}`}
+                                        href={`ordens?q=${gerado.id}&f=1`}
                                         key={idx} className="bg-amber-600 hover:bg-amber-600/90 text-sm font-medium text-gray-50 rounded shadow border-2 border-gray-50 py-1">
                                         {gerado.id}
                                     </Link>

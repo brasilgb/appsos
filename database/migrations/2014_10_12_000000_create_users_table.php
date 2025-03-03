@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('whatsapp')->nullable();
             $table->tinyInteger('role');
             $table->tinyInteger('status');
+            $table->tinyInteger('feedback')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -31,9 +31,10 @@ class HomeController extends Controller
             'numpro' => count(Produto::get()),
             'numage' => count(Agenda::get()),
             'nummen' => count(Mensagem::get()),
-            'trintadias' => Ordem::whereDate("dtentrega", '>=', $date->toDateString())
+            'trintadias' => Ordem::with('cliente')->whereDate("dtentrega", '>=', $date->toDateString())
             ->whereYear("dtentrega", '>=', $year)
             ->where('status', 8)
+            ->where('feedback', 0)
             ->orderBy('dtentrega', 'DESC')
             ->get(),
         ];

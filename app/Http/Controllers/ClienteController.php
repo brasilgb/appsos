@@ -29,7 +29,7 @@ class ClienteController extends Controller
    public function index(Request $request)
    {
        $search = $request->get('q');
-
+       
        $query = Cliente::with('ordens')->orderBy('id', 'DESC');
 
        if ($search) {
