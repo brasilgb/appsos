@@ -142,6 +142,23 @@ const Home = ({ dashdata, statusorder }: any) => {
                         <div className="bg-gray-50 rounded shadow-sm p-2">
                             <div className="border-b mb-2 text-gray-500 flex items-center justify-start gap-1">
                                 <IoList size={20} />
+                                <h1 className="text-sm uppercase font-medium">Equipamento Entregue ({'<='}30 dias)</h1>
+                            </div>
+                            <div className="grid md:grid-cols-5 gap-2 text-center max-h-96 overflow-y-auto">
+                                {dashdata?.trintadias?.map((gerado: any, idx: number) => (
+                                    <Link
+                                        href={`ordens/${gerado.id}`}
+                                        key={idx} className="bg-amber-600 hover:bg-amber-600/90 text-sm font-medium text-gray-50 rounded shadow border-2 border-gray-50 py-1">
+                                        {gerado.id}
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-6 mt-4">
+                        <div className="bg-gray-50 rounded shadow-sm p-2">
+                            <div className="border-b mb-2 text-gray-500 flex items-center justify-start gap-1">
+                                <IoList size={20} />
                                 <h1 className="text-sm uppercase font-medium">Visitas agendadas</h1>
                             </div>
                             <div className="grid md:grid-cols-5 gap-2 text-center max-h-96 overflow-y-auto">

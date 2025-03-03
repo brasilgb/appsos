@@ -9,11 +9,15 @@ use App\Models\Ordem;
 use App\Models\Produto;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        $date = Carbon::now()->subDays(30);
+        $year = Carbon::now()->year;
+        // dd($date->toDateString());
         $statusOrder = [
             'gerados'    => Ordem::where('status', 3)->get('id'),
             'aprovados'  => Ordem::where('status', 4)->get('id'),
@@ -27,7 +31,13 @@ class HomeController extends Controller
             'numpro' => count(Produto::get()),
             'numage' => count(Agenda::get()),
             'nummen' => count(Mensagem::get()),
+            'trintadias' => Ordem::whereDate("dtentrega", '>=', $date->toDateString())
+            ->whereYear("dtentrega", '>=', $year)
+            ->where('status', 8)
+            ->orderBy('dtentrega', 'DESC')
+            ->get(),
         ];
+        // dd($dashData);
         return Inertia::render('Home/index', ['dashdata' => $dashData, 'statusorder' => $statusOrder]);
     }
 }
