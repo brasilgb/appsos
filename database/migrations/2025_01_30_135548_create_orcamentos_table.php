@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('marca')->nullable();
             $table->integer('modelo')->nullable();
             $table->text('descricao')->nullable();
-            $table->float('valor');
+            $table->decimal('valor', 10,2);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

@@ -16,7 +16,8 @@ import { AiFillFileMarkdown } from "react-icons/ai";
 const AddServico = () => {
 
     const { data, setData, post, progress, processing, errors } = useForm({
-        servico: ""
+        servico: "",
+        simples: false
     });
 
     function handleSubmit(e: any) {
@@ -51,8 +52,8 @@ const AddServico = () => {
                     </CardHeader>
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <CardBody className=" border-y border-gray-100">
-                            <div className="px-3 my-4">
-                                <div className="flex flex-col">
+                            <div className="grid grid-cols-3 gap-4 px-3 my-4">
+                                <div className="flex flex-col col-span-2">
                                     <label
                                         className="label-form"
                                         htmlFor="descricao"
@@ -76,6 +77,21 @@ const AddServico = () => {
                                             {errors.servico}
                                         </div>
                                     )}
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <label
+                                        className="label-form"
+                                        htmlFor="simples"
+                                    >
+                                        Serviço simples
+                                    </label>
+                                    <input
+                                        id="simples"
+                                        type="checkbox"
+                                        checked={data.simples}
+                                        onChange={(e) => setData('simples', e.target.checked)}
+                                        className="input-form"
+                                    />
                                 </div>
                             </div>
                         </CardBody>

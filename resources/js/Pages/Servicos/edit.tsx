@@ -19,7 +19,8 @@ const AddServico = ({ servicos }: any) => {
     const { flash } = usePage().props as any;
 
     const { data, setData, patch, progress, processing, errors } = useForm({
-        servico: servicos.servico
+        servico: servicos.servico,
+        simples: servicos.simples,
     });
 
     function handleSubmit(e: any) {
@@ -55,8 +56,8 @@ const AddServico = ({ servicos }: any) => {
                     </CardHeader>
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <CardBody className=" border-y border-gray-100">
-                            <div className="px-3 my-4">
-                                <div className="flex flex-col">
+                            <div className="grid grid-cols-3 gap-4 px-3 my-4">
+                                <div className="flex flex-col col-span-2">
                                     <label
                                         className="label-form"
                                         htmlFor="descricao"
@@ -80,6 +81,21 @@ const AddServico = ({ servicos }: any) => {
                                             {errors.servico}
                                         </div>
                                     )}
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <label
+                                        className="label-form"
+                                        htmlFor="simples"
+                                    >
+                                        Serviço simples
+                                    </label>
+                                    <input
+                                        id="simples"
+                                        type="checkbox"
+                                        checked={data.simples}
+                                        onChange={(e) => setData('simples', e.target.checked)}
+                                        className="input-form"
+                                    />
                                 </div>
                             </div>
                         </CardBody>

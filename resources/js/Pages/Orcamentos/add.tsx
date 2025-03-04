@@ -31,12 +31,9 @@ const AddOrcamento = ({ servicos, marcas, modelos }: any) => {
         setModeloFiltered(mf);
     }
 
-    useEffect(() => {
-        setData('valor', maskMoneyDot(data.valor.toString()));
-    },[data]);
-    
     function handleSubmit(e: any) {
         e.preventDefault();
+        setData('valor', maskMoneyDot(data.valor.toString()));
         post(route("orcamentos.store"));
     }
 
@@ -69,7 +66,7 @@ const AddOrcamento = ({ servicos, marcas, modelos }: any) => {
                         <CardBody className=" border-y border-gray-100">
                             <div className="px-3 my-4">
                                 <div className="grid grid-cols-3 gap-4">
-                                <div className="flex flex-col">
+                                    <div className="flex flex-col">
                                         <label
                                             className="label-form"
                                             htmlFor="servico"
@@ -98,8 +95,13 @@ const AddOrcamento = ({ servicos, marcas, modelos }: any) => {
                                                 </option>
                                             ))}
                                         </select>
+                                        {errors.servico && (
+                                            <div className="text-sm text-red-500">
+                                                {errors.servico}
+                                            </div>
+                                        )}
                                     </div>
- 
+
                                     <div className="flex flex-col">
                                         <label
                                             className="label-form"
@@ -110,7 +112,7 @@ const AddOrcamento = ({ servicos, marcas, modelos }: any) => {
                                         <select
                                             id="marca"
                                             value={data.marca}
-                                            onChange={(e:any) => {
+                                            onChange={(e: any) => {
                                                 setData("marca", e.target.value)
                                                 handleModelo(e.target.value)
                                             }
@@ -170,8 +172,8 @@ const AddOrcamento = ({ servicos, marcas, modelos }: any) => {
                                         )}
                                     </div>
                                 </div>
-                                <div className="grid grid-cols-2 gap-4 mt-4">
-                                    <div className="flex flex-col">
+                                <div className="grid grid-cols-3 gap-4 mt-4">
+                                    <div className="flex flex-col col-span-2">
                                         <label
                                             className="label-form"
                                             htmlFor="descricao"
@@ -220,7 +222,6 @@ const AddOrcamento = ({ servicos, marcas, modelos }: any) => {
                                             </div>
                                         )}
                                     </div>
-
                                 </div>
                             </div>
                         </CardBody>

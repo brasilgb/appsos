@@ -23,7 +23,8 @@ const EditOrcamento = ({ orcamento, servicos, marcas, modelos }: any) => {
         marca: orcamento?.marca,
         modelo: orcamento?.modelo,
         descricao: orcamento?.descricao,
-        valor: orcamento?.valor
+        valor: orcamento?.valor,
+        simples: orcamento?.simples
     });
 
     const [modeloFiltered, setModeloFiltered] = useState<any>(modelos.filter((f: any) => (f.marca_id == orcamento?.marca)));
@@ -173,8 +174,8 @@ const EditOrcamento = ({ orcamento, servicos, marcas, modelos }: any) => {
                                         )}
                                     </div>
                                 </div>
-                                <div className="grid grid-cols-2 gap-4 mt-4">
-                                    <div className="flex flex-col">
+                                <div className="grid grid-cols-5 gap-4 mt-4">
+                                    <div className="flex flex-col col-span-2">
                                         <label
                                             className="label-form"
                                             htmlFor="descricao"
@@ -198,7 +199,7 @@ const EditOrcamento = ({ orcamento, servicos, marcas, modelos }: any) => {
                                             </div>
                                         )}
                                     </div>
-                                    <div className="flex flex-col">
+                                    <div className="flex flex-col col-span-2">
                                         <label
                                             className="label-form"
                                             htmlFor="valor"
@@ -223,7 +224,21 @@ const EditOrcamento = ({ orcamento, servicos, marcas, modelos }: any) => {
                                             </div>
                                         )}
                                     </div>
-
+                                    <div className="flex items-center gap-2">
+                                        <label
+                                            className="label-form"
+                                            htmlFor="simples"
+                                        >
+                                            Serviço simples
+                                        </label>
+                                        <input
+                                            id="simples"
+                                            type="checkbox"
+                                            checked={data.simples}
+                                            onChange={(e) => setData('simples', e.target.checked)}
+                                            className="input-form"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </CardBody>

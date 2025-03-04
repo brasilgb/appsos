@@ -10,6 +10,7 @@ class Servico extends Model
     use HasFactory;
 
     protected $fillable = [
-        'servico'
+        'servico',
+        'simples'
     ];
 }

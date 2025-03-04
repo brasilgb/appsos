@@ -14,6 +14,6 @@ class Orcamento extends Model
         'marca',
         'modelo',
         'descricao',
-        'valor',
+        'valor'
     ];
 }

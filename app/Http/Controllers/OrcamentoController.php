@@ -13,6 +13,7 @@ use Inertia\Inertia;
 
 class OrcamentoController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -59,7 +60,7 @@ class OrcamentoController extends Controller
             ],
             $messages,
             [
-                'servico' => 'orçamento',
+                'servico' => 'serviço',
             ]
         );
 
@@ -125,17 +126,25 @@ class OrcamentoController extends Controller
 
     public function getOrcamentos(Request $request)
     {
-        $orcamento = Orcamento::where('servico', $request->servico)->orWhere('marca', $request->marca)->orWhere('modelo', $request->modelo)->first();
-        $servicos  = Servico::where('id', $request->servico)->first()->servico;
-        $marcas    = $request->marca ? Marca::where('id', $request->marca)->first()->marca : null;
-        $modelos   = $request->modelo ? Modelo::where('id', $request->modelo)->first()->modelo : null;
+        if(!$request->marca && !$request->modelo){
+            $orcamento = Orcamento::where('servico', $request->servico)->first();
+            $marcas = [];
+            $modelos = [];
+        }else{
+            $orcamento = Orcamento::where('servico', $request->servico)->where('marca', $request->marca)->where('modelo', $request->modelo)->first();
+            $marcas    = Marca::where('id', $request->marca)->first();
+            $modelos   = Modelo::where('id', $request->modelo)->first();
+        }
+        
+        $servicos  = Servico::where('id', $request->servico)->first();
+
         return response()->json([
             'status' => true,
             'data' => [
                 "id" =>  $orcamento->id,
-                "servico" =>  $servicos,
-                "marca" =>  $marcas,
-                "modelo" =>  $modelos,
+                "servico" =>  $servicos->servico,
+                "marca" =>  $marcas ? $marcas->marca : null,
+                "modelo" =>  $modelos ? $modelos->modelo : null,
                 "descricao" =>  $orcamento->descricao,
                 "valor" =>  $orcamento->valor,
                 "created_at" =>  $orcamento->created_at,
