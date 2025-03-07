@@ -66,6 +66,7 @@ const Servicos = ({ servicos }: any) => {
                             <TableHeader>
                                 <TableRow>
                                     <TableHead>#</TableHead>
+                                    <TableHead>Equipamento</TableHead>
                                     <TableHead>Servico</TableHead>
                                     <TableHead>Cadastro</TableHead>
                                     <TableHead></TableHead>
@@ -76,6 +77,9 @@ const Servicos = ({ servicos }: any) => {
                                     <Fragment key={servico.id}>
                                         <TableRow>
                                             <TableCell>{servico.id}</TableCell>
+                                            <TableCell>
+                                                {servico.equipamento}
+                                            </TableCell>
                                             <TableCell>
                                                 {servico.servico}
                                             </TableCell>

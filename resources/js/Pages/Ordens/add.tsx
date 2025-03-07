@@ -200,11 +200,8 @@ const AddOrdem = ({ clientes, ordem, gerais }) => {
                                             className="input-form"
                                         >
                                             <option value="">Selecione o tipo de equipamento</option>
-                                            <option value="Notebook">Notebook</option>
-                                            <option value="Mobile">Mobile</option>
-                                            <option value="PC">PC</option>
                                             {equtipo.map((tipo: any, idx: number) => (
-                                                <option value={tipo}>{tipo}</option>
+                                                <option key={idx} value={tipo.trim()}>{tipo}</option>
                                             ))}
                                         </select>
                                         {errors.equipamento && (

@@ -126,16 +126,16 @@ class OrcamentoController extends Controller
 
     public function getOrcamentos(Request $request)
     {
-        if(!$request->marca && !$request->modelo){
+        if (!$request->marca && !$request->modelo) {
             $orcamento = Orcamento::where('servico', $request->servico)->first();
             $marcas = [];
             $modelos = [];
-        }else{
+        } else {
             $orcamento = Orcamento::where('servico', $request->servico)->where('marca', $request->marca)->where('modelo', $request->modelo)->first();
             $marcas    = Marca::where('id', $request->marca)->first();
             $modelos   = Modelo::where('id', $request->modelo)->first();
         }
-        
+
         $servicos  = Servico::where('id', $request->servico)->first();
 
         return response()->json([

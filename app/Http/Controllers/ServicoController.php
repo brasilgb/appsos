@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Geral;
 use App\Models\Servico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -31,7 +32,8 @@ class ServicoController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Servicos/add');
+        $gerais = Geral::first();
+        return Inertia::render('Servicos/add', ['gerais' => $gerais]);
     }
 
     /**
@@ -46,7 +48,8 @@ class ServicoController extends Controller
         ];
         $request->validate(
             [
-                'servico' => 'required'
+                'equipamento' => 'required',
+                'servico' => 'required',
             ],
             $messages,
             [
@@ -64,7 +67,8 @@ class ServicoController extends Controller
      */
     public function show(Servico $servico)
     {
-        return Inertia::render('Servicos/edit', ['servicos' => $servico]);
+        $gerais = Geral::first();
+        return Inertia::render('Servicos/edit', ['servicos' => $servico, 'gerais' => $gerais]);
     }
 
     /**
@@ -87,6 +91,7 @@ class ServicoController extends Controller
         ];
         $request->validate(
             [
+                'equipamento' => 'required',
                 'servico' => 'required'
             ],
             $messages,

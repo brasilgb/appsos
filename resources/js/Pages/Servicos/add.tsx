@@ -13,10 +13,11 @@ import AuthLayout from "@/Layouts/AuthLayout";
 import { Head, useForm } from "@inertiajs/react";
 import { AiFillFileMarkdown } from "react-icons/ai";
 
-const AddServico = () => {
-
+const AddServico = ({ gerais }: any) => {
+    const equtipo = gerais?.equtipo ? gerais?.equtipo?.split(";") : [];
     const { data, setData, post, progress, processing, errors } = useForm({
         servico: "",
+        equipamento: "",
         simples: false
     });
 
@@ -52,7 +53,36 @@ const AddServico = () => {
                     </CardHeader>
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <CardBody className=" border-y border-gray-100">
-                            <div className="grid grid-cols-3 gap-4 px-3 my-4">
+                            <div className="grid grid-cols-5 gap-4 px-3 my-4">
+                                <div className="flex flex-col col-span-2">
+                                    <label
+                                        className="label-form"
+                                        htmlFor="equipamento"
+                                    >
+                                        Tipo de equipamento
+                                    </label>
+                                    <select
+                                        id="equipamento"
+                                        value={data.equipamento}
+                                        onChange={(e) =>
+                                            setData(
+                                                "equipamento",
+                                                e.target.value,
+                                            )
+                                        }
+                                        className="input-form"
+                                    >
+                                        <option value="">Selecione o tipo de equipamento</option>
+                                        {equtipo.map((tipo: any, idx: number) => (
+                                            <option key={idx} value={tipo.trim()}>{tipo}</option>
+                                        ))}
+                                    </select>
+                                    {errors.equipamento && (
+                                        <div className="text-red-500">
+                                            {errors.equipamento}
+                                        </div>
+                                    )}
+                                </div>
                                 <div className="flex flex-col col-span-2">
                                     <label
                                         className="label-form"

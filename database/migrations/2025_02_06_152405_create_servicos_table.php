@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('servicos', function (Blueprint $table) {
             $table->id();
+            $table->string('equipamento');
             $table->string('servico');
             $table->tinyInteger('simples')->default(0);
             $table->timestamp('created_at')->useCurrent();
