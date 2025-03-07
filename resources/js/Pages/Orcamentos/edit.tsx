@@ -36,6 +36,7 @@ const EditOrcamento = ({ orcamento, servicos, marcas, modelos }: any) => {
 
     useEffect(() => {
         setData('valor', maskMoneyDot(data.valor.toString()));
+        return;
     }, [data]);
 
     function handleSubmit(e: any) {

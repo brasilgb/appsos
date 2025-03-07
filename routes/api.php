@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\GeralController;
 use App\Http\Controllers\ImagemController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\ModeloController;
@@ -26,10 +27,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/ordercli/{customer}', [OrdemController::class, 'getOrderCli'])->name('ordercli');
 Route::get('/clientes', [ClienteController::class, 'getClientes']);
 Route::post('/orcamentos', [OrcamentoController::class, 'getOrcamentos']);
-Route::get('/servicos', [ServicoController::class, 'getServicos']);
+Route::post('/servicos', [ServicoController::class, 'getServicos']);
 Route::get('/marcas', [MarcaController::class, 'getMarcas']);
 Route::post('/modelos', [ModeloController::class, 'getModelos']);
 Route::get('/empresa', [EmpresaController::class, 'getEmpresaInfo']);
+Route::get('/gerais', [GeralController::class, 'getGerais']);
 Route::get('/allorder', [OrdemController::class, 'allOrder'])->name('allrder');
 Route::get('/order/{order}', [OrdemController::class, 'getOrder'])->name('order');
 Route::delete('/deleteimage/{image}', [ImagemController::class, 'deleteImageOrder'])->name('deleteimage');

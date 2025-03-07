@@ -115,9 +115,9 @@ class ServicoController extends Controller
         return Redirect::route('servicos.index');
     }
     
-    public function getServicos()
+    public function getServicos(Request $request)
     {
-        $servicos = Servico::get();
+        $servicos = Servico::where('equipamento', $request->equipamento)->get();
         return response()->json([
             "success" => true,
             "data" => $servicos
