@@ -31,7 +31,6 @@ Route::post('/servicos', [ServicoController::class, 'getServicos']);
 Route::get('/marcas', [MarcaController::class, 'getMarcas']);
 Route::post('/modelos', [ModeloController::class, 'getModelos']);
 Route::get('/empresa', [EmpresaController::class, 'getEmpresaInfo']);
-Route::get('/gerais', [GeralController::class, 'getGerais']);
 Route::get('/allorder', [OrdemController::class, 'allOrder'])->name('allrder');
 Route::get('/order/{order}', [OrdemController::class, 'getOrder'])->name('order');
 Route::delete('/deleteimage/{image}', [ImagemController::class, 'deleteImageOrder'])->name('deleteimage');
