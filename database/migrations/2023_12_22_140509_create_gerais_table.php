@@ -17,9 +17,6 @@ return new class extends Migration
             $table->string('bgcolor')->nullable();
             $table->string('equtipo')->nullable();
             $table->string('equestado')->nullable();
-            $table->string('servicos')->nullable();
-            $table->string('marcas')->nullable();
-            $table->string('modelos')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
