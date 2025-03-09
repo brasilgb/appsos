@@ -31,9 +31,11 @@ const AddOrcamento = ({ servicos, marcas, modelos }: any) => {
         setModeloFiltered(mf);
     }
 
+            
+
     function handleSubmit(e: any) {
         e.preventDefault();
-        setData('valor', maskMoneyDot(data.valor.toString()));
+        setData('valor', maskMoneyDot(data.valor.toString()));        
         post(route("orcamentos.store"));
     }
 
@@ -211,7 +213,7 @@ const AddOrcamento = ({ servicos, marcas, modelos }: any) => {
                                             onChange={(e) =>
                                                 setData(
                                                     "valor",
-                                                    e.target.value,
+                                                    maskMoneyDot(e.target.value),
                                                 )
                                             }
                                             className="input-form"
