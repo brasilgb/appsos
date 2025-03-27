@@ -10,8 +10,8 @@ import { InertiaFormProps } from "@inertiajs/react/types/useForm";
 import moment from "moment";
 import React, { useState } from "react";
 import { AiFillTags } from "react-icons/ai";
-import { IoClose, IoCloudUpload, IoInformationCircleOutline, IoRefresh } from "react-icons/io5";
-import { RiLoader2Fill } from "react-icons/ri";
+import { IoClose, IoCloudUpload, IoInformationCircleOutline, IoRefresh, IoReload } from "react-icons/io5";
+import { RiLoader2Fill, RiLoader3Fill } from "react-icons/ri";
 
 interface GeraisProps {
     bgimage: any;
@@ -42,6 +42,7 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
 
     const { flash } = usePage().props;
     const [loading, setLoading] = useState<boolean>(false);
+    const [loading1, setLoading1] = useState<boolean>(false);
     const [messageUploadCustomer, setMessageUploadCustomer] = useState<boolean>(false);
     const [messageUploadOrder, setMessageUploadOrder] = useState<boolean>(false);
     const {
@@ -82,6 +83,32 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
         destroy(route("gerais.destroy", geral.id));
     };
 
+    const pushOrders = async () => {
+        setLoading(true);
+        await apios.post('insert-order', {
+            orders: ordens
+        })
+            .then((res) => {
+                setMessageUploadOrder(res.data.response.message);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            }).finally(() => setLoading(false));
+    }
+
+    const pushUsers = async () => {
+        setLoading1(true);
+        await apios.post('insert-user', {
+            customers: clientes
+        })
+            .then((res) => {
+                setMessageUploadCustomer(res.data.response.message);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            }).finally(() => setLoading1(false));
+    }
+
     return (
         <AuthLayout>
             <Head title="Gerais" />
@@ -97,8 +124,28 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
                 </HeaderContent>
                 <CardContainer className="">
                     <FlashMessage message={flash} />
+                    {messageUploadOrder && <FlashMessage message={messageUploadOrder} />}
+                    {messageUploadCustomer && <FlashMessage message={messageUploadCustomer} />}
                     <form onSubmit={handleSubmit} autoComplete="off">
                         <CardBody className=" border-y border-gray-100 rounded-t-md">
+                            <div className="flex items-center p-4">
+                                <button
+                                    type="button"
+                                    onClick={() => pushOrders()}
+                                    className="flex items-center gap-2 bg-blue-600 hover:bg-blue-600/90 py-1.5 px-8 text-sm text-white rounded-md border-2 border-blue-200 uppercase shadow-md"
+                                >
+                                    Push de ordens ao site
+                                    {loading && <RiLoader3Fill className="animate-spin" />}
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => pushUsers()}
+                                    className="flex items-center gap-2 bg-blue-600 hover:bg-blue-600/90 py-1.5 px-8 text-sm text-white rounded-md border-2 border-blue-200 uppercase shadow-md"
+                                >
+                                    Push de clientes ao site
+                                    {loading1 && <RiLoader3Fill className="animate-spin" />}
+                                </button>
+                            </div>
                             {messageUploadCustomer &&
                                 <div className="flex items-center bg-green-100 p-4 mb-0 text-sm text-green-700 border border-green-200 gap-1">
                                     <IoInformationCircleOutline size={20} />{messageUploadCustomer}
@@ -194,7 +241,7 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
                                         rows={2}
                                     />
                                 </div>
-                                
+
                                 <div className="flex flex-col mt-6">
                                     <label
                                         className="label-form"
@@ -212,7 +259,7 @@ const Gerais = ({ geral, clientes, ordens }: any) => {
                                         rows={2}
                                     />
                                 </div>
-                                
+
                                 {/* <div className="flex flex-col mt-6">
                                     <label
                                         className="label-form"
