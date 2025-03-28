@@ -38,8 +38,8 @@ const AddCliente = ({ cliente }) => {
     async function handleSubmit(e: any) {
         e.preventDefault();
         post(route("clientes.store"));
-        await apios.post('customers', {
-            "clientes": [{
+        await apios.post('insert-user', {
+            "customers": [{
                 "id": data.id,
                 "nome": data.nome,
                 "cpf": data.cpf,

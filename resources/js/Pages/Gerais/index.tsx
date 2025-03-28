@@ -24,6 +24,7 @@ interface GeraisProps {
 }
 
 const Gerais = ({ geral, clientes, ordens }: any) => {
+    
     //     const myOrder = ordens.map((val: any) => ({
     //         "id": val.id,
     //         "cliente_id": val.cliente_id,

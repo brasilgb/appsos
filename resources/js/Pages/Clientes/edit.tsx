@@ -69,8 +69,8 @@ const EditCliente = ({ clientes }: any) => {
         e.preventDefault();
         patch(route("clientes.update", clientes.id));
 
-        await apios.post('customers', {
-            "clientes": [{
+        await apios.post('insert-user', {
+            "customers": [{
                 "id": clientes.id,
                 "nome": data.nome,
                 "cpf": data.cpf,

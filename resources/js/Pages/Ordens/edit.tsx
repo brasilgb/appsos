@@ -113,8 +113,8 @@ const EditOrdem = ({
             page: currentPage,
         });
 
-        await apios.post('orders', {
-            "ordens": [{
+        await apios.post('insert-order', {
+            "insert-orders": [{
                 "id": data.id,
                 "cliente_id": ordens.cliente_id,
                 "detalhes": data.detalhes,

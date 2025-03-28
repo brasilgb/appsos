@@ -24,6 +24,7 @@ class GeralController extends Controller
         $geral = Geral::where("id", $query->id)->first();
         $clientes = Cliente::get(["id", "nome", "cpf", "email"]);
         $ordens = Ordem::get();
+        dd($ordens);
         return Inertia::render('Gerais/index', ["geral" => $geral, 'clientes' => $clientes, 'ordens' => $ordens]);
     }
 

@@ -42,8 +42,8 @@ const AddOrdem = ({ clientes, ordem, gerais }) => {
         setData('valorcamento', maskMoneyDot(data.valorcamento.toString()));
         post(route("ordens.store"));
 
-        await apios.post('orders', {
-            "ordens": [{
+        await apios.post('insert-order', {
+            "orders": [{
                 "id": data.id,
                 "cliente_id": data.cliente_id,
                 "detalhes": "",
