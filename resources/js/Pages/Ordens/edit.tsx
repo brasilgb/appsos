@@ -114,7 +114,7 @@ const EditOrdem = ({
         });
 
         await apios.post('insert-order', {
-            "insert-orders": [{
+            "orders": [{
                 "id": data.id,
                 "cliente_id": ordens.cliente_id,
                 "detalhes": data.detalhes,
@@ -124,8 +124,8 @@ const EditOrdem = ({
                 "valservico": maskMoneyDot(data.valservico.toString()),
                 "custo": maskMoneyDot(data.custo.toString()),
                 "valpecas": maskMoneyDot(data.valpecas.toString()),
-                "dtentrada": moment(ordens.created_at).format("YYYY-MM-DD HH:mm:ss"),
-                "dtentrega": moment(ordens.updated_at).format("YYYY-MM-DD HH:mm:ss"),
+                "created_at": ordens.created_at,
+                "dtentrega": ordens.dtentrega,
                 "status": data.status
             }]
         })

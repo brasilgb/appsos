@@ -53,9 +53,9 @@ const AddOrdem = ({ clientes, ordem, gerais }) => {
                 "custo": '0',
                 "valservico": '0',
                 "valpecas": '0',
-                "dtentrada": moment().format("YYYY-MM-DD H:mm:ss"),
+                "created_at": moment().format("YYYY-MM-DD H:mm:ss"),
                 "dtentrega": null,
-                "status": data.status
+                "status": 1
             }]
         })
             .then((res) => {
