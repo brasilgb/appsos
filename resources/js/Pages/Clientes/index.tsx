@@ -26,7 +26,6 @@ import {
     TableRow,
 } from "@/Components/Table";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { maskCpfCnpj } from "@/Utils/mask";
 import { Head, usePage } from "@inertiajs/react";
 import moment from "moment";
 import React, { Fragment } from "react";
@@ -87,7 +86,7 @@ const Clientes = ({ clientes }: any) => {
                                             <TableCell>
                                                 {cliente.email}
                                             </TableCell>
-                                            <TableCell>{maskCpfCnpj(cliente.cpf)}</TableCell>
+                                            <TableCell>{(cliente.cpf)}</TableCell>
                                             <TableCell>
                                                 {cliente.telefone}
                                             </TableCell>
