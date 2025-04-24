@@ -30,6 +30,8 @@ return new class extends Migration
             $table->string('previsao')->nullable();
             $table->tinyInteger('status')->default('1');
             $table->dateTime('dtentrega')->nullable();
+            $table->tinyInteger('feedback')->nullable();
+            $table->dateTime('dtfeedback')->nullable();
             $table->string('tecnico', 50)->nullable();
             $table->text('obs')->nullable();
             $table->timestamp('created_at')->useCurrent();

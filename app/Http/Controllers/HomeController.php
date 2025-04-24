@@ -16,8 +16,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $date = Carbon::now()->addDays(30);
-        $year = Carbon::now()->year;
+        $date = Carbon::now();
+
+        // dd($date->toDateString());
         $statusOrder = [
             'gerados'    => Ordem::where('status', 3)->get('id'),
             'aprovados'  => Ordem::where('status', 4)->get('id'),
@@ -31,8 +32,7 @@ class HomeController extends Controller
             'numpro' => count(Produto::get()),
             'numage' => count(Agenda::get()),
             'nummen' => count(Mensagem::get()),
-            'trintadias' => Ordem::with('cliente')->whereDate('dtentrega', '>=', '2025-03-01')->whereDate("dtentrega", '>=', $date->toDateString())
-                ->whereYear("dtentrega", '>=', $year)
+            'trintadias' => Ordem::with('cliente')->whereDate('dtentrega', '>=', '2025-03-01')->whereDate("dtfeedback", '>=', $date->toDateString())
                 ->where('status', 8)
                 ->where('feedback', 0)
                 ->orderBy('dtentrega', 'DESC')
