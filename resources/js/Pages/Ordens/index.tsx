@@ -148,9 +148,9 @@ const Ordens = ({ ordens, whats, printers }: any) => {
                                                     ? moment(
                                                         ordem.dtentrega,
                                                     ).format(
-                                                        "DD/MM/YYYY HH:mm",
+                                                        "DD/MM/YYYY",
                                                     )
-                                                    : "__/__/____ __:__"}
+                                                    : "__/__/____"}
                                             </TableCell>
                                             <TableCell className="flex items-center justify-end gap-2">
                                                 <WhatsAppButton
