@@ -31,10 +31,10 @@ class HomeController extends Controller
             'numpro' => count(Produto::get()),
             'numage' => count(Agenda::get()),
             'nummen' => count(Mensagem::get()),
-            'trintadias' => Ordem::with('cliente')->where("dtfeedback", '>=', $date->toDateString())
+            'trintadias' => Ordem::where("dtfeedback", '=', $date->toDateString())
                 ->where('status', 8)
                 ->where('feedback', 0)
-                ->orderBy('dtentrega', 'DESC')
+                ->orderBy('dtfeedback', 'DESC')
                 ->get(),
         ];
         // dd($dashData);
