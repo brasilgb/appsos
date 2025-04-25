@@ -142,7 +142,7 @@ const Home = ({ dashdata, statusorder }: any) => {
                         <div className="bg-gray-50 rounded shadow-sm p-2">
                             <div className="border-b mb-2 text-gray-500 flex items-center justify-start gap-1">
                                 <IoList size={20} />
-                                <h1 className="text-sm uppercase font-medium">Equipamento Entregue ({'>='}30 dias)</h1>
+                                <h1 className="text-sm uppercase font-medium">Equipamento Entregue há 30 dias</h1>
                             </div>
                             <div className="grid md:grid-cols-5 gap-2 text-center max-h-96 overflow-y-auto">
                                 {dashdata?.trintadias?.map((gerado: any, idx: number) => (
