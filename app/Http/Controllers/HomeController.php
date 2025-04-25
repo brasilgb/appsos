@@ -18,7 +18,6 @@ class HomeController extends Controller
     {
         $date = Carbon::now();
 
-        // dd($date->toDateString());
         $statusOrder = [
             'gerados'    => Ordem::where('status', 3)->get('id'),
             'aprovados'  => Ordem::where('status', 4)->get('id'),
